@@ -1,0 +1,5 @@
+//include 'modules/tools'
+//rootProject.children.find { it.name == 'modules/tools' }.name = 'tools'
+
+include 'web', 'tools'
+

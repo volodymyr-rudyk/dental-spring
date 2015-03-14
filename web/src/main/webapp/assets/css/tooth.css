@@ -1,0 +1,28 @@
+.tooth {
+    width: 35px;
+    height: 35px;
+    background-image: url("../images/teeth13.png");
+}
+
+.red {
+    background-position: 0px;
+}
+
+.orange {
+    background-position: 35px;
+}
+
+.blue {
+    background-position: 70px;
+}
+
+.green {
+    background-position: 105px;
+}
+
+.selected {
+    /*box-shadow: rgb(80, 130, 229) 0px 0px 0px 2px;*/
+    box-shadow: 0 0 10px rgba(81, 130, 238, 71);
+    border-radius: 3px;
+    transition: box-shadow ease-in-out .1s;
+}
