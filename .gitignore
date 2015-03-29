@@ -64,7 +64,8 @@ argfile*
 pom.xml
 activemq-data/
 
-/build
+/**/build
+/web/build
 buildSrc/build
 /spring-*/build
 /src/asciidoc/build

@@ -1,5 +1,5 @@
 <#include 'block/header.ftl' />
-{hello} {user}
+${hello} ${user}
 
 <h1 class="filename">Atata</h1>
 

@@ -1,13 +1,15 @@
 package com.dental.controllers;
 
-import com.dental.tools.User;
+import com.dental.dao.entity.User;
 import me.qq.Rt;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,31 +23,28 @@ import java.util.Locale;
  */
 
 @Controller
-public class WelcomeController extends BaseController{
-
+public class WelcomeController extends BaseController {
 
 
     @RequestMapping(value = "/hello")
-//    @ResponseBody
+    @ResponseBody
     public String hello(HttpServletRequest request, HttpServletResponse response) {
 
         String data = Rt.DATA;
-        String m1= messageSource.getMessage("u", null, Locale.getDefault());
-        String m2= messageSource.getMessage("u", null, Locale.ENGLISH);
+        String m1 = messageSource.getMessage("u", null, Locale.getDefault());
+        String m2 = messageSource.getMessage("u", null, Locale.ENGLISH);
 
-//        return "Hello world" + data + "  " + m1 + "  " + m2 + " Rt="+data;
-        return "hello";
+        return "Hello world" + data + "  " + m1 + "  " + m2 + " Rt=" + data;
+//        return "hello";
     }
-
 
 
     @RequestMapping(value = "/hello2")
     public String hello2(HttpServletRequest request, HttpServletResponse response, ModelMap model,
                          User user) {
-//        ResourceBundleMessageSource
 //        String data = Rt.DATA;
-        String m1= messageSource.getMessage("u", null, Locale.getDefault());
-        String m2= messageSource.getMessage("u", null, Locale.ENGLISH);
+        String m1 = messageSource.getMessage("u", null, Locale.getDefault());
+        String m2 = messageSource.getMessage("u", null, Locale.ENGLISH);
 
         //optional.ifPresent(user -> System.out.println(user.getName() + " : " + user.getPhone()));
 //        String s = null;
@@ -55,6 +54,7 @@ public class WelcomeController extends BaseController{
         model.put("user", user);
         return "hello";
     }
+
 
     @ExceptionHandler(NullPointerException.class)
     public String handlerNPE(NullPointerException ex) {
