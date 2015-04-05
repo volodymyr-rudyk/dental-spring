@@ -15,7 +15,6 @@ import org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver;
  */
 
 @Configuration
-//@EnableWebMvc
 public class SpringConfig extends WebMvcConfigurerAdapter {
     private static final String BOOTSTRAP_PATH = "classpath:/META-INF/resources/webjars/bootstrap/3.3.4/";
     private final String CSS_RESOURCE = "/css/**";

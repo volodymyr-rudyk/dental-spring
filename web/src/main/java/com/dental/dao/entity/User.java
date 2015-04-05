@@ -1,8 +1,9 @@
 package com.dental.dao.entity;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 
 /**
  * Created by light on 1/27/2015.
@@ -10,6 +11,10 @@ import javax.persistence.UniqueConstraint;
 @Entity
 @Table(name = "User")
 public class User {
+
+    @Id
+    @GeneratedValue
+    private int id;
     private String name;
     private String phone;
 
@@ -35,5 +40,13 @@ public class User {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

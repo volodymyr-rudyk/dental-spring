@@ -18,7 +18,6 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @Import({SpringConfig.class, DaoConfig.class})
 public class AppConfig {
 
-
     @Bean
     public com.dental.Bean getBean() {
         return new com.dental.Bean();

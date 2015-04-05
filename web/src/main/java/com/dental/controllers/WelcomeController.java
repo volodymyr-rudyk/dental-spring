@@ -1,7 +1,9 @@
 package com.dental.controllers;
 
 import com.dental.dao.entity.User;
+import com.dental.service.UserService;
 import me.qq.Rt;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -25,6 +27,8 @@ import java.util.Locale;
 @Controller
 public class WelcomeController extends BaseController {
 
+    @Autowired
+    private UserService userService;
 
     @RequestMapping(value = "/hello")
     @ResponseBody
@@ -34,6 +38,8 @@ public class WelcomeController extends BaseController {
         String m1 = messageSource.getMessage("u", null, Locale.getDefault());
         String m2 = messageSource.getMessage("u", null, Locale.ENGLISH);
 
+        User user = new User("test", "42424");
+        userService.save(user);
         return "Hello world" + data + "  " + m1 + "  " + m2 + " Rt=" + data;
 //        return "hello";
     }

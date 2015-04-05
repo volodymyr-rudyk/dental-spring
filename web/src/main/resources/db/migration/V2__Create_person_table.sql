@@ -1,0 +1,5 @@
+CREATE TABLE User (
+  id int AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(50) not NULL ,
+  phone VARCHAR(20)
+);
