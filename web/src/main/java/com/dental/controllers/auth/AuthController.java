@@ -17,11 +17,25 @@ import javax.servlet.http.HttpServletResponse;
 @ControllerAdvice
 public class AuthController extends BaseController {
 
-    @RequestMapping(value = "/login")
-    public String about(HttpServletRequest request, HttpServletResponse response) throws NotFoundException {
+  @RequestMapping(value = "/login")
+  public String login(HttpServletRequest request, HttpServletResponse response) throws NotFoundException {
+     return "auth/login";
+  }
 
-        return "auth/login";
-    }
+  @RequestMapping(value = "/logout")
+  public String logout() throws NotFoundException {
+    return "auth/logout";
+  }
+
+  @RequestMapping(value = "/denied")
+  public String denied() throws NotFoundException {
+    return "auth/denied";
+  }
+
+  @RequestMapping(value = "/secure")
+  public String secure() throws NotFoundException {
+    return "auth/secure";
+  }
 
     @ExceptionHandler(NotFoundException.class)
     public String notFound() {

@@ -24,8 +24,10 @@ apply plugin: 'org.flywaydb.flyway'
 flyway {
     url = 'jdbc:mysql://localhost:3306/dental_dev'
 //    url = 'jdbc:h2:file:target/foobar'
-    user = 'root'
-    password = 'rootpass'
+//    user = 'root'
+//    password = 'rootpass'
+    user = 'test'
+    password = 'test'
 }
 
 repositories {
@@ -47,6 +49,11 @@ dependencies {
 
     compile 'org.webjars:bootstrap:3.3.4'
     compile 'javax.servlet:javax.servlet-api:3.1.0'
+
+    compile 'org.springframework.security:spring-security-core:4.0.0.RELEASE'
+    compile 'org.springframework.security:spring-security-web:4.0.0.RELEASE'
+    compile 'org.springframework.security:spring-security-config:4.0.0.RELEASE'
+    compile 'org.springframework.security:spring-security-taglibs:4.0.0.RELEASE'
 
     testCompile 'org.springframework:spring-test:4.1.6.RELEASE'
     //include in compile only, exclude in the war

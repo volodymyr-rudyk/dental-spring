@@ -7,11 +7,11 @@
 
 <html>
 <head>
-    <meta name="layout" content="main"/>
-    <title>Login</title>
+    <title>Custom Login Page</title>
 </head>
 
 <body>
+<h1>Custom Login Page</h1>
 
 
 <form class="form-signin" role="form" action="doLogin" method="post">
