@@ -14,43 +14,53 @@ import java.util.List;
  * Created by admin on 06.04.2015.
  */
 public class UserDetailsServiceImpl implements UserDetailsService {
-  @Override public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-    if(!"test".equals(username))
-      throw new UsernameNotFoundException("user name not found" + username);
 
-    return new UserDetails() {
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-      @Override public Collection<? extends GrantedAuthority> getAuthorities() {
-        List<SimpleGrantedAuthority> grantedAuthorityList = new LinkedList<SimpleGrantedAuthority>();
+        if (!"light".equals(username))
+            throw new UsernameNotFoundException("user name not found" + username);
 
-        grantedAuthorityList.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
-        grantedAuthorityList.add(new SimpleGrantedAuthority("ROLE_USER"));
-        return grantedAuthorityList;
-      }
+        return new UserDetails() {
 
-      @Override public String getPassword() {
-        return "test";
-      }
+            @Override
+            public Collection<? extends GrantedAuthority> getAuthorities() {
+                List<SimpleGrantedAuthority> grantedAuthorityList = new LinkedList<SimpleGrantedAuthority>();
 
-      @Override public String getUsername() {
-        return "test";
-      }
+                grantedAuthorityList.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
+                grantedAuthorityList.add(new SimpleGrantedAuthority("ROLE_USER"));
+                return grantedAuthorityList;
+            }
 
-      @Override public boolean isAccountNonExpired() {
-        return false;
-      }
+            @Override
+            public String getPassword() {
+                return "test";
+            }
 
-      @Override public boolean isAccountNonLocked() {
-        return false;
-      }
+            @Override
+            public String getUsername() {
+                return "light";
+            }
 
-      @Override public boolean isCredentialsNonExpired() {
-        return false;
-      }
+            @Override
+            public boolean isAccountNonExpired() {
+                return true;
+            }
 
-      @Override public boolean isEnabled() {
-        return false;
-      }
-    };
-  }
+            @Override
+            public boolean isAccountNonLocked() {
+                return true;
+            }
+
+            @Override
+            public boolean isCredentialsNonExpired() {
+                return true;
+            }
+
+            @Override
+            public boolean isEnabled() {
+                return true;
+            }
+        };
+    }
 }

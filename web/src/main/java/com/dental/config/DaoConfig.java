@@ -19,7 +19,7 @@ import java.util.Properties;
 
 @Configuration
 @EnableTransactionManagement
-@PropertySource(value = {"classpath:datasource.properties"})
+@PropertySource(value = {"WEB-INF/datasource.properties"})
 public class DaoConfig {
 
     @Autowired
