@@ -1,4 +1,4 @@
-package com.dental.service;
+package com.dental.service.impl;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

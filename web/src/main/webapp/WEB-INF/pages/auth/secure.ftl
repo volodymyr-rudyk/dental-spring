@@ -13,5 +13,11 @@ Time: 2:42 PM
 <body>
 
 <h3>Secure</h3>
+
+
+<form action="/logout" method="post">
+    <button type="submit">Logout</button>
+</form>
+
 </body>
 </html>

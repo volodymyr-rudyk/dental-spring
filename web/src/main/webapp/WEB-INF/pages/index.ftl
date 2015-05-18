@@ -37,6 +37,7 @@
 
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
+                    <p>test</p>
                     <#--<li <g:if test="${controllerName == 'home'}">class="active"</g:if>><a
                         href="${createLink(controller: 'home')}">Home</a></li>
 
@@ -64,6 +65,11 @@
 
 <div class="container" style="margin-bottom: 40px">
     <#--<g:layoutBody/>-->
+
+
+
+    <a href="/login">Login</a>
+    <a href="/signup">SignUp</a>
 </div>
 
 <div class="navbar navbar-default navbar-fixed-bottom">

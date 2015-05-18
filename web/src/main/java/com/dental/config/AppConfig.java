@@ -1,5 +1,7 @@
 package com.dental.config;
 
+import com.dental.service.AuthService;
+import com.dental.service.impl.AuthServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -19,4 +21,8 @@ public class AppConfig {
         return new com.dental.Bean();
     }
 
+    @Bean
+    public AuthService getAuthService() {
+        return new AuthServiceImpl();
+    }
 }

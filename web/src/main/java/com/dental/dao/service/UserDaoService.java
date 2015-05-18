@@ -1,4 +1,4 @@
-package com.dental.service;
+package com.dental.dao.service;
 
 import com.dental.dao.entity.User;
 
@@ -8,7 +8,7 @@ import java.util.List;
  * Created by light on 3/28/2015.
  */
 
-public interface UserService<T> {
+public interface UserDaoService<T> {
 
     T get(int id);
 

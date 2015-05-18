@@ -1,10 +1,10 @@
 package com.dental.config;
 
-//import com.dental.service.DentalAuthenticationProvider;
-//import com.dental.service.UserDetailsServiceImpl;
+//import com.dental.provider.DentalAuthenticationProvider;
+//import com.dental.service.impl.UserDetailsServiceImpl;
 
-import com.dental.service.DentalAuthenticationProvider;
-import com.dental.service.UserDetailsServiceImpl;
+import com.dental.provider.DentalAuthenticationProvider;
+import com.dental.service.impl.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,6 +16,8 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.web.authentication.logout.LogoutHandler;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 
 /**
  * Created by admin on 06.04.2015.
@@ -56,23 +58,31 @@ public class SpringSecureConfig extends WebSecurityConfigurerAdapter {
                         //Anyone can access the urls
                 .antMatchers(
                         "/auth/**",
+                        "/",
                         "/login",
                         "/authenticate",
                         "/signup/**",
+                        "/logout",
                         "/user/register/**"
                 ).permitAll()
                 //The rest of the our application is protected.
-                .antMatchers("/admin/**").hasRole("USER");
+                .antMatchers("/**").hasRole("USER");
         //Adds the SocialAuthenticationFilter to Spring Security's filter chain.
 
 
     }
 
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/authenticate");
+        web.ignoring()
+                .antMatchers("/authenticate")
+                .antMatchers("/logout")
+                .antMatchers("/css/**")
+                .antMatchers("/js/**")
+                .antMatchers("/font/**")
+                .antMatchers("/img/**");
     }
 
-    @Bean(name = "myAuthenticationManager")
+    @Bean(name = "dentalAuthenticationManager")
     @Override
     public AuthenticationManager authenticationManager() throws Exception {
         return super.authenticationManager();
@@ -126,4 +136,9 @@ public class SpringSecureConfig extends WebSecurityConfigurerAdapter {
 //    public SecurityContextPersistenceFilter getSecurityContextPersistenceFilter() {
 //        return new SecurityContextPersistenceFilter();
 //    }
+
+    @Bean
+    public LogoutHandler getLogoutHandler() {
+        return new SecurityContextLogoutHandler();
+    }
 }

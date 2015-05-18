@@ -1,7 +1,8 @@
-package com.dental.service;
+package com.dental.dao.service.impl;
 
 import com.dental.dao.entity.User;
 import com.dental.dao.service.UserDao;
+import com.dental.dao.service.UserDaoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +12,7 @@ import java.util.List;
  * Created by light on 3/28/2015.
  */
 @Service
-public class UserServiceImpl implements UserService<User> {
+public class UserDaoServiceImpl implements UserDaoService<User> {
 
     @Autowired
     private UserDao userDao;

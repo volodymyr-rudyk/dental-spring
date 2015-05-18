@@ -1,8 +1,5 @@
 package com.dental.config;
 
-import com.dental.dao.impl.UserDaoImpl;
-import com.dental.dao.service.UserDao;
-import com.dental.service.UserService;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

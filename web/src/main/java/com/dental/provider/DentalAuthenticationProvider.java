@@ -1,4 +1,4 @@
-package com.dental.service;
+package com.dental.provider;
 
 import org.apache.commons.logging.Log;
 import org.hibernate.annotations.common.util.impl.LoggerFactory;

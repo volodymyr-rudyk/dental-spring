@@ -20,7 +20,6 @@ import javax.servlet.http.HttpServletResponse;
 public class AdminController extends BaseController {
 
   @RequestMapping(value = "/login")
-  @ResponseBody
   public String login(HttpServletRequest request, HttpServletResponse response) throws NotFoundException {
      return "admin/login";
   }
