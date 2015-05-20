@@ -1,4 +1,4 @@
-package com.dental.dao.service;
+package com.dental.dao.component;
 
 import java.io.Serializable;
 import java.util.List;
@@ -7,9 +7,9 @@ import java.util.List;
  * Created by light on 4/5/2015.
  */
 public interface GenericCrud<T> {
-    T get(int id);
-    void save(T entity);
+    T get(Serializable id);
+    T save(T entity);
     List<T> getList();
     void remove(int id);
-    void update(T entity);
+    T update(T entity);
 }

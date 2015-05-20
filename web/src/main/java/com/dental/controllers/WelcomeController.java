@@ -1,7 +1,7 @@
 package com.dental.controllers;
 
 import com.dental.dao.entity.User;
-import com.dental.dao.service.UserDaoService;
+import com.dental.dao.component.UserDao;
 import me.qq.Rt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -28,7 +28,7 @@ import java.util.Locale;
 public class WelcomeController extends BaseController {
 
     @Autowired
-    private UserDaoService userService;
+    private UserDao userService;
 
     @RequestMapping(value = "/hello")
     @ResponseBody

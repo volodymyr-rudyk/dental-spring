@@ -1,5 +1,8 @@
 package com.dental.service.impl;
 
+import com.dental.dao.component.UserDao;
+import com.dental.dao.entity.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -15,11 +18,18 @@ import java.util.List;
  */
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        if (!"light".equals(username))
-            throw new UsernameNotFoundException("user name not found" + username);
+    @Autowired
+    private UserDao<User> userDao;
+
+    private static SimpleGrantedAuthority roleAdmin = new SimpleGrantedAuthority("ROLE_ADMIN");
+    private static SimpleGrantedAuthority roleUser = new SimpleGrantedAuthority("ROLE_USER");
+
+    @Override
+    public UserDetails loadUserByUsername(final String username) throws UsernameNotFoundException {
+        final User user = userDao.loadUserByUserNameAndPassword(username, "");
+        if(user == null)
+          throw new UsernameNotFoundException("user name not found" + username);
 
         return new UserDetails() {
 
@@ -27,19 +37,19 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             public Collection<? extends GrantedAuthority> getAuthorities() {
                 List<SimpleGrantedAuthority> grantedAuthorityList = new LinkedList<SimpleGrantedAuthority>();
 
-                grantedAuthorityList.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
-                grantedAuthorityList.add(new SimpleGrantedAuthority("ROLE_USER"));
+                grantedAuthorityList.add(roleAdmin);
+                grantedAuthorityList.add(roleUser);
                 return grantedAuthorityList;
             }
 
             @Override
             public String getPassword() {
-                return "test";
+                return user.getPassword();
             }
 
             @Override
             public String getUsername() {
-                return "light";
+                return user.getLogin();
             }
 
             @Override

@@ -66,7 +66,18 @@
 <div class="container" style="margin-bottom: 40px">
     <#--<g:layoutBody/>-->
 
+        count = --${count}--
+        list
 
+        <#list list as user>
+            <div>
+                <span>username = ${user.login}</span>
+                <#assign profile = user.profile />
+                <span>${profile.firstName}</span>
+                <span>${profile.lastName}</span>
+
+            </div>
+        </#list>
 
     <a href="/login">Login</a>
     <a href="/signup">SignUp</a>

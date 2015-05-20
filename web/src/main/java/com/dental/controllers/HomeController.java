@@ -1,21 +1,18 @@
 package com.dental.controllers;
 
-import com.dental.dao.entity.Profile;
+import com.dental.dao.component.UserDao;
 import com.dental.dao.entity.User;
-import com.dental.dao.service.UserDaoService;
 import com.dental.exception.NotFoundException;
-import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.Date;
-
+import java.util.List;
 
 //*
 /*Created by light on 3/14/2015.
@@ -25,30 +22,46 @@ import java.util.Date;
 @ControllerAdvice
 public class HomeController extends BaseController {
 
-    @Autowired
-    protected UserDaoService<User> userDaoService;
+//    @Autowired
+//    HibernateTransactionManager transactionManager;
 
     @Autowired
-    protected SessionFactory sessionFactory;
+    protected UserDao<User> userDao;
+
+//    @Autowired
+//    protected SessionFactory sessionFactory;
 
     @RequestMapping(value = "/")
-    public String about(HttpServletRequest request, HttpServletResponse response) throws NotFoundException {
-
-        User user = new User();
-        user.setName("Test" + new Date().toInstant().toString());
-        user.setIsEnabled(true);
-        Profile profile = new Profile();
-        profile.setBirthday(new Date());
-        profile.setFirstName("Profile first");
-        profile.setLastName("Profile last");
-        profile.setPhone("123-432-1");
-        user.setProfile(profile);
-        profile.setUser(user);
-
-        userDaoService.save(user);
+    public String about(HttpServletRequest request, HttpServletResponse response, Model model) throws NotFoundException {
 
 
-//        userUserDaoService.get(1);
+//        sessionFactory.getCurrentSession().save(profile);
+
+//        user.setProfile(profile);
+//        userDaoService.save(user);
+
+
+
+//        Session session = sessionFactory.openSession();
+//        session.beginTransaction();
+
+//        user.setProfile(profile);
+//        userDao.save(user);
+//        System.out.println(user.toString());
+//        session.persist(user);
+//        session.flush();
+//        Profile o = (Profile) session.get(Profile.class, 15);
+
+//        session.save(user);
+
+//        session.getTransaction().commit();
+//        session.close();
+
+        //        userUserDaoService.get(1);
+
+        List<User> list = userDao.getList();
+        model.addAttribute("count",list.size());
+        model.addAttribute("list",list);
 
         return "index";
     }

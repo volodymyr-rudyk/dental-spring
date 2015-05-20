@@ -1,6 +1,10 @@
 package com.dental.service.impl;
 
+import com.dental.beans.SignupBean;
 import com.dental.beans.UserBean;
+import com.dental.dao.component.UserDao;
+import com.dental.dao.entity.Profile;
+import com.dental.dao.entity.User;
 import com.dental.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -15,6 +19,7 @@ import org.springframework.security.web.authentication.logout.LogoutHandler;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.Date;
 
 /**
  * Created by light on 5/3/2015.
@@ -60,5 +65,29 @@ public class AuthServiceImpl implements AuthService {
     public void logout(HttpServletRequest request, HttpServletResponse response) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         logoutHandler.logout(request, response, authentication);
+    }
+
+    @Autowired
+    private UserDao<User> userDao;
+
+    @Override
+    public void signup(SignupBean signupBean) {
+        User user = getUser(signupBean);
+
+        userDao.save(user);
+    }
+
+    private User getUser(SignupBean signupBean){
+        User user = new User();
+        user.setIsEnabled(true);
+        user.setLogin(signupBean.getLogin());
+        user.setPassword(signupBean.getPassword());
+        Profile profile = new Profile();
+        profile.setBirthday(new Date());
+        profile.setFirstName(signupBean.getFirstName());
+        profile.setLastName(signupBean.getLastName());
+        profile.setPhone("434343434");
+        user.setProfile(profile);
+        return user;
     }
 }

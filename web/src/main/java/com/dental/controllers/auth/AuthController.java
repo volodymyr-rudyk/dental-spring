@@ -1,5 +1,6 @@
 package com.dental.controllers.auth;
 
+import com.dental.beans.SignupBean;
 import com.dental.beans.UserBean;
 import com.dental.controllers.BaseController;
 import com.dental.exception.NotFoundException;
@@ -32,15 +33,27 @@ public class AuthController extends BaseController {
 
     @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
     public void login(HttpServletRequest request, HttpServletResponse response,
-                      UserBean userBean) throws NotFoundException, IOException {
-
-        authService.authenticate(userBean, request);
-        response.sendRedirect("/admin/login");
+                      UserBean userBean) throws IOException {
+        try {
+            authService.authenticate(userBean, request);
+        }catch (RuntimeException e){
+            response.sendRedirect("/login?fail");
+            return;
+        }
+        response.sendRedirect("/secure");
     }
 
     @RequestMapping(value = "/signup")
     public String signup() throws NotFoundException, IOException {
         return "/auth/signup";
+    }
+
+    @RequestMapping(value = "/signup", method = RequestMethod.POST)
+    public void signuppost(HttpServletResponse response, SignupBean signupBean) throws NotFoundException, IOException {
+
+        authService.signup(signupBean);
+        response.sendRedirect("/login");
+//        return "/auth/signup";
     }
 
     @RequestMapping(value = "/logout")

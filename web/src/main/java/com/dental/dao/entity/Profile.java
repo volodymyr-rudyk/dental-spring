@@ -1,8 +1,7 @@
 package com.dental.dao.entity;
 
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Parameter;
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -11,13 +10,13 @@ import java.util.Date;
 
 @Entity
 @Table(name = "profile")
-public class Profile {
+public class Profile implements Serializable{
 
     @Id
-    @Column(name="id", unique=true, nullable=false)
-    @GeneratedValue(generator="gen")
-    @GenericGenerator(name="gen", strategy="foreign",
-            parameters=@Parameter(name="property", value="user"))
+    @Column(name="id")
+    @GeneratedValue
+//    @GenericGenerator(name="gen", strategy="foreign",
+//            parameters=@Parameter(name="property", value="user"))
     private int id;
 
     @Column(name = "first_name")
@@ -27,13 +26,13 @@ public class Profile {
     private String lastName;
 
     @Column(name = "birthday")
+    @Temporal(TemporalType.DATE)
     private Date birthday;
 
     @Column(name = "phone")
     private String phone;
 
-    @OneToOne
-    @PrimaryKeyJoinColumn
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "profile")
     private User user;
 
     public int getId() {
@@ -76,11 +75,11 @@ public class Profile {
         this.phone = phone;
     }
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
+//    public User getUser() {
+//        return user;
+//    }
+//
+//    public void setUser(User user) {
+//        this.user = user;
+//    }
 }

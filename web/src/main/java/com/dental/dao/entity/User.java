@@ -1,44 +1,39 @@
 package com.dental.dao.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * Created by light on 1/27/2015.
  */
 @Entity
 @Table(name = "user")
-public class User {
+public class User implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "id", unique = true, nullable = false)
     private int id;
 
-    @Column(name = "user_name", unique = true)
-    private String name;
+    @Column(name = "login", unique = true, nullable = false)
+    private String login;
+
+    @Column(name = "password", nullable = false)
+    private String password;
 
     @Column(name = "is_enabled")
     private boolean isEnabled;
 
-//    private String phone;
-
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "profile_id")
     private Profile profile;
 
     public User() {
 
     }
-    public User(String name) {
-        this.name = name;
-//        this.phone = phone;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+    public User(String login, String password) {
+        this.login = login;
+        this.password = password;
     }
 
     public int getId() {
@@ -63,5 +58,31 @@ public class User {
 
     public void setProfile(Profile profile) {
         this.profile = profile;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    @Override public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", login='" + login + '\'' +
+                ", password='" + password + '\'' +
+                ", isEnabled=" + isEnabled +
+                ", profile=" + profile +
+                '}';
     }
 }

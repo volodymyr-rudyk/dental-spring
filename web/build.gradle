@@ -22,10 +22,10 @@ apply plugin: 'org.flywaydb.flyway'
 flyway {
     url = 'jdbc:mysql://localhost:3306/dental_dev'
 //    url = 'jdbc:h2:file:target/foobar'
-    user = 'root'
-    password = 'rootpass'
-//    user = 'test'
-//    password = 'test'
+//    user = 'root'
+//    password = 'rootpass'
+    user = 'test'
+    password = 'test'
 }
 
 repositories {

@@ -1,5 +1,6 @@
 package com.dental.service;
 
+import com.dental.beans.SignupBean;
 import com.dental.beans.UserBean;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,4 +14,6 @@ public interface AuthService {
     void authenticate(UserBean userBean, HttpServletRequest request);
 
     void logout(HttpServletRequest request, HttpServletResponse response);
+
+    void signup(SignupBean signupBean);
 }

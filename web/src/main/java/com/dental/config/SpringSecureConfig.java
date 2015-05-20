@@ -1,7 +1,7 @@
 package com.dental.config;
 
 //import com.dental.provider.DentalAuthenticationProvider;
-//import com.dental.service.impl.UserDetailsServiceImpl;
+//import com.dental.component.impl.UserDetailsServiceImpl;
 
 import com.dental.provider.DentalAuthenticationProvider;
 import com.dental.service.impl.UserDetailsServiceImpl;
@@ -76,10 +76,13 @@ public class SpringSecureConfig extends WebSecurityConfigurerAdapter {
         web.ignoring()
                 .antMatchers("/authenticate")
                 .antMatchers("/logout")
+                .antMatchers("/signup")
                 .antMatchers("/css/**")
                 .antMatchers("/js/**")
                 .antMatchers("/font/**")
-                .antMatchers("/img/**");
+                .antMatchers("/img/**")
+                .antMatchers("/list")
+                .antMatchers("/favicon.ico");
     }
 
     @Bean(name = "dentalAuthenticationManager")
