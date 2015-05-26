@@ -1,6 +1,7 @@
 package com.dental.tools;
 
-import java.lang.reflect.InvocationTargetException;
+import java.beans.Introspector;
+import java.beans.PropertyDescriptor;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
@@ -10,8 +11,7 @@ import java.util.Map;
  */
 public class BeanConverter {
 
-  public static void main(String[] args)
-          throws InstantiationException, IllegalAccessException, InvocationTargetException {
+  public static void main(String[] args) {
     Map<String, String> map = new HashMap<String, String>();
     map.put("name", "TestName");
     map.put("age", "100500");
@@ -22,34 +22,36 @@ public class BeanConverter {
 
   }
 
-  public static <T> T convert(Map<String, String> map, Class<T> clazz)
-          throws IllegalAccessException, InstantiationException, InvocationTargetException {
-    T instance = clazz.newInstance();
-    Method[] declaredMethods = clazz.getDeclaredMethods();
-    for (Method method : declaredMethods) {
+  public static <T> T convert(Map<String, String> map, Class<T> clazz) {
+    try {
+      T instance = clazz.newInstance();
       for (Map.Entry<String, String> entry : map.entrySet()) {
-        String setMethodName = "set" + entry.getKey();
-        if (setMethodName.equalsIgnoreCase(method.getName())) {
-          Class<?>[] parameterTypes = method.getParameterTypes();
-          Class<?> parameterType = parameterTypes[0];
-
-          if (String.class == parameterType) {
-            String value = String.valueOf(entry.getValue());
-            method.invoke(instance, value);
-          } else if (Integer.class == parameterType || int.class == parameterType) {
-            Integer value = Integer.valueOf(entry.getValue());
-            method.invoke(instance, value);
-          } else if (Boolean.class == parameterType || boolean.class == parameterType) {
-            Boolean value = Boolean.valueOf(entry.getValue());
-            method.invoke(instance, value);
-          } else if (Long.class == parameterType || long.class == parameterType) {
-            Long value = Long.valueOf(entry.getValue());
-            method.invoke(instance, value);
+        for (PropertyDescriptor propertyDescriptor : Introspector.getBeanInfo(clazz).getPropertyDescriptors()) {
+          if (propertyDescriptor.getName().equals(entry.getKey())) {
+            Method writeMethod = propertyDescriptor.getWriteMethod();
+            Class<?>[] parameterTypes = writeMethod.getParameterTypes();
+            Class<?> parameterType = parameterTypes[0];
+            final String value = entry.getValue();
+            if (String.class == parameterType) {
+              writeMethod.invoke(instance, value);
+            } else if (Integer.class == parameterType || int.class == parameterType) {
+              Integer param = Integer.valueOf(value);
+              writeMethod.invoke(instance, param);
+            } else if (Boolean.class == parameterType || boolean.class == parameterType) {
+              Boolean param = Boolean.valueOf(value);
+              writeMethod.invoke(instance, param);
+            } else if (Long.class == parameterType || long.class == parameterType) {
+              Long param = Long.valueOf(value);
+              writeMethod.invoke(instance, param);
+            }
           }
         }
       }
+      return instance;
+    } catch (Exception e) {
+      e.printStackTrace();
+      return null;
     }
-    return instance;
   }
 
   public static class Bean {
@@ -73,19 +75,20 @@ public class BeanConverter {
       this.age = age;
     }
 
-    @Override public String toString() {
-      return "Bean{" +
-              "name='" + name + '\'' +
-              ", age=" + age +
-              '}';
-    }
-
     public boolean isIgnore() {
       return ignore;
     }
 
     public void setIgnore(boolean ignore) {
       this.ignore = ignore;
+    }
+
+    @Override public String toString() {
+      return "Bean{" +
+              "name='" + name + '\'' +
+              ", age=" + age +
+              ", ignore=" + ignore +
+              '}';
     }
   }
 
