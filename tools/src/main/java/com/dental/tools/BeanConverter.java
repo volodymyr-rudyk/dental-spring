@@ -35,14 +35,22 @@ public class BeanConverter {
             if (String.class == parameterType) {
               writeMethod.invoke(instance, value);
             } else if (Integer.class == parameterType || int.class == parameterType) {
-              Integer param = Integer.valueOf(value);
-              writeMethod.invoke(instance, param);
+              try {
+                Integer param = Integer.valueOf(value);
+                writeMethod.invoke(instance, param);
+              } catch (NumberFormatException nex) {
+                continue;
+              }
             } else if (Boolean.class == parameterType || boolean.class == parameterType) {
               Boolean param = Boolean.valueOf(value);
               writeMethod.invoke(instance, param);
             } else if (Long.class == parameterType || long.class == parameterType) {
-              Long param = Long.valueOf(value);
-              writeMethod.invoke(instance, param);
+              try {
+                Long param = Long.valueOf(value);
+                writeMethod.invoke(instance, param);
+              } catch (NumberFormatException nex) {
+                continue;
+              }
             }
           }
         }
