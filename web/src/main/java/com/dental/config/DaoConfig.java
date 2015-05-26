@@ -16,7 +16,7 @@ import java.util.Properties;
 
 @Configuration
 @EnableTransactionManagement
-@PropertySource(value = {"WEB-INF/datasource.properties"})
+@PropertySource(value = {"/WEB-INF/datasource.properties"})
 public class DaoConfig {
 
     @Autowired
@@ -55,14 +55,4 @@ public class DaoConfig {
         txManager.setSessionFactory(s);
         return txManager;
     }
-
-//    @Bean(name="userDao")
-//    public UserDao getUserDao() {
-//        return new UserDaoImpl();
-//    }
-
-//    @Bean(name = "userService")
-//    public UserService getUserService() {
-//        return new UserService();
-//    }
 }

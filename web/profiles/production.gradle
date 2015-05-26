@@ -1,0 +1,5 @@
+serverName = 'http://www.mrhaki.com'
+mail {
+    port = 552
+    server = 'mail.host.com'
+}

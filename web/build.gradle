@@ -19,14 +19,14 @@ apply plugin: 'org.flywaydb.flyway'
 
 //httpPort=9090
 
-flyway {
-    url = 'jdbc:mysql://localhost:3306/dental_dev'
-//    url = 'jdbc:h2:file:target/foobar'
-//    user = 'root'
-//    password = 'rootpass'
-    user = 'test'
-    password = 'test'
-}
+//flyway {
+//    url = 'jdbc:mysql://localhost:3306/dental_dev'
+////    url = 'jdbc:h2:file:target/foobar'
+////    user = 'root'
+////    password = 'rootpass'
+//    user = 'test'
+//    password = 'test'
+//}
 
 repositories {
     mavenLocal()
@@ -66,18 +66,23 @@ dependencies {
     compile project(':tools')
 }
 
+project.ext.profiles = "/profiles/"
+apply from: "${profiles}${profile}.gradle"
 
 //jettyRunWar.contextPath = 'dental'
-
 war {
 
     webInf {
-        from 'src/main/resources/spring/'
-        from 'src/main/resources',{
-            exclude('*/qweb.xml')
-            exclude('*/env')
+        from "${sourceSets.main.resources}/spring/"
+        from sourceSets.main.resources ,{
+            //exclude('profiles/')
         }
-        from 'src/main/resources/env/localhost'
+        from "src/main/resources/profiles/localhost"
+        //from "${sourceSets.main.resources}${profiles}${profile}"
     }
-//    webXml = file("src/main/resources/qweb.xml")
+}
+
+task printpath << {
+    println "${sourceSets.main.resources}${profiles}${profile}"
+    println "${sourceSets.main.resources}"
 }
