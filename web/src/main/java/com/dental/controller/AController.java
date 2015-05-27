@@ -1,4 +1,4 @@
-package com.dental.controllers;
+package com.dental.controller;
 
 import me.qq.Rt;
 import org.springframework.stereotype.Controller;
@@ -30,4 +30,7 @@ public class AController extends BaseController{
         return "a controller";
     }
 
+    @Override protected String getViewFolder() {
+        return null;
+    }
 }
