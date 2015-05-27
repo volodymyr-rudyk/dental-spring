@@ -2,6 +2,7 @@ package com.dental.tools.test;
 
 import com.dental.tools.BeanConverter;
 import org.junit.Assert;
+import org.junit.Assume;
 import org.junit.Test;
 
 import java.util.HashMap;
@@ -64,6 +65,12 @@ public class BeanConverterTest {
 
   @Test public void testName() throws Exception {
     Assert.assertTrue(true);
+  }
+
+  @Test public void testName1() throws Exception {
+    String s = null;
+    Assume.assumeFalse(s == null);
+    Assert.assertNotNull("s = null", s);
   }
 
   public static class Bean {
