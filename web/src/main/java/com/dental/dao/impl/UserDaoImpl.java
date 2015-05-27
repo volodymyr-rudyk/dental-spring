@@ -19,7 +19,7 @@ import java.util.List;
  */
 @Transactional
 @Repository("userDao")
-public class UserDaoImpl extends AbstractDao implements UserDao<User> {
+public class UserDaoImpl extends AbstractDao implements UserDao {
 
     @Override
     public User get(Serializable id) {
@@ -37,7 +37,7 @@ public class UserDaoImpl extends AbstractDao implements UserDao<User> {
     @Override
     public List<User> getList() {
         Criteria criteria = sessionFactory.openSession().createCriteria(User.class);
-        return criteria.list();
+        return (List<User>) criteria.list();
     }
 
     @Override
