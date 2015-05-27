@@ -1,4 +1,4 @@
-package com.dental.controllers;
+package com.dental.controller;
 
 import com.dental.dao.entity.User;
 import com.dental.dao.component.UserDao;
@@ -86,4 +86,7 @@ public class WelcomeController extends BaseController {
         binder.registerCustomEditor(Date.class, dateEditor);
     }
 
+    @Override protected String getViewFolder() {
+        return null;
+    }
 }

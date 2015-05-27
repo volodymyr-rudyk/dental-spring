@@ -1,4 +1,4 @@
-package com.dental.controllers;
+package com.dental.controller;
 
 import com.dental.dao.component.UserDao;
 import com.dental.dao.entity.User;
@@ -26,7 +26,7 @@ public class HomeController extends BaseController {
 //    HibernateTransactionManager transactionManager;
 
     @Autowired
-    protected UserDao<User> userDao;
+    protected UserDao userDao;
 
 //    @Autowired
 //    protected SessionFactory sessionFactory;
@@ -64,6 +64,10 @@ public class HomeController extends BaseController {
         model.addAttribute("list",list);
 
         return "index";
+    }
+
+    @Override protected String getViewFolder() {
+        return null;
     }
 
     @ExceptionHandler(NotFoundException.class)

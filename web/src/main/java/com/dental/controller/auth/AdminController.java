@@ -1,12 +1,10 @@
-package com.dental.controllers.auth;
+package com.dental.controller.auth;
 
-import com.dental.controllers.BaseController;
+import com.dental.controller.BaseController;
 import com.dental.exception.NotFoundException;
+import com.dental.view.ViewConfig;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ControllerAdvice;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
  * Created by light on 3/28/2015.
  */
 @Controller
-@ControllerAdvice
 @RequestMapping("/admin")
 public class AdminController extends BaseController {
 
@@ -39,8 +36,8 @@ public class AdminController extends BaseController {
     return "auth/secure";
   }
 
-    @ExceptionHandler(NotFoundException.class)
-    public String notFound() {
-        return "404";
-    }
+  @Override protected String getViewFolder() {
+    return ViewConfig.FOLDER_ADMIN;
+  }
+
 }

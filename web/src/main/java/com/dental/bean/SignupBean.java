@@ -1,4 +1,4 @@
-package com.dental.beans;
+package com.dental.bean;
 
 import java.util.Date;
 
@@ -12,6 +12,7 @@ public class SignupBean extends UserBean {
   private String login;
   private String password;
   private String email;
+  private String phone;
 
   public String getFirstName() {
     return firstName;
@@ -59,5 +60,13 @@ public class SignupBean extends UserBean {
 
   @Override public void setPassword(String password) {
     this.password = password;
+  }
+
+  public String getPhone() {
+    return phone;
+  }
+
+  public void setPhone(String phone) {
+    this.phone = phone;
   }
 }

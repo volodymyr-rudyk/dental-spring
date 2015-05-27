@@ -1,4 +1,4 @@
-package com.dental.beans;
+package com.dental.bean;
 
 /**
  * Created by light on 5/3/2015.

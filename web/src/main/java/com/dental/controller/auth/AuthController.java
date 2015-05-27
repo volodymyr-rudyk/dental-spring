@@ -1,13 +1,15 @@
-package com.dental.controllers.auth;
+package com.dental.controller.auth;
 
-import com.dental.beans.SignupBean;
-import com.dental.beans.UserBean;
-import com.dental.controllers.BaseController;
+import com.dental.bean.SignupBean;
+import com.dental.bean.UserBean;
+import com.dental.controller.BaseController;
+import com.dental.exception.AuthenticationException;
 import com.dental.exception.NotFoundException;
 import com.dental.service.AuthService;
+import com.dental.view.ViewConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,27 +22,28 @@ import java.io.IOException;
  * Created by light on 3/28/2015.
  */
 @Controller
-@ControllerAdvice
+//@RequestMapping("/auth")
 public class AuthController extends BaseController {
 
     @Autowired
     private AuthService authService;
 
     @RequestMapping(value = "/login")
-    public String login(HttpServletRequest request, HttpServletResponse response) throws NotFoundException {
-        return "auth/login";
+    public String login(HttpServletRequest request, HttpServletResponse response) {
+        return renderView("login");
     }
 
     @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
-    public void login(HttpServletRequest request, HttpServletResponse response,
+    public void authenticate(HttpServletRequest request, HttpServletResponse response,
                       UserBean userBean) throws IOException {
         try {
             authService.authenticate(userBean, request);
-        }catch (RuntimeException e){
+        }catch (AuthenticationException e){
+            // TODO log exeption
             response.sendRedirect("/login?fail");
             return;
         }
-        response.sendRedirect("/secure");
+        response.sendRedirect("/profile");
     }
 
     @RequestMapping(value = "/signup")
@@ -51,6 +54,14 @@ public class AuthController extends BaseController {
     @RequestMapping(value = "/signup", method = RequestMethod.POST)
     public void signuppost(HttpServletResponse response, SignupBean signupBean) throws NotFoundException, IOException {
 
+        if(StringUtils.isEmpty(signupBean.getFirstName()) ||
+                StringUtils.isEmpty(signupBean.getLastName()) ||
+                StringUtils.isEmpty(signupBean.getLogin()) ||
+                StringUtils.isEmpty(signupBean.getPassword())
+                ) {
+            response.sendRedirect("/signup?fail");
+          return;
+        }
         authService.signup(signupBean);
         response.sendRedirect("/login");
 //        return "/auth/signup";
@@ -71,6 +82,10 @@ public class AuthController extends BaseController {
     @RequestMapping(value = "/secure")
     public String secure() throws NotFoundException {
         return "auth/secure";
+    }
+
+    @Override protected String getViewFolder() {
+        return ViewConfig.FOLDER_AUTH;
     }
 
     @ExceptionHandler(NotFoundException.class)

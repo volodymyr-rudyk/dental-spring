@@ -1,7 +1,7 @@
 package com.dental.service.impl;
 
-import com.dental.beans.SignupBean;
-import com.dental.beans.UserBean;
+import com.dental.bean.SignupBean;
+import com.dental.bean.UserBean;
 import com.dental.dao.component.UserDao;
 import com.dental.dao.entity.Profile;
 import com.dental.dao.entity.User;
@@ -68,7 +68,7 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Autowired
-    private UserDao<User> userDao;
+    private UserDao userDao;
 
     @Override
     public void signup(SignupBean signupBean) {
@@ -86,7 +86,7 @@ public class AuthServiceImpl implements AuthService {
         profile.setBirthday(new Date());
         profile.setFirstName(signupBean.getFirstName());
         profile.setLastName(signupBean.getLastName());
-        profile.setPhone("434343434");
+        profile.setPhone(signupBean.getPhone());
         user.setProfile(profile);
         return user;
     }
