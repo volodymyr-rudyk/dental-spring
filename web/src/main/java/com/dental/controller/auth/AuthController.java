@@ -8,9 +8,9 @@ import com.dental.exception.NotFoundException;
 import com.dental.service.AuthService;
 import com.dental.view.ViewConfig;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -36,9 +36,13 @@ public class AuthController extends BaseController {
     @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
     public void authenticate(HttpServletRequest request, HttpServletResponse response,
                       UserBean userBean) throws IOException {
-        try {
-            authService.authenticate(userBean, request);
-        }catch (AuthenticationException e){
+    try {
+      authService.authenticate(userBean, request);
+    } catch (BadCredentialsException bex) {
+      // TODO log exeption
+      response.sendRedirect("/login?fail=badcredentials");
+      return;
+    } catch (AuthenticationException e){
             // TODO log exeption
             response.sendRedirect("/login?fail");
             return;
@@ -69,7 +73,6 @@ public class AuthController extends BaseController {
 
     @RequestMapping(value = "/logout")
     public String logout(HttpServletRequest request, HttpServletResponse response) throws NotFoundException {
-
         authService.logout(request, response);
         return "auth/login";
     }
@@ -86,11 +89,6 @@ public class AuthController extends BaseController {
 
     @Override protected String getViewFolder() {
         return ViewConfig.FOLDER_AUTH;
-    }
-
-    @ExceptionHandler(NotFoundException.class)
-    public String notFound() {
-        return "404";
     }
 
 }

@@ -1,5 +1,6 @@
 package com.dental.service.impl;
 
+import com.dental.bean.UserProfileBean;
 import com.dental.dao.component.ProfileDao;
 import com.dental.dao.entity.Profile;
 import com.dental.service.ProfileService;
@@ -19,6 +20,16 @@ public class ProfileServiceImpl implements ProfileService {
 
   @Override
   public Profile getProfile(Serializable id) {
-    return null;
+    return profileDao.get(id);
+  }
+
+  @Override
+  public void save(UserProfileBean profileBean) {
+    Profile profile = transform(profileBean);
+    profileDao.save(profile);
+  }
+
+  private Profile transform(UserProfileBean profileBean) {
+    return new Profile();
   }
 }

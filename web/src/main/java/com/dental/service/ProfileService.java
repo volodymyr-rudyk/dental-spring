@@ -1,5 +1,6 @@
 package com.dental.service;
 
+import com.dental.bean.UserProfileBean;
 import com.dental.dao.entity.Profile;
 
 import java.io.Serializable;
@@ -9,4 +10,6 @@ import java.io.Serializable;
  */
 public interface ProfileService {
   Profile getProfile(Serializable id);
+
+  void save(UserProfileBean profileBean);
 }

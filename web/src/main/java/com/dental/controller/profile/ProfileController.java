@@ -1,5 +1,6 @@
 package com.dental.controller.profile;
 
+import com.dental.bean.UserProfileBean;
 import com.dental.controller.BaseController;
 import com.dental.provider.DentalUserDetails;
 import com.dental.service.ProfileService;
@@ -36,7 +37,13 @@ public class ProfileController extends BaseController {
   }
 
   @RequestMapping("/save")
-  public String saveProfile() {
+  public String saveProfile(UserProfileBean profileBean) {
+
+    // validate
+
+    profileService.save(profileBean);
+
+
     return renderView("profile");
   }
 

@@ -1,9 +1,8 @@
 package com.dental.provider;
 
-import org.apache.commons.logging.Log;
-import org.hibernate.annotations.common.util.impl.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -36,7 +35,7 @@ public class DentalAuthenticationProvider implements AuthenticationProvider {
         }catch (UsernameNotFoundException e) {
             throw new RuntimeException(e.getMessage(), e);
         }
-        throw new RuntimeException("NOT");
+        throw new BadCredentialsException("user name not found, bad credentials");
     }
 
     @Override
