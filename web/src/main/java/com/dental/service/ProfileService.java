@@ -12,4 +12,6 @@ public interface ProfileService {
   Profile getProfile(Serializable id);
 
   void save(UserProfileBean profileBean);
+
+  Profile getLoggedInProfile();
 }

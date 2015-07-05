@@ -3,8 +3,11 @@ package com.dental.service.impl;
 import com.dental.bean.UserProfileBean;
 import com.dental.dao.component.ProfileDao;
 import com.dental.dao.entity.Profile;
+import com.dental.provider.DentalUserDetails;
 import com.dental.service.ProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.io.Serializable;
@@ -27,6 +30,16 @@ public class ProfileServiceImpl implements ProfileService {
   public void save(UserProfileBean profileBean) {
     Profile profile = transform(profileBean);
     profileDao.save(profile);
+  }
+
+  @Override
+  public Profile getLoggedInProfile() {
+    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    if (authentication != null) {
+      DentalUserDetails dentalUserDetails = (DentalUserDetails) authentication.getPrincipal();
+      return dentalUserDetails.getUser().getProfile();
+    }
+    return null;
   }
 
   private Profile transform(UserProfileBean profileBean) {
