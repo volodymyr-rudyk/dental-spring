@@ -26,7 +26,9 @@ repositories {
 dependencies {
 
 
-    compile project(':tools')
+//    compile project(':tools')
+
+//    testCompile 'junit:junit:4.9'
 }
 
 subprojects {
@@ -38,9 +40,13 @@ subprojects {
     }
 
     dependencies {
-        compile 'ch.qos.logback:logback-classic:1.1.2'
+//        compile 'ch.qos.logback:logback-classic:1.1.2'
         compile 'jstl:jstl:1.2'
         compile 'commons-dbcp:commons-dbcp:1.4'
+
+        testCompile 'junit:junit:4.9'
+//        compile 'ch.qos.logback:logback:0.5'
+
     }
 }
 

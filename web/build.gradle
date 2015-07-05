@@ -1,4 +1,3 @@
-
 buildscript {
     repositories {
         mavenCentral()
@@ -15,18 +14,18 @@ group "example"
 //apply plugin: "java"
 apply plugin: 'war'
 apply plugin: 'org.flywaydb.flyway'
-//apply plugin: 'jetty'
+apply plugin: 'jetty'
 
 //httpPort=9090
 
-//flyway {
-//    url = 'jdbc:mysql://localhost:3306/dental_dev'
-////    url = 'jdbc:h2:file:target/foobar'
-////    user = 'root'
-////    password = 'rootpass'
+flyway {
+    url = 'jdbc:mysql://localhost:3306/dental_dev'
+//    url = 'jdbc:h2:file:target/foobar'
+    user = 'root'
+    password = 'rootpass'
 //    user = 'test'
 //    password = 'test'
-//}
+}
 
 repositories {
     mavenLocal()
@@ -62,12 +61,19 @@ dependencies {
 //    compile 'com.lyncode:jtwig-spring:3.1.1'
     compile 'org.freemarker:freemarker:2.3.21'
 
+//    compile 'log4j:log4j:1.2.17'
+    testCompile 'junit:junit:4.9'
+
+//    integrationTestCompile 'org.assertj:assertj-core:3.0.0'
+
     // add dependencies to project modules
     compile project(':tools')
+
+
 }
 
-project.ext.profiles = "/profiles/"
-apply from: "${profiles}${profile}.gradle"
+//project.ext.profiles = "/profiles/"
+//apply from: "${profiles}${profile}.gradle"
 
 //jettyRunWar.contextPath = 'dental'
 war {
@@ -86,3 +92,25 @@ task printpath << {
     println "${sourceSets.main.resources}${profiles}${profile}"
     println "${sourceSets.main.resources}"
 }
+
+//sourceSets {
+//    integrationTest {
+//        java {
+//            compileClasspath += main.output + test.output
+//            runtimeClasspath += main.output + test.output
+//            srcDir file('src/integration-test/java')
+//        }
+//        resources.srcDir file('src/integration-test/resources')
+//    }
+//}
+//configurations {
+//    integrationTestCompile.extendsFrom testCompile
+//    integrationTestRuntime.extendsFrom testRuntime
+//}
+
+
+
+//jetty
+httpPort = 8080
+stopPort = 9080
+stopKey = "stopKey"
