@@ -22,7 +22,7 @@ import java.io.IOException;
  * Created by light on 3/28/2015.
  */
 @Controller
-//@RequestMapping("/auth")
+@RequestMapping("/auth")
 public class AuthController extends BaseController {
 
     @Autowired
@@ -30,19 +30,19 @@ public class AuthController extends BaseController {
 
     @RequestMapping(value = "/login")
     public String login(HttpServletRequest request, HttpServletResponse response) {
-        return renderView("login");
+        return this.renderView("login");
     }
 
     @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
     public void authenticate(HttpServletRequest request, HttpServletResponse response,
-                      UserBean userBean) throws IOException {
-    try {
-      authService.authenticate(userBean, request);
-    } catch (BadCredentialsException bex) {
-      // TODO log exeption
-      response.sendRedirect("/login?fail=badcredentials");
-      return;
-    } catch (AuthenticationException e){
+                             UserBean userBean) throws IOException {
+        try {
+            authService.authenticate(userBean, request);
+        } catch (BadCredentialsException bex) {
+            // TODO log exeption
+            response.sendRedirect("/login?fail=badcredentials");
+            return;
+        } catch (AuthenticationException e) {
             // TODO log exeption
             response.sendRedirect("/login?fail");
             return;
@@ -52,42 +52,37 @@ public class AuthController extends BaseController {
 
     @RequestMapping(value = "/signup")
     public String signup() throws NotFoundException, IOException {
-        return "/auth/signup";
+        return this.renderView("signup");
     }
 
     @RequestMapping(value = "/signup", method = RequestMethod.POST)
     public void signuppost(HttpServletResponse response, SignupBean signupBean) throws NotFoundException, IOException {
 
-        if(StringUtils.isEmpty(signupBean.getFirstName()) ||
+        if (StringUtils.isEmpty(signupBean.getFirstName()) ||
                 StringUtils.isEmpty(signupBean.getLastName()) ||
                 StringUtils.isEmpty(signupBean.getLogin()) ||
                 StringUtils.isEmpty(signupBean.getPassword())
                 ) {
             response.sendRedirect("/signup?fail");
-          return;
+            return;
         }
         authService.signup(signupBean);
         response.sendRedirect("/login");
-//        return "/auth/signup";
     }
 
     @RequestMapping(value = "/logout")
     public String logout(HttpServletRequest request, HttpServletResponse response) throws NotFoundException {
         authService.logout(request, response);
-        return "auth/login";
+        return login(request, response);
     }
 
     @RequestMapping(value = "/denied")
     public String denied() throws NotFoundException {
-        return "auth/denied";
+        return this.renderView("denied");
     }
 
-    @RequestMapping(value = "/secure")
-    public String secure() throws NotFoundException {
-        return "auth/secure";
-    }
-
-    @Override protected String getViewFolder() {
+    @Override
+    protected String getViewFolder() {
         return ViewConfig.FOLDER_AUTH;
     }
 

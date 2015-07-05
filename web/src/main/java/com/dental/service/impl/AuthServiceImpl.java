@@ -25,6 +25,7 @@ import java.util.Date;
  * Created by light on 5/3/2015.
  */
 public class AuthServiceImpl implements AuthService {
+    public static final String SPRING_SECURITY_CONTEXT = "SPRING_SECURITY_CONTEXT";
 
     //  @Autowired
 //  private ProviderManager providerManager;
@@ -41,8 +42,8 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public void authenticate(UserBean userBean, HttpServletRequest request) {
-
-        UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(userBean.getUsername(), userBean.getPassword());
+        UsernamePasswordAuthenticationToken token =
+                new UsernamePasswordAuthenticationToken(userBean.getUsername(), userBean.getPassword());
         token.setDetails(new WebAuthenticationDetails(request));
         Authentication authentication = authenticationManager.authenticate(token);
 //        Authentication authentication = authenticationProvider.authenticate(token);
@@ -50,7 +51,7 @@ public class AuthServiceImpl implements AuthService {
         SecurityContext securityContext = SecurityContextHolder.getContext();
         securityContext.setAuthentication(authentication);
         HttpSession session = request.getSession(true);
-        session.setAttribute("SPRING_SECURITY_CONTEXT", securityContext);
+        session.setAttribute(SPRING_SECURITY_CONTEXT, securityContext);
 
 //    if(authentication.isAuthenticated())
 //      SecurityContextHolder.getContext().setAuthentication(authentication);
