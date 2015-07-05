@@ -1,47 +1,12 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>INDEX</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<#--<link rel="shortcut icon" href=" ${assetPath(src: 'favicon.ico')}" type="image/x-icon">-->
-<#--<link rel="apple-touch-icon" href="${assetPath(src: 'apple-touch-icon.png')}">-->
-<#--<link rel="apple-touch-icon" sizes="114x114" href="${assetPath(src: 'apple-touch-icon-retina.png')}">-->
-
-    <link rel="stylesheet" href="/css/bootstrap.css">
-</head>
-
-<body>
-
-<div style="margin-bottom: 51px;">
-    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a href="#" class="navbar-brand">Dentalbook.com</a>
-            </div>
-
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav navbar-right">
-                    <p>test</p>
-                </ul>
-            </div>
-        </div>
-    </div>
-</div>
+<#import "../layout/basement.ftl" as base />
+<@base.page "SignUp Page">
 
 <div class="container">
-
     <div class="row">
         <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
-            <form role="form" action="/signup" method="post">
-                <h2>Please Sign Up <small>It's free and always will be.</small></h2>
+            <form ng-controller="submitController as submitCtrl" role="form" action="/auth/signup" method="post" novalidate>
+                <h2>Please Sign Up <small>It's free and always will be.</small>
+                {{submitCtrl.data}}</h2>
                 <hr class="colorgraph">
                 <div class="row">
                     <div class="col-xs-12 col-sm-6 col-md-6">
@@ -121,13 +86,6 @@
     </div><!-- /.modal -->
 </div>
 
-
-<div class="navbar navbar-default navbar-fixed-bottom">
-    <div class="container">
-        <p class="navbar-text pull-left">Copyright</p>
-        <a class="navbar-btn btn btn-danger pull-right">Subscribe</a>
-    </div>
-</div>
-
-</body>
-</html>
+<script src="/js/angular.js"></script>
+<script src="/js/signup-module.js"></script>
+</@base.page>
