@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html ng-app="gemStore">
+<head>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+    <script type="text/javascript" src="js/angular.js"></script>
+    <script type="text/javascript" src="js/app.js"></script>
+</head>
+<body class="container" ng-controller="StoreController as store">
+<div class="product row" ng-hide="store.product.soldOut">
+    <h3>
+        {{store.product.name}}
+        <em class="pull-right">{{store.product.price | currency}}</em>
+    </h3>
+    <button ng-show="store.product.canPurchase">Add to Cart</button>
+</div>
+
+
+<div ng-controller="OneController as one">
+    message : {{one.one.test | uppercase | cm}}
+    message : {{ 0 | cm:112}}
+    <img ng-src="{{one.one.src}}"/>
+</div>
+
+<product-title></product-title>
+<form name="reviewForm"
+      ng-controller="ReviewController as reviewCtrl"
+      ng-init="review.selected=false"
+      ng-submit="reviewCtrl.addReview(product);" novalidate >
+    <blockquote ng-repeat="p in reviewCtrl.ps">
+        <b>Stars: {{p.review.stars}}</b>
+        {{p.review.body}}
+        <cite> review by: {{p.review.author}}</cite>
+        <div>selected:{{p.review.selected}}</div>
+    </blockquote>
+
+    <select ng-model="review.stars" required>
+        <option value="1">1 star</option>
+        <option value="2">2 star</option>
+        <option value="3">3 star</option>
+    </select>
+    <textarea ng-model="review.body" required></textarea>
+    <label>by:</label>
+    <input ng-model="review.author" type="email" required/>
+    <input type="checkbox" ng-model="review.selected">
+    <input type="submit" value="Send..."/>
+    <div>Valid={{reviewForm.$valid}}</div>
+</form>
+
+<section ng-controller="MenuController as menu">
+    <ul class="nav nav-pills">
+        <li ng-repeat="item in menu.items">
+            <a href ng-click="tab='{{item.index}}'">{{item.title}}</a>
+        </li>
+        <li ng-class="{active:menu.isSelected(1)}"><a href ng-click="menu.selectTab(1);">One</a></li>
+        <li ng-class="{active:menu.isSelected(2)}"><a href ng-click="menu.selectTab(2);">Two</a></li>
+        <li ng-class="{active:menu.isSelected(3)}"><a href ng-click="menu.selectTab(3);">Three</a></li>
+    </ul>
+    <div ng-show="menu.isSelected(1)">
+        panel 1
+    </div>
+    <div ng-show="menu.isSelected(2)">
+        panel 2
+    </div>
+    <div ng-show="menu.isSelected(3)">
+        panel 3
+    </div>
+    tab = {{tab}}
+</section>
+</body>
+</html>
