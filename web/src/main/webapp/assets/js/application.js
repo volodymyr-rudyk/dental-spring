@@ -10,12 +10,21 @@
 //= require_self
 //= require bootstrap
 
-if (typeof jQuery !== 'undefined') {
-	(function($) {
-		$('#spinner').ajaxStart(function() {
-			$(this).fadeIn();
-		}).ajaxStop(function() {
-			$(this).fadeOut();
-		});
-	})(jQuery);
-}
+//if (typeof jQuery !== 'undefined') {
+//	(function($) {
+//		$('#spinner').ajaxStart(function() {
+//			$(this).fadeIn();
+//		}).ajaxStop(function() {
+//			$(this).fadeOut();
+//		});
+//	})(jQuery);
+//}
+
+(function() {
+	var app = angular.module('dental', []);
+
+	app.controller('', function () {
+
+	})
+
+})();
