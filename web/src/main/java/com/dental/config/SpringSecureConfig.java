@@ -39,23 +39,25 @@ public class SpringSecureConfig extends WebSecurityConfigurerAdapter {
 //
 ////                .and()
 //
-
-        http
+        http.csrf().disable()
                 //Configures form login
                 .formLogin()
                 .loginPage("/login")
                 .loginProcessingUrl("/authenticate")
                 .failureUrl("/login?error=bad_credentials")
-                        //Configures the logout function
+
+                //Configures the logout function
                 .and()
                 .logout()
                 .deleteCookies("JSESSIONID")
                 .logoutUrl("/logout")
                 .logoutSuccessUrl("/login")
-                        //Configures url based authorization
+
+                //Configures url based authorization
                 .and()
                 .authorizeRequests()
-                        //Anyone can access the urls
+
+                 //Anyone can access the urls
                 .antMatchers(
                         "/auth/**",
                         "/",
