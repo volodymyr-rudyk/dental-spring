@@ -69,7 +69,7 @@ public class BeanConverterTest {
 
   @Test public void testName1() throws Exception {
     String s = null;
-    Assume.assumeFalse(s == null);
+    Assume.assumeTrue(s == null);
     Assert.assertNotNull("s = null", s);
   }
 

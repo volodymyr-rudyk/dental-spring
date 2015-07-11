@@ -46,6 +46,8 @@ subprojects {
 
         testCompile 'junit:junit:4.9'
 //        compile 'ch.qos.logback:logback:0.5'
+        compile 'ch.qos.logback:logback-classic:1.1.3'
+
 
     }
 }

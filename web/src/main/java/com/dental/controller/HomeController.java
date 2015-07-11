@@ -19,7 +19,7 @@ import java.util.List;
 */
 
 @Controller
-@ControllerAdvice
+//@ControllerAdvice
 public class HomeController extends BaseController {
 
 //    @Autowired
@@ -70,8 +70,8 @@ public class HomeController extends BaseController {
         return null;
     }
 
-    @ExceptionHandler(NotFoundException.class)
-    public String notFound() {
-        return "404";
-    }
+//    @ExceptionHandler(NotFoundException.class)
+//    public String notFound() {
+//        return "404";
+//    }
 }

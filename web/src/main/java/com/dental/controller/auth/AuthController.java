@@ -7,6 +7,8 @@ import com.dental.exception.AuthenticationException;
 import com.dental.exception.NotFoundException;
 import com.dental.service.AuthService;
 import com.dental.view.ViewConfig;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.stereotype.Controller;
@@ -25,11 +27,14 @@ import java.io.IOException;
 @RequestMapping("/auth")
 public class AuthController extends BaseController {
 
+    private static final Logger LOG = LoggerFactory.getLogger(AuthController.class);
+
     @Autowired
     private AuthService authService;
 
     @RequestMapping(value = "/login")
     public String login(HttpServletRequest request, HttpServletResponse response) {
+        LOG.debug("Login page entered ...");
         return this.renderView("login");
     }
 
@@ -39,7 +44,7 @@ public class AuthController extends BaseController {
         try {
             authService.authenticate(userBean, request);
         } catch (BadCredentialsException bex) {
-            // TODO log exeption
+            LOG.debug("Bad credentials ...");
             response.sendRedirect("/login?fail=badcredentials");
             return;
         } catch (AuthenticationException e) {
