@@ -50,7 +50,7 @@ public class SpringConfig extends WebMvcConfigurerAdapter {
     @Bean(name = "messageSource")
     public MessageSource getMessageSource() {
         ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
-        messageSource.setBasename("multi.data");
+        messageSource.setBasenames("multi.data", "milti.errors");
         messageSource.setDefaultEncoding("utf-8");
         return messageSource;
     }

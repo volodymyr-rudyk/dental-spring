@@ -78,8 +78,8 @@
     </#list>
 
 
-    <a href="/login">Login</a>
-    <a href="/signup">SignUp</a>
+    <a href="/auth/login">Login</a>
+    <a href="/auth/signup">SignUp</a>
 </div>
 
 <div class="navbar navbar-default navbar-fixed-bottom">

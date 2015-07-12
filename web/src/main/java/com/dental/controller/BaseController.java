@@ -18,7 +18,7 @@ import java.io.IOException;
 
 @Component
 @ControllerAdvice
-public abstract class BaseController {
+public abstract class BaseController implements PageController {
 
     @Autowired
     protected MessageSource messageSource;

@@ -12,12 +12,16 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 import java.io.IOException;
 
 /**
@@ -32,31 +36,44 @@ public class AuthController extends BaseController {
     @Autowired
     private AuthService authService;
 
-    @RequestMapping(value = "/login")
-    public String login(HttpServletRequest request, HttpServletResponse response) {
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public String login() {
         LOG.debug("Login page entered ...");
-        return this.renderView("login");
+        return this.renderView(PAGE_LOGIN);
     }
 
-    @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
-    public void authenticate(HttpServletRequest request, HttpServletResponse response,
-                             UserBean userBean) throws IOException {
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public ModelAndView authenticate(HttpServletRequest request, HttpServletResponse response,
+                               @Valid UserBean userBean, BindingResult result, Model model) throws IOException {
+
+        ModelAndView modelAndView = new ModelAndView();
+        if (result.hasErrors()) {
+            LOG.debug("Entered data has errors");
+            model.addAttribute("validationErrors", result.getFieldErrors());
+            modelAndView.setViewName(this.renderView(PAGE_LOGIN));
+            return modelAndView;
+        }
+
         try {
             authService.authenticate(userBean, request);
+            modelAndView.setViewName("redirect:/profile");
+            LOG.debug("Success, Redirect to profile page");
+            return modelAndView;
         } catch (BadCredentialsException bex) {
             LOG.debug("Bad credentials ...");
-            response.sendRedirect("/login?fail=badcredentials");
-            return;
+            model.addAttribute("error", "Bad credential");
+            modelAndView.setViewName(this.renderView(PAGE_LOGIN));
+            return modelAndView;
         } catch (AuthenticationException e) {
-            // TODO log exeption
-            response.sendRedirect("/login?fail");
-            return;
+            LOG.debug("AuthenticationException = " + e.getMessage());
+            model.addAttribute("error", "Auth Exception");
+            modelAndView.setViewName(this.renderView(PAGE_LOGIN));
+            return modelAndView;
         }
-        response.sendRedirect("/profile");
     }
 
     @RequestMapping(value = "/signup")
-    public String signup() throws NotFoundException, IOException {
+    public String signup() {
         return this.renderView("signup");
     }
 
@@ -76,9 +93,9 @@ public class AuthController extends BaseController {
     }
 
     @RequestMapping(value = "/logout")
-    public String logout(HttpServletRequest request, HttpServletResponse response) throws NotFoundException {
+    public void logout(HttpServletRequest request, HttpServletResponse response, Model model) throws NotFoundException, IOException {
         authService.logout(request, response);
-        return login(request, response);
+        response.sendRedirect("/auth/login");
     }
 
     @RequestMapping(value = "/denied")
