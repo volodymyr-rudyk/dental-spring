@@ -1,0 +1,711 @@
+<?xml version="1.0"?>
+<project
+        xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+        xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+    <modelVersion>4.0.0</modelVersion>
+    <!--<parent>-->
+    <!--<groupId>com.dental</groupId>-->
+    <!--<artifactId>sm-rest-api</artifactId>-->
+    <!--<version>0.9.1</version>-->
+    <!--</parent>-->
+    <groupId>com.dental</groupId>
+    <artifactId>web</artifactId>
+    <version>0.1</version>
+    <packaging>war</packaging>
+    <name>dental-web</name>
+    <description>Dental Web</description>
+
+    <properties>
+        <services.web.mail.version>0.9.1</services.web.mail.version>
+        <config.atb.mockFilesPath>/home/credit_mock_files/</config.atb.mockFilesPath>
+        <service.logging.sqs.version>0.9.1</service.logging.sqs.version>
+        <logging.core.version>0.9.1</logging.core.version>
+        <google.guava.version>18.0</google.guava.version>
+        <org.aspectj-version>1.7.3</org.aspectj-version>
+    </properties>
+
+    <dependencies>
+
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <version>4.1.6.RELEASE</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+            <version>4.1.6.RELEASE</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>4.1.6.RELEASE</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context-support</artifactId>
+            <version>4.0.7.RELEASE</version>
+        </dependency>
+
+        <!--<dependency>-->
+            <!--<groupId>org.springframework</groupId>-->
+            <!--<artifactId>spring-orm</artifactId>-->
+            <!--<version>4.1.6.RELEASE</version>-->
+        <!--</dependency>-->
+<!---->
+        <!--spring security-->
+        <!--<dependency>-->
+            <!--<groupId>org.springframework.security</groupId>-->
+            <!--<artifactId>spring-security-core</artifactId>-->
+            <!--<version>4.0.0</version>-->
+        <!--</dependency>-->
+
+        <!--<dependency>-->
+            <!--<groupId>org.springframework.security</groupId>-->
+            <!--<artifactId>spring-security-web</artifactId>-->
+            <!--<version>4.0.0</version>-->
+        <!--</dependency>-->
+<!---->
+        <!--<dependency>-->
+            <!--<groupId>org.springframework.security</groupId>-->
+            <!--<artifactId>spring-security-config</artifactId>-->
+            <!--<version>4.0.0</version>-->
+        <!--</dependency>-->
+<!---->
+        <!--<dependency>-->
+            <!--<groupId>org.springframework.security</groupId>-->
+            <!--<artifactId>spring-security-taglibs</artifactId>-->
+            <!--<version>4.0.0</version>-->
+        <!--</dependency>-->
+
+
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>bootstrap</artifactId>
+            <version>3.3.5</version>
+        </dependency>
+
+        <!--compile 'org.webjars:bootstrap:3.3.5'-->
+        <!--compile 'javax.servlet:javax.servlet-api:3.1.0'-->
+        <!---->
+        <!--compile 'org.springframework.security:spring-security-config:4.0.0.RELEASE'-->
+        <!--compile 'org.springframework.security:spring-security-taglibs:4.0.0.RELEASE'-->
+        <!---->
+        <!--//    compile 'org.codehaus.jackson:jackson-core-asl:1.9.13'-->
+        <!--//    compile 'org.codehaus.jackson:jackson-mapper-asl:1.9.13'-->
+        <!---->
+        <!--compile 'com.fasterxml.jackson.core:jackson-databind:2.6.0-rc4'-->
+        <!--testCompile 'org.springframework:spring-test:4.1.6.RELEASE'-->
+        <!--//include in compile only, exclude in the war-->
+        <!---->
+        <!--compile 'org.hibernate:hibernate-core:4.3.7.Final'-->
+        <!--compile 'org.hibernate:hibernate-validator:5.0.1.Final'-->
+        <!---->
+        <!--compile 'mysql:mysql-connector-java:5.1.31'-->
+        <!---->
+        <!--//    compile 'com.lyncode:jtwig-spring:3.1.1'-->
+        <!--compile 'org.freemarker:freemarker:2.3.21'-->
+        <!---->
+        <!--//    compile 'log4j:log4j:1.2.17'-->
+        <!--testCompile 'junit:junit:4.9'-->
+        <!---->
+
+
+        <dependency>
+            <groupId>commons-httpclient</groupId>
+            <artifactId>commons-httpclient</artifactId>
+            <version>3.1</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>commons-logging</groupId>
+                    <artifactId>commons-logging</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <!-- // Core dependency for sharing code needed for mail sending -->
+
+        <!-- // Core dependency for sharing code needed for logging events in logging
+            DB -->
+        <dependency>
+            <groupId>net.sf.ehcache</groupId>
+            <artifactId>ehcache-core</artifactId>
+            <version>2.6.9</version>
+        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.springframework</groupId>-->
+            <!--<artifactId>spring-context-support</artifactId>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>net.sourceforge.jtds</groupId>-->
+            <!--<artifactId>jtds</artifactId>-->
+        <!--</dependency>-->
+
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+            <version>1.2</version>
+            <scope>runtime</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>net.sourceforge.javacsv</groupId>
+            <artifactId>javacsv</artifactId>
+            <version>2.0</version>
+        </dependency>
+
+        <!-- SPRING -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+            <version>4.1.6.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>4.1.6.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-beans</artifactId>
+            <version>4.1.6.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-aop</artifactId>
+            <version>4.1.6.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-aspects</artifactId>
+            <version>4.1.4.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-expression</artifactId>
+            <version>
+                4.1.6.RELEASE
+            </version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+            <version>4.1.6.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <version>4.1.6.RELEASE</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-tx</artifactId>
+            <version>4.1.4.RELEASE</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jdbc</artifactId>
+            <version>4.1.4.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-orm</artifactId>
+            <version>4.1.4.RELEASE</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>4.1.4.RELEASE</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-core</artifactId>
+            <version></version>
+        </dependency>
+<!---->
+        <!-- // SPRING -->
+
+        <!--<dependency>-->
+            <!--<groupId>com.fasterxml.jackson.core</groupId>-->
+            <!--<artifactId>jackson-core</artifactId>-->
+        <!--</dependency>-->
+<!---->
+        <!--<dependency>-->
+            <!--<groupId>com.fasterxml.jackson.core</groupId>-->
+            <!--<artifactId>jackson-databind</artifactId>-->
+        <!--</dependency>-->
+
+
+        <!--	<dependency>
+                    <groupId>javax.servlet</groupId>
+                    <artifactId>servlet-api</artifactId>
+                </dependency>-->
+
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jsp-api</artifactId>
+            <version>2.0</version>
+        </dependency>
+
+        <!-- Hibernate -->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>4.3.8.Final</version>
+        </dependency>
+        <!-- // Hibernate -->
+        <!-- Quartz framework dependencies -->
+        <dependency>
+            <groupId>org.quartz-scheduler</groupId>
+            <artifactId>quartz</artifactId>
+            <version>2.2.1</version>
+        </dependency>
+        <!-- // Quartz framework dependencies -->
+        <!-- Java Mail API -->
+        <dependency>
+            <groupId>javax.mail</groupId>
+            <artifactId>mail</artifactId>
+            <version>1.4.3</version>
+        </dependency>
+        <!-- // Java Mail API -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>1.3.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-all</artifactId>
+            <version>1.9.5</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.1.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.3.2</version>
+        </dependency>
+
+        <!-- google.guava -->
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>${google.guava.version}</version>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <defaultGoal>package</defaultGoal>
+
+        <finalName>credit</finalName>
+
+        <resources>
+
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>*.xml</include>
+                    <include>*.properties</include>
+                </includes>
+                <excludes>
+                    <exclude>web.xml</exclude>
+                    <exclude>webdefault.xml</exclude>
+                    <exclude>application.wadl</exclude>
+                </excludes>
+                <filtering>true</filtering>
+            </resource>
+            <!--<resource>-->
+            <!--<directory>src/main/resources/config</directory>-->
+            <!--<includes>-->
+            <!--<include>override.${profile.id}.properties</include>-->
+            <!--</includes>-->
+            <!--</resource>-->
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>web.xml</include>
+                </includes>
+                <targetPath>${project.build.directory}/${project.artifactId}/WEB-INF/</targetPath>
+                <filtering>true</filtering>
+            </resource>
+
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>application.wadl</include>
+                </includes>
+                <targetPath>${project.build.directory}/${project.artifactId}/</targetPath>
+                <filtering>true</filtering>
+            </resource>
+
+        </resources>
+
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <configuration>
+                    <webXml>${project.build.directory}/${project.artifactId}/WEB-INF/web.xml</webXml>
+                    <webResources>
+                        <resource>
+                            <directory>${project.build.directory}/${project.artifactId}/</directory>
+                            <includes>
+                                <include>**/application.wadl</include>
+                            </includes>
+                        </resource>
+                    </webResources>
+                    <archiveClasses>true</archiveClasses>
+                </configuration>
+            </plugin>
+
+            <!-- set system properties -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>properties-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>set-system-properties</goal>
+                        </goals>
+                        <configuration>
+                            <properties>
+                                <property>
+                                    <name>logback.configurationFile</name>
+                                    <value>${project.build.directory}/classes/logback.xml</value>
+                                </property>
+                            </properties>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.mortbay.jetty</groupId>
+                <artifactId>maven-jetty-plugin</artifactId>
+                <configuration>
+                    <scanIntervalSeconds>10</scanIntervalSeconds>
+                    <!-- <contextPath>/${project.artifactId}</contextPath> -->
+                    <contextPath>/</contextPath>
+                    <!--<Set>true</Set>-->
+                    <webAppConfig>
+                        <contextPath>/</contextPath>
+                        <baseResource implementation="org.mortbay.resource.ResourceCollection">
+                            <resourcesAsCSV>
+                                src/main/webapp,
+                                ${project.build.directory}/${project.artifactId}/
+                            </resourcesAsCSV>
+                        </baseResource>
+                    </webAppConfig>
+                    <overrideWebXml>src/main/resources/jetty-override-web.xml</overrideWebXml>
+                    <webXml>${project.build.directory}/${project.artifactId}/WEB-INF/web.xml</webXml>
+                    <systemProperties>
+                        <systemProperty>
+                            <name>jetty.port</name>
+                            <value>8888</value>
+                        </systemProperty>
+                    </systemProperties>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.flywaydb</groupId>
+                <artifactId>flyway-maven-plugin</artifactId>
+                <version>3.1</version>
+                <configuration>
+                    <table>SchemaVersion</table>
+                    <!--<driver>${db.driver}</driver>-->
+                    <!--<url>${db.url}</url>-->
+                    <!--<user>${db.username}</user>-->
+                    <!--<password>${db.password}</password>-->
+                    <schemas>
+                        <schema>dbo</schema>
+                    </schemas>
+                    <locations>
+                        <location>filesystem:${basedir}/doc/sql/migration</location>
+                    </locations>
+                    <initOnMigrate>true</initOnMigrate>
+                </configuration>
+            </plugin>
+
+            <!--	<plugin>
+                    <groupId>org.jacoco</groupId>
+                    <artifactId>jacoco-maven-plugin</artifactId>
+                    <version>0.7.1.201405082137</version>
+                    <executions>
+                        <execution>
+                            <id>default-prepare-agent</id>
+                            <goals>
+                                <goal>prepare-agent</goal>
+                            </goals>
+                        </execution>
+                        <execution>
+                            <id>default-report</id>
+                            <phase>test</phase>
+                            <goals>
+                                <goal>report</goal>
+                            </goals>
+                        </execution>
+                        <execution>
+                            <id>default-check</id>
+                            <phase>test</phase>
+                            <goals>
+                                <goal>check</goal>
+                            </goals>
+                            <configuration>
+                                <rules>
+                                    <rule>
+                                        <element>BUNDLE</element>
+                                        <limits>
+                                            <limit>
+                                                <counter>INSTRUCTION</counter>
+                                                <value>COVEREDRATIO</value>
+                                                <minimum>0.41</minimum>
+                                            </limit>
+                                        </limits>
+                                    </rule>
+                                </rules>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+    -->
+        </plugins>
+    </build>
+
+    <!--<profiles>-->
+    <!--<profile>-->
+    <!--<id>localhost</id>-->
+    <!--<activation>-->
+    <!--<activeByDefault>true</activeByDefault>-->
+    <!--</activation>-->
+    <!--<properties>-->
+    <!--<profile.id>localhost</profile.id>-->
+
+    <!--<buildVersion>1.01</buildVersion>-->
+    <!--<app.log.level>INFO</app.log.level>-->
+    <!--<app.devmode>true</app.devmode>-->
+
+    <!--<app.protocol>http</app.protocol>-->
+    <!--<app.hostname>localhost</app.hostname>-->
+    <!--<app.root.url>${app.protocol}://${app.hostname}</app.root.url>-->
+
+    <!--<db.driver>net.sourceforge.jtds.jdbc.Driver</db.driver>-->
+    <!--<db.url>-->
+    <!--<![CDATA[jdbc:jtds:sqlserver://192.168.2.162:1433/credit_sandbox_enc_final;sendStringParametersAsUnicode=false]]></db.url>-->
+    <!--<db.username>sa</db.username>-->
+    <!--<db.password>teamromexsql./10</db.password>-->
+
+    <!--<app.experian.host>http://soapui.savvymoney.com:8086</app.experian.host>-->
+    <!--&lt;!&ndash; pid &ndash;&gt;-->
+    <!--<config.pid.url>${app.experian.host}/fraudsolutions/webservices/preciseid/PreciseidAPI</config.pid.url>-->
+    <!--<config.pid.preamble>TBD1</config.pid.preamble>-->
+    <!--<config.pid.initials>SB</config.pid.initials>-->
+    <!--<config.pid.subcode>2113820</config.pid.subcode>-->
+    <!--&lt;!&ndash;atb &ndash;&gt;-->
+    <!--<config.atb.url>http://54.84.107.39:8081</config.atb.url>-->
+    <!--<config.atb.subcode>2114370</config.atb.subcode>-->
+    <!--<config.atb.password>ABC</config.atb.password>-->
+
+    <!--<config.auto.refresh.logs.folder>D:\AutoRefresh\</config.auto.refresh.logs.folder>-->
+    <!--<config.report.refresh.logs.folder>D:\ReportRefresh\</config.report.refresh.logs.folder>-->
+
+    <!--<logging.sqs.prefix>st_</logging.sqs.prefix>-->
+
+    <!--<config.tui.provider>true</config.tui.provider>-->
+    <!--<config.tui.username>CC2SavvyMoney</config.tui.username>-->
+    <!--<config.tui.password>#B3Mdwp9</config.tui.password>-->
+    <!--</properties>-->
+    <!--</profile>-->
+
+    <!--<profile>-->
+    <!--<id>sandbox</id>-->
+    <!--<properties>-->
+    <!--<profile.id>sandbox</profile.id>-->
+
+    <!--<buildVersion>${buildVersion}</buildVersion>-->
+    <!--<app.log.level>INFO</app.log.level>-->
+    <!--<app.devmode>false</app.devmode>-->
+
+    <!--<app.protocol>https</app.protocol>-->
+    <!--<app.hostname>sandbox.savvymoney.com</app.hostname>-->
+    <!--<app.root.url>${app.protocol}://${app.hostname}</app.root.url>-->
+
+    <!--<db.driver>net.sourceforge.jtds.jdbc.Driver</db.driver>-->
+    <!--<db.url>-->
+    <!--<![CDATA[jdbc:jtds:sqlserver://mssql-stg-sndbx.cvvhwliyzb2d.us-east-1.rds.amazonaws.com:1433/credit_sandbox;sendStringParametersAsUnicode=false]]></db.url>-->
+    <!--<db.username>credit-sandbox-user</db.username>-->
+    <!--<db.password>m8t5e34w</db.password>-->
+
+    <!--<app.experian.host>https://dm2.experian.com</app.experian.host>-->
+    <!--&lt;!&ndash; pid &ndash;&gt;-->
+    <!--<config.pid.url>${app.experian.host}/fraudsolutions/webservices/preciseid/PreciseidAPI</config.pid.url>-->
+    <!--<config.pid.username>${pidUsername}</config.pid.username>-->
+    <!--<config.pid.password>${pidPassword}</config.pid.password>-->
+    <!--<config.pid.initials>SB</config.pid.initials>-->
+    <!--<config.pid.preamble>TBD1</config.pid.preamble>-->
+    <!--<config.pid.subcode>2113820</config.pid.subcode>-->
+    <!--&lt;!&ndash; atb &ndash;&gt;-->
+    <!--<config.atb.url>http://54.84.107.39:8081</config.atb.url>-->
+    <!--<config.atb.subcode>2114370</config.atb.subcode>-->
+    <!--<config.atb.password>ABC</config.atb.password>-->
+
+    <!--<config.auto.refresh.logs.folder>/opt/AutoRefresh/</config.auto.refresh.logs.folder>-->
+    <!--<config.report.refresh.logs.folder>/opt/ReportRefresh/</config.report.refresh.logs.folder>-->
+
+    <!--<logging.sqs.prefix>st_</logging.sqs.prefix>-->
+
+    <!--<config.tui.provider>true</config.tui.provider>-->
+    <!--<config.tui.username>${TuiUsername}</config.tui.username>-->
+    <!--<config.tui.password>${TuiPassword}</config.tui.password>-->
+
+    <!--</properties>-->
+    <!--</profile>-->
+
+    <!--<profile>-->
+    <!--<id>sandbox2</id>-->
+    <!--<properties>-->
+    <!--<profile.id>sandbox</profile.id>-->
+
+    <!--<buildVersion>${buildVersion}</buildVersion>-->
+    <!--<app.log.level>INFO</app.log.level>-->
+    <!--<app.devmode>false</app.devmode>-->
+
+    <!--<app.protocol>https</app.protocol>-->
+    <!--<app.hostname>sandbox.savvymoney.com</app.hostname>-->
+    <!--<app.root.url>${app.protocol}://${app.hostname}</app.root.url>-->
+
+    <!--<db.driver>net.sourceforge.jtds.jdbc.Driver</db.driver>-->
+    <!--<db.url>-->
+    <!--<![CDATA[jdbc:jtds:sqlserver://mssql-testing.cvvhwliyzb2d.us-east-1.rds.amazonaws.com:1433/credit-test;sendStringParametersAsUnicode=false]]></db.url>-->
+    <!--<db.username>credit-sandbox-user</db.username>-->
+    <!--<db.password>m8t5e34w</db.password>-->
+
+    <!--<app.experian.host>https://dm2.experian.com</app.experian.host>-->
+    <!--&lt;!&ndash; pid &ndash;&gt;-->
+    <!--<config.pid.url>${app.experian.host}/fraudsolutions/webservices/preciseid/PreciseidAPI</config.pid.url>-->
+    <!--<config.pid.username>${pidUsername}</config.pid.username>-->
+    <!--<config.pid.password>${pidPassword}</config.pid.password>-->
+    <!--<config.pid.initials>SB</config.pid.initials>-->
+    <!--<config.pid.preamble>TBD1</config.pid.preamble>-->
+    <!--<config.pid.subcode>2113820</config.pid.subcode>-->
+    <!--&lt;!&ndash; atb &ndash;&gt;-->
+    <!--<config.atb.url>http://54.84.107.39:8081</config.atb.url>-->
+    <!--<config.atb.subcode>2114370</config.atb.subcode>-->
+    <!--<config.atb.password>ABC</config.atb.password>-->
+
+    <!--<config.auto.refresh.logs.folder>/opt/AutoRefresh/</config.auto.refresh.logs.folder>-->
+    <!--<config.report.refresh.logs.folder>/opt/ReportRefresh/</config.report.refresh.logs.folder>-->
+
+    <!--<logging.sqs.prefix>st_</logging.sqs.prefix>-->
+
+    <!--<config.tui.provider>true</config.tui.provider>-->
+    <!--<config.tui.username>${TuiUsername}</config.tui.username>-->
+    <!--<config.tui.password>${TuiPassword}</config.tui.password>-->
+
+    <!--</properties>-->
+    <!--</profile>-->
+
+    <!--<profile>-->
+    <!--<id>staging</id>-->
+    <!--<properties>-->
+    <!--<profile.id>staging</profile.id>-->
+
+    <!--<buildVersion>${buildVersion}</buildVersion>-->
+    <!--<app.log.level>INFO</app.log.level>-->
+    <!--<app.devmode>false</app.devmode>-->
+
+    <!--<app.protocol>https</app.protocol>-->
+    <!--<app.hostname>beta.savvymoney.com</app.hostname>-->
+    <!--<app.root.url>${app.protocol}://${app.hostname}</app.root.url>-->
+
+    <!--<db.driver>net.sourceforge.jtds.jdbc.Driver</db.driver>-->
+    <!--<db.url>-->
+    <!--<![CDATA[jdbc:jtds:sqlserver://mssql-stg-sndbx.cvvhwliyzb2d.us-east-1.rds.amazonaws.com:1433/credit_staging;sendStringParametersAsUnicode=false]]></db.url>-->
+    <!--<db.username>credit-staging-user</db.username>-->
+    <!--<db.password>Kls7~44a</db.password>-->
+
+    <!--<app.experian.host>https://dm2.experian.com</app.experian.host>-->
+    <!--&lt;!&ndash; pid &ndash;&gt;-->
+    <!--<config.pid.url>${app.experian.host}/fraudsolutions/webservices/preciseid/PreciseidAPI</config.pid.url>-->
+    <!--<config.pid.username>${pidUsername}</config.pid.username>-->
+    <!--<config.pid.password>${pidPassword}</config.pid.password>-->
+    <!--<config.pid.initials>SB</config.pid.initials>-->
+    <!--<config.pid.preamble>TBD1</config.pid.preamble>-->
+    <!--<config.pid.subcode>2113820</config.pid.subcode>-->
+    <!--&lt;!&ndash; atb &ndash;&gt;-->
+    <!--<config.atb.url>http://54.84.107.39:8081</config.atb.url>-->
+    <!--<config.atb.subcode>2114370</config.atb.subcode>-->
+    <!--<config.atb.password>ABC</config.atb.password>-->
+
+    <!--<config.auto.refresh.logs.folder>/opt/AutoRefresh/</config.auto.refresh.logs.folder>-->
+    <!--<config.report.refresh.logs.folder>/opt/ReportRefresh/</config.report.refresh.logs.folder>-->
+
+    <!--<logging.sqs.prefix>st_</logging.sqs.prefix>-->
+
+    <!--<config.tui.provider>true</config.tui.provider>-->
+    <!--<config.tui.username>${TuiUsername}</config.tui.username>-->
+    <!--<config.tui.password>${TuiPassword}</config.tui.password>-->
+
+    <!--</properties>-->
+    <!--</profile>-->
+
+    <!--<profile>-->
+    <!--<id>production</id>-->
+    <!--<properties>-->
+    <!--<profile.id>production</profile.id>-->
+
+    <!--<buildVersion>${buildVersion}</buildVersion>-->
+    <!--<app.log.level>ERROR</app.log.level>-->
+    <!--<app.devmode>false</app.devmode>-->
+
+    <!--<app.protocol>https</app.protocol>-->
+    <!--<app.hostname>www.savvymoney.com</app.hostname>-->
+    <!--<app.root.url>${app.protocol}://${app.hostname}</app.root.url>-->
+
+    <!--<db.driver>net.sourceforge.jtds.jdbc.Driver</db.driver>-->
+    <!--<db.url>-->
+    <!--<![CDATA[jdbc:jtds:sqlserver://credit-prod.cejz3wk3b9le.us-east-1.rds.amazonaws.com:1433/credit_production;sendStringParametersAsUnicode=false]]></db.url>-->
+    <!--<db.username>${dbUsername}</db.username>-->
+    <!--<db.password>${dbPassword}</db.password>-->
+
+    <!--<app.experian.host>https://ss3.experian.com</app.experian.host>-->
+    <!--&lt;!&ndash; pid &ndash;&gt;-->
+    <!--<config.pid.url>${app.experian.host}/fraudsolutions/webservices/preciseid/PreciseidAPI</config.pid.url>-->
+    <!--<config.pid.username>${pidUsername}</config.pid.username>-->
+    <!--<config.pid.password>${pidPassword}</config.pid.password>-->
+    <!--<config.pid.initials>SM</config.pid.initials>-->
+    <!--<config.pid.preamble>TBD1</config.pid.preamble>-->
+    <!--<config.pid.subcode>2113820</config.pid.subcode>-->
+    <!--&lt;!&ndash; atb &ndash;&gt;-->
+    <!--<config.atb.url>http://172.16.45.220:8081</config.atb.url>-->
+    <!--<config.atb.password>${atbPassword}</config.atb.password>-->
+    <!--<config.atb.subcode>2114370</config.atb.subcode>-->
+
+    <!--<config.auto.refresh.logs.folder>/opt/AutoRefresh/</config.auto.refresh.logs.folder>-->
+
+    <!--<logging.sqs.prefix></logging.sqs.prefix>-->
+
+    <!--<config.tui.provider>true</config.tui.provider>-->
+    <!--<config.tui.username>${TuiUsername}</config.tui.username>-->
+    <!--<config.tui.password>${TuiPassword}</config.tui.password>-->
+
+    <!--</properties>-->
+    <!--</profile>-->
+    <!--</profiles>-->
+
+</project>

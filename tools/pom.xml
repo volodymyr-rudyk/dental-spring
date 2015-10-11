@@ -1,0 +1,163 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.dental</groupId>
+    <artifactId>tools</artifactId>
+    <version>0.0.1</version>
+    <packaging>jar</packaging>
+    <name>dental-tools</name>
+    <url>https://www.dental.com/</url>
+    <description>Dental search...</description>
+
+    <inceptionYear>2015</inceptionYear>
+
+    <organization>
+        <name>Dental, Inc.</name>
+        <url>https://www.dental.com</url>
+    </organization>
+
+    <properties>
+
+        <axis.version>1.4</axis.version>
+        <jaxrpc.version>1.1</jaxrpc.version>
+        <commons.discovery.version>0.2</commons.discovery.version>
+        <cglib.version>2.2.2</cglib.version>
+
+        <java.home>${env.JAVA_HOME}</java.home>
+        <java.version>1.8</java.version>
+
+        <!-- jtds.version 1.3.0 required java 1.7 -->
+        <jtds.version>1.2.8</jtds.version>
+
+        <maven.version.range>[2.2.1,)</maven.version.range>
+        <maven.compiler.plugin>3.1</maven.compiler.plugin>
+        <maven.enforcer.plugin>1.2</maven.enforcer.plugin>
+        <maven.properties.plugin>1.0-alpha-2</maven.properties.plugin>
+
+        <maven.resources.plugin>2.6</maven.resources.plugin>
+
+        <!-- logging -->
+        <logback.version>1.0.13</logback.version>
+        <slf4j.version>1.6.4</slf4j.version>
+        <slf4j.version.sysout>1.0.2</slf4j.version.sysout>
+        <!-- // logging -->
+
+        <joda.time.version>2.6</joda.time.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+    </properties>
+
+    <dependencyManagement>
+
+        <dependencies>
+
+            <dependency>
+                <groupId>joda-time</groupId>
+                <artifactId>joda-time</artifactId>
+                <version>${joda.time.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+        <!-- testing -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+        </dependency>
+        <!-- logging -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>jcl-over-slf4j</artifactId>
+            <version>1.7.9</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>jul-to-slf4j</artifactId>
+            <version>1.7.9</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.1.2</version>
+        </dependency>
+        <dependency>
+            <groupId>uk.org.lidalia</groupId>
+            <artifactId>sysout-over-slf4j</artifactId>
+            <version>1.0.2</version>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+
+        <testResources>
+            <testResource>
+                <directory>src/test/resources</directory>
+                <filtering>true</filtering>
+            </testResource>
+        </testResources>
+
+        <pluginManagement>
+            <plugins>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>${maven.compiler.plugin}</version>
+                    <configuration>
+                        <encoding>${project.build.sourceEncoding}</encoding>
+                        <source>${java.version}</source>
+                        <target>${java.version}</target>
+                        <testSource>${java.version}</testSource>
+                        <testTarget>${java.version}</testTarget>
+                        <showDeprecation>true</showDeprecation>
+                        <showWarnings>true</showWarnings>
+                    </configuration>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>${maven.resources.plugin}</version>
+                    <configuration>
+                        <encoding>${project.build.sourceEncoding}</encoding>
+                    </configuration>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>properties-maven-plugin</artifactId>
+                    <version>${maven.properties.plugin}</version>
+                </plugin>
+
+            </plugins>
+        </pluginManagement>
+
+        <plugins>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+            </plugin>
+
+        </plugins>
+
+        <defaultGoal>install</defaultGoal>
+
+    </build>
+
+</project>
