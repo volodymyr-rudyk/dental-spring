@@ -62,6 +62,7 @@ public class SpringSecureConfig extends WebSecurityConfigurerAdapter {
                         "/auth/**",
                         "/",
                         "/login",
+                        "/search",
                         "/authenticate",
                         "/signup/**",
                         "/logout",

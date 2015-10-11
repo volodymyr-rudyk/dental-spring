@@ -18,7 +18,7 @@ import org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver;
 @EnableWebMvc
 @Configuration
 public class SpringConfig extends WebMvcConfigurerAdapter {
-    private static final String BOOTSTRAP_PATH = "classpath:/META-INF/resources/webjars/bootstrap/3.3.4/";
+    private static final String BOOTSTRAP_PATH = "classpath:/META-INF/resources/webjars/bootstrap/3.3.5/";
     private final String CSS_RESOURCE = "/css/**";
     private final String CSS_RESOURCE_LOCATION = "/assets/css/";
     private final String CSS_RESOURCE_LOCATION_BOOTSTRAP = BOOTSTRAP_PATH + "css/";
@@ -44,13 +44,14 @@ public class SpringConfig extends WebMvcConfigurerAdapter {
     public FreeMarkerConfigurer getFreeMarkerConfigurer() {
         FreeMarkerConfigurer freeMarkerConfigurer = new FreeMarkerConfigurer();
         freeMarkerConfigurer.setTemplateLoaderPath("WEB-INF/pages/");
+//        freeMarkerConfigurer.getConfiguration().addAutoImport("/spring.ftl", "spring");
         return freeMarkerConfigurer;
     }
 
     @Bean(name = "messageSource")
     public MessageSource getMessageSource() {
         ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
-        messageSource.setBasenames("multi.data", "milti.errors");
+        messageSource.setBasenames("multi.data", "milti.errors", "milti.messages");
         messageSource.setDefaultEncoding("utf-8");
         return messageSource;
     }

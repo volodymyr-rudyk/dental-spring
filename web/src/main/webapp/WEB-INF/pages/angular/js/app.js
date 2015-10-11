@@ -6,7 +6,7 @@
         //debugger;
     }).filter('cm', function(){
         return function(input, data){
-            var c = input ? '\u2713' : '\u2718'
+            var c = input ? '\u2713' : '\u2718';
             return c + ' ' + input + ' ' + data;
         }
     });
@@ -42,7 +42,7 @@
 
         this.isSelected = function(tab){
             return this.tab === tab;
-        }
+        };
 
        var items = [
            {link : 'home', title : 'Home'},

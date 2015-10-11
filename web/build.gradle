@@ -44,7 +44,7 @@ dependencies {
     compile 'org.springframework:spring-context:4.1.6.RELEASE'
     compile 'org.springframework:spring-orm:4.1.6.RELEASE'
 
-    compile 'org.webjars:bootstrap:3.3.4'
+    compile 'org.webjars:bootstrap:3.3.5'
     compile 'javax.servlet:javax.servlet-api:3.1.0'
 
     compile 'org.springframework.security:spring-security-core:4.0.0.RELEASE'
@@ -52,6 +52,10 @@ dependencies {
     compile 'org.springframework.security:spring-security-config:4.0.0.RELEASE'
     compile 'org.springframework.security:spring-security-taglibs:4.0.0.RELEASE'
 
+//    compile 'org.codehaus.jackson:jackson-core-asl:1.9.13'
+//    compile 'org.codehaus.jackson:jackson-mapper-asl:1.9.13'
+
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.6.0-rc4'
     testCompile 'org.springframework:spring-test:4.1.6.RELEASE'
     //include in compile only, exclude in the war
 
