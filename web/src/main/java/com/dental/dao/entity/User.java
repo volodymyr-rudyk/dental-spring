@@ -24,8 +24,8 @@ public class User implements Serializable{
     @Column(name = "is_enabled")
     private boolean isEnabled;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "profile_id")
+//    @OneToOne(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "profile_id")
     private Profile profile;
 
     public User() {

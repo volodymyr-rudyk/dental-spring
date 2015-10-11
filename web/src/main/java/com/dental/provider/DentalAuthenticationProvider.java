@@ -18,7 +18,7 @@ public class DentalAuthenticationProvider implements AuthenticationProvider {
     @Autowired
     private UserDetailsService userDetailsService;
 
-    @Override
+//    @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
 
         System.out.println(authentication.getPrincipal() + " = " + authentication.getCredentials());
@@ -38,7 +38,8 @@ public class DentalAuthenticationProvider implements AuthenticationProvider {
         throw new BadCredentialsException("user name not found, bad credentials");
     }
 
-    @Override
+//
+// @Override
     public boolean supports(Class<?> authentication) {
         return authentication.equals(UsernamePasswordAuthenticationToken.class);
     }

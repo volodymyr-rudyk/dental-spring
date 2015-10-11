@@ -40,7 +40,7 @@ public class AuthServiceImpl implements AuthService {
 //  @Autowired
 //  AuthenticationProvider authenticationProvider;
 
-    @Override
+//    @Override
     public void authenticate(UserBean userBean, HttpServletRequest request) {
         UsernamePasswordAuthenticationToken token =
                 new UsernamePasswordAuthenticationToken(userBean.getUsername(), userBean.getPassword());
@@ -62,7 +62,7 @@ public class AuthServiceImpl implements AuthService {
 
     }
 
-    @Override
+//    @Override
     public void logout(HttpServletRequest request, HttpServletResponse response) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         logoutHandler.logout(request, response, authentication);
@@ -71,7 +71,7 @@ public class AuthServiceImpl implements AuthService {
     @Autowired
     private UserDao userDao;
 
-    @Override
+//    @Override
     public void signup(SignupBean signupBean) {
         User user = getUser(signupBean);
 
