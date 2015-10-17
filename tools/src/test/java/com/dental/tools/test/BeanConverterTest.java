@@ -14,7 +14,8 @@ import java.util.Map;
 //@RunWith(JUnit4.class)
 public class BeanConverterTest {
 
-  @Test public void testConvert1() {
+  @Test
+  public void testConvert1() {
     Map<String, String> map = new HashMap<String, String>();
     map.put("name", "TestName");
     map.put("age", "100500");
@@ -28,7 +29,8 @@ public class BeanConverterTest {
     Assert.assertEquals("Bean equals false", convertedBean, bean);
   }
 
-  @Test public void testConvert2() {
+  @Test
+  public void testConvert2() {
     Map<String, String> map = new HashMap<String, String>();
     map.put("name", null);
     map.put("age", "100500");
@@ -39,7 +41,8 @@ public class BeanConverterTest {
     Assert.assertEquals("Bean equals false", convertedBean, bean);
   }
 
-  @Test public void testConvert3() {
+  @Test
+  public void testConvert3() {
     Map<String, String> map = new HashMap<String, String>();
 
     Bean convertedBean = BeanConverter.convert(map, Bean.class);
@@ -47,12 +50,14 @@ public class BeanConverterTest {
     Assert.assertEquals("Bean equals false", convertedBean, bean);
   }
 
-  @Test public void testConvertNull4() {
+  @Test
+  public void testConvertNull4() {
     Bean convertedBean = BeanConverter.convert(null, Bean.class);
     Assert.assertEquals("Bean equals false", convertedBean, null);
   }
 
-  @Test public void testConvertParsing6() {
+  @Test
+  public void testConvertParsing6() {
     Map<String, String> map = new HashMap<String, String>();
     map.put("name", "4r43334tt");
     map.put("age", "qqqqq");
@@ -63,11 +68,13 @@ public class BeanConverterTest {
     Assert.assertEquals("Bean parsing  equals false", convertedBean, bean);
   }
 
-  @Test public void testName() throws Exception {
+  @Test
+  public void testName() throws Exception {
     Assert.assertTrue(true);
   }
 
-  @Test public void testName1() throws Exception {
+  @Test
+  public void testName1() throws Exception {
     String s = null;
     Assume.assumeTrue(s == null);
     Assert.assertNotNull("s = null", s);
@@ -102,7 +109,8 @@ public class BeanConverterTest {
       this.ignore = ignore;
     }
 
-    @Override public boolean equals(Object o) {
+    @Override
+    public boolean equals(Object o) {
       if (this == o)
         return true;
       if (o == null || getClass() != o.getClass())
@@ -118,19 +126,21 @@ public class BeanConverterTest {
 
     }
 
-    @Override public int hashCode() {
+    @Override
+    public int hashCode() {
       int result = name != null ? name.hashCode() : 0;
       result = 31 * result + age;
       result = 31 * result + (ignore ? 1 : 0);
       return result;
     }
 
-    @Override public String toString() {
+    @Override
+    public String toString() {
       return "Bean{" +
-              "name='" + name + '\'' +
-              ", age=" + age +
-              ", ignore=" + ignore +
-              '}';
+          "name='" + name + '\'' +
+          ", age=" + age +
+          ", ignore=" + ignore +
+          '}';
     }
   }
 }

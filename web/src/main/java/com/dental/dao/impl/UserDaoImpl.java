@@ -1,15 +1,11 @@
 package com.dental.dao.impl;
 
-import com.dental.dao.entity.User;
 import com.dental.dao.component.AbstractDao;
 import com.dental.dao.component.UserDao;
-import org.hibernate.Criteria;
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.criterion.Criterion;
+import com.dental.dao.entity.User;
 import org.springframework.stereotype.Repository;
 
-import javax.security.auth.login.CredentialException;
+import javax.persistence.Query;
 import javax.transaction.Transactional;
 import java.io.Serializable;
 import java.util.List;
@@ -19,48 +15,34 @@ import java.util.List;
  */
 @Transactional
 @Repository("userDao")
-public class UserDaoImpl extends AbstractDao implements UserDao {
+public class UserDaoImpl extends AbstractDao<User> implements UserDao {
 
-    @Override
-    public User get(Serializable id) {
-        return (User) sessionFactory.getCurrentSession().get(User.class, id);
-    }
+  public UserDaoImpl() {
+    super(User.class);
+  }
 
-    @Override
-    public User save(User entity) {
-        Session session = sessionFactory.getCurrentSession();
-        session.persist(entity);
+  @Override
+  public User loadUserByUserNameAndPassword(String login, String password) {
+    String q = "select u from User u where u.login = :login and u.password = :password";
+    Query namedQuery = entityManager.createQuery(q);
+    namedQuery.setParameter("login", login);
+    namedQuery.setParameter("password", password);
+    namedQuery.setMaxResults(1);
+    List resultList = namedQuery.getResultList();
+    return resultList.size() > 0 ? (User) resultList.get(0) : null;
+  }
 
-        return entity;
-    }
+  @Override
+  public User loadUserByLogin(String login) {
+    String q = "select u from User u where u.login = :login";
+    Query namedQuery = entityManager.createQuery(q);
+    namedQuery.setParameter("login", login);
+    namedQuery.setMaxResults(1);
+    List resultList = namedQuery.getResultList();
+    return resultList.size() > 0 ? (User) resultList.get(0) : null;
+  }
 
-    @Override
-    public List<User> getList() {
-        Criteria criteria = sessionFactory.openSession().createCriteria(User.class);
-        return (List<User>) criteria.list();
-    }
-
-    @Override
-    public void remove(int id) {
-        Object o = sessionFactory.getCurrentSession().get(User.class, id);
-        sessionFactory.getCurrentSession().delete(o);
-    }
-
-    @Override
-    public User update(User entity) {
-        sessionFactory.getCurrentSession().update(entity);
-        return entity;
-    }
-
-    @Override public User loadUserByUserNameAndPassword(String userName, String password) {
-        String q = "select u from User u where u.login = :login";
-        Query query = sessionFactory.getCurrentSession().createQuery(q);
-        query.setString("login", userName);
-        Object result = query.uniqueResult();
-        return result != null ? (User) result : null;
-    }
-
-    //
+  //
 //    public void deleteEmployeeBySsn(String ssn) {
 //        Query query = getSession().createSQLQuery("delete from Employee where ssn = :ssn");
 //        query.setString("ssn", ssn);

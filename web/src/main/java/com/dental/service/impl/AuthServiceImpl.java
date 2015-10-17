@@ -25,70 +25,69 @@ import java.util.Date;
  * Created by light on 5/3/2015.
  */
 public class AuthServiceImpl implements AuthService {
-    public static final String SPRING_SECURITY_CONTEXT = "SPRING_SECURITY_CONTEXT";
+  public static final String SPRING_SECURITY_CONTEXT = "SPRING_SECURITY_CONTEXT";
 
-    //  @Autowired
+  //  @Autowired
 //  private ProviderManager providerManager;
 
-    @Autowired
-    private LogoutHandler logoutHandler;
+  @Autowired
+  private LogoutHandler logoutHandler;
 
-    @Autowired
-    @Qualifier("dentalAuthenticationManager")
-    private AuthenticationManager authenticationManager;
+  @Autowired
+  @Qualifier("dentalAuthenticationManager")
+  private AuthenticationManager authenticationManager;
 
 //  @Autowired
 //  AuthenticationProvider authenticationProvider;
+  @Autowired
+  private UserDao userDao;
 
-//    @Override
-    public void authenticate(UserBean userBean, HttpServletRequest request) {
-        UsernamePasswordAuthenticationToken token =
-                new UsernamePasswordAuthenticationToken(userBean.getUsername(), userBean.getPassword());
-        token.setDetails(new WebAuthenticationDetails(request));
-        Authentication authentication = authenticationManager.authenticate(token);
+  //    @Override
+  public void authenticate(UserBean userBean, HttpServletRequest request) {
+    UsernamePasswordAuthenticationToken token =
+        new UsernamePasswordAuthenticationToken(userBean.getUsername(), userBean.getPassword());
+    token.setDetails(new WebAuthenticationDetails(request));
+    Authentication authentication = authenticationManager.authenticate(token);
 //        Authentication authentication = authenticationProvider.authenticate(token);
 
-        SecurityContext securityContext = SecurityContextHolder.getContext();
-        securityContext.setAuthentication(authentication);
-        HttpSession session = request.getSession(true);
-        session.setAttribute(SPRING_SECURITY_CONTEXT, securityContext);
+//    SecurityContext securityContext = SecurityContextHolder.getContext();
+//    securityContext.setAuthentication(authentication);
+//    HttpSession session = request.getSession(true);
+//    session.setAttribute(SPRING_SECURITY_CONTEXT, securityContext);
 
-//    if(authentication.isAuthenticated())
-//      SecurityContextHolder.getContext().setAuthentication(authentication);
+    if(authentication.isAuthenticated())
+      SecurityContextHolder.getContext().setAuthentication(authentication);
 
 //    SecurityContext sc = new SecurityContextImpl();
 //    sc.setAuthentication(authentication);
 //    SecurityContextHolder.setContext(sc);
 
-    }
+  }
 
-//    @Override
-    public void logout(HttpServletRequest request, HttpServletResponse response) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        logoutHandler.logout(request, response, authentication);
-    }
+  //    @Override
+  public void logout(HttpServletRequest request, HttpServletResponse response) {
+    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    logoutHandler.logout(request, response, authentication);
+  }
 
-    @Autowired
-    private UserDao userDao;
+  //    @Override
+  public void signup(SignupBean signupBean) {
+    User user = getUser(signupBean);
 
-//    @Override
-    public void signup(SignupBean signupBean) {
-        User user = getUser(signupBean);
+    userDao.save(user);
+  }
 
-        userDao.save(user);
-    }
-
-    private User getUser(SignupBean signupBean){
-        User user = new User();
-        user.setIsEnabled(true);
-        user.setLogin(signupBean.getLogin());
-        user.setPassword(signupBean.getPassword());
-        Profile profile = new Profile();
-        profile.setBirthday(new Date());
-        profile.setFirstName(signupBean.getFirstName());
-        profile.setLastName(signupBean.getLastName());
-        profile.setPhone(signupBean.getPhone());
-        user.setProfile(profile);
-        return user;
-    }
+  private User getUser(SignupBean signupBean) {
+    User user = new User();
+    user.setIsEnabled(true);
+    user.setLogin(signupBean.getLogin());
+    user.setPassword(signupBean.getPassword());
+    Profile profile = new Profile();
+    profile.setBirthday(new Date());
+    profile.setFirstName(signupBean.getFirstName());
+    profile.setLastName(signupBean.getLastName());
+    profile.setPhone(signupBean.getPhone());
+    user.setProfile(profile);
+    return user;
+  }
 }

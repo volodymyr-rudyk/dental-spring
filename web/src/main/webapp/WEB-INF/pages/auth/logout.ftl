@@ -7,7 +7,7 @@ Time: 2:42 PM
 
 <html>
 <head>
-    <title>Logout</title>
+  <title>Logout</title>
 </head>
 
 <body>

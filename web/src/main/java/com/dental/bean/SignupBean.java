@@ -54,11 +54,13 @@ public class SignupBean extends UserBean {
     this.email = email;
   }
 
-  @Override public String getPassword() {
+  @Override
+  public String getPassword() {
     return password;
   }
 
-  @Override public void setPassword(String password) {
+  @Override
+  public void setPassword(String password) {
     this.password = password;
   }
 

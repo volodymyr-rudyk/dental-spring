@@ -8,4 +8,6 @@ import com.dental.dao.entity.User;
 
 public interface UserDao extends GenericCrud<User> {
   User loadUserByUserNameAndPassword(String userName, String password);
+
+  User loadUserByLogin(String login);
 }

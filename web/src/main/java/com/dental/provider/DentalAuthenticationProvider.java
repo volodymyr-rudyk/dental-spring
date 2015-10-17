@@ -15,32 +15,31 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
  */
 public class DentalAuthenticationProvider implements AuthenticationProvider {
 
-    @Autowired
-    private UserDetailsService userDetailsService;
+  @Autowired
+  private UserDetailsService userDetailsService;
 
-//    @Override
-    public Authentication authenticate(Authentication authentication) throws AuthenticationException {
+  @Override
+  public Authentication authenticate(Authentication authentication) throws AuthenticationException {
 
-        System.out.println(authentication.getPrincipal() + " = " + authentication.getCredentials());
+    System.out.println(authentication.getPrincipal() + " = " + authentication.getCredentials());
 
-        String userName = authentication.getPrincipal().toString();
-        String password = authentication.getCredentials().toString();
+    String userName = authentication.getPrincipal().toString();
+    String password = authentication.getCredentials().toString();
 
-        try {
-            UserDetails userDetails = userDetailsService.loadUserByUsername(userName);
-            if(userDetails.getPassword().equals(password)) {
-                return new UsernamePasswordAuthenticationToken(userDetails,
-                        userDetails.getPassword(), userDetails.getAuthorities());
-            }
-        }catch (UsernameNotFoundException e) {
-            throw new RuntimeException(e.getMessage(), e);
-        }
-        throw new BadCredentialsException("user name not found, bad credentials");
+    try {
+      UserDetails userDetails = userDetailsService.loadUserByUsername(userName);
+      if (userDetails.getPassword().equals(password)) {
+        return new UsernamePasswordAuthenticationToken(userDetails,
+            userDetails.getPassword(), userDetails.getAuthorities());
+      }
+    } catch (UsernameNotFoundException e) {
+      throw new RuntimeException(e.getMessage(), e);
     }
+    throw new BadCredentialsException("user name not found, bad credentials");
+  }
 
-//
-// @Override
-    public boolean supports(Class<?> authentication) {
-        return authentication.equals(UsernamePasswordAuthenticationToken.class);
-    }
+ @Override
+  public boolean supports(Class<?> authentication) {
+    return authentication.equals(UsernamePasswordAuthenticationToken.class);
+  }
 }

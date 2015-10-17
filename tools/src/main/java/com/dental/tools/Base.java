@@ -5,17 +5,17 @@ package com.dental.tools;
  */
 public class Base {
 
-    private int i = 5;
+  private int i = 5;
 
 
-    public Base() {
-        System.out.println("Base constructor " + this.getI());
-    }
+  public Base() {
+    System.out.println("Base constructor " + this.getI());
+  }
 
-    public int getI(){
-        System.out.println("Base getI " + i);
+  public int getI() {
+    System.out.println("Base getI " + i);
 
-        return i;
-    }
+    return i;
+  }
 
 }

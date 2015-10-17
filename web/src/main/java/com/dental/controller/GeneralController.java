@@ -15,8 +15,8 @@ import javax.servlet.http.HttpServletResponse;
 public class GeneralController extends BaseController {
 
   @RequestMapping(value = "/about")
-  public String about(HttpServletRequest request, HttpServletResponse response, @RequestParam(value = "name", required = false) String name ) throws
-          NotFoundException {
+  public String about(HttpServletRequest request, HttpServletResponse response, @RequestParam(value = "name", required = false) String name) throws
+      NotFoundException {
 
     if (name != null) {
       throw new NotFoundException("URL : /about");
@@ -29,7 +29,8 @@ public class GeneralController extends BaseController {
     return "/about/about";
   }
 
-  @Override protected String getViewFolder() {
+  @Override
+  protected String getViewFolder() {
     return null;
   }
 }

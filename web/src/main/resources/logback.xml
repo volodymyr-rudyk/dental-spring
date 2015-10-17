@@ -1,18 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <configuration>
 
-    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
-        <layout class="ch.qos.logback.classic.PatternLayout">
+  <contextListener class="ch.qos.logback.classic.jul.LevelChangePropagator">
+    <resetJUL>true</resetJUL>
+  </contextListener>
 
-            <Pattern>
-                %-5level %logger{36} - %msg%n
-            </Pattern>
+  <appender name="A1" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder>
+      <pattern>%d | %thread | %-5level | %logger:%line - %msg%n</pattern>
+    </encoder>
+  </appender>
 
-        </layout>
-    </appender>
-
-    <root level="debug">
-        <appender-ref ref="STDOUT" />
-    </root>
-
+  <logger name="org.mortbay" level="ERROR"/>
+  <logger name="org.hiberante.loader" level="ERROR"/>
+  <logger name="org.mortbay" level="ERROR"/>
+  <logger name="org.apache.axis.ConfigurationException" level="INFO"/>
+  <!-- DEBUG level prints Exception because a ConfigurationException logs itself (at DEBUG level) on creation -->
+  <root level="ALL">
+    <appender-ref ref="A1"/>
+  </root>
 </configuration>
+
+<!--<?xml version="1.0" encoding="UTF-8"?>-->
+<!--<configuration>-->
+
+  <!--<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">-->
+    <!--<layout class="ch.qos.logback.classic.PatternLayout">-->
+
+      <!--<Pattern>-->
+        <!--%-5level %logger{36} - %msg%n-->
+      <!--</Pattern>-->
+
+    <!--</layout>-->
+  <!--</appender>-->
+
+  <!--<root level="debug">-->
+    <!--<appender-ref ref="STDOUT"/>-->
+  <!--</root>-->
+
+<!--</configuration>-->

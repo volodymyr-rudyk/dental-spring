@@ -18,7 +18,7 @@ public class AdminController extends BaseController {
 
   @RequestMapping(value = "/login")
   public String login(HttpServletRequest request, HttpServletResponse response) throws NotFoundException {
-     return "admin/login";
+    return "admin/login";
   }
 
   @RequestMapping(value = "/logout")
@@ -36,7 +36,8 @@ public class AdminController extends BaseController {
     return "auth/secure";
   }
 
-  @Override protected String getViewFolder() {
+  @Override
+  protected String getViewFolder() {
     return ViewConfig.FOLDER_ADMIN;
   }
 

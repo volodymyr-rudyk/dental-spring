@@ -26,8 +26,8 @@ import org.springframework.security.web.authentication.logout.SecurityContextLog
 @Configuration
 public class SpringSecureConfig extends WebSecurityConfigurerAdapter {
 
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
+  @Override
+  protected void configure(HttpSecurity http) throws Exception {
 //        http.authorizeRequests()
 //                .antMatchers("/login", "/authenticate").permitAll()
 //                .antMatchers("/secure").hasRole("USER").and().
@@ -39,73 +39,73 @@ public class SpringSecureConfig extends WebSecurityConfigurerAdapter {
 //
 ////                .and()
 //
-        http.csrf().disable()
-                //Configures form login
-                .formLogin()
-                .loginPage("/login")
-                .loginProcessingUrl("/authenticate")
-                .failureUrl("/login?error=bad_credentials")
+    http.csrf().disable()
+        //Configures form login
+        .formLogin()
+        .loginPage("/login")
+        .loginProcessingUrl("/authenticate")
+        .failureUrl("/login?error=bad_credentials")
 
-                //Configures the logout function
-                .and()
-                .logout()
-                .deleteCookies("JSESSIONID")
-                .logoutUrl("/logout")
-                .logoutSuccessUrl("/login")
+            //Configures the logout function
+        .and()
+        .logout()
+        .deleteCookies("JSESSIONID")
+        .logoutUrl("/logout")
+        .logoutSuccessUrl("/login")
 
-                //Configures url based authorization
-                .and()
-                .authorizeRequests()
+            //Configures url based authorization
+        .and()
+        .authorizeRequests()
 
-                 //Anyone can access the urls
-                .antMatchers(
-                        "/auth/**",
-                        "/",
-                        "/login",
-                        "/search",
-                        "/authenticate",
-                        "/signup/**",
-                        "/logout",
-                        "/user/register/**"
-                ).permitAll()
-                //The rest of the our application is protected.
-                .antMatchers("/**").hasRole("USER");
-        //Adds the SocialAuthenticationFilter to Spring Security's filter chain.
+            //Anyone can access the urls
+        .antMatchers(
+            "/auth/**",
+            "/",
+            "/login",
+            "/search",
+            "/authenticate",
+            "/signup/**",
+            "/logout",
+            "/user/register/**"
+        ).permitAll()
+        //The rest of the our application is protected.
+        .antMatchers("/**").hasRole("USER");
+    //Adds the SocialAuthenticationFilter to Spring Security's filter chain.
 
 
-    }
+  }
 
-    public void configure(WebSecurity web) throws Exception {
-        web.ignoring()
-                .antMatchers("/authenticate")
-                .antMatchers("/logout")
-                .antMatchers("/signup")
-                .antMatchers("/css/**")
-                .antMatchers("/js/**")
-                .antMatchers("/font/**")
-                .antMatchers("/img/**")
-                .antMatchers("/list")
-                .antMatchers("/favicon.ico");
-    }
+  public void configure(WebSecurity web) throws Exception {
+    web.ignoring()
+        .antMatchers("/authenticate")
+        .antMatchers("/logout")
+        .antMatchers("/signup")
+        .antMatchers("/css/**")
+        .antMatchers("/js/**")
+        .antMatchers("/font/**")
+        .antMatchers("/img/**")
+        .antMatchers("/list")
+        .antMatchers("/favicon.ico");
+  }
 
-    @Bean(name = "dentalAuthenticationManager")
-    @Override
-    public AuthenticationManager authenticationManager() throws Exception {
-        return super.authenticationManager();
-    }
+  @Bean(name = "dentalAuthenticationManager")
+  @Override
+  public AuthenticationManager authenticationManager() throws Exception {
+    return super.authenticationManager();
+  }
 
-    @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+  @Autowired
+  public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 
-        // in-memory auth
+    // in-memory auth
 //        auth.inMemoryAuthentication().withUser("user").password("123456").roles("USER");
 //        auth.inMemoryAuthentication().withUser("admin").password("123456").roles("ADMIN");
 //        auth.inMemoryAuthentication().withUser("dba").password("123456").roles("DBA");
 
-        // Dao auth
+    // Dao auth
 //        auth.userDetailsService(new UserDetailsServiceImpl());
 
-        auth.authenticationProvider(getAuthenticationProvider());
+    auth.authenticationProvider(getAuthenticationProvider());
 //    }
 
 //    @Bean
@@ -113,23 +113,23 @@ public class SpringSecureConfig extends WebSecurityConfigurerAdapter {
 //        RoleVoter roleVoter = new RoleVoter();
 //        roleVoter.setRolePrefix("ROLE_");
 //        return roleVoter;
-    }
+  }
 
-    //region User Details related functionality
-    @Bean
-    public UserDetailsService getUserDetailsService() {
-        return new UserDetailsServiceImpl();
-    }
+  //region User Details related functionality
+  @Bean
+  public UserDetailsService getUserDetailsService() {
+    return new UserDetailsServiceImpl();
+  }
 
-    //endregion
+  //endregion
 //
-    @Bean
-    public AuthenticationProvider getAuthenticationProvider() {
+  @Bean
+  public AuthenticationProvider getAuthenticationProvider() {
 //        DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
 //        daoAuthenticationProvider.setUserDetailsService(new UserDetailsServiceImpl());
 //        return daoAuthenticationProvider;
-        return new DentalAuthenticationProvider();
-    }
+    return new DentalAuthenticationProvider();
+  }
 
 //    @Bean
 //    public ProviderManager getProviderManager() {
@@ -143,8 +143,8 @@ public class SpringSecureConfig extends WebSecurityConfigurerAdapter {
 //        return new SecurityContextPersistenceFilter();
 //    }
 
-    @Bean
-    public LogoutHandler getLogoutHandler() {
-        return new SecurityContextLogoutHandler();
-    }
+  @Bean
+  public LogoutHandler getLogoutHandler() {
+    return new SecurityContextLogoutHandler();
+  }
 }

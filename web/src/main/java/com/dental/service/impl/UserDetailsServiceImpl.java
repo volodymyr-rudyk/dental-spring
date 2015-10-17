@@ -17,20 +17,19 @@ import java.util.List;
  */
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-    @Autowired
-    private UserDao userDao;
+  private static SimpleGrantedAuthority roleAdmin = new SimpleGrantedAuthority("ROLE_ADMIN");
+  private static SimpleGrantedAuthority roleUser = new SimpleGrantedAuthority("ROLE_USER");
+  @Autowired
+  private UserDao userDao;
 
-    private static SimpleGrantedAuthority roleAdmin = new SimpleGrantedAuthority("ROLE_ADMIN");
-    private static SimpleGrantedAuthority roleUser = new SimpleGrantedAuthority("ROLE_USER");
+  @Override
+  public UserDetails loadUserByUsername(final String username) throws UsernameNotFoundException {
+    final User user = userDao.loadUserByLogin(username);
+    if (user == null)
+      throw new UsernameNotFoundException("user name not found" + username);
 
-    @Override
-    public UserDetails loadUserByUsername(final String username) throws UsernameNotFoundException {
-        final User user = userDao.loadUserByUserNameAndPassword(username, "");
-        if(user == null)
-          throw new UsernameNotFoundException("user name not found" + username);
-
-        List<SimpleGrantedAuthority> authorities = new ArrayList<SimpleGrantedAuthority>();
-        authorities.add(roleUser);
-        return new DentalUserDetails(username, user.getPassword(), authorities, user);
-    }
+    List<SimpleGrantedAuthority> authorities = new ArrayList<SimpleGrantedAuthority>();
+    authorities.add(roleUser);
+    return new DentalUserDetails(username, user.getPassword(), authorities, user);
+  }
 }

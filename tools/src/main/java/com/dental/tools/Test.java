@@ -6,19 +6,19 @@ package com.dental.tools;
 public class Test extends Base {
 
 
-    private static int i = 10;
+  private static int i = 10;
 
-    public Test(){
-        System.out.println("Test constructor " + super.getI());
-    }
+  public Test() {
+    System.out.println("Test constructor " + super.getI());
+  }
 
-    public int getI(){
-        System.out.println("Test getI " + i);
+  public static void main(String[] args) {
+    Test test = new Test();
+  }
 
-        return i;
-    }
+  public int getI() {
+    System.out.println("Test getI " + i);
 
-    public static void main(String[] args){
-        Test test = new Test();
-    }
+    return i;
+  }
 }

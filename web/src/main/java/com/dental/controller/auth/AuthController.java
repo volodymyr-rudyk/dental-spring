@@ -31,81 +31,81 @@ import java.io.IOException;
 @RequestMapping("/auth")
 public class AuthController extends BaseController {
 
-    private static final Logger LOG = LoggerFactory.getLogger(AuthController.class);
+  private static final Logger LOG = LoggerFactory.getLogger(AuthController.class);
 
-    @Autowired
-    private AuthService authService;
+  @Autowired
+  private AuthService authService;
 
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String login() {
-        LOG.debug("Login page entered ...");
-        return this.renderView(PAGE_LOGIN);
+  @RequestMapping(value = "/login", method = RequestMethod.GET)
+  public String login() {
+    LOG.debug("Login page entered ...");
+    return this.renderView(PAGE_LOGIN);
+  }
+
+  @RequestMapping(value = "/login", method = RequestMethod.POST)
+  public ModelAndView authenticate(HttpServletRequest request, HttpServletResponse response,
+                                   @Valid UserBean userBean, BindingResult result, Model model) throws IOException {
+
+    ModelAndView modelAndView = new ModelAndView();
+    if (result.hasErrors()) {
+      LOG.debug("Entered data has errors");
+      model.addAttribute("validationErrors", result.getFieldErrors());
+      modelAndView.setViewName(this.renderView(PAGE_LOGIN));
+      return modelAndView;
     }
 
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public ModelAndView authenticate(HttpServletRequest request, HttpServletResponse response,
-                               @Valid UserBean userBean, BindingResult result, Model model) throws IOException {
-
-        ModelAndView modelAndView = new ModelAndView();
-        if (result.hasErrors()) {
-            LOG.debug("Entered data has errors");
-            model.addAttribute("validationErrors", result.getFieldErrors());
-            modelAndView.setViewName(this.renderView(PAGE_LOGIN));
-            return modelAndView;
-        }
-
-        try {
-            authService.authenticate(userBean, request);
-            modelAndView.setViewName("redirect:/profile");
-            LOG.debug("Success, Redirect to profile page");
-            return modelAndView;
-        } catch (BadCredentialsException bex) {
-            LOG.debug("Bad credentials ...");
-            model.addAttribute("error", "Bad credential");
-            modelAndView.setViewName(this.renderView(PAGE_LOGIN));
-            return modelAndView;
-        } catch (AuthenticationException e) {
-            LOG.debug("AuthenticationException = " + e.getMessage());
-            model.addAttribute("error", "Auth Exception");
-            modelAndView.setViewName(this.renderView(PAGE_LOGIN));
-            return modelAndView;
-        }
+    try {
+      authService.authenticate(userBean, request);
+      modelAndView.setViewName("redirect:/profile");
+      LOG.debug("Success, Redirect to profile page");
+      return modelAndView;
+    } catch (BadCredentialsException bex) {
+      LOG.debug("Bad credentials ...");
+      model.addAttribute("error", "Bad credential");
+      modelAndView.setViewName(this.renderView(PAGE_LOGIN));
+      return modelAndView;
+    } catch (AuthenticationException e) {
+      LOG.debug("AuthenticationException = " + e.getMessage());
+      model.addAttribute("error", "Auth Exception");
+      modelAndView.setViewName(this.renderView(PAGE_LOGIN));
+      return modelAndView;
     }
+  }
 
-    @RequestMapping(value = "/signup")
-    public String signup() {
-        return this.renderView("signup");
+  @RequestMapping(value = "/signup")
+  public String signup() {
+    return this.renderView("signup");
+  }
+
+  @RequestMapping(value = "/signup", method = RequestMethod.POST)
+  public void signuppost(HttpServletResponse response, SignupBean signupBean) throws NotFoundException, IOException {
+
+    if (StringUtils.isEmpty(signupBean.getFirstName()) ||
+        StringUtils.isEmpty(signupBean.getLastName()) ||
+        StringUtils.isEmpty(signupBean.getLogin()) ||
+        StringUtils.isEmpty(signupBean.getPassword())
+        ) {
+      response.sendRedirect("/signup?fail");
+      return;
     }
+    authService.signup(signupBean);
+    response.sendRedirect("/login");
+  }
 
-    @RequestMapping(value = "/signup", method = RequestMethod.POST)
-    public void signuppost(HttpServletResponse response, SignupBean signupBean) throws NotFoundException, IOException {
+  @RequestMapping(value = "/logout")
+  public void logout(HttpServletRequest request, HttpServletResponse response, Model model) throws NotFoundException, IOException {
+    authService.logout(request, response);
+    response.sendRedirect("/auth/login");
+  }
 
-        if (StringUtils.isEmpty(signupBean.getFirstName()) ||
-                StringUtils.isEmpty(signupBean.getLastName()) ||
-                StringUtils.isEmpty(signupBean.getLogin()) ||
-                StringUtils.isEmpty(signupBean.getPassword())
-                ) {
-            response.sendRedirect("/signup?fail");
-            return;
-        }
-        authService.signup(signupBean);
-        response.sendRedirect("/login");
-    }
+  @RequestMapping(value = "/denied")
+  public String denied() throws NotFoundException {
+    return this.renderView("denied");
+  }
 
-    @RequestMapping(value = "/logout")
-    public void logout(HttpServletRequest request, HttpServletResponse response, Model model) throws NotFoundException, IOException {
-        authService.logout(request, response);
-        response.sendRedirect("/auth/login");
-    }
-
-    @RequestMapping(value = "/denied")
-    public String denied() throws NotFoundException {
-        return this.renderView("denied");
-    }
-
-    @Override
-    protected String getViewFolder() {
-        return ViewConfig.FOLDER_AUTH;
-    }
+  @Override
+  protected String getViewFolder() {
+    return ViewConfig.FOLDER_AUTH;
+  }
 
 }

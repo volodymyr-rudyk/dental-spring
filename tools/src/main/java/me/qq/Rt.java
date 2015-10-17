@@ -5,5 +5,5 @@ package me.qq;
  */
 public class Rt {
 
-    public static String DATA = "fffffff";
+  public static String DATA = "fffffff";
 }

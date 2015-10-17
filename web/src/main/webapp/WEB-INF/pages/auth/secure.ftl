@@ -7,7 +7,7 @@ Time: 2:42 PM
 
 <html>
 <head>
-    <title>Secure</title>
+  <title>Secure</title>
 </head>
 
 <body>
@@ -16,7 +16,7 @@ Time: 2:42 PM
 
 
 <form action="/logout" method="post">
-    <button type="submit">Logout</button>
+  <button type="submit">Logout</button>
 </form>
 
 </body>

@@ -1,6 +1,9 @@
 package com.dental.controller;
 
+import com.dental.exception.AuthenticationException;
 import com.dental.exception.NotFoundException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Component;
@@ -20,23 +23,30 @@ import java.io.IOException;
 @ControllerAdvice
 public abstract class BaseController implements PageController {
 
-    @Autowired
-    protected MessageSource messageSource;
+  private static final Logger LOG = LoggerFactory.getLogger(BaseController.class);
 
-    protected String renderView(String view) {
-      return getViewFolder() + "/" + view;
-    }
+  @Autowired
+  protected MessageSource messageSource;
+
+  protected String renderView(String view) {
+    return getViewFolder() + "/" + view;
+  }
 
   protected abstract String getViewFolder();
 
-    @ExceptionHandler(NotFoundException.class)
-    public String notFound(NotFoundException e, HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String url = e.getUrl();
-        if (!StringUtils.isEmpty(url)) {
-            // TODO add logger
-            response.sendRedirect(url);
-        }
-        return "404";
+  @ExceptionHandler(NotFoundException.class)
+  public String notFound(NotFoundException e, HttpServletRequest request, HttpServletResponse response) throws IOException {
+    String url = e.getUrl();
+    LOG.debug("NotFoundHandler, url {}%s", url);
+    if (!StringUtils.isEmpty(url)) {
+      // TODO add logger
+      response.sendRedirect(url);
     }
+    return "404";
+  }
 
+  @ExceptionHandler(AuthenticationException.class)
+  public void authenticationRequired(AuthenticationException e, HttpServletRequest request, HttpServletResponse response) throws IOException {
+    response.sendRedirect("/auth/login");
+  }
 }

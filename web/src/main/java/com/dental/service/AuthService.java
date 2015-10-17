@@ -12,9 +12,9 @@ import javax.servlet.http.HttpServletResponse;
  */
 public interface AuthService {
 
-    void authenticate(UserBean userBean, HttpServletRequest request) throws AuthenticationException;
+  void authenticate(UserBean userBean, HttpServletRequest request) throws AuthenticationException;
 
-    void logout(HttpServletRequest request, HttpServletResponse response);
+  void logout(HttpServletRequest request, HttpServletResponse response);
 
-    void signup(SignupBean signupBean);
+  void signup(SignupBean signupBean);
 }

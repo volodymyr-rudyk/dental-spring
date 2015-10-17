@@ -5,8 +5,8 @@ package com.dental.tools;
  */
 public class WebConfig {
 
-    private void read() {
+  private void read() {
 
 
-    }
+  }
 }

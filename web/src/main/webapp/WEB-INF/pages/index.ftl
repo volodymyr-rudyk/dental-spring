@@ -1,10 +1,5 @@
 <!DOCTYPE html>
-<!--[if lt IE 7 ]> <html lang="en" class="no-js ie6"> <![endif]-->
-<!--[if IE 7 ]>    <html lang="en" class="no-js ie7"> <![endif]-->
-<!--[if IE 8 ]>    <html lang="en" class="no-js ie8"> <![endif]-->
-<!--[if IE 9 ]>    <html lang="en" class="no-js ie9"> <![endif]-->
-<!--[if (gt IE 9)|!(IE)]><!-->
-<html lang="en" class="no-js" xmlns="http://www.w3.org/1999/html"><!--<![endif]-->
+<html lang="en" xmlns="http://www.w3.org/1999/html"><!--<![endif]-->
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -61,17 +56,6 @@
 </div>
 
 <div class="container" ng-app="dental">
-
-  count = --${count}--
-<#list list as user>
-  <div>
-    <span>user.login = ${user.login}</span>
-      <#assign profile = user.profile />
-    <span>profile.firstname - ${profile.firstName}</span>
-    <span>profile.lastname - ${profile.lastName}</span>
-  </div>
-</#list>
-
 
   <div id="search" ng-app="dentalSearch">
     <div ng-controller="SearchController as searchCtrl">

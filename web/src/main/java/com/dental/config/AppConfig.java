@@ -16,13 +16,8 @@ import org.springframework.context.annotation.Import;
 @Import({SpringConfig.class, DaoConfig.class, SpringSecureConfig.class})
 public class AppConfig {
 
-    @Bean
-    public com.dental.Bean getBean() {
-        return new com.dental.Bean();
-    }
-
-    @Bean
-    public AuthService getAuthService() {
-        return new AuthServiceImpl();
-    }
+  @Bean
+  public AuthService getAuthService() {
+    return new AuthServiceImpl();
+  }
 }

@@ -91,12 +91,13 @@ public class BeanConverter {
       this.ignore = ignore;
     }
 
-    @Override public String toString() {
+    @Override
+    public String toString() {
       return "Bean{" +
-              "name='" + name + '\'' +
-              ", age=" + age +
-              ", ignore=" + ignore +
-              '}';
+          "name='" + name + '\'' +
+          ", age=" + age +
+          ", ignore=" + ignore +
+          '}';
     }
   }
 
