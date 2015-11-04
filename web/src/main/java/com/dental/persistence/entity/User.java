@@ -1,4 +1,4 @@
-package com.dental.dao.entity;
+package com.dental.persistence.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;

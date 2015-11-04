@@ -2,7 +2,7 @@ package com.dental.controller.profile;
 
 import com.dental.bean.UserProfileBean;
 import com.dental.controller.BaseController;
-import com.dental.dao.entity.Profile;
+import com.dental.persistence.entity.Profile;
 import com.dental.exception.NotFoundException;
 import com.dental.service.ProfileService;
 import com.dental.view.ViewConfig;

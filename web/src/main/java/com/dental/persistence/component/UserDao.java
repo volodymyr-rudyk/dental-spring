@@ -1,6 +1,6 @@
-package com.dental.dao.component;
+package com.dental.persistence.component;
 
-import com.dental.dao.entity.User;
+import com.dental.persistence.entity.User;
 
 /**
  * Created by light on 3/28/2015.

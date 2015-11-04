@@ -1,6 +1,6 @@
 package com.dental.controller;
 
-import com.dental.dao.entity.User;
+import com.dental.persistence.entity.User;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;

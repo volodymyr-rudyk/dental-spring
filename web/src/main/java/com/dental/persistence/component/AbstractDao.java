@@ -1,8 +1,4 @@
-package com.dental.dao.component;
-
-import com.dental.dao.entity.User;
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+package com.dental.persistence.component;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

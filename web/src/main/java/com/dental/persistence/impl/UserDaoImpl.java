@@ -1,13 +1,12 @@
-package com.dental.dao.impl;
+package com.dental.persistence.impl;
 
-import com.dental.dao.component.AbstractDao;
-import com.dental.dao.component.UserDao;
-import com.dental.dao.entity.User;
+import com.dental.persistence.component.AbstractDao;
+import com.dental.persistence.component.UserDao;
+import com.dental.persistence.entity.User;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.Query;
 import javax.transaction.Transactional;
-import java.io.Serializable;
 import java.util.List;
 
 /**

@@ -1,6 +1,6 @@
 package com.dental.controller;
 
-import com.dental.dao.entity.Profile;
+import com.dental.persistence.entity.Profile;
 import com.dental.exception.NotFoundException;
 import com.dental.service.ProfileService;
 import org.slf4j.Logger;

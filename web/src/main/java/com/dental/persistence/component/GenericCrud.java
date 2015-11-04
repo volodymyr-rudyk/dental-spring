@@ -1,4 +1,4 @@
-package com.dental.dao.component;
+package com.dental.persistence.component;
 
 import java.io.Serializable;
 import java.util.List;

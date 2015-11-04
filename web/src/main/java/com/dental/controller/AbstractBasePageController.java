@@ -6,7 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -19,11 +19,11 @@ import java.io.IOException;
  * Created by light on 1/8/2015.
  */
 
-@Component
+@Controller
 @ControllerAdvice
-public abstract class BaseController implements PageController {
+public abstract class AbstractBasePageController implements PageController {
 
-  private static final Logger LOG = LoggerFactory.getLogger(BaseController.class);
+  private static final Logger LOG = LoggerFactory.getLogger(AbstractBasePageController.class);
 
   @Autowired
   protected MessageSource messageSource;
@@ -39,7 +39,7 @@ public abstract class BaseController implements PageController {
     String url = e.getUrl();
     LOG.debug("NotFoundHandler, url {}%s", url);
     if (!StringUtils.isEmpty(url)) {
-      // TODO add logger
+      LOG.debug("NotFound URL, redirect" + url);
       response.sendRedirect(url);
     }
     return "404";

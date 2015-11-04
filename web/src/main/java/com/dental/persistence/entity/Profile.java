@@ -1,6 +1,4 @@
-package com.dental.dao.entity;
-
-import org.hibernate.annotations.GenericGenerator;
+package com.dental.persistence.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
