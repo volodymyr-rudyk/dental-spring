@@ -1,8 +1,9 @@
 package com.dental.service.impl;
 
 import com.dental.bean.UserProfileBean;
-import com.dental.dao.component.ProfileDao;
-import com.dental.dao.entity.Profile;
+import com.dental.exception.RequiredAuthenticationException;
+import com.dental.persistence.component.ProfileDao;
+import com.dental.persistence.entity.Profile;
 import com.dental.provider.DentalUserDetails;
 import com.dental.service.ProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,14 +36,13 @@ public class ProfileServiceImpl implements ProfileService {
   @Override
   public Profile getLoggedInProfile() {
     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-    if (authentication != null) {
-      DentalUserDetails dentalUserDetails = (DentalUserDetails) authentication.getPrincipal();
-      return dentalUserDetails.getUser().getProfile();
-    }
-    return null;
+    if (authentication == null) throw new RequiredAuthenticationException("getLoggedInProfile");
+    DentalUserDetails dentalUserDetails = (DentalUserDetails) authentication.getPrincipal();
+    return dentalUserDetails.getUser().getProfile();
   }
 
   private Profile transform(UserProfileBean profileBean) {
+    // TODO add transformer
     return new Profile();
   }
 }

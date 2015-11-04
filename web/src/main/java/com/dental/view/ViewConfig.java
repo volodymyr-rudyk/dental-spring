@@ -6,7 +6,6 @@ package com.dental.view;
 public class ViewConfig {
 
   public static final String FOLDER_PROFILE = "/profile";
-
   public static final String FOLDER_ADMIN = "/admin";
   public static final String FOLDER_AUTH = "/auth";
 }

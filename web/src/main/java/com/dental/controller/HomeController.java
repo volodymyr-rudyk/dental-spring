@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 */
 
 @Controller
-public class HomeController extends BaseController {
+public class HomeController extends AbstractBasePageController {
 
   private String viewName = "index";
 

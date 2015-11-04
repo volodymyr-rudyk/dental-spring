@@ -1,6 +1,6 @@
 package com.dental.provider;
 
-import com.dental.dao.entity.User;
+import com.dental.persistence.entity.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 

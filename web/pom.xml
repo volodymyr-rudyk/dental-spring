@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+         xmlns="http://maven.apache.org/POM/4.0.0">
 
   <modelVersion>4.0.0</modelVersion>
   <parent>
@@ -25,6 +26,11 @@
 
   <dependencies>
 
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+      <version>2.5.1</version>
+    </dependency>
 
     <dependency>
       <groupId>org.springframework</groupId>
@@ -260,6 +266,11 @@
       <artifactId>xml-apis</artifactId>
       <version>1.3.04</version>
     </dependency>
+    <!--<dependency>-->
+    <!--<groupId>com.sun.jersey</groupId>-->
+    <!--<artifactId>jersey-core</artifactId>-->
+    <!--<version>1.9.1</version>-->
+    <!--</dependency>-->
 
   </dependencies>
 
@@ -379,15 +390,15 @@
         <version>3.1</version>
         <configuration>
           <table>SchemaVersion</table>
-          <!--<driver>${db.driver}</driver>-->
-          <!--<url>${db.url}</url>-->
-          <!--<user>${db.username}</user>-->
-          <!--<password>${db.password}</password>-->
-          <schemas>
-            <schema>dbo</schema>
-          </schemas>
+          <driver>${db.driverClassName}</driver>
+          <url>${db.url}</url>
+          <user>${db.username}</user>
+          <password>${db.password}</password>
+          <!--<schemas>-->
+            <!--<schema>dbo</schema>-->
+          <!--</schemas>-->
           <locations>
-            <location>filesystem:${basedir}/doc/sql/migration</location>
+            <location>filesystem:${basedir}</location>
           </locations>
           <initOnMigrate>true</initOnMigrate>
         </configuration>
@@ -398,9 +409,6 @@
   <profiles>
     <profile>
       <id>asus</id>
-      <activation>
-        <activeByDefault>true</activeByDefault>
-      </activation>
       <properties>
         <db.driverClassName>com.mysql.jdbc.Driver</db.driverClassName>
         <db.url>jdbc:mysql://localhost:3306/dental_dev</db.url>
@@ -415,15 +423,18 @@
     </profile>
 
     <profile>
-      <id>asus2</id>
+      <id>lenovo</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
       <properties>
         <db.driverClassName>com.mysql.jdbc.Driver</db.driverClassName>
         <db.url>jdbc:mysql://localhost:3306/dental_dev</db.url>
         <db.username>test</db.username>
         <db.password>test</db.password>
-        <hibernate.dialect>org.hibernate.dialect.MySQLDialect</hibernate.dialect>
-        <hibernate.show_sql>true</hibernate.show_sql>
-        <hibernate.format_sql>false</hibernate.format_sql>
+        <db.hibernate.dialect>org.hibernate.dialect.MySQLDialect</db.hibernate.dialect>
+        <db.hibernate.show_sql>true</db.hibernate.show_sql>
+        <db.hibernate.format_sql>false</db.hibernate.format_sql>
         <db.engine>MYSQL</db.engine>
       </properties>
     </profile>

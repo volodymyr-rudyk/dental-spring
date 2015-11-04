@@ -46,22 +46,25 @@ public class SpringSecureConfig extends WebSecurityConfigurerAdapter {
         .loginProcessingUrl("/authenticate")
         .failureUrl("/login?error=bad_credentials")
 
-            //Configures the logout function
+        //Configures the logout function
         .and()
         .logout()
         .deleteCookies("JSESSIONID")
         .logoutUrl("/logout")
         .logoutSuccessUrl("/login")
 
-            //Configures url based authorization
+        //Configures url based authorization
         .and()
         .authorizeRequests()
 
-            //Anyone can access the urls
+        //Anyone can access the urls
         .antMatchers(
             "/auth/**",
             "/",
+            "/test**",
+            "/rest**/**",
             "/login",
+            "/about",
             "/search",
             "/authenticate",
             "/signup/**",
@@ -95,6 +98,9 @@ public class SpringSecureConfig extends WebSecurityConfigurerAdapter {
   }
 
   @Autowired
+  private AuthenticationProvider dentalAuthenticationProvider;
+
+  @Autowired
   public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 
     // in-memory auth
@@ -105,7 +111,7 @@ public class SpringSecureConfig extends WebSecurityConfigurerAdapter {
     // Dao auth
 //        auth.userDetailsService(new UserDetailsServiceImpl());
 
-    auth.authenticationProvider(getAuthenticationProvider());
+    auth.authenticationProvider(dentalAuthenticationProvider);
 //    }
 
 //    @Bean
@@ -115,21 +121,13 @@ public class SpringSecureConfig extends WebSecurityConfigurerAdapter {
 //        return roleVoter;
   }
 
-  //region User Details related functionality
-  @Bean
-  public UserDetailsService getUserDetailsService() {
-    return new UserDetailsServiceImpl();
-  }
-
-  //endregion
-//
-  @Bean
-  public AuthenticationProvider getAuthenticationProvider() {
+//  @Bean
+//  public AuthenticationProvider getAuthenticationProvider() {
 //        DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
 //        daoAuthenticationProvider.setUserDetailsService(new UserDetailsServiceImpl());
 //        return daoAuthenticationProvider;
-    return new DentalAuthenticationProvider();
-  }
+//    return new DentalAuthenticationProvider();
+//  }
 
 //    @Bean
 //    public ProviderManager getProviderManager() {

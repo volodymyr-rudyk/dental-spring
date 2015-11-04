@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
  * Created by admin on 26.05.2015.
  */
 @RestController
-public class SearchController extends BaseController {
+public class SearchController extends AbstractBasePageController {
 
   public static final String PROFILE_VIEW = "profile";
 

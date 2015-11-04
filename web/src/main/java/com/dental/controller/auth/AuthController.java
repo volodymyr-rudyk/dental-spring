@@ -2,8 +2,8 @@ package com.dental.controller.auth;
 
 import com.dental.bean.SignupBean;
 import com.dental.bean.UserBean;
-import com.dental.controller.BaseController;
-import com.dental.exception.AuthenticationException;
+import com.dental.controller.AbstractBasePageController;
+import com.dental.exception.RequiredAuthenticationException;
 import com.dental.exception.NotFoundException;
 import com.dental.service.AuthService;
 import com.dental.view.ViewConfig;
@@ -29,7 +29,7 @@ import java.io.IOException;
  */
 @Controller
 @RequestMapping("/auth")
-public class AuthController extends BaseController {
+public class AuthController extends AbstractBasePageController {
 
   private static final Logger LOG = LoggerFactory.getLogger(AuthController.class);
 
@@ -64,8 +64,8 @@ public class AuthController extends BaseController {
       model.addAttribute("error", "Bad credential");
       modelAndView.setViewName(this.renderView(PAGE_LOGIN));
       return modelAndView;
-    } catch (AuthenticationException e) {
-      LOG.debug("AuthenticationException = " + e.getMessage());
+    } catch (RequiredAuthenticationException e) {
+      LOG.debug("RequiredAuthenticationException = " + e.getMessage());
       model.addAttribute("error", "Auth Exception");
       modelAndView.setViewName(this.renderView(PAGE_LOGIN));
       return modelAndView;

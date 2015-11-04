@@ -1,6 +1,6 @@
 package com.dental.controller;
 
-import com.dental.exception.AuthenticationException;
+import com.dental.exception.RequiredAuthenticationException;
 import com.dental.exception.NotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -45,8 +45,8 @@ public abstract class AbstractBasePageController implements PageController {
     return "404";
   }
 
-  @ExceptionHandler(AuthenticationException.class)
-  public void authenticationRequired(AuthenticationException e, HttpServletRequest request, HttpServletResponse response) throws IOException {
+  @ExceptionHandler(RequiredAuthenticationException.class)
+  public void authenticationRequired(RequiredAuthenticationException e, HttpServletRequest request, HttpServletResponse response) throws IOException {
     response.sendRedirect("/auth/login");
   }
 }

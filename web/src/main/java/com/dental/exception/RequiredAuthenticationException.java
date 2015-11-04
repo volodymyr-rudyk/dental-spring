@@ -8,6 +8,10 @@ public class RequiredAuthenticationException extends RuntimeException {
     super();
   }
 
+  public RequiredAuthenticationException(String msg) {
+    super(msg);
+  }
+
   public RequiredAuthenticationException(String msg, Throwable ex) {
     super(msg, ex);
   }

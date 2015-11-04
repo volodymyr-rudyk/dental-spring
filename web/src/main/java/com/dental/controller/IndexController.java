@@ -1,6 +1,8 @@
 package com.dental.controller;
 
 import com.dental.persistence.entity.User;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -21,19 +23,16 @@ import java.util.Locale;
  */
 
 @Controller
-public class IndexController extends BaseController {
+public class IndexController extends AbstractBasePageController {
+
+  private static final Logger LOG = LoggerFactory.getLogger(IndexController.class);
 
   @RequestMapping(value = "/hello2")
   public String hello2(HttpServletRequest request, HttpServletResponse response, ModelMap model,
                        User user) {
-//        String data = Rt.DATA;
     String m1 = messageSource.getMessage("u", null, Locale.getDefault());
     String m2 = messageSource.getMessage("u", null, Locale.ENGLISH);
 
-    //optional.ifPresent(user -> System.out.println(user.getName() + " : " + user.getPhone()));
-//        String s = null;
-//        s.toString();
-//        optional.get().getName();
     model.put("hello", 123);
     model.put("user", user);
     return "hello";
@@ -43,8 +42,7 @@ public class IndexController extends BaseController {
   @ExceptionHandler(NullPointerException.class)
   public String handlerNPE(NullPointerException ex) {
     String message = ex.getMessage();
-    System.out.println("HANDLER = " + message);
-
+    LOG.info("HANDLER = " + message);
     return message;
   }
 

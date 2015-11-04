@@ -2,7 +2,7 @@ package com.dental.service;
 
 import com.dental.bean.SignupBean;
 import com.dental.bean.UserBean;
-import com.dental.exception.AuthenticationException;
+import com.dental.exception.RequiredAuthenticationException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 public interface AuthService {
 
-  void authenticate(UserBean userBean, HttpServletRequest request) throws AuthenticationException;
+  void authenticate(UserBean userBean, HttpServletRequest request) throws RequiredAuthenticationException;
 
   void logout(HttpServletRequest request, HttpServletResponse response);
 

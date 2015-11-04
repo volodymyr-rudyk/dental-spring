@@ -1,5 +1,5 @@
 <#import "../layout/basement.ftl" as base />
-<@base.page "SignUp Page">
+<@base.page title="SignUp Page">
 
 <div class="container">
   <div class="row">
