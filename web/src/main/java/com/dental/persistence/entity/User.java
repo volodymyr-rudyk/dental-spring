@@ -15,8 +15,8 @@ public class User implements Serializable {
   @Column(name = "id", unique = true, nullable = false)
   private int id;
 
-  @Column(name = "login", unique = true, nullable = false)
-  private String login;
+  @Column(name = "email", unique = true, nullable = false)
+  private String email;
 
   @Column(name = "password", nullable = false)
   private String password;
@@ -32,8 +32,8 @@ public class User implements Serializable {
 
   }
 
-  public User(String login, String password) {
-    this.login = login;
+  public User(String email, String password) {
+    this.email = email;
     this.password = password;
   }
 
@@ -61,12 +61,12 @@ public class User implements Serializable {
     this.profile = profile;
   }
 
-  public String getLogin() {
-    return login;
+  public String getEmail() {
+    return email;
   }
 
-  public void setLogin(String login) {
-    this.login = login;
+  public void setEmail(String email) {
+    this.email = email;
   }
 
   public String getPassword() {
@@ -81,7 +81,7 @@ public class User implements Serializable {
   public String toString() {
     return "User{" +
         "id=" + id +
-        ", login='" + login + '\'' +
+        ", email='" + email + '\'' +
         ", password='" + password + '\'' +
         ", isEnabled=" + isEnabled +
         ", profile=" + profile +

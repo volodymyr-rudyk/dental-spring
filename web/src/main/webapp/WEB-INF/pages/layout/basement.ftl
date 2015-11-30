@@ -19,7 +19,7 @@
     <@page_footer />
 
     <#list js as j>
-    <script type="javascript" src="/js/${j}.js">
+    <script type="application/javascript" src="/js/${j}.js"></script>
     </#list>
 </body >
 </html>

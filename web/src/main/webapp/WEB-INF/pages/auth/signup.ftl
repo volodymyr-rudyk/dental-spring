@@ -25,7 +25,7 @@
           </div>
         </div>
         <div class="form-group">
-          <input type="text" name="login" id="display_name" class="form-control input-lg" placeholder="Display Name"
+          <input type="text" name="email" id="display_name" class="form-control input-lg" placeholder="Display Name"
                  tabindex="3">
         </div>
         <div class="form-group">

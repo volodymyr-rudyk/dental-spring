@@ -1,10 +1,5 @@
 package com.dental.config;
 
-//import com.dental.provider.DentalAuthenticationProvider;
-//import com.dental.component.impl.UserDetailsServiceImpl;
-
-import com.dental.provider.DentalAuthenticationProvider;
-import com.dental.service.impl.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,16 +10,18 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.logout.LogoutHandler;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 
 /**
- * Created by admin on 06.04.2015.
+ * Created by light on 06.04.2015.
  */
 @EnableWebSecurity
 @Configuration
 public class SpringSecureConfig extends WebSecurityConfigurerAdapter {
+
+  @Autowired
+  private AuthenticationProvider dentalAuthenticationProvider;
 
   @Override
   protected void configure(HttpSecurity http) throws Exception {
@@ -96,9 +93,6 @@ public class SpringSecureConfig extends WebSecurityConfigurerAdapter {
   public AuthenticationManager authenticationManager() throws Exception {
     return super.authenticationManager();
   }
-
-  @Autowired
-  private AuthenticationProvider dentalAuthenticationProvider;
 
   @Autowired
   public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {

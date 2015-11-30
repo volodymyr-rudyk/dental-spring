@@ -1,0 +1,1 @@
+var dentalApp = angular.module('dental', []);

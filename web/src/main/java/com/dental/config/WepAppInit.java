@@ -37,17 +37,15 @@ import javax.servlet.ServletRegistration;
 public class WepAppInit implements WebApplicationInitializer {
 
   @Override
-  public void onStartup(ServletContext container) {
+  public void onStartup(ServletContext servletContext) {
     AnnotationConfigWebApplicationContext rootContext = new AnnotationConfigWebApplicationContext();
     rootContext.register(AppConfig.class);
-    ContextLoaderListener contextLoaderListener = new ContextLoaderListener(rootContext);
-    container.addListener(contextLoaderListener);
-    //container.setInitParameter("contextInitializerClasses", "mvctest.web.DemoApplicationContextInitializer");
-    AnnotationConfigWebApplicationContext webContext = new AnnotationConfigWebApplicationContext();
-    webContext.register(AppConfig.class);
-    DispatcherServlet dispatcherServlet = new DispatcherServlet(webContext);
-    ServletRegistration.Dynamic dispatcher = container.addServlet("dispatcher", dispatcherServlet);
+//    rootContext.setConfigLocation("com.dental.config.AppConfig");
+    servletContext.addListener(new ContextLoaderListener(rootContext));
+
+    DispatcherServlet dispatcherServlet = new DispatcherServlet(rootContext);
+    ServletRegistration.Dynamic dispatcher = servletContext.addServlet("dispatcher", dispatcherServlet);
+    dispatcher.setLoadOnStartup(1);
     dispatcher.addMapping("/");
   }
 }
-

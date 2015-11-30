@@ -1,17 +1,29 @@
 package com.dental.bean;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Date;
 
 /**
  * Created by admin on 20.05.2015.
  */
 public class SignupBean extends UserBean {
+
+  @NotNull
+  @Size(min = 5, max = 50)
   private String firstName;
+
+  @NotNull
+  @Size(min = 5, max = 50)
   private String lastName;
+
+  @NotNull
   private Date birthday;
-  private String login;
+
+  @NotNull
+  @Size(min = 6, max = 50)
   private String password;
-  private String email;
+
   private String phone;
 
   public String getFirstName() {
@@ -38,28 +50,10 @@ public class SignupBean extends UserBean {
     this.birthday = birthday;
   }
 
-  public String getLogin() {
-    return login;
-  }
-
-  public void setLogin(String login) {
-    this.login = login;
-  }
-
-  public String getEmail() {
-    return email;
-  }
-
-  public void setEmail(String email) {
-    this.email = email;
-  }
-
-  @Override
   public String getPassword() {
     return password;
   }
 
-  @Override
   public void setPassword(String password) {
     this.password = password;
   }

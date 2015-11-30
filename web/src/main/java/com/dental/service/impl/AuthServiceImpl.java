@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.security.web.authentication.logout.LogoutHandler;
@@ -28,29 +29,21 @@ public class AuthServiceImpl implements AuthService {
 
   private static final Logger LOG = LoggerFactory.getLogger(AuthServiceImpl.class);
 
-
-//  public static final String SPRING_SECURITY_CONTEXT = "SPRING_SECURITY_CONTEXT";
-
-  //  @Autowired
-//  private ProviderManager providerManager;
-
   @Autowired
   private LogoutHandler logoutHandler;
 
   @Autowired
-//  @Qualifier("dentalAuthenticationManager")
+  @Qualifier("dentalAuthenticationManager")
   private AuthenticationManager authenticationManager;
 
-  //  @Autowired
-//  AuthenticationProvider authenticationProvider;
   @Autowired
   private UserDao userDao;
 
-  //    @Override
-  public void authenticate(UserBean userBean, HttpServletRequest request) {
+  @Override
+  public void authenticate(UserBean userBean, HttpServletRequest request) throws AuthenticationException {
     LOG.info("Authentication started... " + userBean);
     UsernamePasswordAuthenticationToken token =
-        new UsernamePasswordAuthenticationToken(userBean.getUsername(), userBean.getPassword());
+        new UsernamePasswordAuthenticationToken(userBean.getEmail(), userBean.getPassword());
     token.setDetails(new WebAuthenticationDetails(request));
     Authentication authentication = authenticationManager.authenticate(token);
 //        Authentication authentication = authenticationProvider.authenticate(token);
@@ -84,7 +77,7 @@ public class AuthServiceImpl implements AuthService {
   private User getUser(SignupBean signupBean) {
     User user = new User();
     user.setIsEnabled(true);
-    user.setLogin(signupBean.getLogin());
+    user.setEmail(signupBean.getEmail());
     user.setPassword(signupBean.getPassword());
 
     Profile profile = new Profile();

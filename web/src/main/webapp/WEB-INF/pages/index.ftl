@@ -84,7 +84,7 @@
 
   </div>
 
-  <a href="/auth/login">Login</a>
+  <a href="/auth/email">Login</a>
   <a href="/auth/signup">SignUp</a>
 </div>
 

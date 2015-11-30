@@ -3,7 +3,6 @@ package com.dental.controller.auth;
 import com.dental.bean.SignupBean;
 import com.dental.bean.UserBean;
 import com.dental.controller.AbstractBasePageController;
-import com.dental.exception.RequiredAuthenticationException;
 import com.dental.exception.NotFoundException;
 import com.dental.service.AuthService;
 import com.dental.view.ViewConfig;
@@ -28,7 +27,7 @@ import java.io.IOException;
  * Created by light on 3/28/2015.
  */
 @Controller
-@RequestMapping("/auth")
+@RequestMapping("/")
 public class AuthController extends AbstractBasePageController {
 
   private static final Logger LOG = LoggerFactory.getLogger(AuthController.class);
@@ -64,11 +63,6 @@ public class AuthController extends AbstractBasePageController {
       model.addAttribute("error", "Bad credential");
       modelAndView.setViewName(this.renderView(PAGE_LOGIN));
       return modelAndView;
-    } catch (RequiredAuthenticationException e) {
-      LOG.debug("RequiredAuthenticationException = " + e.getMessage());
-      model.addAttribute("error", "Auth Exception");
-      modelAndView.setViewName(this.renderView(PAGE_LOGIN));
-      return modelAndView;
     }
   }
 
@@ -82,7 +76,7 @@ public class AuthController extends AbstractBasePageController {
 
     if (StringUtils.isEmpty(signupBean.getFirstName()) ||
         StringUtils.isEmpty(signupBean.getLastName()) ||
-        StringUtils.isEmpty(signupBean.getLogin()) ||
+        StringUtils.isEmpty(signupBean.getEmail()) ||
         StringUtils.isEmpty(signupBean.getPassword())
         ) {
       response.sendRedirect("/signup?fail");
@@ -95,7 +89,7 @@ public class AuthController extends AbstractBasePageController {
   @RequestMapping(value = "/logout")
   public void logout(HttpServletRequest request, HttpServletResponse response, Model model) throws NotFoundException, IOException {
     authService.logout(request, response);
-    response.sendRedirect("/auth/login");
+    response.sendRedirect("/login");
   }
 
   @RequestMapping(value = "/denied")

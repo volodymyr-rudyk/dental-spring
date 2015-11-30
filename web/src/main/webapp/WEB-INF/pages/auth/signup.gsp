@@ -51,7 +51,7 @@
             </div>
 
             <div class="form-group">
-                <strong>login/email</strong>
+                <strong>email/email</strong>
                 <g:if test="${flash.errors?.getFieldError("username")}">
                     <p class="bg-danger">Incorrect value</p>
                 </g:if>

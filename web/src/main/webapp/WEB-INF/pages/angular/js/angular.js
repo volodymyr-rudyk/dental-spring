@@ -8974,7 +8974,7 @@
      *       // when the response is available
      *     }).
                  *     error(function(data, status, headers, config) {
-     *       // called asynchronously if an error occurs
+     *     -  // called asynchronously if an error occurs
      *       // or server returns response with an error status.
      *     });
                  * ```
@@ -24646,6 +24646,7 @@
      </file>
      <file name="animations.css">
      .example-animate-container {
+
         background:white;
         border:1px solid black;
         list-style:none;

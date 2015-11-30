@@ -21,10 +21,10 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
   }
 
   @Override
-  public User loadUserByUserNameAndPassword(String login, String password) {
-    String q = "select u from User u where u.login = :login and u.password = :password";
+  public User loadUserByUserNameAndPassword(String email, String password) {
+    String q = "select u from User u where u.email = :email and u.password = :password";
     Query namedQuery = entityManager.createQuery(q);
-    namedQuery.setParameter("login", login);
+    namedQuery.setParameter("email", email);
     namedQuery.setParameter("password", password);
     namedQuery.setMaxResults(1);
     List resultList = namedQuery.getResultList();
@@ -32,10 +32,10 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
   }
 
   @Override
-  public User loadUserByLogin(String login) {
-    String q = "select u from User u where u.login = :login";
+  public User loadUserByLogin(String email) {
+    String q = "select u from User u where u.email = :email";
     Query namedQuery = entityManager.createQuery(q);
-    namedQuery.setParameter("login", login);
+    namedQuery.setParameter("email", email);
     namedQuery.setMaxResults(1);
     List resultList = namedQuery.getResultList();
     return resultList.size() > 0 ? (User) resultList.get(0) : null;

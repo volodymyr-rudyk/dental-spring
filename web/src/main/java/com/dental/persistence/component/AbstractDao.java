@@ -1,17 +1,19 @@
 package com.dental.persistence.component;
 
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.transaction.Transactional;
 import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by light on 4/5/2015.
  */
-@Component
+@Repository
+@Transactional
 public abstract class AbstractDao<T> implements GenericCrud<T> {
 
   @PersistenceContext

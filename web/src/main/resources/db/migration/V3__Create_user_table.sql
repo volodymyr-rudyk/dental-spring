@@ -1,6 +1,6 @@
 create table user (
 	id int not null auto_increment,
-  login varchar(50) NOT NULL ,
+  email varchar(50) NOT NULL ,
   password varchar(50) NOT NULL ,
   is_enabled bit default 1 not null,
   profile_id int not null,

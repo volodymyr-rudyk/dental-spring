@@ -78,8 +78,8 @@ public class DaoConfig {
     String DB_URL = "db.url";
     String DB_USERNAME = "db.username";
     String DB_PASSWORD = "db.password";
-    String HIBERNATE_DIALECT = "hibernate.dialect";
-    String HIBERNATE_SHOW_SQL = "hibernate.show_sql";
+    String HIBERNATE_DIALECT = "db.hibernate.dialect";
+    String HIBERNATE_SHOW_SQL = "db.hibernate.show_sql";
     String HIBERNATE_JDBC_BATCH_SIZE = "hibernate.jdbc.batch_size";
     String PACKAGES_SCAN = "packages.scan";
     String DB_ENGINE = "db.engine";
