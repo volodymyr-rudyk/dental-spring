@@ -1,4 +1,4 @@
-<div style="margin-bottom: 51px;">
+<header class="header">
   <div class="navbar navbar-default navbar-fixed-top" role="navigation">
     <div class="container">
       <div class="navbar-header">
@@ -8,14 +8,13 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a href="/" class="navbar-brand">Dentalbook.com</a>
+        <a href="/" class="navbar-brand">G.com</a>
       </div>
 
       <div class="navbar-collapse collapse">
         <ul class="nav navbar-nav navbar-right">
-          <p>test</p>
         </ul>
       </div>
     </div>
   </div>
-</div>
+</header>

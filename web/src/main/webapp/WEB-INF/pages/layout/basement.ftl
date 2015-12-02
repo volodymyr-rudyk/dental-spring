@@ -1,4 +1,6 @@
 <#macro page title="Dental" css=[] js=[]>
+<#include "macro.ftl" />
+
 <#--<#import "spring.ftl" as spring />-->
 
 <!DOCTYPE html>
@@ -13,25 +15,19 @@
     </#list>
 </head>
 <body>
-    <@page_header />
+    <@pageHeader />
 
     <#nested />
-    <@page_footer />
+    <@pageFooter />
 
     <#list js as j>
-    <script type="application/javascript" src="/js/${j}.js"></script>
+        <script type="application/javascript" src="/js/${j}.js"></script>
     </#list>
 </body >
 </html>
 </#macro>
 
-<#macro page_header>
-    <#include "header.ftl" />
-</#macro>
 
-<#macro page_footer>
-    <#include "footer.ftl" />
-</#macro>
 
 
 

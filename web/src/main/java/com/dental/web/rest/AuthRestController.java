@@ -4,6 +4,8 @@ import com.dental.bean.UserBean;
 import com.dental.service.AuthService;
 import com.dental.web.ResponseStatus;
 import com.dental.web.dto.SigninDTO;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -24,6 +26,8 @@ import javax.validation.Valid;
 @RestController
 public class AuthRestController extends BaseRestController {
 
+  private Logger logger = LoggerFactory.getLogger(AuthRestController.class);
+
   @Autowired
   private AuthService authService;
 
@@ -37,7 +41,7 @@ public class AuthRestController extends BaseRestController {
       signinDTO.setCode(-1);
       signinDTO.setResponseStatus(ResponseStatus.Failure);
       signinDTO.setMessage("Invalid user data");
-      return new ResponseEntity<>(signinDTO, HttpStatus.OK);
+      return new ResponseEntity<>(signinDTO, HttpStatus.BAD_REQUEST);
     }
 
     try {
@@ -45,14 +49,24 @@ public class AuthRestController extends BaseRestController {
       signinDTO.setCode(200);
       signinDTO.setResponseStatus(ResponseStatus.Success);
       signinDTO.setUserEmail(userBean.getEmail());
-//      LOG.debug("Success, Redirect to profile page");
+      return new ResponseEntity<>(signinDTO, HttpStatus.OK);
     } catch (Exception e) {
-//      e.printStackTrace();
+      logger.error("Authentication Error", e.getMessage());
       signinDTO.setCode(-1);
       signinDTO.setMessage("Invalid user data");
       signinDTO.setResponseStatus(ResponseStatus.Failure);
+      return new ResponseEntity<>(signinDTO, HttpStatus.BAD_REQUEST);
     }
-    return new ResponseEntity<>(signinDTO, HttpStatus.OK);
+  }
+
+  @RequestMapping(value = "/signup", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE,
+      consumes = MediaType.APPLICATION_JSON_VALUE)
+  public ResponseEntity<SigninDTO> signup(HttpServletRequest httpServletRequest, @RequestBody @Valid UserBean userBean,
+                                         BindingResult result) {
+
+
+
+    return null;
   }
 
   @RequestMapping(value = "/logout", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE,

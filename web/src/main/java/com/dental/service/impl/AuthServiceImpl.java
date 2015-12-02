@@ -53,8 +53,9 @@ public class AuthServiceImpl implements AuthService {
 //    HttpSession session = request.getSession(true);
 //    session.setAttribute(SPRING_SECURITY_CONTEXT, securityContext);
 
-    if (authentication.isAuthenticated())
+    if (authentication.isAuthenticated()) {
       SecurityContextHolder.getContext().setAuthentication(authentication);
+    }
 
 //    SecurityContext sc = new SecurityContextImpl();
 //    sc.setAuthentication(authentication);

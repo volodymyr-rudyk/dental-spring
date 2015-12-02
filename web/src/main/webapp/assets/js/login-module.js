@@ -1,23 +1,23 @@
-angular.module('login', [])
-  .controller('LoginController', function ($scope, $http, $location) {
+angular.module('login', ['dental'])
+  .controller('LoginController', function ($scope, $http, Rest) {
     $scope.user = {email : "", password : ""};
     $scope.response = {};
 
-    this.doLogin = function () {
+    this.login = function () {
       $http({
-        url: "http://localhost:9999/rest/login",
+        url: Rest.login,
         method: 'POST',
         data: $scope.user
-      }).success(loginSuccess).error(loginFail);
+      }).success(success).error(fail);
     };
 
-    var loginSuccess = function (data, status, headers, config) {
+    var success = function (data, status, headers, config) {
       $scope.response = data;
       if(data.code == 200)
-        document.location = "http://localhost:9999/profile";
-        console.log(data);
+        document.location = "/profile";
+      console.log(data);
     };
-    var loginFail = function (data, status, headers, config) {
+    var fail = function (data, status, headers, config) {
       console.log(data);
     };
 
