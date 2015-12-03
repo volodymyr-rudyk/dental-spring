@@ -10,29 +10,20 @@ import java.util.Date;
 
 @Entity
 @Table(name = "profile")
-public class Profile implements Serializable {
+public class Profile extends BaseEntity implements Serializable {
+
+  private int id;
+  private String firstName;
+  private String middleName;
+  private String lastName;
+  private Date birthday;
+  private String phone;
+  private User user;
 
   @Id
   @Column(name = "id")
   @GeneratedValue
-  private int id;
-
-  @Column(name = "first_name")
-  private String firstName;
-
-  @Column(name = "last_name")
-  private String lastName;
-
-  @Column(name = "birthday")
-  @Temporal(TemporalType.DATE)
-  private Date birthday;
-
-  @Column(name = "phone")
-  private String phone;
-
-  @OneToOne(fetch = FetchType.LAZY, mappedBy = "profile")
-  private User user;
-
+  @Override
   public int getId() {
     return id;
   }
@@ -41,6 +32,7 @@ public class Profile implements Serializable {
     this.id = id;
   }
 
+  @Column(name = "first_name")
   public String getFirstName() {
     return firstName;
   }
@@ -49,6 +41,16 @@ public class Profile implements Serializable {
     this.firstName = firstName;
   }
 
+  @Column(name = "middle_name")
+  public String getMiddleName() {
+    return middleName;
+  }
+
+  public void setMiddleName(String middleName) {
+    this.middleName = middleName;
+  }
+
+  @Column(name = "last_name")
   public String getLastName() {
     return lastName;
   }
@@ -57,6 +59,8 @@ public class Profile implements Serializable {
     this.lastName = lastName;
   }
 
+  @Column(name = "birthday")
+  @Temporal(TemporalType.DATE)
   public Date getBirthday() {
     return birthday;
   }
@@ -65,6 +69,7 @@ public class Profile implements Serializable {
     this.birthday = birthday;
   }
 
+  @Column(name = "phone")
   public String getPhone() {
     return phone;
   }
@@ -73,11 +78,12 @@ public class Profile implements Serializable {
     this.phone = phone;
   }
 
-//    public User getUser() {
-//        return user;
-//    }
-//
-//    public void setUser(User user) {
-//        this.user = user;
-//    }
+  @OneToOne(fetch = FetchType.LAZY, mappedBy = "profile")
+  public User getUser() {
+    return user;
+  }
+
+  public void setUser(User user) {
+    this.user = user;
+  }
 }

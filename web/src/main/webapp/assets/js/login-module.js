@@ -1,6 +1,6 @@
 angular.module('login', ['dental'])
   .controller('LoginController', function ($scope, $http, Rest) {
-    $scope.user = {email : "", password : ""};
+    $scope.user = {email: "", password: ""};
     $scope.response = {};
 
     this.login = function () {
@@ -13,11 +13,12 @@ angular.module('login', ['dental'])
 
     var success = function (data, status, headers, config) {
       $scope.response = data;
-      if(data.code == 200)
+      if (data.code == 200)
         document.location = "/profile";
       console.log(data);
     };
     var fail = function (data, status, headers, config) {
+      $scope.response = data;
       console.log(data);
     };
 

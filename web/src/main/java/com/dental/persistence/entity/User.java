@@ -8,24 +8,12 @@ import java.io.Serializable;
  */
 @Entity
 @Table(name = "user")
-public class User implements Serializable {
+public class User extends BaseEntity implements Serializable {
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "id", unique = true, nullable = false)
   private int id;
-
-  @Column(name = "email", unique = true, nullable = false)
   private String email;
-
-  @Column(name = "password", nullable = false)
   private String password;
-
-  @Column(name = "is_enabled")
   private boolean isEnabled;
-
-  @OneToOne(cascade = CascadeType.ALL)
-  @JoinColumn(name = "profile_id")
   private Profile profile;
 
   public User() {
@@ -37,6 +25,10 @@ public class User implements Serializable {
     this.password = password;
   }
 
+  @Id
+  @Column(name = "id")
+  @GeneratedValue
+  @Override
   public int getId() {
     return id;
   }
@@ -45,7 +37,8 @@ public class User implements Serializable {
     this.id = id;
   }
 
-  public boolean isEnabled() {
+  @Column(name = "is_enabled")
+  public boolean getIsEnabled() {
     return isEnabled;
   }
 
@@ -53,6 +46,8 @@ public class User implements Serializable {
     this.isEnabled = isEnabled;
   }
 
+  @OneToOne(cascade = CascadeType.ALL)
+  @JoinColumn(name = "profile_id")
   public Profile getProfile() {
     return profile;
   }
@@ -61,6 +56,7 @@ public class User implements Serializable {
     this.profile = profile;
   }
 
+  @Column(name = "email", unique = true, nullable = false)
   public String getEmail() {
     return email;
   }
@@ -69,6 +65,7 @@ public class User implements Serializable {
     this.email = email;
   }
 
+  @Column(name = "password", nullable = false)
   public String getPassword() {
     return password;
   }

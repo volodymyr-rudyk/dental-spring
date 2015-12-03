@@ -11,8 +11,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
-import java.io.Serializable;
-
 /**
  * Created by light on 27.05.2015.
  */
@@ -23,7 +21,7 @@ public class ProfileServiceImpl implements ProfileService {
   private ProfileDao profileDao;
 
   @Override
-  public Profile getProfile(Serializable id) {
+  public Profile getProfile(int id) {
     return profileDao.get(id);
   }
 

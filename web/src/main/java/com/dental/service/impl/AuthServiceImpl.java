@@ -1,7 +1,7 @@
 package com.dental.service.impl;
 
+import com.dental.bean.SigninBean;
 import com.dental.bean.SignupBean;
-import com.dental.bean.UserBean;
 import com.dental.persistence.component.UserDao;
 import com.dental.persistence.entity.Profile;
 import com.dental.persistence.entity.User;
@@ -20,7 +20,6 @@ import org.springframework.security.web.authentication.logout.LogoutHandler;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.Date;
 
 /**
  * Created by light on 5/3/2015.
@@ -40,10 +39,10 @@ public class AuthServiceImpl implements AuthService {
   private UserDao userDao;
 
   @Override
-  public void authenticate(UserBean userBean, HttpServletRequest request) throws AuthenticationException {
-    LOG.info("Authentication started... " + userBean);
+  public void authenticate(SigninBean signinBean, HttpServletRequest request) throws AuthenticationException {
+    LOG.info("Authentication started... " + signinBean);
     UsernamePasswordAuthenticationToken token =
-        new UsernamePasswordAuthenticationToken(userBean.getEmail(), userBean.getPassword());
+        new UsernamePasswordAuthenticationToken(signinBean.getEmail(), signinBean.getPassword());
     token.setDetails(new WebAuthenticationDetails(request));
     Authentication authentication = authenticationManager.authenticate(token);
 //        Authentication authentication = authenticationProvider.authenticate(token);
@@ -82,8 +81,9 @@ public class AuthServiceImpl implements AuthService {
     user.setPassword(signupBean.getPassword());
 
     Profile profile = new Profile();
-    profile.setBirthday(new Date());
+    profile.setBirthday(signupBean.getBirthday());
     profile.setFirstName(signupBean.getFirstName());
+    profile.setMiddleName(signupBean.getMiddleName());
     profile.setLastName(signupBean.getLastName());
     profile.setPhone(signupBean.getPhone());
 

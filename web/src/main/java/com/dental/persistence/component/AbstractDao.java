@@ -6,7 +6,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.transaction.Transactional;
-import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -25,26 +24,31 @@ public abstract class AbstractDao<T> implements GenericCrud<T> {
     this.clazz = clazz;
   }
 
-  public T get(Serializable id) {
+  @Override
+  public T get(int id) {
     return entityManager.find(clazz, id);
   }
 
+  @Override
   public T save(T entity) {
     entityManager.persist(entity);
     return entity;
   }
 
+  @Override
   public List<T> getList() {
     String all = "SELECT * FROM " + clazz.getSimpleName();
     Query nativeQuery = entityManager.createNativeQuery(all, clazz);
     return nativeQuery.getResultList();
   }
 
+  @Override
   public void remove(int id) {
     T entity = this.get(id);
     entityManager.remove(entity);
   }
 
+  @Override
   public T update(T entity) {
     entityManager.persist(entity);
     return entity;

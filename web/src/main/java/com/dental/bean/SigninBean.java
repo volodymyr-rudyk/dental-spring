@@ -6,7 +6,7 @@ import javax.validation.constraints.Size;
 /**
  * Created by light on 5/3/2015.
  */
-public class UserBean {
+public class SigninBean {
 
   @NotNull
   @Size(min = 5, max = 50)

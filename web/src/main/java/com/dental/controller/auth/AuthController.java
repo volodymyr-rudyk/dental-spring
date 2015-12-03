@@ -1,7 +1,6 @@
 package com.dental.controller.auth;
 
-import com.dental.bean.SignupBean;
-import com.dental.bean.UserBean;
+import com.dental.bean.SigninBean;
 import com.dental.controller.AbstractBasePageController;
 import com.dental.exception.NotFoundException;
 import com.dental.service.AuthService;
@@ -12,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -43,7 +41,7 @@ public class AuthController extends AbstractBasePageController {
 
   @RequestMapping(value = "/login", method = RequestMethod.POST)
   public ModelAndView authenticate(HttpServletRequest request, HttpServletResponse response,
-                                   @Valid UserBean userBean, BindingResult result, Model model) throws IOException {
+                                   @Valid SigninBean signinBean, BindingResult result, Model model) throws IOException {
 
     ModelAndView modelAndView = new ModelAndView();
     if (result.hasErrors()) {
@@ -54,7 +52,7 @@ public class AuthController extends AbstractBasePageController {
     }
 
     try {
-      authService.authenticate(userBean, request);
+      authService.authenticate(signinBean, request);
       modelAndView.setViewName("redirect:/profile");
       LOG.debug("Success, Redirect to profile page");
       return modelAndView;
@@ -69,21 +67,6 @@ public class AuthController extends AbstractBasePageController {
   @RequestMapping(value = "/signup")
   public String signup() {
     return this.renderView("signup");
-  }
-
-  @RequestMapping(value = "/signup", method = RequestMethod.POST)
-  public void signuppost(HttpServletResponse response, SignupBean signupBean) throws NotFoundException, IOException {
-
-    if (StringUtils.isEmpty(signupBean.getFirstName()) ||
-        StringUtils.isEmpty(signupBean.getLastName()) ||
-        StringUtils.isEmpty(signupBean.getEmail()) ||
-        StringUtils.isEmpty(signupBean.getPassword())
-        ) {
-      response.sendRedirect("/signup?fail");
-      return;
-    }
-    authService.signup(signupBean);
-    response.sendRedirect("/login");
   }
 
   @RequestMapping(value = "/logout")

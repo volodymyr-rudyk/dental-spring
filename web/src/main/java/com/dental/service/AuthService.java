@@ -1,7 +1,7 @@
 package com.dental.service;
 
+import com.dental.bean.SigninBean;
 import com.dental.bean.SignupBean;
-import com.dental.bean.UserBean;
 import org.springframework.security.core.AuthenticationException;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 public interface AuthService {
 
-  void authenticate(UserBean userBean, HttpServletRequest request) throws AuthenticationException;
+  void authenticate(SigninBean signinBean, HttpServletRequest request) throws AuthenticationException;
 
   void signup(SignupBean signupBean);
 

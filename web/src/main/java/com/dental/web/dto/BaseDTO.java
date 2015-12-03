@@ -5,7 +5,7 @@ import com.dental.web.ResponseStatus;
 /**
  * Created by vrudyk on 11/5/2015.
  */
-public class BaseDTO {
+public abstract class BaseDTO {
 
   protected ResponseStatus responseStatus;
   protected String message;
