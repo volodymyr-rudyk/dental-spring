@@ -1,24 +1,21 @@
-angular.module('login', ['dental'])
-  .controller('LoginController', function ($scope, $http, Rest) {
-    $scope.user = {email: "", password: ""};
+angular.module('dashboard', ['dental'])
+  .controller('DashboardController', function ($scope, $http, Rest) {
+    $scope.user = window.user;
     $scope.response = {};
 
-    this.login = function () {
+    this.dashboard = function () {
       $http({
-        url: Rest.login,
+        url: Rest.dashboard,
         method: 'POST',
         data: $scope.user
       }).success(success).error(fail);
     };
     var success = function (data, status, headers, config) {
       $scope.response = data;
-      if (data.code == 200)
-        document.location = "/profile";
       console.log(data);
     };
     var fail = function (data, status, headers, config) {
       $scope.response = data;
       console.log(data);
     };
-
   });

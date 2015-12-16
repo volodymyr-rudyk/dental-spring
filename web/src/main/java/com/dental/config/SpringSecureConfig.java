@@ -59,14 +59,15 @@ public class SpringSecureConfig extends WebSecurityConfigurerAdapter {
             "/auth/**",
             "/",
             "/test**",
-            "/rest**/**",
             "/login",
             "/about",
             "/search",
             "/authenticate",
             "/signup/**",
             "/logout",
-            "/user/register/**"
+            "/user/register/**",
+            "/rest/login",
+            "/rest/signup"
         ).permitAll()
         //The rest of the our application is protected.
         .antMatchers("/**").hasRole("USER");
