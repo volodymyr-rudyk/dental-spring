@@ -24,11 +24,15 @@ public class SpringConfig extends WebMvcConfigurerAdapter {
   private final String CSS_RESOURCE_LOCATION_BOOTSTRAP = BOOTSTRAP_PATH + "css/";
   private final String JS_RESOURCE = "/js/**";
   private final String JS_RESOURCE_LOCATION = "/assets/js/";
+  private final String BOWER_RESOURCE = "/bower/**";
+  private final String BOWER_RESOURCE_LOCATION = "/assets/bower/";
+
   private final String JS_RESOURCE_LOCATION_BOOTSTRAP = BOOTSTRAP_PATH + "js/";
   private final String FONT_RESOURCE = "/fonts/**";
   private final String FONT_RESOURCE_LOCATION = BOOTSTRAP_PATH + "fonts/";
   private final String IMAGE_RESOURCE = "/img/**";
   private final String IMAGE_RESOURCE_LOCATION = "/assets/img/";
+
 
   @Bean
   public ViewResolver viewResolver() {
@@ -62,5 +66,6 @@ public class SpringConfig extends WebMvcConfigurerAdapter {
     registry.addResourceHandler(JS_RESOURCE).addResourceLocations(JS_RESOURCE_LOCATION, JS_RESOURCE_LOCATION_BOOTSTRAP);
     registry.addResourceHandler(FONT_RESOURCE).addResourceLocations(FONT_RESOURCE_LOCATION, FONT_RESOURCE_LOCATION);
     registry.addResourceHandler(IMAGE_RESOURCE).addResourceLocations(IMAGE_RESOURCE_LOCATION);
+    registry.addResourceHandler(BOWER_RESOURCE).addResourceLocations(BOWER_RESOURCE_LOCATION);
   }
 }

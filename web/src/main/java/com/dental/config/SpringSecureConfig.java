@@ -82,6 +82,7 @@ public class SpringSecureConfig extends WebSecurityConfigurerAdapter {
         .antMatchers("/logout")
         .antMatchers("/signup")
         .antMatchers("/css/**")
+        .antMatchers("/bower/**")
         .antMatchers("/js/**")
         .antMatchers("/font/**")
         .antMatchers("/img/**")

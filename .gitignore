@@ -80,3 +80,4 @@ out
 test-output
 .gradletasknamecache
 classes
+/web/src/main/webapp/assets/bower
