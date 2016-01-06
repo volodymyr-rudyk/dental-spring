@@ -1,6 +1,5 @@
 package com.dental.controller.profile;
 
-import com.dental.bean.UserProfileBean;
 import com.dental.controller.AbstractBasePageController;
 import com.dental.exception.NotFoundException;
 import com.dental.persistence.entity.Profile;
@@ -16,7 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Created by admin on 26.05.2015.
+ * Created by vrudyk on 12/19/2015.
  */
 @Controller
 @RequestMapping("/profile")
@@ -31,22 +30,9 @@ public class ProfileController extends AbstractBasePageController {
   public String profile(HttpServletRequest request, HttpServletResponse response, ModelMap model) throws NotFoundException {
     Profile loggedInProfile = profileService.getLoggedInProfile();
     assert loggedInProfile != null;
+    loggedInProfile.getUser();
     model.put("profile", loggedInProfile);
     return renderView(PROFILE_VIEW);
-  }
-
-  @RequestMapping("/edit")
-  public String editProfile() {
-    return renderView("edit");
-  }
-
-  @RequestMapping("/save")
-  public String saveProfile(UserProfileBean profileBean) {
-
-    // validate
-
-    profileService.save(profileBean);
-    return renderView("profile");
   }
 
   @Override

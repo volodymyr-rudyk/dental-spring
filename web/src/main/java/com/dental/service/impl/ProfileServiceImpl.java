@@ -1,9 +1,10 @@
 package com.dental.service.impl;
 
-import com.dental.bean.UserProfileBean;
+import com.dental.bean.ProfileBean;
 import com.dental.exception.RequiredAuthenticationException;
 import com.dental.persistence.component.ProfileDao;
 import com.dental.persistence.entity.Profile;
+import com.dental.persistence.entity.User;
 import com.dental.provider.DentalUserDetails;
 import com.dental.service.ProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,21 +27,41 @@ public class ProfileServiceImpl implements ProfileService {
   }
 
   @Override
-  public void save(UserProfileBean profileBean) {
+  public void save(ProfileBean profileBean) {
     Profile profile = transform(profileBean);
     profileDao.save(profile);
   }
 
   @Override
+  public void update(ProfileBean profileBean, Profile profile) {
+    profile.setFirstName(profileBean.getFirstName());
+    profile.setMiddleName(profileBean.getMiddleName());
+    profile.setLastName(profileBean.getLastName());
+    profile.setBirthday(profileBean.getBirthday());
+    profile.setPhone(profileBean.getPhone());
+    profileDao.update(profile);
+  }
+
+  @Override
   public Profile getLoggedInProfile() {
-    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-    if (authentication == null) throw new RequiredAuthenticationException("getLoggedInProfile");
-    DentalUserDetails dentalUserDetails = (DentalUserDetails) authentication.getPrincipal();
+    DentalUserDetails dentalUserDetails = this.loadUserDetails();
     return dentalUserDetails.getUser().getProfile();
   }
 
-  private Profile transform(UserProfileBean profileBean) {
-    // TODO add transformer
+  @Override
+  public User getLoggedUser() {
+    DentalUserDetails dentalUserDetails = this.loadUserDetails();
+    return dentalUserDetails.getUser();
+  }
+
+  private DentalUserDetails loadUserDetails() {
+    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    if (authentication == null) throw new RequiredAuthenticationException("getLoggedInProfile");
+    return (DentalUserDetails) authentication.getPrincipal();
+  }
+
+  private Profile transform(ProfileBean profileBean) {
+
     return new Profile();
   }
 }
