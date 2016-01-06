@@ -3,7 +3,19 @@
   color: red;
 }
 
-
-input.ng-invalid-required {
-
+.error-dark {
+  color: black;
+  text-align: center;
 }
+
+/*input.ng-invalid-required {*/
+  /*border: 2px solid black;*/
+/*}*/
+
+/*input.ng-invalid .ng-dirty{*/
+  /*border: 2px solid red;*/
+/*}*/
+
+/*input.ng-pristine {*/
+  /*border: 2px solid white;*/
+/*}*/

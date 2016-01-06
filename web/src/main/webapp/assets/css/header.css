@@ -67,7 +67,7 @@ header .intro-text .skills {
 }
 
 .navbar {
-  text-transform: uppercase;
+  /*text-transform: uppercase;*/
   font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
   font-weight: 700;
 }
@@ -76,9 +76,9 @@ header .intro-text .skills {
   outline: 0;
 }
 
-.navbar .navbar-nav {
-  letter-spacing: 1px;
-}
+/*.navbar .navbar-nav {*/
+  /*letter-spacing: 1px;*/
+/*}*/
 
 .navbar .navbar-nav li a:focus {
   outline: 0;
@@ -89,3 +89,10 @@ header .intro-text .skills {
   border: 0;
 }
 
+.navbar {
+  margin-bottom: 0;
+}
+
+footer {
+  padding: 25px;
+}

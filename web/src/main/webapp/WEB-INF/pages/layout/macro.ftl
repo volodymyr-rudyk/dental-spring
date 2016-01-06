@@ -1,4 +1,4 @@
-<#macro pageHeader>
+<#macro pageHeader profile>
   <#include "header.ftl" />
 </#macro>
 

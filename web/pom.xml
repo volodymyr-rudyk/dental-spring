@@ -214,6 +214,11 @@
       <artifactId>mysql-connector-java</artifactId>
       <version>5.1.35</version>
     </dependency>
+    <dependency>
+      <groupId>postgresql</groupId>
+      <artifactId>postgresql</artifactId>
+      <version>9.1-901-1.jdbc4</version>
+    </dependency>
 
     <!-- // Hibernate -->
     <!-- Quartz framework dependencies -->
@@ -439,6 +444,23 @@
         <db.engine>MYSQL</db.engine>
       </properties>
     </profile>
+
+    <!--<profile>-->
+      <!--<id>heroku</id>-->
+      <!--<activation>-->
+        <!--<activeByDefault>true</activeByDefault>-->
+      <!--</activation>-->
+      <!--<properties>-->
+        <!--<db.driverClassName>org.postgresql.Driver</db.driverClassName>-->
+        <!--<db.url>jdbc:postgres://ec2-54-195-252-202.eu-west-1.compute.amazonaws.com:5432/d6acsomj9kce41</db.url>-->
+        <!--<db.username>icrnsappgwyjne</db.username>-->
+        <!--<db.password>38B1HdPDbCfLAxyIvLJfrWaVlI</db.password>-->
+        <!--<db.hibernate.dialect>org.hibernate.dialect.PostgreSQL9Dialect</db.hibernate.dialect>-->
+        <!--<db.hibernate.show_sql>true</db.hibernate.show_sql>-->
+        <!--<db.hibernate.format_sql>true</db.hibernate.format_sql>-->
+        <!--<db.engine>POSTGRESQL</db.engine>-->
+      <!--</properties>-->
+    <!--</profile>-->
 
   </profiles>
 

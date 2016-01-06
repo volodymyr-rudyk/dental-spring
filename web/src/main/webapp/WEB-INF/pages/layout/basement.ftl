@@ -1,4 +1,4 @@
-<#macro page title="Dental" css=[] js=[] bower=[]>
+<#macro page profile='' title="Dental" css=[] js=[] bower=[]>
 <#include "macro.ftl" />
 
 <#--<#import "spring.ftl" as spring />-->
@@ -15,7 +15,7 @@
     </#list>
 </head>
 <body>
-    <@pageHeader />
+    <@pageHeader profile />
 
     <#nested />
     <@pageFooter />

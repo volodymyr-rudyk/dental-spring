@@ -1,24 +1,29 @@
 <#import "../layout/basement.ftl" as base />
 
-<@base.page title="Login" css=["header", "content", "signin", "validation"] js=["main-module", "login-module"] bower=["angular"]>
+<@base.page title="Login" css=["header", "content", "signin", "validation"]
+js=["main-module", "login-module", "dropdown", "jquery-1.11.1.min", "bootstrap"] bower=["angular"]>
 
-<section class="white">
+<section class="gray">
   <div class="container" ng-app="login">
     <div ng-controller="LoginController as loginCtrl">
-      <form class="col-xs-12 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3"
-            role="form" ng-submit="loginCtrl.login()" name="loginForm" novalidate>
-        <h2>Sign in</h2>
+      <form class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4"
+            role="form" ng-submit="loginCtrl.login(loginForm.$valid)" name="loginForm" novalidate>
+        <h3 class="text-center">Sign in</h3>
         <div>
-          <span class="error" ng-show="response.code < 0 || loginForm.email.$error.required"
-                ng-bind="response.message"></span>
-          <#--<span class="error" ng-show="loginForm.email.$error.required">Email required</span>-->
-          <input class="has-success form-control bottom-buffer " ng-model="user.email" placeholder="email"
+          <p class="bg-danger error-dark" ng-show="response.code < 0 || loginForm.email.$error.required"
+                ng-bind="response.message"></p>
+          <input class="form-control bottom-buffer input-lg" ng-model="user.email" placeholder="email"
                  autofocus id="email" name="email" type="email" ng-required="true"/>
-          <input class="form-control bottom-buffer" ng-model="user.password" placeholder="password"
-                 id="password" type="password" name="password" min="6" ng-required="true"/>
-          <input type="submit" class="btn btn-primary btn-block" name="submit" value="Submit"/>
+          <p ng-show="loginForm.email.$invalid && !loginForm.email.$pristine"
+             class="help-block error">Email is required</p>
         </div>
-        <a href="/forgot-password">Forgot the password?</a>
+          <input class="form-control bottom-buffer input-lg" ng-model="user.password" placeholder="password"
+                 id="password" type="password" name="password" ng-minlength="5" ng-maxlength="50" min="5" ng-required="true"/>
+        <p ng-show="loginForm.password.$error.minlength || loginForm.password.$error.maxlength"
+        class="help-block error">Password 5-50 characters</p>
+        <input type="submit" class="btn-lg btn btn-default pull-right" ng-disabled="loginForm.$invalid" name="submit" value="Login"/>
+        </div>
+      <#--<a href="/forgot-password">Forgot the password?</a>-->
       </form>
     </div>
   </div>
