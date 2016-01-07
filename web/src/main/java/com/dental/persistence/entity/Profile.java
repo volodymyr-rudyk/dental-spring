@@ -16,6 +16,7 @@ public class Profile extends BaseEntity implements Serializable {
   private String firstName;
   private String middleName;
   private String lastName;
+  private String address;
   private Date birthday;
   private String phone;
   private User user;
@@ -57,6 +58,15 @@ public class Profile extends BaseEntity implements Serializable {
 
   public void setLastName(String lastName) {
     this.lastName = lastName;
+  }
+
+  @Column(name = "address")
+  public String getAddress() {
+    return address;
+  }
+
+  public void setAddress(String address) {
+    this.address = address;
   }
 
   @Column(name = "birthday")

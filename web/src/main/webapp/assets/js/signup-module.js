@@ -3,23 +3,25 @@ angular.module('signup', ['dental'])
     $scope.user = {
       email: "",
       password: "",
-      confirmPassword: "",
       firstName: "",
       middleName: "",
       lastName: "",
       birthday: "",
+      address: "",
       phone: ""
     };
 
     $scope.response = {};
 
-    this.signup = function () {
+    this.signup = function (isValid) {
       debugger;
-      $http({
-        url: Rest.signup,
-        method: 'POST',
-        data: $scope.user
-      }).success(success).error(fail);
+      if (isValid) {
+        $http({
+          url: Rest.signup,
+          method: 'POST',
+          data: $scope.user
+        }).success(success).error(fail);
+      }
     };
     this.validate = function () {
       var u = $scope.user;

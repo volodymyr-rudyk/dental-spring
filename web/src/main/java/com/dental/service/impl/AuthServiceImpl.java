@@ -86,6 +86,7 @@ public class AuthServiceImpl implements AuthService {
     profile.setMiddleName(signupBean.getMiddleName());
     profile.setLastName(signupBean.getLastName());
     profile.setPhone(signupBean.getPhone());
+    profile.setAddress(signupBean.getAddress());
 
     user.setProfile(profile);
     return user;
