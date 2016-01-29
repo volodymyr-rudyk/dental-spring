@@ -76,8 +76,7 @@ section h2 {
 }
 
 section.green {
-  color: #fff;
-  background: #18bc9c;
+  background-image: url("/img/background.jpg");
   margin-top: 100px;
 }
 
@@ -257,4 +256,8 @@ footer .footer-below {
 
 .scroll-top .btn:focus {
   outline: 0;
+}
+
+.ng-invalid-email {
+  border: 1px solid red;
 }

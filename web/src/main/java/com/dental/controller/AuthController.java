@@ -1,6 +1,5 @@
-package com.dental.controller.auth;
+package com.dental.controller;
 
-import com.dental.controller.AbstractBasePageController;
 import com.dental.view.ViewConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

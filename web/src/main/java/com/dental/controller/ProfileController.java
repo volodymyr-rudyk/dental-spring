@@ -1,6 +1,5 @@
-package com.dental.controller.profile;
+package com.dental.controller;
 
-import com.dental.controller.AbstractBasePageController;
 import com.dental.exception.NotFoundException;
 import com.dental.persistence.entity.Profile;
 import com.dental.service.ProfileService;

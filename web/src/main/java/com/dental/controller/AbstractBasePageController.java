@@ -47,6 +47,6 @@ public abstract class AbstractBasePageController implements PageController {
 
   @ExceptionHandler(RequiredAuthenticationException.class)
   public void authenticationRequired(RequiredAuthenticationException e, HttpServletRequest request, HttpServletResponse response) throws IOException {
-    response.sendRedirect("/auth/login");
+    response.sendRedirect("/login");
   }
 }

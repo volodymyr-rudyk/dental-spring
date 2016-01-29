@@ -394,7 +394,7 @@
       <plugin>
         <groupId>org.flywaydb</groupId>
         <artifactId>flyway-maven-plugin</artifactId>
-        <version>3.1</version>
+        <version>3.2.1</version>
         <configuration>
           <table>SchemaVersion</table>
           <driver>${db.driverClassName}</driver>
@@ -416,6 +416,9 @@
   <profiles>
     <profile>
       <id>asus</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
       <properties>
         <db.driverClassName>com.mysql.jdbc.Driver</db.driverClassName>
         <db.url>jdbc:mysql://localhost:3306/dental_dev</db.url>
@@ -430,9 +433,6 @@
 
     <profile>
       <id>lenovo</id>
-      <activation>
-        <activeByDefault>true</activeByDefault>
-      </activation>
       <properties>
         <db.driverClassName>com.mysql.jdbc.Driver</db.driverClassName>
         <db.url>jdbc:mysql://localhost:3306/dental_dev</db.url>

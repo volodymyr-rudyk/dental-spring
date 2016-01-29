@@ -18,8 +18,8 @@
         <p>Whether you're a student looking to showcase your work, a professional looking to attract clients, or a graphic artist looking to share your projects, this template is the perfect starting point!</p>
       </div>
       <div class="col-lg-8 col-lg-offset-2 text-center">
-        <a href="/login" class="btn btn-lg btn-outline"><i class="fa fa-download"></i> Login</a>
-        <a href="/signup" class="btn btn-lg btn-outline"><i class="fa fa-download"></i> SignUp</a>
+        <a href="/login" class="btn btn-lg btn-outline">Login</a>
+        <a href="/signup" class="btn btn-lg btn-outline">SignUp</a>
       </div>
     </div>
   </div>

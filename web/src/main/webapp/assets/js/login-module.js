@@ -24,3 +24,14 @@ angular.module('login', ['dental'])
     };
 
   });
+
+function Person(firstName){
+    this.firstName = firstName;
+}
+
+Person.prototype.say = function () {
+  return this.firstName;
+};
+
+var p = new Person("test");
+p.say();

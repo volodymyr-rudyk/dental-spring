@@ -1,4 +1,4 @@
-package com.dental.controller.auth;
+package com.dental.controller;
 
 import com.dental.controller.AbstractBasePageController;
 import com.dental.exception.NotFoundException;
