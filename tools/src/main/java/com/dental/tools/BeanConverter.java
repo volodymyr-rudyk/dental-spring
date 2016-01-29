@@ -12,7 +12,7 @@ import java.util.Map;
 public class BeanConverter {
 
   public static void main(String[] args) {
-    Map<String, String> map = new HashMap<String, String>();
+    Map<String, String> map = new HashMap<>();
     map.put("name", "TestName");
     map.put("age", "100500");
     map.put("ignore", "true");

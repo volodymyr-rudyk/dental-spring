@@ -16,7 +16,7 @@ public class BeanConverterTest {
 
   @Test
   public void testConvert1() {
-    Map<String, String> map = new HashMap<String, String>();
+    Map<String, String> map = new HashMap<>();
     map.put("name", "TestName");
     map.put("age", "100500");
     map.put("ignore", "true");
@@ -31,7 +31,7 @@ public class BeanConverterTest {
 
   @Test
   public void testConvert2() {
-    Map<String, String> map = new HashMap<String, String>();
+    Map<String, String> map = new HashMap<>();
     map.put("name", null);
     map.put("age", "100500");
 
@@ -43,7 +43,7 @@ public class BeanConverterTest {
 
   @Test
   public void testConvert3() {
-    Map<String, String> map = new HashMap<String, String>();
+    Map<String, String> map = new HashMap<>();
 
     Bean convertedBean = BeanConverter.convert(map, Bean.class);
     Bean bean = new Bean();
@@ -58,7 +58,7 @@ public class BeanConverterTest {
 
   @Test
   public void testConvertParsing6() {
-    Map<String, String> map = new HashMap<String, String>();
+    Map<String, String> map = new HashMap<>();
     map.put("name", "4r43334tt");
     map.put("age", "qqqqq");
 

@@ -31,7 +31,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     if (user == null)
       throw new UsernameNotFoundException("user name not found" + username);
 
-    List<SimpleGrantedAuthority> authorities = new ArrayList<SimpleGrantedAuthority>();
+    List<SimpleGrantedAuthority> authorities = new ArrayList<>();
     authorities.add(roleUser);
     return new DentalUserDetails(username, user.getPassword(), authorities, user);
   }

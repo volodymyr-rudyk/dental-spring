@@ -12,7 +12,7 @@
     </div>
     <div class="row">
       <div class="col-lg-4 col-lg-offset-2">
-        <p>Block 1 .<p>
+        <p>Date:<p>
       </div>
       <div class="col-lg-4">
         <p>Whether you're a student looking to showcase your work, a professional looking to attract clients, or a graphic artist looking to share your projects, this template is the perfect starting point!</p>
