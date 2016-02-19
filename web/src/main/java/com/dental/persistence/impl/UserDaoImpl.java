@@ -4,9 +4,9 @@ import com.dental.persistence.component.AbstractDao;
 import com.dental.persistence.component.UserDao;
 import com.dental.persistence.entity.User;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.Query;
-import javax.transaction.Transactional;
 import java.util.List;
 
 /**

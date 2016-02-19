@@ -5,11 +5,21 @@ import com.dental.web.ResponseStatus;
 /**
  * Created by vrudyk on 11/5/2015.
  */
-public abstract class BaseDTO {
+public class BaseDTO {
 
   protected ResponseStatus responseStatus;
   protected String message;
   protected int code;
+
+  public BaseDTO() {
+
+  }
+
+  public BaseDTO(ResponseStatus responseStatus, String message, int code) {
+    this.responseStatus = responseStatus;
+    this.message = message;
+    this.code = code;
+  }
 
   public ResponseStatus getResponseStatus() {
     return responseStatus;
