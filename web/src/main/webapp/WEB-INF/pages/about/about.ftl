@@ -1,19 +1,20 @@
-<!DOCTYPE html>
-<!--[if lt IE 7 ]> <html lang="en" class="no-js ie6"> <![endif]-->
-<!--[if IE 7 ]>    <html lang="en" class="no-js ie7"> <![endif]-->
-<!--[if IE 8 ]>    <html lang="en" class="no-js ie8"> <![endif]-->
-<!--[if IE 9 ]>    <html lang="en" class="no-js ie9"> <![endif]-->
-<!--[if (gt IE 9)|!(IE)]><!-->
-<html lang="en" class="no-js"><!--<![endif]-->
-<head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>About</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="/css/bootstrap.css"/>
-</head>
+<#import "../layout/basement.ftl" as base />
 
-<body>
-ABOUT Page
-</body>
-</html>
+<@base.page title="About Page" css=["header", "content"]>
+
+<section class="white">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 text-center">
+        <h2>About</h2>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-4">
+        <p class="text-center text-capitalize">Under construction</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</@base.page>

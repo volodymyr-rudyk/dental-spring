@@ -1,6 +1,6 @@
 package com.dental.config;
 
-import com.mchange.v2.c3p0.ComboPooledDataSource;
+import com.zaxxer.hikari.HikariDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -26,12 +26,12 @@ public class DaoConfig {
 
   @Bean
   public DataSource dataSource() {
-    ComboPooledDataSource dataSource = new ComboPooledDataSource();
+    HikariDataSource dataSource = new HikariDataSource();
     try {
       dataSource.setJdbcUrl(env.getRequiredProperty(DbConfig.DB_URL));
-      dataSource.setUser(env.getRequiredProperty(DbConfig.DB_USERNAME));
+      dataSource.setUsername(env.getRequiredProperty(DbConfig.DB_USERNAME));
       dataSource.setPassword(env.getRequiredProperty(DbConfig.DB_PASSWORD));
-      dataSource.setDriverClass(env.getRequiredProperty(DbConfig.DB_DRIVER_CLASSNAME));
+      dataSource.setDriverClassName(env.getRequiredProperty(DbConfig.DB_DRIVER_CLASSNAME));
 //      dataSource.setConnectionCustomizerClassName(JDBCConnectionCustomizer.class.getName());
     } catch (Exception e) {
       throw new RuntimeException(e);

@@ -5,17 +5,8 @@
 <section class="green">
   <div class="container">
     <div class="row">
-      <div class="col-lg-12 text-center">
-        <h2>Index</h2>
-        <hr class="star-light">
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-lg-4 col-lg-offset-2">
-        <p>Date:<p>
-      </div>
       <div class="col-lg-4">
-        <p>Whether you're a student looking to showcase your work, a professional looking to attract clients, or a graphic artist looking to share your projects, this template is the perfect starting point!</p>
+        <p class="text-center">Keep all your patients together</p>
       </div>
       <div class="col-lg-8 col-lg-offset-2 text-center">
         <a href="/login" class="btn btn-lg btn-outline">Login</a>

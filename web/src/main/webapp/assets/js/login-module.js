@@ -9,16 +9,16 @@ angular.module('login', ['dental'])
           url: Rest.login,
           method: 'POST',
           data: $scope.user
-        }).success(success).error(fail);
+        }).success(this.success).error(this.fail);
       }
     };
-    var success = function (data, status, headers, config) {
+    this.success = function (data, status, headers, config) {
       $scope.response = data;
       if (data.code == 200)
         document.location = "/dashboard";
       console.log(data);
     };
-    var fail = function (data, status, headers, config) {
+    this.fail = function (data, status, headers, config) {
       $scope.response = data;
       console.log(data);
     };
