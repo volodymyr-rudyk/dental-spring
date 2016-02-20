@@ -4,8 +4,8 @@ import com.dental.persistence.component.AbstractDao;
 import com.dental.persistence.component.ProfileDao;
 import com.dental.persistence.entity.Profile;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
 
 /**
  * Created by light on 10/17/2015.

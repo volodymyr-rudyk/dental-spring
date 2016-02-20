@@ -26,4 +26,4 @@ public class ProfileRestController extends BaseRestController {
     return null;
   }
 
-  }
+}

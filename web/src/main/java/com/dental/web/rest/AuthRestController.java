@@ -4,6 +4,7 @@ import com.dental.bean.SigninBean;
 import com.dental.bean.SignupBean;
 import com.dental.service.AuthService;
 import com.dental.web.ResponseStatus;
+import com.dental.web.dto.BaseDTO;
 import com.dental.web.dto.SigninDTO;
 import com.dental.web.dto.SignupDTO;
 import org.slf4j.Logger;
@@ -35,22 +36,19 @@ public class AuthRestController extends BaseRestController {
 
   @RequestMapping(value = "/login", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE,
       consumes = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<? extends SigninDTO> login(HttpServletRequest httpServletRequest,
+  public ResponseEntity<? extends BaseDTO> login(HttpServletRequest httpServletRequest,
                                                    @RequestBody @Valid SigninBean signinBean, BindingResult result) {
 
-    SigninDTO signinDTO = new SigninDTO();
     if (result.hasErrors()) {
-      signinDTO.setCode(-1);
-      signinDTO.setResponseStatus(ResponseStatus.Failure);
-      signinDTO.setMessage("Invalid user data");
-      return new ResponseEntity<>(signinDTO, HttpStatus.BAD_REQUEST);
+      BaseDTO baseDTO = baseDTO(ResponseStatus.Failure, "", -1);
+      return new ResponseEntity<>(baseDTO, HttpStatus.BAD_REQUEST);
     }
+    SigninDTO signinDTO = new SigninDTO();
 
     try {
       authService.authenticate(signinBean, httpServletRequest);
       signinDTO.setCode(200);
       signinDTO.setResponseStatus(ResponseStatus.Success);
-//      signinDTO.setUserEmail(signinBean.getEmail());
       return new ResponseEntity<>(signinDTO, HttpStatus.OK);
     } catch (Exception e) {
       logger.error("Authentication Error", e.getMessage());

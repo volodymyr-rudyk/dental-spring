@@ -5,6 +5,16 @@ package com.dental.web.dto;
  */
 public class SigninDTO extends BaseDTO{
 
+  public SigninDTO() {
+
+  }
+
+  public SigninDTO(BaseDTO base){
+    this.responseStatus = base.responseStatus;
+    this.message = base.message;
+    this.code = base.code;
+  }
+
 //  private int userId;
 //  private String userEmail;
 //
