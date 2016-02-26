@@ -14,7 +14,7 @@ angular.module('login', ['dental'])
     };
     this.success = function (data, status, headers, config) {
       $scope.response = data;
-      if (data.code == 200)
+      if (data.code == 0)
         document.location = "/dashboard";
       console.log(data);
     };

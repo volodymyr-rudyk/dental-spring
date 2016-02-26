@@ -60,6 +60,7 @@ public class DaoConfig {
 
   private Properties hibernateProperties() {
     Properties properties = new Properties();
+    properties.put("hibernate.id.new_generator_mappings", false);
     properties.put(DbConfig.HIBERNATE_JDBC_BATCH_SIZE, env.getProperty(DbConfig.HIBERNATE_JDBC_BATCH_SIZE));
     properties.put(DbConfig.HIBERNATE_DIALECT, env.getRequiredProperty(DbConfig.HIBERNATE_DIALECT));
     properties.put(DbConfig.HIBERNATE_SHOW_SQL, env.getRequiredProperty(DbConfig.HIBERNATE_SHOW_SQL));

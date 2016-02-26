@@ -12,7 +12,7 @@ import java.util.Date;
 @Table(name = "profile")
 public class Profile extends BaseEntity implements Serializable {
 
-  private int id;
+  private Integer id;
   private String firstName;
   private String middleName;
   private String lastName;
@@ -23,13 +23,13 @@ public class Profile extends BaseEntity implements Serializable {
 
   @Id
   @Column(name = "id")
-  @GeneratedValue
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Override
-  public int getId() {
+  public Integer getId() {
     return id;
   }
 
-  public void setId(int id) {
+  public void setId(Integer id) {
     this.id = id;
   }
 

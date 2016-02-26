@@ -1,6 +1,7 @@
 package com.dental.web.dto;
 
-import com.dental.web.ResponseStatus;
+import com.dental.web.error.RestStatus;
+import com.dental.web.status.ResponseStatus;
 
 /**
  * Created by vrudyk on 11/5/2015.
@@ -13,6 +14,12 @@ public class BaseDTO {
 
   public BaseDTO() {
 
+  }
+
+  public BaseDTO(ResponseStatus responseStatus, RestStatus restStatus) {
+    this.responseStatus = responseStatus;
+    this.message = restStatus.getMsg();
+    this.code = restStatus.getCode();
   }
 
   public BaseDTO(ResponseStatus responseStatus, String message, int code) {

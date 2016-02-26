@@ -81,12 +81,12 @@ public class AuthServiceImpl implements AuthService {
     user.setPassword(signupBean.getPassword());
 
     Profile profile = new Profile();
-    profile.setBirthday(signupBean.getBirthday());
+//    profile.setBirthday(signupBean.getBirthday());
     profile.setFirstName(signupBean.getFirstName());
-    profile.setMiddleName(signupBean.getMiddleName());
+//    profile.setMiddleName(signupBean.getMiddleName());
     profile.setLastName(signupBean.getLastName());
-    profile.setPhone(signupBean.getPhone());
-    profile.setAddress(signupBean.getAddress());
+//    profile.setPhone(signupBean.getPhone());
+//    profile.setAddress(signupBean.getAddress());
 
     user.setProfile(profile);
     return user;

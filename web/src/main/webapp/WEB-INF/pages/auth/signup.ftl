@@ -32,27 +32,27 @@
                 </div>
               </div>
             </div>
-            <div class="form-group"
-                 ng-class="{ 'has-error' : signupForm.middleName.$invalid && !signupForm.middleName.$pristine }">
-              <input type="text" name="middleName" ng-model="user.middleName" class="form-control input-lg"
-                     placeholder="Middle Name" tabindex="3" ng-minlength="5" ng-maxlength="50">
-              <p ng-show="signupForm.middleName.$error.minlength || signupForm.middleName.$error.maxlength"
-                 class="help-block">middleName 5-50 characters</p>
-            </div>
-            <div class="form-group"
-                 ng-class="{ 'has-error' : signupForm.birthday.$invalid && signupForm.birthday.$touched }">
-              <input type="date" name="birthday" ng-model="user.birthday" class="form-control input-lg"
-                     placeholder="Birthday" tabindex="4" ng-required="true">
-              <p ng-show="signupForm.birthday.$invalid && signupForm.birthday.$touched"
-                 class="help-block">Select birthday</p>
-            </div>
-            <div class="form-group"
-                 ng-class="{ 'has-error' : signupForm.address.$invalid && !signupForm.address.$pristine }">
-              <input type="text" name="address" ng-model="user.address" class="form-control input-lg"
-                     placeholder="Address" tabindex="5" ng-required="true">
-              <p ng-show="signupForm.address.$invalid && !signupForm.address.$pristine"
-                 class="help-block">Address required</p>
-            </div>
+            <#--<div class="form-group"-->
+                 <#--ng-class="{ 'has-error' : signupForm.middleName.$invalid && !signupForm.middleName.$pristine }">-->
+              <#--<input type="text" name="middleName" ng-model="user.middleName" class="form-control input-lg"-->
+                     <#--placeholder="Middle Name" tabindex="3" ng-minlength="5" ng-maxlength="50">-->
+              <#--<p ng-show="signupForm.middleName.$error.minlength || signupForm.middleName.$error.maxlength"-->
+                 <#--class="help-block">middleName 5-50 characters</p>-->
+            <#--</div>-->
+            <#--<div class="form-group"-->
+                 <#--ng-class="{ 'has-error' : signupForm.birthday.$invalid && signupForm.birthday.$touched }">-->
+              <#--<input type="date" name="birthday" ng-model="user.birthday" class="form-control input-lg"-->
+                     <#--placeholder="Birthday" tabindex="4" ng-required="true">-->
+              <#--<p ng-show="signupForm.birthday.$invalid && signupForm.birthday.$touched"-->
+                 <#--class="help-block">Select birthday</p>-->
+            <#--</div>-->
+            <#--<div class="form-group"-->
+                 <#--ng-class="{ 'has-error' : signupForm.address.$invalid && !signupForm.address.$pristine }">-->
+              <#--<input type="text" name="address" ng-model="user.address" class="form-control input-lg"-->
+                     <#--placeholder="Address" tabindex="5" ng-required="true">-->
+              <#--<p ng-show="signupForm.address.$invalid && !signupForm.address.$pristine"-->
+                 <#--class="help-block">Address required</p>-->
+            <#--</div>-->
             <div class="form-group"
                  ng-class="{ 'has-error' : signupForm.email.$invalid && !signupForm.email.$pristine }">
               <input type="email" name="email" ng-model="user.email" class="form-control input-lg"
@@ -60,10 +60,10 @@
               <p ng-show="signupForm.email.$invalid && !signupForm.email.$pristine"
                  class="help-block">Email is required</p>
             </div>
-            <div class="form-group">
-              <input type="phone" name="phone" ng-model="user.phone" class="form-control input-lg" placeholder="Phone"
-                     tabindex="7">
-            </div>
+            <#--<div class="form-group">-->
+              <#--<input type="phone" name="phone" ng-model="user.phone" class="form-control input-lg" placeholder="Phone"-->
+                     <#--tabindex="7">-->
+            <#--</div>-->
             <div class="form-group">
               <input type="password" name="password" ng-model="user.password" class="form-control input-lg"
                      placeholder="Password" tabindex="8" ng-minlength="8" ng-maxlength="50">

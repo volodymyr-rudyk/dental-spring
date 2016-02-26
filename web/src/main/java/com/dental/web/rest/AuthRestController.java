@@ -3,10 +3,10 @@ package com.dental.web.rest;
 import com.dental.bean.SigninBean;
 import com.dental.bean.SignupBean;
 import com.dental.service.AuthService;
-import com.dental.web.ResponseStatus;
 import com.dental.web.dto.BaseDTO;
-import com.dental.web.dto.SigninDTO;
 import com.dental.web.dto.SignupDTO;
+import com.dental.web.error.RestStatus;
+import com.dental.web.status.ResponseStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,24 +38,20 @@ public class AuthRestController extends BaseRestController {
       consumes = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<? extends BaseDTO> login(HttpServletRequest httpServletRequest,
                                                    @RequestBody @Valid SigninBean signinBean, BindingResult result) {
-
+    BaseDTO loginDTO;
     if (result.hasErrors()) {
-      BaseDTO baseDTO = baseDTO(ResponseStatus.Failure, "", -1);
-      return new ResponseEntity<>(baseDTO, HttpStatus.BAD_REQUEST);
+       loginDTO = baseDTO(ResponseStatus.Failure, RestStatus.LOGIN_ERROR);
+      return new ResponseEntity<>(loginDTO, HttpStatus.BAD_REQUEST);
     }
-    SigninDTO signinDTO = new SigninDTO();
 
     try {
       authService.authenticate(signinBean, httpServletRequest);
-      signinDTO.setCode(200);
-      signinDTO.setResponseStatus(ResponseStatus.Success);
-      return new ResponseEntity<>(signinDTO, HttpStatus.OK);
+      loginDTO = baseDTO(ResponseStatus.Success, RestStatus.SUCCESS);
+      return new ResponseEntity<>(loginDTO, HttpStatus.OK);
     } catch (Exception e) {
       logger.error("Authentication Error", e.getMessage());
-      signinDTO.setCode(-1);
-      signinDTO.setMessage("Invalid user data");
-      signinDTO.setResponseStatus(ResponseStatus.Failure);
-      return new ResponseEntity<>(signinDTO, HttpStatus.BAD_REQUEST);
+      loginDTO = baseDTO(ResponseStatus.Failure, RestStatus.LOGIN_ERROR);
+      return new ResponseEntity<>(loginDTO, HttpStatus.BAD_REQUEST);
     }
   }
 
@@ -64,25 +60,20 @@ public class AuthRestController extends BaseRestController {
   public ResponseEntity<? extends SignupDTO> signup(HttpServletRequest httpServletRequest,
                                                     @RequestBody @Valid SignupBean signupBean, BindingResult result) {
 
-    SignupDTO signupDTO = new SignupDTO();
+    SignupDTO signupDTO;
     if (result.hasErrors()) {
-      signupDTO.setCode(-1);
-      signupDTO.setResponseStatus(ResponseStatus.Failure);
-      signupDTO.setMessage("Invalid user data");
+      signupDTO = new SignupDTO(baseDTO(ResponseStatus.Failure, RestStatus.SINGUP_ERROR));
       return new ResponseEntity<>(signupDTO, HttpStatus.BAD_REQUEST);
     }
 
     try {
       authService.signup(signupBean);
-      signupDTO.setCode(200);
-      signupDTO.setResponseStatus(ResponseStatus.Success);
-//      signinDTO.setUserEmail(signinBean.getEmail());
+      signupDTO = new SignupDTO(baseDTO(ResponseStatus.Success, RestStatus.SUCCESS));
+      signupDTO.setEmail(signupBean.getEmail());
       return new ResponseEntity<>(signupDTO, HttpStatus.OK);
     } catch (Exception e) {
       logger.error("Signup Error", e.getMessage());
-      signupDTO.setCode(-1);
-      signupDTO.setMessage("Invalid user data");
-      signupDTO.setResponseStatus(ResponseStatus.Failure);
+      signupDTO = new SignupDTO(baseDTO(ResponseStatus.Failure, RestStatus.SINGUP_ERROR));
       return new ResponseEntity<>(signupDTO, HttpStatus.BAD_REQUEST);
     }
   }

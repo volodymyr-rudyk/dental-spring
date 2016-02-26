@@ -4,11 +4,11 @@ angular.module('signup', ['dental'])
       email: "",
       password: "",
       firstName: "",
-      middleName: "",
+      //middleName: "",
       lastName: "",
-      birthday: "",
-      address: "",
-      phone: ""
+      //birthday: "",
+      //address: "",
+      //phone: ""
     };
 
     $scope.response = {};
@@ -20,20 +20,20 @@ angular.module('signup', ['dental'])
           url: Rest.signup,
           method: 'POST',
           data: $scope.user
-        }).success(success).error(fail);
+        }).success(this.success).error(this.fail);
       }
     };
     this.validate = function () {
       var u = $scope.user;
     };
 
-    var success = function (data, status, headers, config) {
+    this.success = function (data, status, headers, config) {
       $scope.response = data;
-      if (data.code == 200)
+      if (data.code == 0)
         document.location = "/login";
       console.log(data);
     };
-    var fail = function (data, status, headers, config) {
+    this.fail = function (data, status, headers, config) {
       console.log(data);
     };
 
