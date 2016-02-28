@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
  */
 @Controller
 @RequestMapping("/")
-public class AuthController extends AbstractBasePageController {
+public class AuthPageController extends AbstractBasePageController {
 
-  private static final Logger LOG = LoggerFactory.getLogger(AuthController.class);
+  private static final Logger LOG = LoggerFactory.getLogger(AuthPageController.class);
 
   @RequestMapping(value = "/login", method = RequestMethod.GET)
   public String login() {
@@ -23,7 +23,7 @@ public class AuthController extends AbstractBasePageController {
 
   @RequestMapping(value = "/signup")
   public String signup() {
-    return this.renderView("signup");
+    return this.renderView(PAGE_SIGNUP);
   }
 
   @Override

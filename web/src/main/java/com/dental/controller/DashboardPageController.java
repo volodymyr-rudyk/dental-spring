@@ -1,6 +1,5 @@
 package com.dental.controller;
 
-import com.dental.controller.AbstractBasePageController;
 import com.dental.exception.NotFoundException;
 import com.dental.persistence.entity.Profile;
 import com.dental.service.ProfileService;
@@ -19,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 @Controller
 @RequestMapping("/dashboard")
-public class DashboardController extends AbstractBasePageController {
+public class DashboardPageController extends AbstractBasePageController {
 
   public static final String DASHBOARD_VIEW = "dashboard";
 

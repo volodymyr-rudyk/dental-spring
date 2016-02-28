@@ -20,8 +20,6 @@ import javax.servlet.http.HttpServletResponse;
 @RequestMapping("/profile")
 public class ProfileController extends AbstractBasePageController {
 
-  public static final String PROFILE_VIEW = "profile";
-
   @Autowired
   private ProfileService profileService;
 
@@ -31,7 +29,7 @@ public class ProfileController extends AbstractBasePageController {
     assert loggedInProfile != null;
     loggedInProfile.getUser();
     model.put("profile", loggedInProfile);
-    return renderView(PROFILE_VIEW);
+    return renderView(PAGE_PROFILE);
   }
 
   @Override

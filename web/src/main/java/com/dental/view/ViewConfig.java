@@ -7,6 +7,7 @@ public class ViewConfig {
 
   public static final String FOLDER_DASHBOARD = "/dashboard";
   public static final String FOLDER_PROFILE = "/profile";
+  public static final String FOLDER_SEARCH = "/search";
   public static final String FOLDER_ADMIN = "/admin";
   public static final String FOLDER_AUTH = "/auth";
 }

@@ -1,6 +1,5 @@
 package com.dental.controller;
 
-import com.dental.controller.AbstractBasePageController;
 import com.dental.exception.NotFoundException;
 import com.dental.view.ViewConfig;
 import org.springframework.stereotype.Controller;
@@ -14,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 @Controller
 @RequestMapping("/admin")
-public class AdminController extends AbstractBasePageController {
+public class AdminPageController extends AbstractBasePageController {
 
   @RequestMapping(value = "/login")
   public String login(HttpServletRequest request, HttpServletResponse response) throws NotFoundException {
