@@ -1,12 +1,12 @@
 package com.dental.service.impl;
 
-import com.dental.bean.ProfileBean;
+import com.dental.bean.DentistBean;
 import com.dental.exception.RequiredAuthenticationException;
-import com.dental.persistence.component.ProfileDao;
-import com.dental.persistence.entity.Profile;
+import com.dental.persistence.component.DentistDao;
+import com.dental.persistence.entity.Dentist;
 import com.dental.persistence.entity.User;
 import com.dental.provider.DentalUserDetails;
-import com.dental.service.ProfileService;
+import com.dental.service.DentistService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -16,36 +16,36 @@ import org.springframework.stereotype.Service;
  * Created by light on 27.05.2015.
  */
 @Service
-public class ProfileServiceImpl implements ProfileService {
+public class DentistServiceImpl implements DentistService {
 
   @Autowired
-  private ProfileDao profileDao;
+  private DentistDao dentistDao;
 
   @Override
-  public Profile getProfile(int id) {
-    return profileDao.get(id);
+  public Dentist getDentist(int id) {
+    return dentistDao.get(id);
   }
 
   @Override
-  public void save(ProfileBean profileBean) {
-    Profile profile = transform(profileBean);
-    profileDao.save(profile);
+  public void save(DentistBean dentistBean) {
+    Dentist dentist = transform(dentistBean);
+    dentistDao.save(dentist);
   }
 
   @Override
-  public void update(ProfileBean profileBean, Profile profile) {
-    profile.setFirstName(profileBean.getFirstName());
-    profile.setMiddleName(profileBean.getMiddleName());
-    profile.setLastName(profileBean.getLastName());
-    profile.setBirthday(profileBean.getBirthday());
-    profile.setPhone(profileBean.getPhone());
-    profileDao.update(profile);
+  public void update(DentistBean dentistBean, Dentist profile) {
+    profile.setFirstName(dentistBean.getFirstName());
+    profile.setMiddleName(dentistBean.getMiddleName());
+    profile.setLastName(dentistBean.getLastName());
+    profile.setBirthday(dentistBean.getBirthday());
+    profile.setPhone(dentistBean.getPhone());
+    dentistDao.update(profile);
   }
 
   @Override
-  public Profile getLoggedInProfile() {
+  public Dentist getLoggedInDentist() {
     DentalUserDetails dentalUserDetails = this.loadUserDetails();
-    return dentalUserDetails.getUser().getProfile();
+    return dentalUserDetails.getUser().getDentist();
   }
 
   @Override
@@ -60,8 +60,7 @@ public class ProfileServiceImpl implements ProfileService {
     return (DentalUserDetails) authentication.getPrincipal();
   }
 
-  private Profile transform(ProfileBean profileBean) {
-
-    return new Profile();
+  private Dentist transform(DentistBean dentistBean) {
+    return new Dentist();
   }
 }

@@ -3,7 +3,7 @@ package com.dental.service.impl;
 import com.dental.bean.SigninBean;
 import com.dental.bean.SignupBean;
 import com.dental.persistence.component.UserDao;
-import com.dental.persistence.entity.Profile;
+import com.dental.persistence.entity.Dentist;
 import com.dental.persistence.entity.User;
 import com.dental.service.AuthService;
 import org.slf4j.Logger;
@@ -80,15 +80,14 @@ public class AuthServiceImpl implements AuthService {
     user.setEmail(signupBean.getEmail());
     user.setPassword(signupBean.getPassword());
 
-    Profile profile = new Profile();
-//    profile.setBirthday(signupBean.getBirthday());
-    profile.setFirstName(signupBean.getFirstName());
+    Dentist dentist = new Dentist();
+    dentist.setFirstName(signupBean.getFirstName());
 //    profile.setMiddleName(signupBean.getMiddleName());
-    profile.setLastName(signupBean.getLastName());
+    dentist.setLastName(signupBean.getLastName());
 //    profile.setPhone(signupBean.getPhone());
 //    profile.setAddress(signupBean.getAddress());
 
-    user.setProfile(profile);
+    user.setDentist(dentist);
     return user;
   }
 }

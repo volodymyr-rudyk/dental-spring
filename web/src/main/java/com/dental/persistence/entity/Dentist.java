@@ -9,8 +9,8 @@ import java.util.Date;
  */
 
 @Entity
-@Table(name = "profile")
-public class Profile extends BaseEntity implements Serializable {
+@Table(name = "dentist")
+public class Dentist extends BaseEntity implements Serializable {
 
   private Integer id;
   private String firstName;
@@ -88,7 +88,7 @@ public class Profile extends BaseEntity implements Serializable {
     this.phone = phone;
   }
 
-  @OneToOne(fetch = FetchType.LAZY, mappedBy = "profile")
+  @OneToOne(fetch = FetchType.LAZY, mappedBy = "dentist")
   public User getUser() {
     return user;
   }

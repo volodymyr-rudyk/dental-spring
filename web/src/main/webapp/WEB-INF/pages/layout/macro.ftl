@@ -1,7 +1,11 @@
-<#macro pageHeader profile>
+<#macro loggedHeader dentist>
+  <#include "loggedheader.ftl" />
+</#macro>
+
+<#macro header>
   <#include "header.ftl" />
 </#macro>
 
-<#macro pageFooter>
+<#macro footer>
   <#include "footer.ftl" />
 </#macro>

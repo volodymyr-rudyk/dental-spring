@@ -1,24 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <title>Custom Login Page</title>
+<#import "../layout/admin/adminbasement.ftl" as base />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-</head>
+<@base.page title="About Page" css=["header", "content"]>
 
-<body>
-<h1>Admin Login Page</h1>
+<section class="white">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 text-center">
+        <h2>About</h2>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-4">
+        <p class="text-center text-capitalize">Under construction</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-<a href="/logout">Logout</a>
-
-<form class="form-signin" role="form" action="/authenticate" method="post">
-  <h2 class="form-signin-heading">Please sign in</h2>
-
-  <input class="form-control" placeholder="email" required autofocus id="email" name='username'/>
-  <input class="form-control" placeholder="password" required id="password" type='password' name='password'/>
-
-  <input type="submit" class="btn btn-primary btn-lg btn-block" name="submit" value="Submit"/>
-
-</form>
-</body>
-</html>
+</@base.page>

@@ -1,8 +1,8 @@
 package com.dental.controller;
 
 import com.dental.exception.NotFoundException;
-import com.dental.persistence.entity.Profile;
-import com.dental.service.ProfileService;
+import com.dental.persistence.entity.Dentist;
+import com.dental.service.DentistService;
 import com.dental.view.ViewConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,13 +23,13 @@ public class DashboardPageController extends AbstractBasePageController {
   public static final String DASHBOARD_VIEW = "dashboard";
 
   @Autowired
-  private ProfileService profileService;
+  private DentistService dentistService;
 
   @RequestMapping(method = RequestMethod.GET)
   public String dashboard(HttpServletRequest request, HttpServletResponse response, ModelMap model) throws NotFoundException {
-    Profile loggedInProfile = profileService.getLoggedInProfile();
-    assert loggedInProfile != null;
-    model.put("profile", loggedInProfile);
+    Dentist loggedInDentist = dentistService.getLoggedInDentist();
+    assert loggedInDentist != null;
+    model.put("dentist", loggedInDentist);
     return renderView(DASHBOARD_VIEW);
   }
 

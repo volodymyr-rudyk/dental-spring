@@ -1,8 +1,8 @@
 package com.dental.web.rest;
 
 import com.dental.exception.NotFoundException;
-import com.dental.persistence.entity.Profile;
-import com.dental.service.ProfileService;
+import com.dental.persistence.entity.Dentist;
+import com.dental.service.DentistService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,18 +24,18 @@ class SearchRestController extends BaseRestController {
     private static final Logger LOG = LoggerFactory.getLogger(SearchRestController.class);
 
     @Autowired
-    private ProfileService profileService;
+    private DentistService dentistService;
 
     @RequestMapping(value = "/search", method = {RequestMethod.GET, RequestMethod.POST}
 //          produces = "application/json",  consumes = "*/*"
     )
-    public Profile search(HttpServletRequest request, HttpServletResponse response,
+    public Dentist search(HttpServletRequest request, HttpServletResponse response,
                           @RequestParam("q") String query, ModelMap model) throws NotFoundException {
       LOG.info("query = " + query);
-      Profile profile = profileService.getProfile(1);
+      Dentist dentist = dentistService.getDentist(1);
 
 //    return new ResponseEntity<>(profile, HttpStatus.OK);
-      return profile;
+      return dentist;
     }
 
 }

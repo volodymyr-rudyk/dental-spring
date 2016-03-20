@@ -1,6 +1,6 @@
-<#import "../layout/basement.ftl" as base />
+<#import "../layout/loggedbasement.ftl" as base />
 
-<@base.page profile=profile title="Dashboard" css=["header", "content", "signin"]
+<@base.page dentist=dentist title="Dashboard" css=["header", "content", "signin"]
 js=["main-module", "dashboard-module", "jquery-1.11.1.min", "bootstrap"] bower=["angular"]>
 
 <section class="white">
@@ -15,12 +15,12 @@ js=["main-module", "dashboard-module", "jquery-1.11.1.min", "bootstrap"] bower=[
 </section>
 <script type="application/javascript">
   window.user = {
-    firstName: "${profile.firstName!""}",
-    lastName: "${profile.lastName!""}",
-    middleName: "${profile.middleName!""}",
-    birthday: "${profile.birthday!""}",
-    phone: "${profile.phone!""}",
-    email: "${profile.user.email!""}"
+    firstName: "${dentist.firstName!""}",
+    lastName: "${dentist.lastName!""}",
+    middleName: "${dentist.middleName!""}",
+    birthday: "${dentist.birthday!""}",
+    phone: "${dentist.phone!""}",
+    email: "${dentist.user.email!""}"
   };
   console.log(user);
 </script>

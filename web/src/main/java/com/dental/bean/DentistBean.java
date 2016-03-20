@@ -7,7 +7,7 @@ import java.util.Date;
 /**
  * Created by light on 20.05.2015.
  */
-public class ProfileBean extends SigninBean {
+public class DentistBean extends SigninBean {
 
   private String firstName;
   private String middleName;

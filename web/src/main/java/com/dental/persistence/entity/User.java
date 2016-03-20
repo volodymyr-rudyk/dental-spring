@@ -14,7 +14,7 @@ public class User extends BaseEntity implements Serializable {
   private String email;
   private String password;
   private boolean isEnabled;
-  private Profile profile;
+  private Dentist dentist;
 
   public User() {
 
@@ -47,13 +47,13 @@ public class User extends BaseEntity implements Serializable {
   }
 
   @OneToOne(cascade = CascadeType.ALL)
-  @JoinColumn(name = "profile_id")
-  public Profile getProfile() {
-    return profile;
+  @JoinColumn(name = "dentist_id")
+  public Dentist getDentist() {
+    return dentist;
   }
 
-  public void setProfile(Profile profile) {
-    this.profile = profile;
+  public void setDentist(Dentist dentist) {
+    this.dentist = dentist;
   }
 
   @Column(name = "email", unique = true, nullable = false)
@@ -81,7 +81,7 @@ public class User extends BaseEntity implements Serializable {
         ", email='" + email + '\'' +
         ", password='" + password + '\'' +
         ", isEnabled=" + isEnabled +
-        ", profile=" + profile +
+        ", dentist=" + dentist +
         '}';
   }
 }

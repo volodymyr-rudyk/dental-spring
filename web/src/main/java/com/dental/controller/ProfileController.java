@@ -1,8 +1,8 @@
 package com.dental.controller;
 
 import com.dental.exception.NotFoundException;
-import com.dental.persistence.entity.Profile;
-import com.dental.service.ProfileService;
+import com.dental.persistence.entity.Dentist;
+import com.dental.service.DentistService;
 import com.dental.view.ViewConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,14 +21,14 @@ import javax.servlet.http.HttpServletResponse;
 public class ProfileController extends AbstractBasePageController {
 
   @Autowired
-  private ProfileService profileService;
+  private DentistService dentistService;
 
   @RequestMapping(method = RequestMethod.GET)
   public String profile(HttpServletRequest request, HttpServletResponse response, ModelMap model) throws NotFoundException {
-    Profile loggedInProfile = profileService.getLoggedInProfile();
-    assert loggedInProfile != null;
-    loggedInProfile.getUser();
-    model.put("profile", loggedInProfile);
+    Dentist loggedInDentist = dentistService.getLoggedInDentist();
+    assert loggedInDentist != null;
+    loggedInDentist.getUser();
+    model.put("dentist", loggedInDentist);
     return renderView(PAGE_PROFILE);
   }
 

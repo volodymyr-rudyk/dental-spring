@@ -1,5 +1,5 @@
-<#macro page title="Dental" css=[] js=[] bower=[]>
-<#include "macro.ftl" />
+<#macro page dentist='' title="Dental" css=[] js=[] bower=[]>
+<#include "../macro.ftl" />
 
 <#--<#import "spring.ftl" as spring />-->
 
@@ -15,7 +15,7 @@
     </#list>
 </head>
 <body>
-    <@header />
+    <@loggedHeader dentist />
     <#nested />
     <@footer />
     <#list bower as b>
