@@ -4,7 +4,9 @@ import com.dental.bean.SigninBean;
 import com.dental.bean.SignupBean;
 import com.dental.persistence.component.UserDao;
 import com.dental.persistence.entity.Dentist;
+import com.dental.persistence.entity.Patient;
 import com.dental.persistence.entity.User;
+import com.dental.persistence.helperbean.Gender;
 import com.dental.service.AuthService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,6 +22,7 @@ import org.springframework.security.web.authentication.logout.LogoutHandler;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Date;
 
 /**
  * Created by light on 5/3/2015.
@@ -71,6 +74,19 @@ public class AuthServiceImpl implements AuthService {
   @Override
   public void signup(SignupBean signupBean) {
     User user = getUser(signupBean);
+//    user = userDao.save(user);
+
+    Dentist dentist = user.getDentist();
+    Patient p = new Patient();
+    p.setFirstName("first name");
+    p.setLastName("last name");
+    p.setMiddleName("middle name");
+    p.setBirthday(new Date());
+    p.setGender(Gender.Mail);
+    p.setEmail("fsdfsfsdf");
+
+
+    dentist.getPatients().add(p);
     userDao.save(user);
   }
 
@@ -82,10 +98,15 @@ public class AuthServiceImpl implements AuthService {
 
     Dentist dentist = new Dentist();
     dentist.setFirstName(signupBean.getFirstName());
+    dentist.setMiddleName("fff");
+    dentist.setBirthday(new Date());
+    dentist.setAddress("dsds");
+    dentist.setPhone("fdfdfd");
 //    profile.setMiddleName(signupBean.getMiddleName());
     dentist.setLastName(signupBean.getLastName());
 //    profile.setPhone(signupBean.getPhone());
 //    profile.setAddress(signupBean.getAddress());
+
 
     user.setDentist(dentist);
     return user;

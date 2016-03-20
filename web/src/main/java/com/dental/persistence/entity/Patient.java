@@ -1,5 +1,7 @@
 package com.dental.persistence.entity;
 
+import com.dental.persistence.helperbean.Gender;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -11,18 +13,20 @@ import java.util.Set;
  */
 
 @Entity
-@Table(name = "dentist")
-public class Dentist extends BaseEntity implements Serializable {
+@Table(name = "patient")
+public class Patient extends BaseEntity implements Serializable {
 
   private Integer id;
+  private String email;
   private String firstName;
   private String middleName;
   private String lastName;
   private String address;
   private Date birthday;
+  private Gender gender;
   private String phone;
   private User user;
-  private Set<Patient> patients = new HashSet<>(0);
+  private Set<Dentist> dentists = new HashSet<>(0);
 
   @Id
   @Column(name = "id")
@@ -34,6 +38,15 @@ public class Dentist extends BaseEntity implements Serializable {
 
   public void setId(Integer id) {
     this.id = id;
+  }
+
+  @Column(name = "email")
+  public String getEmail() {
+    return email;
+  }
+
+  public void setEmail(String email) {
+    this.email = email;
   }
 
   @Column(name = "first_name")
@@ -82,6 +95,16 @@ public class Dentist extends BaseEntity implements Serializable {
     this.birthday = birthday;
   }
 
+  @Column(name = "gender")
+  @Enumerated(EnumType.STRING)
+  public Gender getGender() {
+    return gender;
+  }
+
+  public void setGender(Gender gender) {
+    this.gender = gender;
+  }
+
   @Column(name = "phone")
   public String getPhone() {
     return phone;
@@ -100,16 +123,12 @@ public class Dentist extends BaseEntity implements Serializable {
     this.user = user;
   }
 
-  @ManyToMany(cascade = CascadeType.ALL)
-  @JoinTable(name = "dentist_patient",
-      joinColumns = { @JoinColumn(name = "dentist_id") },
-      inverseJoinColumns = { @JoinColumn(name = "patient_id") }
-  )
-  public Set<Patient> getPatients() {
-    return patients;
+  @ManyToMany(fetch = FetchType.LAZY, mappedBy = "patients")
+  public Set<Dentist> getDentists() {
+    return dentists;
   }
 
-  public void setPatients(Set<Patient> patients) {
-    this.patients = patients;
+  public void setDentists(Set<Dentist> dentists) {
+    this.dentists = dentists;
   }
 }
