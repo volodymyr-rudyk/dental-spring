@@ -32,7 +32,7 @@ class SearchRestController extends BaseRestController {
     public Dentist search(HttpServletRequest request, HttpServletResponse response,
                           @RequestParam("q") String query, ModelMap model) throws NotFoundException {
       LOG.info("query = " + query);
-      Dentist dentist = dentistService.getDentist(1);
+      Dentist dentist = dentistService.get(1l);
 
 //    return new ResponseEntity<>(profile, HttpStatus.OK);
       return dentist;

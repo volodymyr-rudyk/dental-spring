@@ -1,8 +1,10 @@
 package com.dental.controller;
 
+import com.dental.bean.SayText;
 import com.dental.persistence.entity.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -16,7 +18,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Locale;
 
 /**
  * Created by light on 1/1/2015.
@@ -27,15 +28,24 @@ public class IndexController extends AbstractBasePageController {
 
   private static final Logger LOG = LoggerFactory.getLogger(IndexController.class);
 
-  @RequestMapping(value = "/hello2")
-  public String hello2(HttpServletRequest request, HttpServletResponse response, ModelMap model,
-                       User user) {
-    String m1 = messageSource.getMessage("u", null, Locale.getDefault());
-    String m2 = messageSource.getMessage("u", null, Locale.ENGLISH);
+  @Autowired
+  private SayText sayText;
 
-    model.put("hello", 123);
-    model.put("user", user);
-    return "hello";
+  @RequestMapping(value = "/test/hello2")
+  public String hello2(HttpServletRequest request, HttpServletResponse response, ModelMap model,
+                       User user) throws InterruptedException {
+//    String m1 = messageSource.getMessage("u", null, Locale.getDefault());
+//    String m2 = messageSource.getMessage("u", null, Locale.ENGLISH);
+
+    while (true){
+      Thread.sleep(2000);
+      sayText.sayText();
+
+    }
+
+//    model.put("hello", 123);
+//    model.put("user", user);
+//    return "hello";
   }
 
 

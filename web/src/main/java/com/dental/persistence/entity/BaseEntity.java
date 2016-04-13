@@ -5,6 +5,6 @@ package com.dental.persistence.entity;
  */
 public abstract class BaseEntity {
 
-  public abstract Integer getId();
+  public abstract Long getId();
 
 }

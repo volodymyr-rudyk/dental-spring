@@ -1,7 +1,7 @@
 package com.dental.service.impl;
 
-import com.dental.persistence.component.UserDao;
 import com.dental.persistence.entity.User;
+import com.dental.persistence.repository.UserRepository;
 import com.dental.provider.DentalUserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -23,11 +23,11 @@ public class UserDetailsServiceImpl implements UserDetailsService {
   private static SimpleGrantedAuthority roleUser = new SimpleGrantedAuthority("ROLE_USER");
 
   @Autowired
-  private UserDao userDao;
+  private UserRepository userRepository;
 
   @Override
   public UserDetails loadUserByUsername(final String username) throws UsernameNotFoundException {
-    final User user = userDao.loadUserByLogin(username);
+    final User user = userRepository.loadUserByLogin(username);
     if (user == null)
       throw new UsernameNotFoundException("user name not found" + username);
 

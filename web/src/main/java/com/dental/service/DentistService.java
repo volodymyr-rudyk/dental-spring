@@ -7,9 +7,7 @@ import com.dental.persistence.entity.User;
 /**
  * Created by admin on 27.05.2015.
  */
-public interface DentistService {
-  Dentist getDentist(int id);
-
+public interface DentistService extends BaseService<Dentist>{
   void save(DentistBean dentistBean);
 
   void update(DentistBean dentistBean, Dentist dentist);

@@ -1,18 +1,18 @@
-package com.dental.persistence.component;
+package com.dental.persistence.repository;
 
 import java.util.List;
 
 /**
  * Created by light on 4/5/2015.
  */
-public interface GenericCrud<T> {
-  T get(int id);
+public interface GenericRepository<T> {
+  T get(Long id);
 
   T save(T entity);
 
   List<T> getList();
 
-  void remove(int id);
+  void remove(Long id);
 
   T update(T entity);
 }

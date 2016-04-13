@@ -16,7 +16,7 @@ import java.util.Set;
 @Table(name = "patient")
 public class Patient extends BaseEntity implements Serializable {
 
-  private Integer id;
+  private Long id;
   private String email;
   private String firstName;
   private String middleName;
@@ -25,18 +25,17 @@ public class Patient extends BaseEntity implements Serializable {
   private Date birthday;
   private Gender gender;
   private String phone;
-  private User user;
   private Set<Dentist> dentists = new HashSet<>(0);
 
   @Id
   @Column(name = "id")
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Override
-  public Integer getId() {
+  public Long getId() {
     return id;
   }
 
-  public void setId(Integer id) {
+  public void setId(Long id) {
     this.id = id;
   }
 
@@ -112,15 +111,6 @@ public class Patient extends BaseEntity implements Serializable {
 
   public void setPhone(String phone) {
     this.phone = phone;
-  }
-
-  @OneToOne(fetch = FetchType.LAZY, mappedBy = "dentist")
-  public User getUser() {
-    return user;
-  }
-
-  public void setUser(User user) {
-    this.user = user;
   }
 
   @ManyToMany(fetch = FetchType.LAZY, mappedBy = "patients")

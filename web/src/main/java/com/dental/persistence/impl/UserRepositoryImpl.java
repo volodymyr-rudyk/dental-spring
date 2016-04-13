@@ -1,8 +1,8 @@
 package com.dental.persistence.impl;
 
-import com.dental.persistence.component.AbstractDao;
-import com.dental.persistence.component.UserDao;
 import com.dental.persistence.entity.User;
+import com.dental.persistence.repository.AbstractRepository;
+import com.dental.persistence.repository.UserRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,10 +13,10 @@ import java.util.List;
  * Created by light on 4/5/2015.
  */
 @Transactional
-@Repository("userDao")
-public class UserDaoImpl extends AbstractDao<User> implements UserDao {
+@Repository("userRepository")
+public class UserRepositoryImpl extends AbstractRepository<User> implements UserRepository {
 
-  public UserDaoImpl() {
+  public UserRepositoryImpl() {
     super(User.class);
   }
 
@@ -41,21 +41,4 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
     return resultList.size() > 0 ? (User) resultList.get(0) : null;
   }
 
-  //
-//    public void deleteEmployeeBySsn(String ssn) {
-//        Query query = getSession().createSQLQuery("delete from Employee where ssn = :ssn");
-//        query.setString("ssn", ssn);
-//        query.executeUpdate();
-//    }
-//
-//
-//    public Employee findBySsn(String ssn){
-//        Criteria criteria = getSession().createCriteria(Employee.class);
-//        criteria.add(Restrictions.eq("ssn",ssn));
-//        return (Employee) criteria.uniqueResult();
-//    }
-//
-//    public void updateEmployee(Employee employee){
-//        getSession().update(employee);
-//    }
 }

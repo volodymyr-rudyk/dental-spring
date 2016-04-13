@@ -10,7 +10,7 @@ import java.io.Serializable;
 @Table(name = "user")
 public class User extends BaseEntity implements Serializable {
 
-  private Integer id;
+  private Long id;
   private String email;
   private String password;
   private boolean isEnabled;
@@ -29,11 +29,11 @@ public class User extends BaseEntity implements Serializable {
   @Column(name = "id")
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Override
-  public Integer getId() {
+  public Long getId() {
     return id;
   }
 
-  public void setId(Integer id) {
+  public void setId(Long id) {
     this.id = id;
   }
 

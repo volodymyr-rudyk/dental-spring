@@ -1,4 +1,4 @@
-package com.dental.persistence.component;
+package com.dental.persistence.repository;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,19 +13,19 @@ import java.util.List;
  */
 @Repository
 @Transactional
-public abstract class AbstractDao<T> implements GenericCrud<T> {
+public abstract class AbstractRepository<T> implements GenericRepository<T> {
 
   @PersistenceContext
   protected EntityManager entityManager;
 
   private Class<T> clazz;
 
-  public AbstractDao(Class<T> clazz) {
+  public AbstractRepository(Class<T> clazz) {
     this.clazz = clazz;
   }
 
   @Override
-  public T get(int id) {
+  public T get(Long id) {
     return entityManager.find(clazz, id);
   }
 
@@ -43,7 +43,7 @@ public abstract class AbstractDao<T> implements GenericCrud<T> {
   }
 
   @Override
-  public void remove(int id) {
+  public void remove(Long id) {
     T entity = this.get(id);
     entityManager.remove(entity);
   }

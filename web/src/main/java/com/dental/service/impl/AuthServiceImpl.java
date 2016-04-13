@@ -2,11 +2,11 @@ package com.dental.service.impl;
 
 import com.dental.bean.SigninBean;
 import com.dental.bean.SignupBean;
-import com.dental.persistence.component.UserDao;
 import com.dental.persistence.entity.Dentist;
 import com.dental.persistence.entity.Patient;
 import com.dental.persistence.entity.User;
 import com.dental.persistence.helperbean.Gender;
+import com.dental.persistence.repository.UserRepository;
 import com.dental.service.AuthService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,7 +39,7 @@ public class AuthServiceImpl implements AuthService {
   private AuthenticationManager authenticationManager;
 
   @Autowired
-  private UserDao userDao;
+  private UserRepository userRepository;
 
   @Override
   public void authenticate(SigninBean signinBean, HttpServletRequest request) throws AuthenticationException {
@@ -74,7 +74,7 @@ public class AuthServiceImpl implements AuthService {
   @Override
   public void signup(SignupBean signupBean) {
     User user = getUser(signupBean);
-//    user = userDao.save(user);
+//    user = userRepository.save(user);
 
     Dentist dentist = user.getDentist();
     Patient p = new Patient();
@@ -86,8 +86,18 @@ public class AuthServiceImpl implements AuthService {
     p.setEmail("fsdfsfsdf");
 
 
+    Patient p2 = new Patient();
+    p2.setFirstName("first name");
+    p2.setLastName("last name");
+    p2.setMiddleName("middle name");
+    p2.setBirthday(new Date());
+    p2.setGender(Gender.Mail);
+    p2.setEmail("fsdfsfsdf");
+
+
     dentist.getPatients().add(p);
-    userDao.save(user);
+    dentist.getPatients().add(p2);
+    userRepository.save(user);
   }
 
   private User getUser(SignupBean signupBean) {

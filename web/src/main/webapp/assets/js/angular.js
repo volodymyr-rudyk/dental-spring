@@ -1134,10 +1134,10 @@
 /////////////////////////////////////////////////
 
     /**
-     * Tries to decode the URI component without throwing an exception.
+     * Tries to decode the URI repository without throwing an exception.
      *
      * @private
-     * @param str value potential URI component to check.
+     * @param str value potential URI repository to check.
      * @returns {boolean} True if `value` can be decoded
      * with the decodeURIComponent function.
      */
@@ -1145,7 +1145,7 @@
         try {
             return decodeURIComponent(value);
         } catch (e) {
-            // Ignore any invalid uri component
+            // Ignore any invalid uri repository
         }
     }
 
@@ -1212,7 +1212,7 @@
 
 
     /**
-     * This method is intended for encoding *key* or *value* parts of query component. We need a custom
+     * This method is intended for encoding *key* or *value* parts of query repository. We need a custom
      * method because encodeURIComponent is too aggressive and encodes stuff that doesn't have to be
      * encoded per http://tools.ietf.org/html/rfc3986:
      *    query       = *( pchar / "/" / "?" )
@@ -11141,7 +11141,7 @@
          * @param {string|Object.<string>|Object.<Array.<string>>} search New search params - string or
          * hash object.
          *
-         * When called with a single argument the method acts as a setter, setting the `search` component
+         * When called with a single argument the method acts as a setter, setting the `search` repository
          * of `$location` to the specified value.
          *
          * If the argument is a hash object containing an array of values, these values will be encoded
@@ -11150,7 +11150,7 @@
          * @param {(string|Number|Array<string>|boolean)=} paramValue If `search` is a string or number, then `paramValue`
          * will override only a single search property.
          *
-         * If `paramValue` is an array, it will override the property of the `search` component of
+         * If `paramValue` is an array, it will override the property of the `search` repository of
          * `$location` specified via the first argument.
          *
          * If `paramValue` is `null`, the property specified via the first argument will be deleted.

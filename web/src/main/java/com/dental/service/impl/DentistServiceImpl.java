@@ -2,9 +2,9 @@ package com.dental.service.impl;
 
 import com.dental.bean.DentistBean;
 import com.dental.exception.RequiredAuthenticationException;
-import com.dental.persistence.component.DentistDao;
 import com.dental.persistence.entity.Dentist;
 import com.dental.persistence.entity.User;
+import com.dental.persistence.repository.DentistRepository;
 import com.dental.provider.DentalUserDetails;
 import com.dental.service.DentistService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,17 +19,17 @@ import org.springframework.stereotype.Service;
 public class DentistServiceImpl implements DentistService {
 
   @Autowired
-  private DentistDao dentistDao;
+  private DentistRepository dentistRepository;
 
   @Override
-  public Dentist getDentist(int id) {
-    return dentistDao.get(id);
+  public Dentist get(Long id) {
+    return dentistRepository.get(id);
   }
 
   @Override
   public void save(DentistBean dentistBean) {
     Dentist dentist = transform(dentistBean);
-    dentistDao.save(dentist);
+    dentistRepository.save(dentist);
   }
 
   @Override
@@ -39,7 +39,7 @@ public class DentistServiceImpl implements DentistService {
     profile.setLastName(dentistBean.getLastName());
     profile.setBirthday(dentistBean.getBirthday());
     profile.setPhone(dentistBean.getPhone());
-    dentistDao.update(profile);
+    dentistRepository.update(profile);
   }
 
   @Override
