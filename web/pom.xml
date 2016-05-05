@@ -27,12 +27,6 @@
   <dependencies>
 
     <dependency>
-      <groupId>org.springframework.data</groupId>
-      <artifactId>spring-data-jpa</artifactId>
-      <version>1.9.4.RELEASE</version>
-    </dependency>
-
-    <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
       <artifactId>jackson-databind</artifactId>
       <version>2.5.1</version>
@@ -41,13 +35,13 @@
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-webmvc</artifactId>
-      <version>4.1.6.RELEASE</version>
+      <version>4.2.5.RELEASE</version>
     </dependency>
 
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-web</artifactId>
-      <version>4.1.6.RELEASE</version>
+      <version>4.2.5.RELEASE</version>
     </dependency>
 
     <dependency>
@@ -60,25 +54,25 @@
     <dependency>
       <groupId>org.springframework.security</groupId>
       <artifactId>spring-security-core</artifactId>
-      <version>4.0.2.RELEASE</version>
+      <version>4.0.4.RELEASE</version>
     </dependency>
 
 
     <dependency>
       <groupId>org.springframework.security</groupId>
       <artifactId>spring-security-web</artifactId>
-      <version>4.0.1.RELEASE</version>
+      <version>4.0.4.RELEASE</version>
     </dependency>
     <dependency>
       <groupId>org.springframework.security</groupId>
       <artifactId>spring-security-config</artifactId>
-      <version>4.0.1.RELEASE</version>
+      <version>4.0.4.RELEASE</version>
     </dependency>
 
     <dependency>
       <groupId>org.springframework.security</groupId>
       <artifactId>spring-security-taglibs</artifactId>
-      <version>4.0.1.RELEASE</version>
+      <version>4.0.4.RELEASE</version>
     </dependency>
 
 
@@ -150,52 +144,52 @@
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-core</artifactId>
-      <version>4.1.6.RELEASE</version>
+      <version>4.2.5.RELEASE</version>
     </dependency>
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-context</artifactId>
-      <version>4.1.6.RELEASE</version>
+      <version>4.2.5.RELEASE</version>
     </dependency>
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-beans</artifactId>
-      <version>4.1.6.RELEASE</version>
+      <version>4.2.5.RELEASE</version>
     </dependency>
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-aop</artifactId>
-      <version>4.1.6.RELEASE</version>
+      <version>4.2.5.RELEASE</version>
     </dependency>
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-aspects</artifactId>
-      <version>4.1.6.RELEASE</version>
+      <version>4.2.5.RELEASE</version>
     </dependency>
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-expression</artifactId>
-      <version>4.1.6.RELEASE</version>
+      <version>4.2.5.RELEASE</version>
     </dependency>
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-tx</artifactId>
-      <version>4.1.6.RELEASE</version>
+      <version>4.2.5.RELEASE</version>
     </dependency>
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-jdbc</artifactId>
-      <version>4.1.6.RELEASE</version>
+      <version>4.2.5.RELEASE</version>
     </dependency>
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-orm</artifactId>
-      <version>4.1.6.RELEASE</version>
+      <version>4.2.5.RELEASE</version>
     </dependency>
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-test</artifactId>
-      <version>4.1.6.RELEASE</version>
+      <version>4.2.5.RELEASE</version>
       <scope>test</scope>
     </dependency>
 
@@ -203,12 +197,12 @@
     <dependency>
       <groupId>org.hibernate</groupId>
       <artifactId>hibernate-core</artifactId>
-      <version>5.0.2.Final</version>
+      <version>5.1.0.Final</version>
     </dependency>
     <dependency>
       <groupId>org.hibernate</groupId>
       <artifactId>hibernate-entitymanager</artifactId>
-      <version>5.0.2.Final</version>
+      <version>5.1.0.Final</version>
     </dependency>
     <dependency>
       <groupId>org.hibernate</groupId>
@@ -413,7 +407,7 @@
       <plugin>
         <groupId>org.flywaydb</groupId>
         <artifactId>flyway-maven-plugin</artifactId>
-        <version>3.2.1</version>
+        <version>4.0</version>
         <configuration>
           <table>SchemaVersion</table>
           <driver>${db.driverClassName}</driver>

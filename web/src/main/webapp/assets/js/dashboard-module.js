@@ -1,13 +1,13 @@
 angular.module('dashboard', ['dental'])
   .controller('DashboardController', function ($scope, $http, Rest) {
-    $scope.user = window.user;
+    $scope.dentist = window.dentist;
     $scope.response = {};
 
     this.dashboard = function () {
       $http({
         url: Rest.dashboard,
         method: 'POST',
-        data: $scope.user
+        data: $scope.dentist
       }).success(success).error(fail);
     };
     var success = function (data, status, headers, config) {

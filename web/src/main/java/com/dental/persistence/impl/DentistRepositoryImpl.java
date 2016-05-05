@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
  * Created by light on 10/17/2015.
  */
 @Repository
-@Transactional("dentistRepository")
+@Transactional
 public class DentistRepositoryImpl extends AbstractRepository<Dentist> implements DentistRepository {
   public DentistRepositoryImpl() {
     super(Dentist.class);

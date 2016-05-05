@@ -12,8 +12,8 @@ import java.util.List;
 /**
  * Created by light on 4/5/2015.
  */
+@Repository
 @Transactional
-@Repository("userRepository")
 public class UserRepositoryImpl extends AbstractRepository<User> implements UserRepository {
 
   public UserRepositoryImpl() {

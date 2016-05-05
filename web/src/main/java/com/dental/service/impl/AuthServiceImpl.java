@@ -19,6 +19,7 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.security.web.authentication.logout.LogoutHandler;
+import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -27,6 +28,7 @@ import java.util.Date;
 /**
  * Created by light on 5/3/2015.
  */
+@Service
 public class AuthServiceImpl implements AuthService {
 
   private static final Logger LOG = LoggerFactory.getLogger(AuthServiceImpl.class);
