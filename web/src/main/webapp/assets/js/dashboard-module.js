@@ -1,21 +1,25 @@
 angular.module('dashboard', ['dental'])
-  .controller('DashboardController', function ($scope, $http, Rest) {
+  .controller('DashboardController', function ($scope, $http, DashboardService) {
+    DashboardService.initDashbord();
+
     $scope.dentist = window.dentist;
     $scope.response = {};
 
-    this.dashboard = function () {
+
+  })
+  .service('DashboardService', function ($http, Rest) {
+    this.initDashbord = function () {
       $http({
         url: Rest.dashboard,
         method: 'POST',
-        data: $scope.dentist
       }).success(success).error(fail);
-    };
-    var success = function (data, status, headers, config) {
-      $scope.response = data;
-      console.log(data);
-    };
-    var fail = function (data, status, headers, config) {
-      $scope.response = data;
-      console.log(data);
-    };
+      var success = function (data, status, headers, config) {
+        $scope.response = data;
+        console.log(data);
+      };
+      var fail = function (data, status, headers, config) {
+        $scope.response = data;
+        console.log(data);
+      };
+    }
   });

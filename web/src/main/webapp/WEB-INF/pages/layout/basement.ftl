@@ -1,4 +1,4 @@
-<#macro page title="Dental" css=[] js=[] bower=[]>
+<#macro page title="Dental" css=[] js=[] bowerdist=[] bower=[]>
 <#include "macro.ftl" />
 
 <#--<#import "spring.ftl" as spring />-->
@@ -18,6 +18,9 @@
     <@header />
     <#nested />
     <@footer />
+    <#list bowerdist as b>
+      <script type="application/javascript" src="/bower/${b}/dist/${b}.js"></script>
+    </#list>
     <#list bower as b>
         <script type="application/javascript" src="/bower/${b}/${b}.js"></script>
     </#list>
