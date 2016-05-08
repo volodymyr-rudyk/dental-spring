@@ -27,6 +27,11 @@ public class DentistServiceImpl implements DentistService {
   }
 
   @Override
+  public Dentist getFull(Long id) {
+    return dentistRepository.loadFull(id);
+  }
+
+  @Override
   public void save(DentistBean dentistBean) {
     Dentist dentist = transform(dentistBean);
     dentistRepository.save(dentist);
