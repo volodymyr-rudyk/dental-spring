@@ -14,7 +14,6 @@ angular.module('signup', ['dental'])
     $scope.response = {};
 
     this.signup = function (isValid) {
-      debugger;
       if (isValid) {
         $http({
           url: Rest.signup,

@@ -2,6 +2,7 @@ package com.dental.web.dto;
 
 import com.dental.persistence.entity.Dentist;
 import com.dental.persistence.entity.Patient;
+import com.dental.persistence.helperbean.Gender;
 
 /**
  * Created by light on 5/6/2016.
@@ -19,7 +20,7 @@ public class DTOUtils {
     if (dentist.getPatients().size() > 0) {
       for (Patient patient : dentist.getPatients()) {
         PatientDTO patientDTO = convert(patient);
-        dentistDTO.getPatientsDTO().add(patientDTO);
+        dentistDTO.getPatients().add(patientDTO);
       }
     }
     return dentistDTO;
@@ -36,5 +37,18 @@ public class DTOUtils {
     patientDTO.setPhone(patient.getPhone());
     return patientDTO;
   }
+
+  public static Patient convert(PatientDTO patientDTO) {
+    Patient patient = new Patient();
+    patient.setFirstName(patientDTO.getFirstName());
+    patient.setLastName(patientDTO.getLastName());
+    patient.setAddress(patientDTO.getAddress());
+    patient.setMiddleName(patientDTO.getMiddleName());
+    patient.setBirthday(patientDTO.getBirthday());
+    patient.setGender(Gender.get(patientDTO.getGender()));
+    patient.setPhone(patientDTO.getPhone());
+    return patient;
+  }
+
 
 }

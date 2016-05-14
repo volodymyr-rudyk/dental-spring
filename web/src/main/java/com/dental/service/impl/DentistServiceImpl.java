@@ -38,6 +38,11 @@ public class DentistServiceImpl implements DentistService {
   }
 
   @Override
+  public void save(Dentist dentist) {
+    dentistRepository.save(dentist);
+  }
+
+  @Override
   public void update(DentistBean dentistBean, Dentist profile) {
     profile.setFirstName(dentistBean.getFirstName());
     profile.setMiddleName(dentistBean.getMiddleName());

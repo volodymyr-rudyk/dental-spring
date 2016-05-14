@@ -1,36 +1,24 @@
 <#import "../layout/loggedbasement.ftl" as base />
 
 <@base.page dentist=dentist title="Patients" css=["header", "content"]
-js=["main-module", "bootstrap"] bowerdist=["jquery"] bower=["angular"]>
+js=["main-module", "patient-module", "bootstrap"] bowerdist=["jquery"] bower=["angular", "angular-route"]>
 
-<section class="white">
-  <div class="container" ng-app="dashboard">
-    <div ng-controller="DashboardController as dashboardCtrl">
-      <input type="text" ng-model="user.firstName"></input>
-      <span ng-model="firstName"></span>
-      <span ng-bind="user.lastName"></span>
-      <span ng-bind="lastName"></span>
+<section class="white" ng-app="patient">
+  <div class="container" ng-controller="PatientController">
+    <div class="row">
+      <div class="col-md-2">
+        <div class="list-group">
+          <div class="list-group-item-heading">Menu</div>
+          <a href="#/" class="list-group-item">Patients</a>
+          <a href="#new" class="list-group-item">New</a>
+        </div>
+      </div>
+
+      <div ng-view></div>
+
     </div>
   </div>
 </section>
-<script type="application/javascript">
-  window.patients = window.patients }} [];
-  <#list patients as p>
-    var patient = {
-      firstName: "${dentist.firstName!""}",
-      lastName: "${dentist.lastName!""}",
-      middleName: "${dentist.middleName!""}",
-      birthday: "${dentist.birthday!""}",
-      phone: "${dentist.phone!""}",
-      email: "${dentist.user.email!""}"
-    };
-    window.patients.push();
-  </#list>
 
-
-
-
-  console.log(user);
-</script>
 
 </@base.page>

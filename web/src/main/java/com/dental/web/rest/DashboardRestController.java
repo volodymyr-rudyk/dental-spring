@@ -27,8 +27,7 @@ public class DashboardRestController extends BaseRestController {
       consumes = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<DentistDTO> dashboard(HttpServletRequest httpServletRequest) {
     Dentist loggedInDentist = dentistService.getLoggedInDentist();
-    Dentist dentist = dentistService.getFull(loggedInDentist.getId());
-
+    Dentist dentist = dentistService.get(loggedInDentist.getId());
     DentistDTO dentistDTO = DTOUtils.convert(dentist);
     ResponseEntity<DentistDTO> responseEntity = new ResponseEntity<DentistDTO>(dentistDTO, HttpStatus.OK);
     return responseEntity;

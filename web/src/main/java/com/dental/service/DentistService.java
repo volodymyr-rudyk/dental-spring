@@ -19,4 +19,6 @@ public interface DentistService extends BaseService<Dentist>{
 
   User getLoggedUser();
 
+  void save(Dentist dentist);
+
 }

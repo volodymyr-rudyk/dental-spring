@@ -15,7 +15,7 @@ public class DentistDTO {
   private Date birthday;
   private String phone;
 
-  private Set<PatientDTO> patientsDTO = new HashSet<>(0);
+  private Set<PatientDTO> patients = new HashSet<>(0);
 
   public String getFirstName() {
     return firstName;
@@ -65,11 +65,11 @@ public class DentistDTO {
     this.phone = phone;
   }
 
-  public Set<PatientDTO> getPatientsDTO() {
-    return patientsDTO;
+  public Set<PatientDTO> getPatients() {
+    return patients;
   }
 
-  public void setPatientsDTO(Set<PatientDTO> patientsDTO) {
-    this.patientsDTO = patientsDTO;
+  public void setPatients(Set<PatientDTO> patients) {
+    this.patients = patients;
   }
 }
