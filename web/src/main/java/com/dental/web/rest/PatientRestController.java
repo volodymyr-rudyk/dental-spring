@@ -29,11 +29,32 @@ public class PatientRestController extends BaseRestController {
 
   @RequestMapping(value = "/patient", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE,
       consumes = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<DentistDTO> getPatient(HttpServletRequest httpServletRequest) {
+  public ResponseEntity<DentistDTO> getPatients(HttpServletRequest httpServletRequest) {
     Dentist loggedInDentist = dentistService.getLoggedInDentist();
     Dentist dentist = dentistService.getFull(loggedInDentist.getId());
     DentistDTO dentistDTO = DTOUtils.convert(dentist);
     ResponseEntity<DentistDTO> responseEntity = new ResponseEntity<DentistDTO>(dentistDTO, HttpStatus.OK);
+    return responseEntity;
+  }
+
+  @RequestMapping(value = "/patient/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE,
+      consumes = MediaType.APPLICATION_JSON_VALUE)
+  public ResponseEntity<PatientDTO> getPatient(@PathVariable("id") Long patientId) {
+    Dentist loggedInDentist = dentistService.getLoggedInDentist();
+    Patient patient = patientService.get(patientId);
+    PatientDTO patientDTO = DTOUtils.convert(patient);
+    ResponseEntity<PatientDTO> responseEntity = new ResponseEntity<>(patientDTO, HttpStatus.OK);
+    return responseEntity;
+  }
+
+  @RequestMapping(value = "/patient/{id}", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE,
+      consumes = MediaType.APPLICATION_JSON_VALUE)
+  public ResponseEntity<Object> putPatient(HttpServletRequest httpServletRequest, PatientDTO patientDTO) {
+
+    Dentist loggedInDentist = dentistService.getLoggedInDentist();
+    patientService.update(patientDTO, loggedInDentist);
+
+    ResponseEntity<Object> responseEntity = new ResponseEntity<>(null, HttpStatus.OK);
     return responseEntity;
   }
 
@@ -44,19 +65,6 @@ public class PatientRestController extends BaseRestController {
     Patient patient = DTOUtils.convert(patientDTO);
     patientService.add(patient);
     ResponseEntity responseEntity = new ResponseEntity(null, HttpStatus.OK);
-    return responseEntity;
-  }
-
-  @RequestMapping(value = "/patient/{id}", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE,
-      consumes = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<DentistDTO> putPatient(HttpServletRequest httpServletRequest,
-                                               @PathVariable("id") Long id) {
-    Dentist loggedInDentist = dentistService.getLoggedInDentist();
-    patientService.update(id, loggedInDentist);
-
-    Dentist dentist = dentistService.getFull(loggedInDentist.getId());
-    DentistDTO dentistDTO = DTOUtils.convert(dentist);
-    ResponseEntity<DentistDTO> responseEntity = new ResponseEntity<DentistDTO>(dentistDTO, HttpStatus.OK);
     return responseEntity;
   }
 

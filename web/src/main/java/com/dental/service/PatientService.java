@@ -14,7 +14,7 @@ public interface PatientService extends BaseService<Patient> {
 
   Collection<Patient> getList(Dentist dentist);
 
-  boolean update(Long id, Dentist loggedInDentist);
+  boolean update(PatientDTO patientDTO, Dentist loggedInDentist);
 
   void add(PatientDTO patientDTO, Dentist dentist);
 

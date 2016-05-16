@@ -28,6 +28,7 @@ public class DTOUtils {
 
   public static PatientDTO convert(Patient patient) {
     PatientDTO patientDTO = new PatientDTO();
+    patientDTO.setId(patient.getId());
     patientDTO.setFirstName(patient.getFirstName());
     patientDTO.setLastName(patient.getLastName());
     patientDTO.setMiddleName(patient.getMiddleName());

@@ -10,17 +10,22 @@ angular.module('patient', ['ngRoute', 'dental'])
         templateUrl: '/template/patients/add-patient',
         controller: 'NewPatientController'
       })
+      .when('/edit/:id', {
+        templateUrl: '/template/patients/edit-patient',
+        controller: 'EditPatientController'
+      })
       .otherwise({
         redirectTo: '/'
       });
   })
   .controller('PatientController', PatientController)
   .controller('NewPatientController', NewPatientController)
+  .controller('EditPatientController', EditPatientController)
   .service('PatientService', PatientService);
 
 // Controllers
 function PatientController($scope, $http, PatientService) {
-  PatientService.get().then(function (response) {
+  PatientService.getAll().then(function (response) {
     $scope.dentist = response;
     console.log(response);
   }, function error(error) {
@@ -31,19 +36,41 @@ function NewPatientController($scope, $http, PatientService) {
   $scope.patient = {};
 
   this.create = function (isValid) {
-    PatientService.create($scope.user).then(function success(response) {
-      $scope.success = "Added new Patient";
-    }, function (error) {
-    })
+    if (isValid) {
+      PatientService.create($scope.patient).then(function success(response) {
+        $scope.success = "Added new Patient";
+      }, function (error) {
+      });
+    }
   };
+};
+function EditPatientController($scope, $routeParams, PatientService) {
+  $scope.patient = {};
+  $scope.patient.id = $routeParams.id;
 
+  PatientService.get($scope.patient).then(function (response) {
+    $scope.patient = response;
+    console.log(response);
+  }, function error(error) {
+    console.error(error)
+  });
+
+  this.update = function (isValid) {
+    if (isValid) {
+      PatientService.update($scope.patient).then(function success(response) {
+        $scope.success = "Patient Edited";
+        console.log($scope.success);
+      }, function (error) {
+      });
+    }
+  };
 };
 
 function PatientService($http, $q, Rest, ResponseHandlers) {
-  var defer = $q.defer();
-  this.get = function () {
+  this.getAll = function () {
+    var defer = $q.defer();
     $http({
-      url: Rest.patient + "?d="+new Date(),
+      url: Rest.patient,
       method: 'GET',
       data: {},
       headers: {'Content-Type': 'application/json'}
@@ -52,17 +79,31 @@ function PatientService($http, $q, Rest, ResponseHandlers) {
     }).error(ResponseHandlers.onErrorResponse);
     return defer.promise;
   };
-  this.update = function () {
+  this.get = function (patient) {
+    var defer = $q.defer();
     $http({
-      url: Rest.patient,
+      url: Rest.patient + "/" + patient.id,
+      method: 'GET',
+      data: {},
+      headers: {'Content-Type': 'application/json'}
+    }).success(function (data) {
+      defer.resolve(data);
+    }).error(ResponseHandlers.onErrorResponse);
+    return defer.promise;
+  };
+  this.update = function (patient) {
+    var defer = $q.defer();
+    $http({
+      url: Rest.patient + "/" + patient.id,
       method: 'PUT',
-      data: {}
+      data: patient
     }).success(function (data) {
       defer.resolve(data);
     }).error(ResponseHandlers.onErrorResponse);
     return defer.promise;
   };
   this.create = function (patient) {
+    var defer = $q.defer();
     $http({
       url: Rest.patient,
       method: 'POST',
