@@ -47,6 +47,7 @@ public class PatientServiceImpl implements PatientService {
   }
 
   @Override
+  @Transactional
   public boolean update(PatientDTO patientDTO, Dentist loggedInDentist) {
     Collection<Patient> patients = patientRepository.getPatientsByDentist(loggedInDentist.getId());
     Optional<Patient> optional = patients.stream().filter((p) -> p.getId().equals(patientDTO.getId())).findFirst();
@@ -59,6 +60,7 @@ public class PatientServiceImpl implements PatientService {
       p.setBirthday(patientDTO.getBirthday());
       p.setGender(Gender.get(patientDTO.getGender()));
       p.setPhone(patientDTO.getPhone());
+      patientRepository.update(p);
     });
     return true;
   }

@@ -20,6 +20,7 @@
     "angular-route": "1.5.5",
     "angular-messages": "1.5.5",
     "underscore": "1.8.2",
-    "jquery": "2.2.3"
+    "jquery": "2.2.3",
+    "bootstrap": "3.3.6"
   }
 }

@@ -49,7 +49,7 @@ public class PatientRestController extends BaseRestController {
 
   @RequestMapping(value = "/patient/{id}", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE,
       consumes = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<Object> putPatient(HttpServletRequest httpServletRequest, PatientDTO patientDTO) {
+  public ResponseEntity<Object> putPatient(HttpServletRequest httpServletRequest, @RequestBody PatientDTO patientDTO) {
 
     Dentist loggedInDentist = dentistService.getLoggedInDentist();
     patientService.update(patientDTO, loggedInDentist);

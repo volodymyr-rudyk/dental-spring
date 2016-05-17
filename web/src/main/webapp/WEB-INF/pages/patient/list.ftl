@@ -8,17 +8,13 @@ js=["main-module", "patient-module", "bootstrap"] bowerdist=["jquery"] bower=["a
     <div class="row">
       <div class="col-md-2">
         <div class="list-group">
-          <div class="list-group-item-heading">Menu</div>
           <a href="#/" class="list-group-item">Patients</a>
           <a href="#new" class="list-group-item">New</a>
         </div>
       </div>
-
-      <div ng-view></div>
-
+      <div ng-view class="col-md-10"></div>
     </div>
   </div>
 </section>
-
 
 </@base.page>
