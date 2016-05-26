@@ -79,6 +79,12 @@ section.green {
   height: 400px;
 }
 
+section.home-page {
+  background-size: 100%;
+  background: url("/img/home/background.jpg") no-repeat;
+  height: 45em;
+}
+
 section.gray {
   color: #fff;
   background: #9c9c9c;
@@ -253,8 +259,4 @@ footer .footer-below {
 
 .scroll-top .btn:focus {
   outline: 0;
-}
-
-.ng-invalid-email {
-  border: 1px solid red;
 }

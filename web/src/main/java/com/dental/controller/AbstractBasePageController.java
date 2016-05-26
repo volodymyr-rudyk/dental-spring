@@ -1,7 +1,7 @@
 package com.dental.controller;
 
-import com.dental.exception.RequiredAuthenticationException;
 import com.dental.exception.NotFoundException;
+import com.dental.exception.RequiredAuthenticationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +28,7 @@ public abstract class AbstractBasePageController implements PageController {
   @Autowired
   protected MessageSource messageSource;
 
-  protected String renderView(String view) {
+  String renderView(String view) {
     return getViewFolder() + "/" + view;
   }
 

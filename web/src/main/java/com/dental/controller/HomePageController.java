@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 @Controller
 public class HomePageController extends AbstractBasePageController {
 
-  private String viewName = "index";
+  private static String viewName = "index";
 
   @RequestMapping(value = "/")
   public String about(HttpServletRequest request, HttpServletResponse response, Model model) throws NotFoundException {

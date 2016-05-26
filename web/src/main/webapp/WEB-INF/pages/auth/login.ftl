@@ -1,10 +1,10 @@
 <#import "../layout/basement.ftl" as base />
 
 <@base.page title="Login" css=["header", "content", "signin", "validation"]
-js=["main-module", "login-module"] bowerdist=["jquery"] bower=["angular"]>
+js=["main-module", "auth-module"] bowerdist=["jquery"] bower=["angular"]>
 
 <section class="white">
-  <div class="container" ng-app="login">
+  <div class="container" ng-app="auth">
     <div ng-controller="LoginController as loginCtrl">
       <form class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4"
             role="form" ng-submit="loginCtrl.login(loginForm.$valid)" name="loginForm" novalidate>
