@@ -3,7 +3,6 @@ angular.module('auth', ['dental'])
   .controller('SignupController', SignupController)
   .service("AuthService", AuthService);
 
-
 function LoginController($scope, AuthService) {
   $scope.user = {email: "", password: ""};
   $scope.response = {};
@@ -21,13 +20,35 @@ function LoginController($scope, AuthService) {
       });
     }
   };
-  this.signup = function () {
-
-  };
 }
 
 function SignupController($scope, AuthService) {
+  $scope.user = {
+    email: "",
+    password: "",
+    firstName: "",
+    //middleName: "",
+    lastName: "",
+    //birthday: "",
+    //address: "",
+    //phone: ""
+  };
 
+  $scope.response = {};
+
+  this.signup = function (isValid) {
+    if (isValid) {
+      AuthService.signup($scope.user).then(function (response) {
+        $scope.response = response;
+        if (response.code == 0)
+          document.location = "/login";
+        console.log(response);
+      }, function error(response) {
+        $scope.response = response;
+        console.error(response)
+      });
+    }
+  };
 }
 
 function AuthService($http, $q, Rest, ResponseHandlers) {
@@ -44,7 +65,17 @@ function AuthService($http, $q, Rest, ResponseHandlers) {
     });
     return defer.promise;
   };
-  this.signup = function signup() {
-
-  }
-}
+  this.signup = function signup(user) {
+    var defer = $q.defer();
+    $http({
+      url: Rest.signup,
+      method: 'POST',
+      data: user
+    }).success(function (data) {
+      defer.resolve(data);
+    }).error(function (data) {
+      defer.reject(data);
+    });
+    return defer.promise;
+  };
+};

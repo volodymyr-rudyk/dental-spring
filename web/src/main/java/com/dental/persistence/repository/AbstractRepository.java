@@ -12,6 +12,7 @@ import java.util.List;
  * Created by light on 4/5/2015.
  */
 @Repository
+@Transactional
 public abstract class AbstractRepository<T> implements GenericRepository<T> {
 
   @PersistenceContext

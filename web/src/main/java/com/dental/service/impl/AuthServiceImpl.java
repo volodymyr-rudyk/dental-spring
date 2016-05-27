@@ -21,7 +21,6 @@ import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.Date;
 
 /**
  * Created by light on 5/3/2015.
@@ -85,15 +84,7 @@ public class AuthServiceImpl implements AuthService {
 
     Dentist dentist = new Dentist();
     dentist.setFirstName(signupBean.getFirstName());
-    dentist.setMiddleName("fff");
-    dentist.setBirthday(new Date());
-    dentist.setAddress("dsds");
-    dentist.setPhone("fdfdfd");
-//    profile.setMiddleName(signupBean.getMiddleName());
     dentist.setLastName(signupBean.getLastName());
-//    profile.setPhone(signupBean.getPhone());
-//    profile.setAddress(signupBean.getAddress());
-
 
     user.setDentist(dentist);
     return user;
