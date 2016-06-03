@@ -1,5 +1,6 @@
 package com.dental.web.rest;
 
+import com.dental.init.LoggedDentist;
 import com.dental.persistence.entity.Dentist;
 import com.dental.persistence.entity.Patient;
 import com.dental.service.DentistService;
@@ -29,9 +30,8 @@ public class PatientRestController extends BaseRestController {
 
   @RequestMapping(value = "/patient", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE,
       consumes = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<DentistDTO> getPatients(HttpServletRequest httpServletRequest) {
-    Dentist loggedInDentist = dentistService.getLoggedInDentist();
-    Dentist dentist = dentistService.getFull(loggedInDentist.getId());
+  public ResponseEntity<DentistDTO> getPatients(HttpServletRequest httpServletRequest, @LoggedDentist Dentist loggedDentist) {
+    Dentist dentist = dentistService.getFull(loggedDentist.getId());
     DentistDTO dentistDTO = DTOUtils.convert(dentist);
     ResponseEntity<DentistDTO> responseEntity = new ResponseEntity<DentistDTO>(dentistDTO, HttpStatus.OK);
     return responseEntity;
@@ -39,8 +39,7 @@ public class PatientRestController extends BaseRestController {
 
   @RequestMapping(value = "/patient/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE,
       consumes = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<PatientDTO> getPatient(@PathVariable("id") Long patientId) {
-    Dentist loggedInDentist = dentistService.getLoggedInDentist();
+  public ResponseEntity<PatientDTO> getPatient(@PathVariable("id") Long patientId, @LoggedDentist Dentist loggedDentist) {
     Patient patient = patientService.get(patientId);
     PatientDTO patientDTO = DTOUtils.convert(patient);
     ResponseEntity<PatientDTO> responseEntity = new ResponseEntity<>(patientDTO, HttpStatus.OK);

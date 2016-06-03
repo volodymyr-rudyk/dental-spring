@@ -12,12 +12,12 @@
     </encoder>
   </appender>
 
-  <logger name="org.mortbay" level="ERROR"/>
-  <logger name="org.hiberante.loader" level="ERROR"/>
-  <logger name="org.mortbay" level="ERROR"/>
+  <logger name="org.mortbay" level="INFO"/>
+  <logger name="org.hiberante.loader" level="INFO"/>
+  <logger name="org.mortbay" level="INFO"/>
   <logger name="org.apache.axis.ConfigurationException" level="INFO"/>
   <!-- DEBUG level prints Exception because a ConfigurationException logs itself (at DEBUG level) on creation -->
-  <root level="ALL">
+  <root level="INFO">
     <appender-ref ref="A1"/>
   </root>
 </configuration>

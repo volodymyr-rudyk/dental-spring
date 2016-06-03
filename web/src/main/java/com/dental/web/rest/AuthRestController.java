@@ -3,6 +3,8 @@ package com.dental.web.rest;
 import com.dental.bean.SigninBean;
 import com.dental.bean.SignupBean;
 import com.dental.service.AuthService;
+import com.dental.spring.EventService;
+import com.dental.spring.LoginEvent;
 import com.dental.web.dto.BaseDTO;
 import com.dental.web.dto.SignupDTO;
 import com.dental.web.error.RestStatus;
@@ -32,6 +34,9 @@ public class AuthRestController extends BaseRestController {
   private Logger logger = LoggerFactory.getLogger(AuthRestController.class);
 
   @Autowired
+  private EventService eventService;
+
+  @Autowired
   private AuthService authService;
 
   @RequestMapping(value = "/login", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE,
@@ -46,6 +51,8 @@ public class AuthRestController extends BaseRestController {
 
     try {
       authService.authenticate(signinBean, httpServletRequest);
+      LoginEvent loginEvent = new LoginEvent(this, signinBean.getEmail());
+      eventService.publish(loginEvent);
       loginDTO = baseDTO(ResponseStatus.Success, RestStatus.SUCCESS);
       return new ResponseEntity<>(loginDTO, HttpStatus.OK);
     } catch (Exception e) {

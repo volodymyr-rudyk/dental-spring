@@ -1,10 +1,13 @@
 package com.dental.controller;
 
 import com.dental.exception.NotFoundException;
+import com.dental.init.LoggedDentist;
 import com.dental.persistence.entity.Dentist;
+import com.dental.provider.DentalUserDetails;
 import com.dental.service.DentistService;
 import com.dental.view.ViewConfig;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,9 +29,9 @@ public class DashboardPageController extends AbstractBasePageController {
   private DentistService dentistService;
 
   @RequestMapping(method = RequestMethod.GET)
-  public String dashboard(HttpServletRequest request, HttpServletResponse response, ModelMap model) throws NotFoundException {
-    Dentist loggedInDentist = dentistService.getLoggedInDentist();
-    Dentist dentist = dentistService.getFull(loggedInDentist.getId());
+  public String dashboard(HttpServletRequest request, HttpServletResponse response, @LoggedDentist Dentist loggedDentist,
+                          ModelMap model) throws NotFoundException {
+    Dentist dentist = dentistService.getFull(loggedDentist.getId());
     model.put("dentist", dentist);
     return renderView(DASHBOARD_VIEW);
   }

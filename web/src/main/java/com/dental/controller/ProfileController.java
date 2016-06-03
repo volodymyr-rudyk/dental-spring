@@ -1,6 +1,7 @@
 package com.dental.controller;
 
 import com.dental.exception.NotFoundException;
+import com.dental.init.LoggedDentist;
 import com.dental.persistence.entity.Dentist;
 import com.dental.service.DentistService;
 import com.dental.view.ViewConfig;
@@ -24,11 +25,9 @@ public class ProfileController extends AbstractBasePageController {
   private DentistService dentistService;
 
   @RequestMapping(method = RequestMethod.GET)
-  public String profile(HttpServletRequest request, HttpServletResponse response, ModelMap model) throws NotFoundException {
-    Dentist loggedInDentist = dentistService.getLoggedInDentist();
-    assert loggedInDentist != null;
-    loggedInDentist.getUser();
-    model.put("dentist", loggedInDentist);
+  public String profile(@LoggedDentist Dentist loggedDentist, ModelMap model) throws NotFoundException {
+    Dentist dentist = dentistService.getFull(loggedDentist.getId());
+    model.put("dentist", dentist);
     return renderView(PAGE_PROFILE);
   }
 

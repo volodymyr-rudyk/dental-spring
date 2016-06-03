@@ -1,5 +1,6 @@
 package com.dental.web.rest;
 
+import com.dental.init.LoggedDentist;
 import com.dental.persistence.entity.Dentist;
 import com.dental.service.DentistService;
 import com.dental.web.dto.DTOUtils;
@@ -25,9 +26,8 @@ public class DashboardRestController extends BaseRestController {
 
   @RequestMapping(value = "/dashboard", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE,
       consumes = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<DentistDTO> dashboard(HttpServletRequest httpServletRequest) {
-    Dentist loggedInDentist = dentistService.getLoggedInDentist();
-    Dentist dentist = dentistService.get(loggedInDentist.getId());
+  public ResponseEntity<DentistDTO> dashboard(@LoggedDentist Dentist loggedDentist) {
+    Dentist dentist = dentistService.get(loggedDentist.getId());
     DentistDTO dentistDTO = DTOUtils.convert(dentist);
     ResponseEntity<DentistDTO> responseEntity = new ResponseEntity<DentistDTO>(dentistDTO, HttpStatus.OK);
     return responseEntity;
