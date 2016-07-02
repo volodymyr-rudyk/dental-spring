@@ -17,12 +17,9 @@
   <description>Dental Web</description>
 
   <properties>
-    <services.web.mail.version>0.9.1</services.web.mail.version>
-    <service.logging.sqs.version>0.9.1</service.logging.sqs.version>
-    <logging.core.version>0.9.1</logging.core.version>
     <google.guava.version>18.0</google.guava.version>
-    <org.aspectj-version>1.7.3</org.aspectj-version>
-    <spring.version>4.2.6.RELEASE</spring.version>
+    <spring.version>4.3.0.RELEASE</spring.version>
+    <spring.security.version>4.1.0.RELEASE</spring.security.version>
   </properties>
 
   <dependencies>
@@ -48,54 +45,33 @@
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-context-support</artifactId>
-      <version>4.0.7.RELEASE</version>
+      <version>4.2.0.RELEASE</version>
     </dependency>
 
     <!--spring security-->
     <dependency>
       <groupId>org.springframework.security</groupId>
       <artifactId>spring-security-core</artifactId>
-      <version>4.0.4.RELEASE</version>
+      <version>${spring.security.version}</version>
     </dependency>
 
 
     <dependency>
       <groupId>org.springframework.security</groupId>
       <artifactId>spring-security-web</artifactId>
-      <version>4.0.4.RELEASE</version>
+      <version>${spring.security.version}</version>
     </dependency>
     <dependency>
       <groupId>org.springframework.security</groupId>
       <artifactId>spring-security-config</artifactId>
-      <version>4.0.4.RELEASE</version>
+      <version>${spring.security.version}</version>
     </dependency>
-
-    <dependency>
-      <groupId>org.springframework.security</groupId>
-      <artifactId>spring-security-taglibs</artifactId>
-      <version>4.0.4.RELEASE</version>
-    </dependency>
-
 
     <dependency>
       <groupId>org.webjars</groupId>
       <artifactId>bootstrap</artifactId>
       <version>3.3.5</version>
     </dependency>
-
-    <!---->
-    <!--//    compile 'org.codehaus.jackson:jackson-core-asl:1.9.13'-->
-    <!--//    compile 'org.codehaus.jackson:jackson-mapper-asl:1.9.13'-->
-    <!---->
-    <!--compile 'com.fasterxml.jackson.core:jackson-databind:2.6.0-rc4'-->
-    <!--testCompile 'org.springframework:spring-test:4.1.6.RELEASE'-->
-    <!--//include in compile only, exclude in the war-->
-    <!---->
-
-
-    <!--//    compile 'com.lyncode:jtwig-spring:3.1.1'-->
-    <!--//    compile 'log4j:log4j:1.2.17'-->
-    <!---->
 
     <dependency>
       <groupId>org.freemarker</groupId>
@@ -104,29 +80,10 @@
     </dependency>
 
     <dependency>
-      <groupId>commons-httpclient</groupId>
-      <artifactId>commons-httpclient</artifactId>
-      <version>3.1</version>
-      <exclusions>
-        <exclusion>
-          <groupId>commons-logging</groupId>
-          <artifactId>commons-logging</artifactId>
-        </exclusion>
-      </exclusions>
-    </dependency>
-    <!-- // Core dependency for sharing code needed for mail sending -->
-
-    <!-- // Core dependency for sharing code needed for logging events in logging
-        DB -->
-    <dependency>
       <groupId>net.sf.ehcache</groupId>
       <artifactId>ehcache-core</artifactId>
       <version>2.6.10</version>
     </dependency>
-    <!--<dependency>-->
-    <!--<groupId>net.sourceforge.jtds</groupId>-->
-    <!--<artifactId>jtds</artifactId>-->
-    <!--</dependency>-->
 
     <dependency>
       <groupId>com.google.code.gson</groupId>
@@ -219,7 +176,7 @@
     <dependency>
       <groupId>mysql</groupId>
       <artifactId>mysql-connector-java</artifactId>
-      <version>5.1.35</version>
+      <version>5.1.38</version>
     </dependency>
     <dependency>
       <groupId>postgresql</groupId>
@@ -252,7 +209,7 @@
     <dependency>
       <groupId>javax.mail</groupId>
       <artifactId>mail</artifactId>
-      <version>1.4.3</version>
+      <version>1.4.7</version>
     </dependency>
     <!-- // Java Mail API -->
     <dependency>
@@ -261,6 +218,11 @@
       <version>1.3.2</version>
     </dependency>
 
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.12</version>
+    </dependency>
     <dependency>
       <groupId>org.mockito</groupId>
       <artifactId>mockito-all</artifactId>
@@ -291,11 +253,6 @@
       <artifactId>xml-apis</artifactId>
       <version>1.3.04</version>
     </dependency>
-    <!--<dependency>-->
-    <!--<groupId>com.sun.jersey</groupId>-->
-    <!--<artifactId>jersey-core</artifactId>-->
-    <!--<version>1.9.1</version>-->
-    <!--</dependency>-->
 
   </dependencies>
 
@@ -311,8 +268,6 @@
         </includes>
         <excludes>
           <exclude>web.xml</exclude>
-          <!--<exclude>webdefault.xml</exclude>-->
-          <!--<exclude>application.wadl</exclude>-->
         </excludes>
         <filtering>true</filtering>
       </resource>
@@ -338,40 +293,31 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-war-plugin</artifactId>
         <configuration>
-          <!--&lt;!&ndash;<webXml>${project.build.directory}/${project.artifactId}/WEB-INF/web.xml</webXml>&ndash;&gt;-->
-          <!--<webResources>-->
-          <!--<resource>-->
-          <!--<directory>${project.build.directory}/${project.artifactId}/</directory>-->
-          <!--<includes>-->
-          <!--<include>**/application.wadl</include>-->
-          <!--</includes>-->
-          <!--</resource>-->
-          <!--</webResources>-->
           <failOnMissingWebXml>false</failOnMissingWebXml>
           <archiveClasses>true</archiveClasses>
         </configuration>
       </plugin>
 
       <!-- set system properties -->
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>properties-maven-plugin</artifactId>
-        <executions>
-          <execution>
-            <goals>
-              <goal>set-system-properties</goal>
-            </goals>
-            <configuration>
-              <properties>
-                <property>
-                  <name>logback.configurationFile</name>
-                  <value>${project.build.directory}/classes/logback.xml</value>
-                </property>
-              </properties>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
+      <!--<plugin>-->
+        <!--<groupId>org.codehaus.mojo</groupId>-->
+        <!--<artifactId>properties-maven-plugin</artifactId>-->
+        <!--<executions>-->
+          <!--<execution>-->
+            <!--<goals>-->
+              <!--<goal>set-system-properties</goal>-->
+            <!--</goals>-->
+            <!--<configuration>-->
+              <!--<properties>-->
+                <!--<property>-->
+                  <!--<name>logback.configurationFile</name>-->
+                  <!--<value>${project.build.directory}/classes/logback.xml</value>-->
+                <!--</property>-->
+              <!--</properties>-->
+            <!--</configuration>-->
+          <!--</execution>-->
+        <!--</executions>-->
+      <!--</plugin>-->
 
       <plugin>
         <groupId>org.eclipse.jetty</groupId>
@@ -387,30 +333,6 @@
         </configuration>
       </plugin>
 
-      <!--<plugin>-->
-      <!--<groupId>org.mortbay.jetty</groupId>-->
-      <!--<artifactId>maven-jetty-plugin</artifactId>-->
-      <!--<configuration>-->
-      <!--<scanIntervalSeconds>10</scanIntervalSeconds>-->
-      <!--&lt;!&ndash; <contextPath>/${project.artifactId}</contextPath> &ndash;&gt;-->
-      <!--<contextPath>/</contextPath>-->
-      <!--<webAppConfig>-->
-      <!--<contextPath>/</contextPath>-->
-      <!--<baseResource implementation="org.mortbay.resource.ResourceCollection">-->
-      <!--<resourcesAsCSV>src/main/webapp,${project.build.directory}/${project.artifactId}/-->
-      <!--</resourcesAsCSV>-->
-      <!--</baseResource>-->
-      <!--</webAppConfig>-->
-      <!--<overrideWebXml>src/main/resources/jetty-override-web.xml</overrideWebXml>-->
-      <!--<webXml>${project.build.directory}/${project.artifactId}/WEB-INF/web.xml</webXml>-->
-      <!--<systemProperties>-->
-      <!--<systemProperty>-->
-      <!--<name>jetty.port</name>-->
-      <!--<value>8888</value>-->
-      <!--</systemProperty>-->
-      <!--</systemProperties>-->
-      <!--</configuration>-->
-      <!--</plugin>-->
       <plugin>
         <groupId>org.flywaydb</groupId>
         <artifactId>flyway-maven-plugin</artifactId>
@@ -421,19 +343,16 @@
           <url>${db.url}</url>
           <user>${db.username}</user>
           <password>${db.password}</password>
-          <!--<schemas>-->
-            <!--<schema>dbo</schema>-->
-          <!--</schemas>-->
           <locations>
             <location>filesystem:${basedir}</location>
           </locations>
-          <initOnMigrate>true</initOnMigrate>
         </configuration>
       </plugin>
     </plugins>
   </build>
 
   <profiles>
+
     <profile>
       <id>asus</id>
       <activation>
@@ -464,23 +383,6 @@
         <db.engine>MYSQL</db.engine>
       </properties>
     </profile>
-
-    <!--<profile>-->
-      <!--<id>heroku</id>-->
-      <!--<activation>-->
-        <!--<activeByDefault>true</activeByDefault>-->
-      <!--</activation>-->
-      <!--<properties>-->
-        <!--<db.driverClassName>org.postgresql.Driver</db.driverClassName>-->
-        <!--<db.url>jdbc:postgres://ec2-54-195-252-202.eu-west-1.compute.amazonaws.com:5432/d6acsomj9kce41</db.url>-->
-        <!--<db.username>icrnsappgwyjne</db.username>-->
-        <!--<db.password>38B1HdPDbCfLAxyIvLJfrWaVlI</db.password>-->
-        <!--<db.hibernate.dialect>org.hibernate.dialect.PostgreSQL9Dialect</db.hibernate.dialect>-->
-        <!--<db.hibernate.show_sql>true</db.hibernate.show_sql>-->
-        <!--<db.hibernate.format_sql>true</db.hibernate.format_sql>-->
-        <!--<db.engine>POSTGRESQL</db.engine>-->
-      <!--</properties>-->
-    <!--</profile>-->
 
   </profiles>
 

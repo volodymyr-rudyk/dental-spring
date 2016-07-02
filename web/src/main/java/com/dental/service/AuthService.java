@@ -2,6 +2,8 @@ package com.dental.service;
 
 import com.dental.bean.SigninBean;
 import com.dental.bean.SignupBean;
+import com.dental.persistence.entity.Dentist;
+import com.dental.persistence.entity.User;
 import org.springframework.security.core.AuthenticationException;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,4 +19,9 @@ public interface AuthService {
   void signup(SignupBean signupBean);
 
   void logout(HttpServletRequest request, HttpServletResponse response);
+
+  Dentist getLoggedInDentist();
+
+  User getLoggedUser();
+
 }

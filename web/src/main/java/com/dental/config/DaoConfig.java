@@ -32,15 +32,9 @@ public class DaoConfig {
       dataSource.setUsername(env.getRequiredProperty(DbConfig.DB_USERNAME));
       dataSource.setPassword(env.getRequiredProperty(DbConfig.DB_PASSWORD));
       dataSource.setDriverClassName(env.getRequiredProperty(DbConfig.DB_DRIVER_CLASSNAME));
-//      dataSource.setConnectionCustomizerClassName(JDBCConnectionCustomizer.class.getName());
     } catch (Exception e) {
       throw new RuntimeException(e);
     }
-    boolean b1 = false;
-    boolean b2 = false;
-    if (b2 != b1 = !b2){
-      System.out.println("true"); } else{
-      System.out.println("false"); }
     return dataSource;
   }
 

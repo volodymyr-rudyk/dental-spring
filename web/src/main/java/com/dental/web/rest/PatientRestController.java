@@ -3,6 +3,7 @@ package com.dental.web.rest;
 import com.dental.init.LoggedDentist;
 import com.dental.persistence.entity.Dentist;
 import com.dental.persistence.entity.Patient;
+import com.dental.service.AuthService;
 import com.dental.service.DentistService;
 import com.dental.service.PatientService;
 import com.dental.web.dto.DTOUtils;
@@ -21,6 +22,9 @@ import javax.servlet.http.HttpServletRequest;
  */
 @RestController
 public class PatientRestController extends BaseRestController {
+
+  @Autowired
+  protected AuthService authService;
 
   @Autowired
   private DentistService dentistService;
@@ -50,7 +54,7 @@ public class PatientRestController extends BaseRestController {
       consumes = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<Object> putPatient(HttpServletRequest httpServletRequest, @RequestBody PatientDTO patientDTO) {
 
-    Dentist loggedInDentist = dentistService.getLoggedInDentist();
+    Dentist loggedInDentist = authService.getLoggedInDentist();
     patientService.update(patientDTO, loggedInDentist);
 
     ResponseEntity<Object> responseEntity = new ResponseEntity<>(null, HttpStatus.OK);

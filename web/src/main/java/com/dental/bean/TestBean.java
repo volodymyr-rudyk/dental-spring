@@ -1,11 +1,15 @@
 package com.dental.bean;
 
+import org.springframework.stereotype.Component;
+
 import javax.annotation.PostConstruct;
 
 /**
  * Created by vrudyk on 3/21/2016.
  */
+@Component
 @Profiler
+@DeprecatedClass(newImpl = TestBeanNew.class)
 public class TestBean implements SayText{
 
   @InjectTextMessage(value = "hi its me.")

@@ -1,6 +1,6 @@
 package com.dental.controller;
 
-import org.springframework.security.acls.model.NotFoundException;
+import com.dental.exception.NotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,7 +18,7 @@ public class TemplatePageController extends AbstractBasePageController {
 
   @RequestMapping("/template/{folder}/{name}")
   public String template(HttpServletRequest servletRequest, @PathVariable("folder") String folder,
-                         @PathVariable("name") String templateName) {
+                         @PathVariable("name") String templateName) throws NotFoundException {
     if (StringUtils.isEmpty(folder) || StringUtils.isEmpty(templateName)) {
       throw new NotFoundException("empty path or template");
     }

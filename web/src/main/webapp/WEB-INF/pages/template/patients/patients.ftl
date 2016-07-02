@@ -20,6 +20,7 @@
       <td>{{p.gender}}</td>
       <td>{{p.phone}}</td>
       <td><a ng-href="#edit/{{p.id}}" ng-click="edit(p.id)">edit</a> | <a href="javascript:void(0)" >delete</a>
+        | <a ng-href="#view/{{p.id}}" >View</a>
     </tr>
     </tbody>
   </table>

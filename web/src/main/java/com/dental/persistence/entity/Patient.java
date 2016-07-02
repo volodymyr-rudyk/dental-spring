@@ -26,6 +26,7 @@ public class Patient extends BaseEntity implements Serializable {
   private Gender gender;
   private String phone;
   private Set<Dentist> dentists = new HashSet<>(0);
+  private Set<Tooth> teeth = new HashSet<>(0);
 
   @Id
   @Column(name = "id")
@@ -120,5 +121,15 @@ public class Patient extends BaseEntity implements Serializable {
 
   public void setDentists(Set<Dentist> dentists) {
     this.dentists = dentists;
+  }
+
+  @OneToMany(cascade = CascadeType.ALL)
+  @JoinColumn(name = "patient_id")
+  public Set<Tooth> getTeeth() {
+    return teeth;
+  }
+
+  public void setTeeth(Set<Tooth> teeth) {
+    this.teeth = teeth;
   }
 }

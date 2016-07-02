@@ -14,6 +14,10 @@ angular.module('patient', ['ngRoute', 'dental'])
         templateUrl: '/template/patients/edit-patient',
         controller: 'EditPatientController'
       })
+      .when('/view/:id', {
+        templateUrl: '/template/patients/view-patient',
+        controller: 'ViewPatientController'
+      })
       .otherwise({
         redirectTo: '/'
       });
@@ -21,6 +25,7 @@ angular.module('patient', ['ngRoute', 'dental'])
   .controller('PatientController', PatientController)
   .controller('NewPatientController', NewPatientController)
   .controller('EditPatientController', EditPatientController)
+  .controller('ViewPatientController', ViewPatientController)
   .service('PatientService', PatientService);
 
 // Controllers
@@ -34,7 +39,6 @@ function PatientController($scope, $http, PatientService) {
 }
 function NewPatientController($scope, $http, PatientService) {
   $scope.patient = {};
-
   this.create = function (isValid) {
     if (isValid) {
       PatientService.create($scope.patient).then(function success(response) {
@@ -64,6 +68,17 @@ function EditPatientController($scope, $routeParams, PatientService) {
       });
     }
   };
+};
+function ViewPatientController($scope, $routeParams, PatientService) {
+  $scope.patient = {};
+  $scope.patient.id = $routeParams.id;
+debugger;
+  PatientService.get($scope.patient).then(function (response) {
+    $scope.patient = response;
+    console.log(response);
+  }, function error(error) {
+    console.error(error)
+  });
 };
 
 function PatientService($http, $q, Rest, ResponseHandlers) {

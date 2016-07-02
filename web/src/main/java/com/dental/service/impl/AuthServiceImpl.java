@@ -2,9 +2,11 @@ package com.dental.service.impl;
 
 import com.dental.bean.SigninBean;
 import com.dental.bean.SignupBean;
+import com.dental.exception.RequiredAuthenticationException;
 import com.dental.persistence.entity.Dentist;
 import com.dental.persistence.entity.User;
 import com.dental.persistence.repository.UserRepository;
+import com.dental.provider.DentalUserDetails;
 import com.dental.service.AuthService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -74,6 +76,24 @@ public class AuthServiceImpl implements AuthService {
   public void signup(SignupBean signupBean) {
     User user = getUser(signupBean);
     userRepository.save(user);
+  }
+
+  @Override
+  public User getLoggedUser() {
+    DentalUserDetails dentalUserDetails = this.loadUserDetails();
+    return dentalUserDetails.getUser();
+  }
+
+  private DentalUserDetails loadUserDetails() {
+    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    if (authentication == null) throw new RequiredAuthenticationException("getLoggedInProfile");
+    return (DentalUserDetails) authentication.getPrincipal();
+  }
+
+  @Override
+  public Dentist getLoggedInDentist() {
+    DentalUserDetails dentalUserDetails = this.loadUserDetails();
+    return dentalUserDetails.getUser().getDentist();
   }
 
   private User getUser(SignupBean signupBean) {

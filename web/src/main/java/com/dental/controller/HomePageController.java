@@ -18,7 +18,7 @@ public class HomePageController extends AbstractBasePageController {
   private static String viewName = "index";
 
   @RequestMapping(value = "/")
-  public String about(HttpServletRequest request, HttpServletResponse response, Model model) throws NotFoundException {
+  public String homePage(HttpServletRequest request, HttpServletResponse response, Model model) throws NotFoundException {
     return this.renderView(viewName);
   }
 
