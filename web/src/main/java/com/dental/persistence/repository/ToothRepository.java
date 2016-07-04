@@ -9,4 +9,5 @@ import java.util.List;
  */
 public interface ToothRepository extends GenericRepository<Tooth> {
   List<Tooth> getAllToothByPatientId(Long patientId);
+  Tooth get(Long toothId, Long patientId);
 }

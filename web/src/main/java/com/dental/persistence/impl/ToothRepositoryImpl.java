@@ -3,6 +3,7 @@ package com.dental.persistence.impl;
 import com.dental.persistence.entity.Tooth;
 import com.dental.persistence.repository.AbstractRepository;
 import com.dental.persistence.repository.ToothRepository;
+import org.hibernate.Hibernate;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,9 +24,26 @@ public class ToothRepositoryImpl extends AbstractRepository<Tooth> implements To
   @Override
   public List<Tooth> getAllToothByPatientId(Long patientId) {
     String q = "select t from User t where t.patient_id = :patientId";
+
     Query namedQuery = entityManager.createQuery(q);
     namedQuery.setParameter("patientId", patientId);
     return namedQuery.getResultList();
+  }
+
+  @Override
+  public Tooth get(Long toothId, Long patientId) {
+    String q = "from Tooth as t where t.id = :toothId and t.patient.id = :patientId";
+
+    Query query = entityManager.createQuery(q);
+    query.setParameter("toothId", toothId);
+    query.setParameter("patientId", patientId);
+    List list = query.getResultList();
+    if(list.size() > 0) {
+      Tooth t = (Tooth) list.get(0);
+      Hibernate.initialize(t.getCures());
+      return t;
+    }
+    return null;
   }
 
   @Override

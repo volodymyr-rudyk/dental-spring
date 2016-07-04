@@ -167,4 +167,10 @@ public class PatientServiceImpl implements PatientService {
 
     dentistService.save(dentist);
   }
+
+  @Override
+  public Patient findIn(Long patientId, Set<Patient> patients) {
+    Optional<Patient> patient = patients.stream().filter(p -> p.getId().equals(patientId)).findFirst();
+    return patient.get();
+  }
 }

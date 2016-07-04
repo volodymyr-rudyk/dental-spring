@@ -5,6 +5,7 @@ import com.dental.persistence.entity.Patient;
 import com.dental.web.dto.PatientDTO;
 
 import java.util.Collection;
+import java.util.Set;
 
 /**
  * Created by vrudyk on 3/21/2016.
@@ -19,4 +20,6 @@ public interface PatientService extends BaseService<Patient> {
   void add(PatientDTO patientDTO, Dentist dentist);
 
   void add(Patient patient);
+
+  Patient findIn(Long patientId, Set<Patient> patients);
 }
