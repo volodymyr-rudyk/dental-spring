@@ -1,5 +1,6 @@
 package com.dental.web.rest;
 
+import com.dental.bean.ToothRequestBean;
 import com.dental.init.LoggedDentist;
 import com.dental.persistence.entity.Dentist;
 import com.dental.persistence.entity.Tooth;
@@ -13,7 +14,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
@@ -33,9 +33,9 @@ public class ToothRestController extends BaseRestController {
   @RequestMapping(value = "/tooth", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE,
       consumes = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<ToothDTO> getTooth(HttpServletRequest httpServletRequest, @LoggedDentist Dentist loggedDentist,
-                                             @RequestParam Long patientId, @RequestParam Long toothId)  {
+                                           ToothRequestBean toothRequestBean)  {
 
-    Tooth tooth = toothService.get(toothId, patientId);
+    Tooth tooth = toothService.get(toothRequestBean.getToothId(), toothRequestBean.getPatientId());
     ToothDTO toothDTO = DTOUtils.convert(tooth);
     ResponseEntity<ToothDTO> responseEntity = new ResponseEntity<>(toothDTO, HttpStatus.OK);
     return responseEntity;
