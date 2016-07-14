@@ -1,6 +1,8 @@
 package com.dental.web.dto;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by light on 5/6/2016.
@@ -14,6 +16,7 @@ public class PatientDTO {
   private Date birthday;
   private String gender;
   private String phone;
+  private Set<ToothDTO> teeth = new HashSet<>();
 
   public Long getId() {
     return id;
@@ -77,5 +80,13 @@ public class PatientDTO {
 
   public void setPhone(String phone) {
     this.phone = phone;
+  }
+
+  public Set<ToothDTO> getTeeth() {
+    return teeth;
+  }
+
+  public void setTeeth(Set<ToothDTO> teeth) {
+    this.teeth = teeth;
   }
 }

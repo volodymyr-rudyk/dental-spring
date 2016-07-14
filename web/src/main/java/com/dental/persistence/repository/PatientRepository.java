@@ -10,4 +10,5 @@ import java.util.Collection;
 public interface PatientRepository extends GenericRepository<Patient> {
   Patient findByFirstAndLastName(String firstName, String lastName);
   Collection<Patient> getPatientsByDentist(Long dentistId);
+  Patient getFull(Long patientId);
 }

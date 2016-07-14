@@ -4,7 +4,6 @@ import com.dental.persistence.entity.Dentist;
 import com.dental.persistence.entity.Patient;
 import com.dental.persistence.repository.AbstractRepository;
 import com.dental.persistence.repository.PatientRepository;
-import net.sf.ehcache.hibernate.HibernateUtil;
 import org.hibernate.Hibernate;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -47,4 +46,10 @@ public class PatientRepositoryImpl extends AbstractRepository<Patient> implement
     return patients;
   }
 
+  @Override
+  public Patient getFull(Long patientId) {
+    Patient patient = entityManager.find(Patient.class, patientId);
+    Hibernate.initialize(patient.getTeeth());
+    return patient;
+  }
 }

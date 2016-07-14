@@ -1,6 +1,5 @@
 package com.dental.web.dto;
 
-import com.dental.persistence.entity.ToothCure;
 import com.dental.persistence.helperbean.ToothState;
 
 import java.util.Set;
@@ -10,7 +9,7 @@ import java.util.Set;
  */
 public class ToothDTO {
   private Long id;
-  private Set<ToothCure> cures;
+  private Set<ToothCureDTO> cures;
   private ToothState toothState;
 
   public Long getId() {
@@ -21,11 +20,11 @@ public class ToothDTO {
     this.id = id;
   }
 
-  public Set<ToothCure> getCures() {
+  public Set<ToothCureDTO> getCures() {
     return cures;
   }
 
-  public void setCures(Set<ToothCure> cures) {
+  public void setCures(Set<ToothCureDTO> cures) {
     this.cures = cures;
   }
 

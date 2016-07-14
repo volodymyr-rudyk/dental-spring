@@ -42,6 +42,11 @@ public class PatientServiceImpl implements PatientService {
   }
 
   @Override
+  public Patient getFull(Long patientId) {
+    return patientRepository.getFull(patientId);
+  }
+
+  @Override
   public Collection<Patient> getList(Dentist dentistBean) {
     if (dentistBean == null) return Collections.emptyList();
     Collection<Patient> patients = patientRepository.getPatientsByDentist(dentistBean.getId());

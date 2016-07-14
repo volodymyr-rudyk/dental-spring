@@ -6,9 +6,9 @@
           <h1>
             <div>{{patient.firstName}} {{patient.lastName}}</div>
           </h1>
-          <tr ng-repeat="t in patient.teeth">
-            {{t}}
-          </tr>
+          <div class="btn btn-warning" ng-repeat="t in patient.teeth">
+            {{t.id}}, {{t.toothState}}
+          </div>
         </div>
       </div>
     </div>

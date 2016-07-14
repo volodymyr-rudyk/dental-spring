@@ -3,12 +3,35 @@ package com.dental.web.dto;
 import com.dental.persistence.entity.Dentist;
 import com.dental.persistence.entity.Patient;
 import com.dental.persistence.entity.Tooth;
+import com.dental.persistence.entity.ToothCure;
 import com.dental.persistence.helperbean.Gender;
+
+import java.util.Set;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 /**
  * Created by light on 5/6/2016.
  */
 public class DTOUtils {
+
+
+  static Function<ToothCure, ToothCureDTO> convertToothCureToToothCureDto = (tc) -> {
+    ToothCureDTO toothCureDTO = new ToothCureDTO();
+    toothCureDTO.setId(tc.getId());
+    toothCureDTO.setCreatedOn(tc.getCreatedOn());
+    toothCureDTO.setCure(tc.getCure());
+    return toothCureDTO;
+  };
+
+  static Function<Tooth, ToothDTO> convertToothToToothDto = (t) -> {
+    ToothDTO toothDTO = new ToothDTO();
+    toothDTO.setId(t.getId());
+    toothDTO.setToothState(t.getToothState());
+    Set<ToothCureDTO> toothCureDTOSet = t.getCures().stream().map(convertToothCureToToothCureDto).collect(Collectors.toSet());
+    toothDTO.setCures(toothCureDTOSet);
+    return toothDTO;
+  };
 
   public static DentistDTO convert(Dentist dentist) {
     DentistDTO dentistDTO = new DentistDTO();
@@ -40,15 +63,15 @@ public class DTOUtils {
     return patientDTO;
   }
 
+  public static PatientDTO convertDeep(Patient patient) {
+    PatientDTO patientDTO = convert(patient);
+    Set<ToothDTO> toothDTOSet = patient.getTeeth().stream().map(convertToothToToothDto).collect(Collectors.toSet());
+    patientDTO.setTeeth(toothDTOSet);
+    return patientDTO;
+  }
+
   public static ToothDTO convert(Tooth tooth) {
-    ToothDTO toothDTO = new ToothDTO();
-    if (tooth == null) {
-      return toothDTO;
-    }
-    toothDTO.setId(tooth.getId());
-    toothDTO.setCures(tooth.getCures());
-    toothDTO.setToothState(tooth.getToothState());
-    return toothDTO;
+    return convertToothToToothDto.apply(tooth);
   }
 
   public static Patient convert(PatientDTO patientDTO) {
@@ -62,6 +85,5 @@ public class DTOUtils {
     patient.setPhone(patientDTO.getPhone());
     return patient;
   }
-
 
 }

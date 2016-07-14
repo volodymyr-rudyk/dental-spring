@@ -13,6 +13,8 @@ import java.util.Set;
 public interface PatientService extends BaseService<Patient> {
   Patient get(String firstName, String lastName);
 
+  Patient getFull(Long patientId);
+
   Collection<Patient> getList(Dentist dentist);
 
   boolean update(PatientDTO patientDTO, Dentist loggedInDentist);
