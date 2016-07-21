@@ -17,12 +17,29 @@
   <description>Dental Web</description>
 
   <properties>
+    <logback.version>1.0.13</logback.version>
     <google.guava.version>18.0</google.guava.version>
     <spring.version>4.3.0.RELEASE</spring.version>
     <spring.security.version>4.1.0.RELEASE</spring.security.version>
   </properties>
 
   <dependencies>
+
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
+      <version>${logback.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-core</artifactId>
+      <version>${logback.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-access</artifactId>
+      <version>${logback.version}</version>
+    </dependency>
 
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
@@ -56,6 +73,7 @@
     </dependency>
 
 
+
     <dependency>
       <groupId>org.springframework.security</groupId>
       <artifactId>spring-security-web</artifactId>
@@ -79,11 +97,11 @@
       <version>2.3.21</version>
     </dependency>
 
-    <dependency>
-      <groupId>net.sf.ehcache</groupId>
-      <artifactId>ehcache-core</artifactId>
-      <version>2.6.10</version>
-    </dependency>
+    <!--<dependency>-->
+      <!--<groupId>net.sf.ehcache</groupId>-->
+      <!--<artifactId>ehcache-core</artifactId>-->
+      <!--<version>2.6.10</version>-->
+    <!--</dependency>-->
 
     <dependency>
       <groupId>com.google.code.gson</groupId>
@@ -188,29 +206,35 @@
       <groupId>com.zaxxer</groupId>
       <artifactId>HikariCP</artifactId>
       <version>2.4.3</version>
+      <!--<exclusions>-->
+        <!--<exclusion>-->
+          <!--<groupId>org.slf4j</groupId>-->
+          <!--<artifactId>slf4j-api</artifactId>-->
+        <!--</exclusion>-->
+      <!--</exclusions>-->
     </dependency>
 
 
     <!-- // Hibernate -->
     <!-- Quartz framework dependencies -->
-    <dependency>
-      <groupId>org.quartz-scheduler</groupId>
-      <artifactId>quartz</artifactId>
-      <version>2.2.1</version>
-      <exclusions>
-        <exclusion>
-            <groupId>com.mchange</groupId>
-            <artifactId>c3p0</artifactId>
-        </exclusion>
-      </exclusions>
-    </dependency>
-    <!-- // Quartz framework dependencies -->
+    <!--<dependency>-->
+      <!--<groupId>org.quartz-scheduler</groupId>-->
+      <!--<artifactId>quartz</artifactId>-->
+      <!--<version>2.2.1</version>-->
+      <!--<exclusions>-->
+        <!--<exclusion>-->
+            <!--<groupId>com.mchange</groupId>-->
+            <!--<artifactId>c3p0</artifactId>-->
+        <!--</exclusion>-->
+      <!--</exclusions>-->
+    <!--</dependency>-->
+     <!--// Quartz framework dependencies-->
     <!-- Java Mail API -->
-    <dependency>
-      <groupId>javax.mail</groupId>
-      <artifactId>mail</artifactId>
-      <version>1.4.7</version>
-    </dependency>
+    <!--<dependency>-->
+      <!--<groupId>javax.mail</groupId>-->
+      <!--<artifactId>mail</artifactId>-->
+      <!--<version>1.4.7</version>-->
+    <!--</dependency>-->
     <!-- // Java Mail API -->
     <dependency>
       <groupId>org.apache.commons</groupId>

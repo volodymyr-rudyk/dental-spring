@@ -12,7 +12,7 @@ import org.springframework.web.method.support.ModelAndViewContainer;
 /**
  * Created by vrudyk on 5/30/2016.
  */
-public class LoggedDentistMethodParameterResovler implements HandlerMethodArgumentResolver {
+public class LoggedDentistMethodParameterResolver implements HandlerMethodArgumentResolver {
   @Override
   public boolean supportsParameter(MethodParameter methodParameter) {
     return methodParameter.getParameterAnnotation(LoggedDentist.class) != null;

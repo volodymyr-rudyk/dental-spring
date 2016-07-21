@@ -1,6 +1,6 @@
 package com.dental.config;
 
-import com.dental.init.LoggedDentistMethodParameterResovler;
+import com.dental.init.LoggedDentistMethodParameterResolver;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -41,7 +41,7 @@ public class SpringConfig extends WebMvcConfigurerAdapter {
   @Override
   public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
     super.addArgumentResolvers(argumentResolvers);
-    argumentResolvers.add(new LoggedDentistMethodParameterResovler());
+    argumentResolvers.add(new LoggedDentistMethodParameterResolver());
     float f = 2;
   }
 
@@ -66,7 +66,7 @@ public class SpringConfig extends WebMvcConfigurerAdapter {
   @Bean(name = "messageSource")
   public MessageSource getMessageSource() {
     ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
-    messageSource.setBasenames("multi.data", "milti.errors", "milti.messages");
+    messageSource.setBasenames("multi.data", "multi.errors", "multi.messages");
     messageSource.setDefaultEncoding("utf-8");
     return messageSource;
   }
