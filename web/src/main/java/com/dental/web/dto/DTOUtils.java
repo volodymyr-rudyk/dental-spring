@@ -28,8 +28,9 @@ public class DTOUtils {
     ToothDTO toothDTO = new ToothDTO();
     toothDTO.setId(t.getId());
     toothDTO.setToothState(t.getToothState());
-    Set<ToothCureDTO> toothCureDTOSet = t.getCures().stream().map(convertToothCureToToothCureDto).collect(Collectors.toSet());
-    toothDTO.setCures(toothCureDTOSet);
+    toothDTO.setToothGrid(t.getToothGrid());
+//    Set<ToothCureDTO> toothCureDTOSet = t.getCures().stream().map(convertToothCureToToothCureDto).collect(Collectors.toSet());
+//    toothDTO.setCures(toothCureDTOSet);
     return toothDTO;
   };
 

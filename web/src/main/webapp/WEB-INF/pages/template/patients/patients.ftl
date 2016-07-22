@@ -1,5 +1,5 @@
 <div>
-  <table class="table table-striped table-bordered">
+  <table class="table table-hover table-bordered">
     <thead>
     <tr>
       <th>LastName</th>
@@ -19,8 +19,13 @@
       <td>{{p.birthday}}</td>
       <td>{{p.gender}}</td>
       <td>{{p.phone}}</td>
-      <td><a ng-href="#edit/{{p.id}}" ng-click="edit(p.id)">edit</a> | <a href="javascript:void(0)" >delete</a>
-        | <a ng-href="#view/{{p.id}}" >View</a>
+      <td>
+        <div class="text-center">
+          <a ng-href="#view/{{p.id}}" ><span class="glyphicon glyphicon-eye-open"></span></a>&nbsp;&nbsp;&nbsp;
+          <a ng-href="#edit/{{p.id}}" ng-click="edit(p.id)"><span class="glyphicon glyphicon-pencil"></span></a>&nbsp;&nbsp;&nbsp;
+          <a href="javascript:void(0)" ><span class="glyphicon glyphicon-remove-sign"></span></a>
+        </div>
+      </td>
     </tr>
     </tbody>
   </table>

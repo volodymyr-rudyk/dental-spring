@@ -72,7 +72,6 @@ function EditPatientController($scope, $routeParams, PatientService) {
 function ViewPatientController($scope, $routeParams, PatientService) {
   $scope.patient = {};
   $scope.patient.id = $routeParams.id;
-debugger;
   PatientService.get($scope.patient).then(function (response) {
     $scope.patient = response;
     console.log(response);

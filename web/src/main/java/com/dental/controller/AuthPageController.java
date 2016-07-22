@@ -18,6 +18,7 @@ public class AuthPageController extends AbstractBasePageController {
 
   @RequestMapping(value = "/login", method = RequestMethod.GET)
   public String login() {
+    LOG.info("/login request ...");
     return this.renderView(PAGE_LOGIN);
   }
 

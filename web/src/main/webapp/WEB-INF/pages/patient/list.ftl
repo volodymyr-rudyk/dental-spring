@@ -8,8 +8,8 @@ js=["main-module", "patient-module", "bootstrap"] bowerdist=["jquery"] bower=["a
     <div class="row">
       <div class="col-md-2">
         <div class="list-group">
-          <a href="#/" class="list-group-item">Patients</a>
-          <a href="#new" class="list-group-item">New</a>
+          <a href="#/" class="list-group-item"><span class="glyphicon glyphicon-option-vertical"></span> Patients</a>
+          <a href="#new" class="list-group-item"><span class="glyphicon glyphicon-plus"></span> New</a>
         </div>
       </div>
       <div ng-view class="col-md-10"></div>

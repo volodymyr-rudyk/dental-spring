@@ -1,5 +1,6 @@
 package com.dental.persistence.entity;
 
+import com.dental.persistence.helperbean.ToothGrid;
 import com.dental.persistence.helperbean.ToothState;
 
 import javax.persistence.*;
@@ -16,6 +17,7 @@ public class Tooth extends BaseEntity implements Serializable{
 
   private Long id;
   private ToothState toothState;
+  private ToothGrid toothGrid;
   private Set<ToothCure> cures = new HashSet<>();
   private Patient patient;
 
@@ -40,6 +42,16 @@ public class Tooth extends BaseEntity implements Serializable{
 
   public void setToothState(ToothState toothState) {
     this.toothState = toothState;
+  }
+
+  @Column(name = "toothgrid")
+  @Enumerated(EnumType.STRING)
+  public ToothGrid getToothGrid() {
+    return toothGrid;
+  }
+
+  public void setToothGrid(ToothGrid toothGrid) {
+    this.toothGrid = toothGrid;
   }
 
   @OneToMany(cascade = CascadeType.ALL)

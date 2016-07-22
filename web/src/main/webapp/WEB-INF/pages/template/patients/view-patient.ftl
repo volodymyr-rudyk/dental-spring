@@ -7,7 +7,7 @@
             <div>{{patient.firstName}} {{patient.lastName}}</div>
           </h1>
           <div class="btn btn-warning" ng-repeat="t in patient.teeth">
-            {{t.id}}, {{t.toothState}}
+            {{t.id}}, {{t.toothGrid}},
           </div>
         </div>
       </div>
