@@ -16,7 +16,6 @@ import java.util.stream.Collectors;
  */
 public class DTOUtils {
 
-
   static Function<ToothCure, ToothCureDTO> convertToothCureToToothCureDto = (tc) -> {
     ToothCureDTO toothCureDTO = new ToothCureDTO();
     toothCureDTO.setId(tc.getId());
@@ -36,6 +35,18 @@ public class DTOUtils {
     return toothDTO;
   };
 
+  private static Function<Dentist, DentistDTO> dentistToDentistDTO = dentist -> {
+    DentistDTO dentistDTO = new DentistDTO();
+    dentistDTO.setFirstName(dentist.getFirstName());
+    dentistDTO.setLastName(dentist.getLastName());
+    dentistDTO.setAddress(dentist.getAddress());
+    dentistDTO.setBirthday(dentist.getBirthday());
+    dentistDTO.setMiddleName(dentist.getMiddleName());
+    dentistDTO.setPhone(dentist.getPhone());
+    return dentistDTO;
+  };
+
+
   public static DentistDTO convert(Dentist dentist) {
     DentistDTO dentistDTO = new DentistDTO();
     dentistDTO.setFirstName(dentist.getFirstName());
@@ -53,7 +64,7 @@ public class DTOUtils {
     return dentistDTO;
   }
 
-  public static PatientDTO convert(Patient patient) {
+  private static Function<Patient, PatientDTO> patientToPatientDTO = patient -> {
     PatientDTO patientDTO = new PatientDTO();
     patientDTO.setId(patient.getId());
     patientDTO.setFirstName(patient.getFirstName());
@@ -64,7 +75,7 @@ public class DTOUtils {
     patientDTO.setBirthday(patient.getBirthday());
     patientDTO.setPhone(patient.getPhone());
     return patientDTO;
-  }
+  };
 
   public static PatientDTO convertDeep(Patient patient) {
     PatientDTO patientDTO = convert(patient);
@@ -85,7 +96,7 @@ public class DTOUtils {
     return convertToothToToothDto.apply(tooth);
   }
 
-  public static Patient convert(PatientDTO patientDTO) {
+  private static Function<PatientDTO, Patient> patientDTOPToPatient = patientDTO -> {
     Patient patient = new Patient();
     patient.setFirstName(patientDTO.getFirstName());
     patient.setLastName(patientDTO.getLastName());
@@ -95,6 +106,18 @@ public class DTOUtils {
     patient.setGender(Gender.get(patientDTO.getGender()));
     patient.setPhone(patientDTO.getPhone());
     return patient;
+  };
+
+
+  public static Patient convert(PatientDTO patientDTO) {
+    return patientDTOPToPatient.apply(patientDTO);
   }
 
+  public static PatientDTO convert(Patient patient) {
+    return patientToPatientDTO.apply(patient);
+  }
+
+  public static Set<PatientDTO> convert(Set<Patient> patients) {
+    return patients.stream().map(patientToPatientDTO).collect(Collectors.toSet());
+  }
 }

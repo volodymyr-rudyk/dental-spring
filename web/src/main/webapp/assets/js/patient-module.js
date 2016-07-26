@@ -31,7 +31,7 @@ angular.module('patient', ['ngRoute', 'dental'])
 // Controllers
 function PatientController($scope, $http, PatientService) {
   PatientService.getAll().then(function (response) {
-    $scope.dentist = response;
+    $scope.patients = response;
     console.log(response);
   }, function error(error) {
     console.error(error)
@@ -84,7 +84,7 @@ function PatientService($http, $q, Rest, ResponseHandlers) {
   this.getAll = function () {
     var defer = $q.defer();
     $http({
-      url: Rest.patient,
+      url: Rest.patients,
       method: 'GET',
       data: {},
       headers: {'Content-Type': 'application/json'}
@@ -96,7 +96,7 @@ function PatientService($http, $q, Rest, ResponseHandlers) {
   this.get = function (patient) {
     var defer = $q.defer();
     $http({
-      url: Rest.patient + "/" + patient.id,
+      url: Rest.patients + "/" + patient.id,
       method: 'GET',
       data: {},
       headers: {'Content-Type': 'application/json'}
@@ -108,7 +108,7 @@ function PatientService($http, $q, Rest, ResponseHandlers) {
   this.update = function (patient) {
     var defer = $q.defer();
     $http({
-      url: Rest.patient + "/" + patient.id,
+      url: Rest.patients + "/" + patient.id,
       method: 'PUT',
       data: patient
     }).success(function (data) {
@@ -119,7 +119,7 @@ function PatientService($http, $q, Rest, ResponseHandlers) {
   this.create = function (patient) {
     var defer = $q.defer();
     $http({
-      url: Rest.patient,
+      url: Rest.patients,
       method: 'POST',
       data: patient
     }).success(function (data) {

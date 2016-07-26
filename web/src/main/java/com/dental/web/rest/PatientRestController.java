@@ -7,7 +7,6 @@ import com.dental.service.AuthService;
 import com.dental.service.DentistService;
 import com.dental.service.PatientService;
 import com.dental.web.dto.DTOUtils;
-import com.dental.web.dto.DentistDTO;
 import com.dental.web.dto.PatientDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Set;
 
 /**
  * Created by light on 12/5/2015.
@@ -32,16 +32,16 @@ public class PatientRestController extends BaseRestController {
   @Autowired
   private PatientService patientService;
 
-  @RequestMapping(value = "/patient", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE,
+  @RequestMapping(value = "/patients", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE,
       consumes = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<DentistDTO> getPatients(HttpServletRequest httpServletRequest, @LoggedDentist Dentist loggedDentist) {
+  public ResponseEntity<Set<PatientDTO>> getPatients(HttpServletRequest httpServletRequest, @LoggedDentist Dentist loggedDentist) {
     Dentist dentist = dentistService.getFull(loggedDentist.getId());
-    DentistDTO dentistDTO = DTOUtils.convert(dentist);
-    ResponseEntity<DentistDTO> responseEntity = new ResponseEntity<DentistDTO>(dentistDTO, HttpStatus.OK);
+    Set<PatientDTO> patientsDTO = DTOUtils.convert(dentist.getPatients());
+    ResponseEntity<Set<PatientDTO>> responseEntity = new ResponseEntity<>(patientsDTO, HttpStatus.OK);
     return responseEntity;
   }
 
-  @RequestMapping(value = "/patient/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE,
+  @RequestMapping(value = "/patients/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE,
       consumes = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<PatientDTO> getPatient(@PathVariable("id") Long patientId, @LoggedDentist Dentist loggedDentist) {
     Patient patient = patientService.getFull(patientId);
@@ -50,7 +50,7 @@ public class PatientRestController extends BaseRestController {
     return responseEntity;
   }
 
-  @RequestMapping(value = "/patient/{id}", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE,
+  @RequestMapping(value = "/patients/{id}", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE,
       consumes = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<Object> putPatient(HttpServletRequest httpServletRequest, @RequestBody PatientDTO patientDTO) {
 
@@ -61,7 +61,7 @@ public class PatientRestController extends BaseRestController {
     return responseEntity;
   }
 
-  @RequestMapping(value = "/patient", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE,
+  @RequestMapping(value = "/patients", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE,
       consumes = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<Object> patient(HttpServletRequest httpServletRequest, @RequestBody PatientDTO patientDTO) {
 

@@ -4,7 +4,7 @@
 js=["main-module", "patient-module", "bootstrap"] bowerdist=["jquery"] bower=["angular", "angular-route"]>
 
 <section class="white" ng-app="patient">
-  <div class="container" ng-controller="PatientController">
+  <div class="container">
     <div class="row">
       <div class="col-md-2">
         <div class="list-group">

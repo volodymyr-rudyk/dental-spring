@@ -12,7 +12,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr ng-repeat="p in dentist.patients">
+    <tr ng-repeat="p in patients">
       <td>{{p.lastName}}</td>
       <td>{{p.firstName}}</td>
       <td>{{p.middleName}}</td>
