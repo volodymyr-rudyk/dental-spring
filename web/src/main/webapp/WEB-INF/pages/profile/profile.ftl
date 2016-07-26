@@ -1,7 +1,7 @@
 <#import "../layout/loggedbasement.ftl" as base />
 
 <@base.page dentist=dentist title="Profile" css=["header", "content"]
-js=["main-module", "profile-module", "dropdown", "bootstrap"] bowerdist=["jquery"] bower=[angular"]>
+js=["main-module", "profile-module", "dropdown"] bowerdist=["jquery"] bower=["angular"]>
 
 <section class="white">
   <div class="container" ng-app="profile">

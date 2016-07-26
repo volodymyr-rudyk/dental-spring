@@ -9,7 +9,6 @@
   <title>${title}</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="/css/bootstrap.css">
     <#list css as c>
       <link rel="stylesheet" href="/css/${c}.css">
     </#list>

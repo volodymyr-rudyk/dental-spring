@@ -22,18 +22,14 @@ import java.util.List;
 @EnableWebMvc
 @Configuration
 public class SpringConfig extends WebMvcConfigurerAdapter {
-  private static final String BOOTSTRAP_PATH = "classpath:/META-INF/resources/webjars/bootstrap/3.3.5/";
   private final String CSS_RESOURCE = "/css/**";
   private final String CSS_RESOURCE_LOCATION = "/assets/css/";
-  private final String CSS_RESOURCE_LOCATION_BOOTSTRAP = BOOTSTRAP_PATH + "css/";
   private final String JS_RESOURCE = "/js/**";
   private final String JS_RESOURCE_LOCATION = "/assets/js/";
   private final String BOWER_RESOURCE = "/bower/**";
   private final String BOWER_RESOURCE_LOCATION = "/assets/bower/";
 
-  private final String JS_RESOURCE_LOCATION_BOOTSTRAP = BOOTSTRAP_PATH + "js/";
   private final String FONT_RESOURCE = "/fonts/**";
-  private final String FONT_RESOURCE_LOCATION = BOOTSTRAP_PATH + "fonts/";
   private final String IMAGE_RESOURCE = "/img/**";
   private final String IMAGE_RESOURCE_LOCATION = "/assets/img/";
 
@@ -73,9 +69,9 @@ public class SpringConfig extends WebMvcConfigurerAdapter {
 
   @Override
   public void addResourceHandlers(ResourceHandlerRegistry registry) {
-    registry.addResourceHandler(CSS_RESOURCE).addResourceLocations(CSS_RESOURCE_LOCATION, CSS_RESOURCE_LOCATION_BOOTSTRAP);
-    registry.addResourceHandler(JS_RESOURCE).addResourceLocations(JS_RESOURCE_LOCATION, JS_RESOURCE_LOCATION_BOOTSTRAP);
-    registry.addResourceHandler(FONT_RESOURCE).addResourceLocations(FONT_RESOURCE_LOCATION, FONT_RESOURCE_LOCATION);
+    registry.addResourceHandler(CSS_RESOURCE).addResourceLocations(CSS_RESOURCE_LOCATION);
+    registry.addResourceHandler(JS_RESOURCE).addResourceLocations(JS_RESOURCE_LOCATION);
+    registry.addResourceHandler(FONT_RESOURCE);
     registry.addResourceHandler(IMAGE_RESOURCE).addResourceLocations(IMAGE_RESOURCE_LOCATION);
     registry.addResourceHandler(BOWER_RESOURCE).addResourceLocations(BOWER_RESOURCE_LOCATION);
   }

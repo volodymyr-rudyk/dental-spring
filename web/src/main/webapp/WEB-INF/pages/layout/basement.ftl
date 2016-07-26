@@ -1,5 +1,5 @@
 <#macro page title="Dental" css=[] js=[] bowerdist=[] bower=[]>
-<#include "macro.ftl" />
+    <#include "macro.ftl" />
 
 <#--<#import "spring.ftl" as spring />-->
 
@@ -9,7 +9,10 @@
   <title>${title}</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="/css/bootstrap.css">
+
+  <link rel="stylesheet" href="/bower/bootstrap/dist/css/bootstrap.css">
+  <#--<link rel="stylesheet" href="/bower/bootstrap/dist/css/bootstrap-theme.css">-->
+
     <#list css as c>
       <link rel="stylesheet" href="/css/${c}.css">
     </#list>
@@ -19,7 +22,7 @@
     <#nested />
     <@footer />
     <#list bowerdist as b>
-      <script type="application/javascript" src="/bower/${b}/dist/${b}.js"></script>
+        <script type="application/javascript" src="/bower/${b}/dist/${b}.js"></script>
     </#list>
     <#list bower as b>
         <script type="application/javascript" src="/bower/${b}/${b}.js"></script>
@@ -27,7 +30,7 @@
     <#list js as j>
         <script type="application/javascript" src="/js/${j}.js"></script>
     </#list>
-</body >
+</body>
 </html>
 </#macro>
 

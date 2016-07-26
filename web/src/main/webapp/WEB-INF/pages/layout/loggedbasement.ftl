@@ -1,4 +1,4 @@
-<#macro page dentist='' title="Dental" css=[] js=[] bowerdist=[] bower=[]>
+<#macro page dentist='' title="Dental" css=[] js=[] bowerdist=[] bower=[] bowercsspath=[] bowerfontpath=[] bowerjspath=[]>
 <#include "macro.ftl" />
 
 <#--<#import "spring.ftl" as spring />-->
@@ -9,10 +9,14 @@
   <title>${title}</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="/css/bootstrap.css">
+  <link rel="stylesheet" href="/bower/bootstrap/dist/css/bootstrap.css">
+  <#--<link rel="stylesheet" href="/bower/bootstrap/dist/css/bootstrap-theme.css">-->
     <#list css as c>
       <link rel="stylesheet" href="/css/${c}.css">
     </#list>
+    <#--<#list bowercsspath as c>-->
+      <#--<link rel="stylesheet" href="/bower/${c}.css">-->
+    <#--</#list>-->
 </head>
 <body>
     <@loggedHeader dentist />
@@ -24,10 +28,14 @@
     <#list bower as b>
       <script type="application/javascript" src="/bower/${b}/${b}.js"></script>
     </#list>
+    <#list bowerjspath as b>
+        <script type="application/javascript" src="/bower/${b}.js"></script>
+    </#list>
+    <script type="application/javascript" src="/bower/bootstrap/dist/js/bootstrap.js"></script>
+
     <#list js as j>
         <script type="application/javascript" src="/js/${j}.js"></script>
     </#list>
-
 
 </body >
 </html>

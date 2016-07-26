@@ -1,7 +1,7 @@
 <#import "../layout/basement.ftl" as base />
 
 <@base.page title="Login" css=["header", "content", "signin", "validation"]
-js=["main-module", "auth-module"] bowerdist=["jquery"] bower=["angular"]>
+js=["main-module", "auth-module"] bowerdist=["jquery"] bower=["angular"] >
 
 <section class="white">
   <div class="container" ng-app="auth">
