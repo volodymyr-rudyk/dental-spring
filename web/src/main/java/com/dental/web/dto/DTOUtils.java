@@ -5,6 +5,7 @@ import com.dental.persistence.entity.Patient;
 import com.dental.persistence.entity.Tooth;
 import com.dental.persistence.entity.ToothCure;
 import com.dental.persistence.helperbean.Gender;
+import com.dental.persistence.helperbean.ToothBucket;
 
 import java.util.Set;
 import java.util.function.Function;
@@ -28,7 +29,8 @@ public class DTOUtils {
     ToothDTO toothDTO = new ToothDTO();
     toothDTO.setId(t.getId());
     toothDTO.setToothState(t.getToothState());
-    toothDTO.setToothGrid(t.getToothGrid());
+    toothDTO.setToothBucket(t.getToothBucket());
+    toothDTO.setToothNumber(t.getToothNumber());
 //    Set<ToothCureDTO> toothCureDTOSet = t.getCures().stream().map(convertToothCureToToothCureDto).collect(Collectors.toSet());
 //    toothDTO.setCures(toothCureDTOSet);
     return toothDTO;
@@ -66,8 +68,16 @@ public class DTOUtils {
 
   public static PatientDTO convertDeep(Patient patient) {
     PatientDTO patientDTO = convert(patient);
-    Set<ToothDTO> toothDTOSet = patient.getTeeth().stream().map(convertToothToToothDto).collect(Collectors.toSet());
-    patientDTO.setTeeth(toothDTOSet);
+    Set<ToothDTO> upLeftToothDTOSet = patient.getTeeth().stream().filter(t -> t.getToothBucket() == ToothBucket.UP_LEFT).map(convertToothToToothDto).collect(Collectors.toSet());
+    Set<ToothDTO> upRightToothDTOSet = patient.getTeeth().stream().filter(t -> t.getToothBucket() == ToothBucket.UP_RIGHT).map(convertToothToToothDto).collect(Collectors.toSet());
+    Set<ToothDTO> downLeftToothDTOSet = patient.getTeeth().stream().filter(t -> t.getToothBucket() == ToothBucket.DOWN_LEFT).map(convertToothToToothDto).collect(Collectors.toSet());
+    Set<ToothDTO> downRightToothDTOSet = patient.getTeeth().stream().filter(t -> t.getToothBucket() == ToothBucket.DOWN_RIGHT).map(convertToothToToothDto).collect(Collectors.toSet());
+
+    patientDTO.setTeethUL(upLeftToothDTOSet);
+    patientDTO.setTeethUR(upRightToothDTOSet);
+    patientDTO.setTeethDL(downLeftToothDTOSet);
+    patientDTO.setTeethDR(downRightToothDTOSet);
+
     return patientDTO;
   }
 

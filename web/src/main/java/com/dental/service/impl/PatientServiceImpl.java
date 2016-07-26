@@ -4,7 +4,7 @@ import com.dental.persistence.entity.Dentist;
 import com.dental.persistence.entity.Patient;
 import com.dental.persistence.entity.Tooth;
 import com.dental.persistence.helperbean.Gender;
-import com.dental.persistence.helperbean.ToothGrid;
+import com.dental.persistence.helperbean.ToothBucket;
 import com.dental.persistence.helperbean.ToothState;
 import com.dental.persistence.repository.PatientRepository;
 import com.dental.service.AuthService;
@@ -28,12 +28,11 @@ import java.util.Set;
 @Service
 public class PatientServiceImpl implements PatientService {
 
+  private static final int TEETH_IN_BUCKET = 8;
   @Autowired
   private AuthService authService;
-
   @Autowired
   private PatientRepository patientRepository;
-
   @Autowired
   private DentistService dentistService;
 
@@ -95,140 +94,22 @@ public class PatientServiceImpl implements PatientService {
 
     Set<Tooth> teeth = patient.getTeeth();
 
-    Tooth ul1 = new Tooth();
-    ul1.setToothGrid(ToothGrid.UP_LEFT_1);
 
-    Tooth ul2 = new Tooth();
-    ul2.setToothGrid(ToothGrid.UP_LEFT_2);
+    for(int i = 1; i <= TEETH_IN_BUCKET; i++) {
+      fillTeeth(i, ToothBucket.UP_LEFT, teeth);
+    }
 
-    Tooth ul3 = new Tooth();
-    ul3.setToothGrid(ToothGrid.UP_LEFT_3);
+    for(int i = 1; i <= TEETH_IN_BUCKET; i++) {
+      fillTeeth(i, ToothBucket.UP_RIGHT, teeth);
+    }
 
-    Tooth ul4 = new Tooth();
-    ul4.setToothGrid(ToothGrid.UP_LEFT_4);
+    for(int i = 1; i <= TEETH_IN_BUCKET; i++) {
+      fillTeeth(i, ToothBucket.DOWN_LEFT, teeth);
+    }
 
-    Tooth ul5 = new Tooth();
-    ul5.setToothGrid(ToothGrid.UP_LEFT_5);
-
-    Tooth ul6 = new Tooth();
-    ul6.setToothGrid(ToothGrid.UP_LEFT_6);
-
-    Tooth ul7 = new Tooth();
-    ul7.setToothGrid(ToothGrid.UP_LEFT_7);
-
-    Tooth ul8 = new Tooth();
-    ul8.setToothGrid(ToothGrid.UP_LEFT_8);
-
-
-    Tooth ur1 = new Tooth();
-    ur1.setToothGrid(ToothGrid.UP_RIGHT_1);
-
-    Tooth ur2 = new Tooth();
-    ur2.setToothGrid(ToothGrid.UP_RIGHT_2);
-
-    Tooth ur3 = new Tooth();
-    ur3.setToothGrid(ToothGrid.UP_RIGHT_3);
-
-    Tooth ur4 = new Tooth();
-    ur4.setToothGrid(ToothGrid.UP_RIGHT_4);
-
-    Tooth ur5 = new Tooth();
-    ur5.setToothGrid(ToothGrid.UP_RIGHT_5);
-
-    Tooth ur6 = new Tooth();
-    ur6.setToothGrid(ToothGrid.UP_RIGHT_6);
-
-    Tooth ur7 = new Tooth();
-    ur7.setToothGrid(ToothGrid.UP_RIGHT_7);
-
-    Tooth ur8 = new Tooth();
-    ur8.setToothGrid(ToothGrid.UP_RIGHT_8);
-
-
-    Tooth dl1 = new Tooth();
-    dl1.setToothGrid(ToothGrid.DOWN_LEFT_1);
-
-    Tooth dl2 = new Tooth();
-    dl2.setToothGrid(ToothGrid.DOWN_LEFT_2);
-
-    Tooth dl3 = new Tooth();
-    dl3.setToothGrid(ToothGrid.DOWN_LEFT_3);
-
-    Tooth dl4 = new Tooth();
-    dl4.setToothGrid(ToothGrid.DOWN_LEFT_4);
-
-    Tooth dl5 = new Tooth();
-    dl5.setToothGrid(ToothGrid.DOWN_LEFT_5);
-
-    Tooth dl6 = new Tooth();
-    dl6.setToothGrid(ToothGrid.DOWN_LEFT_6);
-
-    Tooth dl7 = new Tooth();
-    dl7.setToothGrid(ToothGrid.DOWN_LEFT_7);
-
-    Tooth dl8 = new Tooth();
-    dl8.setToothGrid(ToothGrid.DOWN_LEFT_8);
-
-
-    Tooth dr1 = new Tooth();
-    dr1.setToothGrid(ToothGrid.DOWN_RIGHT_1);
-
-    Tooth dr2 = new Tooth();
-    dr2.setToothGrid(ToothGrid.DOWN_RIGHT_2);
-
-    Tooth dr3 = new Tooth();
-    dr3.setToothGrid(ToothGrid.DOWN_RIGHT_3);
-
-    Tooth dr4 = new Tooth();
-    dr4.setToothGrid(ToothGrid.DOWN_RIGHT_4);
-
-    Tooth dr5 = new Tooth();
-    dr5.setToothGrid(ToothGrid.DOWN_RIGHT_5);
-
-    Tooth dr6 = new Tooth();
-    dr6.setToothGrid(ToothGrid.DOWN_RIGHT_6);
-
-    Tooth dr7 = new Tooth();
-    dr7.setToothGrid(ToothGrid.DOWN_RIGHT_7);
-
-    Tooth dr8 = new Tooth();
-    dr8.setToothGrid(ToothGrid.DOWN_RIGHT_8);
-
-    teeth.add(ul1);
-    teeth.add(ul2);
-    teeth.add(ul3);
-    teeth.add(ul4);
-    teeth.add(ul5);
-    teeth.add(ul6);
-    teeth.add(ul7);
-    teeth.add(ul8);
-
-    teeth.add(ur1);
-    teeth.add(ur2);
-    teeth.add(ur3);
-    teeth.add(ur4);
-    teeth.add(ur5);
-    teeth.add(ur6);
-    teeth.add(ur7);
-    teeth.add(ur8);
-
-    teeth.add(dl1);
-    teeth.add(dl2);
-    teeth.add(dl3);
-    teeth.add(dl4);
-    teeth.add(dl5);
-    teeth.add(dl6);
-    teeth.add(dl7);
-    teeth.add(dl8);
-
-    teeth.add(dr1);
-    teeth.add(dr2);
-    teeth.add(dr3);
-    teeth.add(dr4);
-    teeth.add(dr5);
-    teeth.add(dr6);
-    teeth.add(dr7);
-    teeth.add(dr8);
+    for(int i = 1; i <= TEETH_IN_BUCKET; i++) {
+      fillTeeth(i, ToothBucket.DOWN_RIGHT, teeth);
+    }
 
     teeth.stream().forEach(t -> {
       t.setPatient(patient);
@@ -236,6 +117,13 @@ public class PatientServiceImpl implements PatientService {
     });
 
     dentistService.save(dentist);
+  }
+
+  private void fillTeeth(int index, ToothBucket toothBucket, Set<Tooth> teeth) {
+    Tooth tooth = new Tooth();
+    tooth.setToothBucket(toothBucket);
+    tooth.setToothNumber(index);
+    teeth.add(tooth);
   }
 
   @Override

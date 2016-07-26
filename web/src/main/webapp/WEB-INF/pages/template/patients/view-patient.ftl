@@ -1,13 +1,28 @@
 <div class="white">
   <div>
-    <div ng-controller="ViewPatientController">
+    <div>
       <div class="row">
-        <div class="col-xs-12 col-sm-8 col-md-9">
-          <h1>
-            <div>{{patient.firstName}} {{patient.lastName}}</div>
-          </h1>
-          <div class="btn btn-warning" ng-repeat="t in patient.teeth">
-            {{t.id}}, {{t.toothGrid}},
+        <div class="col-xs-12 col-sm-8 col-md-12">
+          <div class="text-center">
+            <h1 >{{patient.firstName}} {{patient.lastName}}</h1>
+            <span>{{patient.birthday}}</span>
+            <span>{{patient.phone}}</span>
+          </div>
+          <div class="row text-center">
+            <div class="btn btn-warning" ng-repeat="t in patient.teethUL | orderBy : '-toothNumber'">
+              {{t.toothNumber}}
+            </div>
+            <div class="btn btn-warning" ng-repeat="t in patient.teethUR | orderBy : '+toothNumber'">
+              {{t.toothNumber}}
+            </div>
+          </div>
+          <div class="row text-center ">
+            <div class="btn btn-warning" ng-repeat="t in patient.teethDL | orderBy : '-toothNumber'">
+              {{t.toothNumber}}
+            </div>
+            <div class="btn btn-warning" ng-repeat="t in patient.teethDR | orderBy : '+toothNumber'">
+              {{t.toothNumber}}
+            </div>
           </div>
         </div>
       </div>

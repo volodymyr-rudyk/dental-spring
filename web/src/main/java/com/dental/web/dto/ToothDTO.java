@@ -1,6 +1,6 @@
 package com.dental.web.dto;
 
-import com.dental.persistence.helperbean.ToothGrid;
+import com.dental.persistence.helperbean.ToothBucket;
 import com.dental.persistence.helperbean.ToothState;
 
 import java.util.Set;
@@ -12,7 +12,8 @@ public class ToothDTO {
   private Long id;
   private Set<ToothCureDTO> cures;
   private ToothState toothState;
-  private ToothGrid toothGrid;
+  private ToothBucket toothBucket;
+  private Integer toothNumber;
 
   public Long getId() {
     return id;
@@ -38,11 +39,19 @@ public class ToothDTO {
     this.toothState = toothState;
   }
 
-  public ToothGrid getToothGrid() {
-    return toothGrid;
+  public ToothBucket getToothBucket() {
+    return toothBucket;
   }
 
-  public void setToothGrid(ToothGrid toothGrid) {
-    this.toothGrid = toothGrid;
+  public void setToothBucket(ToothBucket toothBucket) {
+    this.toothBucket = toothBucket;
+  }
+
+  public Integer getToothNumber() {
+    return toothNumber;
+  }
+
+  public void setToothNumber(Integer toothNumber) {
+    this.toothNumber = toothNumber;
   }
 }

@@ -1,6 +1,6 @@
 package com.dental.persistence.entity;
 
-import com.dental.persistence.helperbean.ToothGrid;
+import com.dental.persistence.helperbean.ToothBucket;
 import com.dental.persistence.helperbean.ToothState;
 
 import javax.persistence.*;
@@ -17,7 +17,8 @@ public class Tooth extends BaseEntity implements Serializable{
 
   private Long id;
   private ToothState toothState;
-  private ToothGrid toothGrid;
+  private ToothBucket toothBucket;
+  private Integer toothNumber;
   private Set<ToothCure> cures = new HashSet<>();
   private Patient patient;
 
@@ -34,7 +35,7 @@ public class Tooth extends BaseEntity implements Serializable{
     this.id = id;
   }
 
-  @Column(name = "toothstate")
+  @Column(name = "tooth_state")
   @Enumerated(EnumType.STRING)
   public ToothState getToothState() {
     return toothState;
@@ -44,14 +45,14 @@ public class Tooth extends BaseEntity implements Serializable{
     this.toothState = toothState;
   }
 
-  @Column(name = "toothgrid")
+  @Column(name = "tooth_bucket")
   @Enumerated(EnumType.STRING)
-  public ToothGrid getToothGrid() {
-    return toothGrid;
+  public ToothBucket getToothBucket() {
+    return toothBucket;
   }
 
-  public void setToothGrid(ToothGrid toothGrid) {
-    this.toothGrid = toothGrid;
+  public void setToothBucket(ToothBucket toothBucket) {
+    this.toothBucket = toothBucket;
   }
 
   @OneToMany(cascade = CascadeType.ALL)
@@ -71,5 +72,14 @@ public class Tooth extends BaseEntity implements Serializable{
 
   public void setPatient(Patient patient) {
     this.patient = patient;
+  }
+
+  @Column(name = "tooth_number")
+  public Integer getToothNumber() {
+    return toothNumber;
+  }
+
+  public void setToothNumber(Integer toothNumber) {
+    this.toothNumber = toothNumber;
   }
 }

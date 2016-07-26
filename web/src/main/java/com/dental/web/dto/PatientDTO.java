@@ -16,7 +16,11 @@ public class PatientDTO {
   private Date birthday;
   private String gender;
   private String phone;
-  private Set<ToothDTO> teeth = new HashSet<>();
+
+  private Set<ToothDTO> teethUL = new HashSet<>();
+  private Set<ToothDTO> teethUR = new HashSet<>();
+  private Set<ToothDTO> teethDL = new HashSet<>();
+  private Set<ToothDTO> teethDR = new HashSet<>();
 
   public Long getId() {
     return id;
@@ -82,11 +86,35 @@ public class PatientDTO {
     this.phone = phone;
   }
 
-  public Set<ToothDTO> getTeeth() {
-    return teeth;
+  public Set<ToothDTO> getTeethUL() {
+    return teethUL;
   }
 
-  public void setTeeth(Set<ToothDTO> teeth) {
-    this.teeth = teeth;
+  public void setTeethUL(Set<ToothDTO> teethUL) {
+    this.teethUL = teethUL;
+  }
+
+  public Set<ToothDTO> getTeethUR() {
+    return teethUR;
+  }
+
+  public void setTeethUR(Set<ToothDTO> teethUR) {
+    this.teethUR = teethUR;
+  }
+
+  public Set<ToothDTO> getTeethDL() {
+    return teethDL;
+  }
+
+  public void setTeethDL(Set<ToothDTO> teethDL) {
+    this.teethDL = teethDL;
+  }
+
+  public Set<ToothDTO> getTeethDR() {
+    return teethDR;
+  }
+
+  public void setTeethDR(Set<ToothDTO> teethDR) {
+    this.teethDR = teethDR;
   }
 }
