@@ -16,7 +16,6 @@ import java.util.Set;
 @Table(name = "patient")
 public class Patient extends BaseEntity implements Serializable {
 
-  private Long id;
   private String email;
   private String firstName;
   private String middleName;
@@ -27,18 +26,6 @@ public class Patient extends BaseEntity implements Serializable {
   private String phone;
   private Set<Dentist> dentists = new HashSet<>(0);
   private Set<Tooth> teeth = new HashSet<>(0);
-
-  @Id
-  @Column(name = "id")
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Override
-  public Long getId() {
-    return id;
-  }
-
-  public void setId(Long id) {
-    this.id = id;
-  }
 
   @Column(name = "email")
   public String getEmail() {

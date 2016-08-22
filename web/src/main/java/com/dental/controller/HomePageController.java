@@ -1,6 +1,7 @@
 package com.dental.controller;
 
 import com.dental.exception.NotFoundException;
+import com.dental.view.ViewConfig;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,11 +16,10 @@ import javax.servlet.http.HttpServletResponse;
 @Controller
 public class HomePageController extends AbstractBasePageController {
 
-  private static String viewName = "index";
 
   @RequestMapping(value = "/")
   public String homePage(HttpServletRequest request, HttpServletResponse response, Model model) throws NotFoundException {
-    return this.renderView(viewName);
+    return this.renderView(ViewConfig.PAGE_INDEX);
   }
 
   @Override

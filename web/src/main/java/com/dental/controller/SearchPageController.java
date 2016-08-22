@@ -1,6 +1,7 @@
 package com.dental.controller;
 
 import com.dental.view.ViewConfig;
+import com.dental.view.ViewFolderConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -18,11 +19,11 @@ public class SearchPageController extends AbstractBasePageController {
 
   @RequestMapping(method = RequestMethod.GET)
   public String search() {
-    return this.renderView(PAGE_SEARCH);
+    return this.renderView(ViewConfig.PAGE_SEARCH);
   }
 
   @Override
   protected String getViewFolder() {
-    return ViewConfig.FOLDER_SEARCH;
+    return ViewFolderConfig.FOLDER_SEARCH;
   }
 }

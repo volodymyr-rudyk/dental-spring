@@ -1,7 +1,7 @@
 package com.dental.controller;
 
 import com.dental.exception.NotFoundException;
-import com.dental.view.ViewConfig;
+import com.dental.view.ViewFolderConfig;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -37,7 +37,7 @@ public class AdminPageController extends AbstractBasePageController {
 
   @Override
   protected String getViewFolder() {
-    return ViewConfig.FOLDER_ADMIN;
+    return ViewFolderConfig.FOLDER_ADMIN;
   }
 
 }

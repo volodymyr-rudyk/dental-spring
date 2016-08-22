@@ -18,7 +18,9 @@ import java.util.Properties;
 
 @Configuration
 @EnableTransactionManagement
+//@EnableJpaRepositories("com.dental.persistence.repository")
 @PropertySource(value = {"classpath:datasource.properties"})
+//@Profile("one")
 public class DaoConfig {
 
   @Autowired
@@ -43,13 +45,13 @@ public class DaoConfig {
     LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
     entityManagerFactoryBean.setDataSource(dataSource());
     entityManagerFactoryBean.setPackagesToScan(env.getRequiredProperty(DbConfig.PACKAGES_SCAN));
-    entityManagerFactoryBean.setJpaVendorAdapter(jpaVendorAdapater());
+    entityManagerFactoryBean.setJpaVendorAdapter(jpaVendorAdapter());
     entityManagerFactoryBean.setJpaProperties(hibernateProperties());
     return entityManagerFactoryBean;
   }
 
   @Bean
-  public JpaVendorAdapter jpaVendorAdapater() {
+  public JpaVendorAdapter jpaVendorAdapter() {
     HibernateJpaVendorAdapter adapter = new HibernateJpaVendorAdapter();
     adapter.setDatabase(Database.valueOf(env.getRequiredProperty(DbConfig.DB_ENGINE)));
     adapter.setShowSql(env.getRequiredProperty(DbConfig.HIBERNATE_SHOW_SQL, Boolean.class));

@@ -15,25 +15,12 @@ import java.util.Set;
 @Table(name = "tooth")
 public class Tooth extends BaseEntity implements Serializable{
 
-  private Long id;
   private ToothState toothState;
   private ToothBucket toothBucket;
   private Integer toothNumber;
   private Set<ToothCure> cures = new HashSet<>();
   private Patient patient;
 
-
-  @Id
-  @Column(name = "id")
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Override
-  public Long getId() {
-    return id;
-  }
-
-  public void setId(Long id) {
-    this.id = id;
-  }
 
   @Column(name = "tooth_state")
   @Enumerated(EnumType.STRING)

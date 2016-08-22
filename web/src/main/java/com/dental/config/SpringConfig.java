@@ -8,12 +8,16 @@ import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.i18n.CookieLocaleResolver;
+import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver;
 
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by light on 1/6/2015.
@@ -21,6 +25,7 @@ import java.util.List;
 
 @EnableWebMvc
 @Configuration
+//@Profile("one")
 public class SpringConfig extends WebMvcConfigurerAdapter {
   private final String CSS_RESOURCE = "/css/**";
   private final String CSS_RESOURCE_LOCATION = "/assets/css/";
@@ -38,7 +43,6 @@ public class SpringConfig extends WebMvcConfigurerAdapter {
   public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
     super.addArgumentResolvers(argumentResolvers);
     argumentResolvers.add(new LoggedDentistMethodParameterResolver());
-    float f = 2;
   }
 
   @Bean
@@ -75,4 +79,26 @@ public class SpringConfig extends WebMvcConfigurerAdapter {
     registry.addResourceHandler(IMAGE_RESOURCE).addResourceLocations(IMAGE_RESOURCE_LOCATION);
     registry.addResourceHandler(BOWER_RESOURCE).addResourceLocations(BOWER_RESOURCE_LOCATION);
   }
+
+  @Bean
+  public LocaleChangeInterceptor localeChangeInterceptor() {
+    LocaleChangeInterceptor localeChangeInterceptor = new LocaleChangeInterceptor();
+    localeChangeInterceptor.setParamName("lang");
+    return localeChangeInterceptor;
+  }
+
+  @Override
+  public void addInterceptors(InterceptorRegistry registry) {
+    registry.addInterceptor(localeChangeInterceptor());
+  }
+
+  @Bean
+  public CookieLocaleResolver localeResolver() {
+    CookieLocaleResolver cookieLocaleResolver = new CookieLocaleResolver();
+    cookieLocaleResolver.setDefaultLocale(new Locale("ua", "UA"));
+    cookieLocaleResolver.setCookieName("language");
+    cookieLocaleResolver.setCookieMaxAge(3600);
+    return cookieLocaleResolver;
+  }
+
 }

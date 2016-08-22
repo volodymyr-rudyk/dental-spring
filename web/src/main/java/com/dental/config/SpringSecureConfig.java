@@ -18,6 +18,7 @@ import org.springframework.security.web.authentication.logout.SecurityContextLog
  */
 @EnableWebSecurity
 @Configuration
+//@Profile("one")
 public class SpringSecureConfig extends WebSecurityConfigurerAdapter {
 
   @Autowired

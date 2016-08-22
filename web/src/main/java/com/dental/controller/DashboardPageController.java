@@ -3,11 +3,10 @@ package com.dental.controller;
 import com.dental.exception.NotFoundException;
 import com.dental.init.LoggedDentist;
 import com.dental.persistence.entity.Dentist;
-import com.dental.provider.DentalUserDetails;
 import com.dental.service.DentistService;
 import com.dental.view.ViewConfig;
+import com.dental.view.ViewFolderConfig;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,7 +22,6 @@ import javax.servlet.http.HttpServletResponse;
 @RequestMapping("/dashboard")
 public class DashboardPageController extends AbstractBasePageController {
 
-  public static final String DASHBOARD_VIEW = "dashboard";
 
   @Autowired
   private DentistService dentistService;
@@ -33,11 +31,11 @@ public class DashboardPageController extends AbstractBasePageController {
                           ModelMap model) throws NotFoundException {
     Dentist dentist = dentistService.getFull(loggedDentist.getId());
     model.put("dentist", dentist);
-    return renderView(DASHBOARD_VIEW);
+    return renderView(ViewConfig.PAGE_DASHBOARD);
   }
 
   @Override
   protected String getViewFolder() {
-    return ViewConfig.FOLDER_DASHBOARD;
+    return ViewFolderConfig.FOLDER_DASHBOARD;
   }
 }

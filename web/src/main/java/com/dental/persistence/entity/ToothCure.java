@@ -11,22 +11,9 @@ import java.util.Date;
 @Table(name = "tooth_cure")
 public class ToothCure extends BaseEntity implements Serializable {
 
-  private Long id;
   private String cure;
   private Date createdOn;
   private Tooth tooth;
-
-  @Id
-  @Column(name = "id")
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Override
-  public Long getId() {
-    return id;
-  }
-
-  public void setId(Long id) {
-    this.id = id;
-  }
 
   @Column(name = "cure")
   public String getCure() {

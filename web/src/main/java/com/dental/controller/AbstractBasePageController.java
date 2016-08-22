@@ -21,7 +21,7 @@ import java.io.IOException;
 
 @Controller
 @ControllerAdvice
-public abstract class AbstractBasePageController implements PageController {
+public abstract class AbstractBasePageController {
 
   private static final Logger LOG = LoggerFactory.getLogger(AbstractBasePageController.class);
 

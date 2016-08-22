@@ -1,10 +1,27 @@
 package com.dental.persistence.entity;
 
+import javax.persistence.*;
+
 /**
  * Created by vrudyk on 12/3/2015.
  */
-public abstract class BaseEntity {
+@MappedSuperclass
+public class BaseEntity {
 
-  public abstract Long getId();
+  protected Long id;
+
+  @Id
+  @Column(name = "id")
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  public Long getId() {
+    return id;
+  }
+
+  public void setId(Long id) {
+    this.id = id;
+  }
+
+
+//  public abstract Long getId();
 
 }

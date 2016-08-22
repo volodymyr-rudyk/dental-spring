@@ -3,7 +3,6 @@ package com.dental.persistence.impl;
 import com.dental.persistence.entity.Tooth;
 import com.dental.persistence.repository.AbstractRepository;
 import com.dental.persistence.repository.ToothRepository;
-import org.hibernate.Hibernate;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -40,7 +39,7 @@ public class ToothRepositoryImpl extends AbstractRepository<Tooth> implements To
     List list = query.getResultList();
     if(list.size() > 0) {
       Tooth t = (Tooth) list.get(0);
-      Hibernate.initialize(t.getCures());
+//      Hibernate.initialize(t.getCures());
       return t;
     }
     return null;

@@ -9,19 +9,19 @@
             <span>{{patient.phone}}</span>
           </div>
           <div class="row text-center">
-            <div class="btn btn-warning" ng-repeat="t in patient.teethUL | orderBy : '-toothNumber'">
-              {{t.toothNumber}}
+            <div class="btn tooth blue" ng-repeat="t in patient.teethUL | orderBy : '-toothNumber'">
+              <#--{{t.toothNumber}}-->
             </div>
-            <div class="btn btn-warning" ng-repeat="t in patient.teethUR | orderBy : '+toothNumber'">
-              {{t.toothNumber}}
+            <div class="btn tooth red" ng-repeat="t in patient.teethUR | orderBy : '+toothNumber'">
+              <#--{{t.toothNumber}}-->
             </div>
           </div>
           <div class="row text-center ">
-            <div class="btn btn-warning" ng-repeat="t in patient.teethDL | orderBy : '-toothNumber'">
-              {{t.toothNumber}}
+            <div class="btn tooth orange" ng-repeat="t in patient.teethDL | orderBy : '-toothNumber'">
+              <#--{{t.toothNumber}}-->
             </div>
-            <div class="btn btn-warning" ng-repeat="t in patient.teethDR | orderBy : '+toothNumber'">
-              {{t.toothNumber}}
+            <div class="btn tooth green" ng-repeat="t in patient.teethDR | orderBy : '+toothNumber'">
+              <#--{{t.toothNumber}}-->
             </div>
           </div>
         </div>

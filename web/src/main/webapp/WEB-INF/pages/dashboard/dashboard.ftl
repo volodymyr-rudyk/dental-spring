@@ -6,12 +6,6 @@ js=["main-module", "dashboard-module"] bowerdist=["jquery"] bower=["angular", "a
 <section class="white">
   <div class="container">
     <div class="row">
-      <#--<div class="col-md-2">-->
-        <#--<div class="list-group">-->
-          <#--<a href="/dashboard/patient" class="list-group-item">Patients</a>-->
-        <#--</div>-->
-      <#--</div>-->
-
       <#--CONTENT-->
       <ul class="nav nav-tabs">
         <li class="active"><a href="#">Home</a></li>
@@ -23,11 +17,15 @@ js=["main-module", "dashboard-module"] bowerdist=["jquery"] bower=["angular", "a
             <li><a href="#">Submenu 1-3</a></li>
           </ul>
         </li>
-        <li><a href="/dashboard/patient" >Patients</a>            </li>
-
+        <li><a href="/dashboard/patient" >Patients</a></li>
         <li><a href="#">Menu 2</a></li>
         <li><a href="#">Menu 3</a></li>
       </ul>
+
+      <div>
+        <h2>General Info</h2>
+        Patients count : #
+      </div>
     </div>
   </div>
 </section>

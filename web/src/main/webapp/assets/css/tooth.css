@@ -1,23 +1,23 @@
 .tooth {
     width: 35px;
     height: 35px;
-    background-image: url("../images/teeth13.png");
+    background-image: url("../img/teeth13.png");
 }
 
-.red {
+.tooth.red {
     background-position: 0;
 }
 
-.orange {
+.tooth.orange {
     background-position: 35px;
 }
 
-.blue {
+.tooth.blue {
     background-position: 70px;
 }
 
-.green {
-    background-position: 105px;
+.tooth.green {
+    background-position: 103px;
 }
 
 .selected {

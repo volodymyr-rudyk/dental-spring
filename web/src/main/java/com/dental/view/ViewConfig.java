@@ -1,14 +1,14 @@
 package com.dental.view;
 
 /**
- * Created by admin on 26.05.2015.
+ * Created by vrudyk on 8/15/2016.
  */
-public class ViewConfig {
-
-  public static final String FOLDER_DASHBOARD = "/dashboard";
-  public static final String FOLDER_PATIENT = "/patient";
-  public static final String FOLDER_PROFILE = "/profile";
-  public static final String FOLDER_SEARCH = "/search";
-  public static final String FOLDER_ADMIN = "/admin";
-  public static final String FOLDER_AUTH = "/auth";
+public interface ViewConfig {
+  String PAGE_LOGIN = "login";
+  String PAGE_SIGNUP = "signup";
+  String PAGE_PROFILE = "profile";
+  String PAGE_SEARCH = "search";
+  String PAGE_DASHBOARD = "dashboard";
+  String PAGE_INDEX = "index";
+  String PAGE_PATIENT_LIST = "list";
 }

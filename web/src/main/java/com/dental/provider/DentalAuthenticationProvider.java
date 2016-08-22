@@ -10,7 +10,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
 /**
@@ -33,8 +32,7 @@ public class DentalAuthenticationProvider implements AuthenticationProvider {
 
     UserDetails userDetails = userDetailsService.loadUserByUsername(userName);
     if (userDetails.getPassword().equals(password)) {
-      return new UsernamePasswordAuthenticationToken(userDetails,
-          userDetails.getPassword(), userDetails.getAuthorities());
+      return new UsernamePasswordAuthenticationToken(userDetails, userDetails.getPassword(), userDetails.getAuthorities());
     }
     throw new BadCredentialsException("user name not found, bad credentials");
   }

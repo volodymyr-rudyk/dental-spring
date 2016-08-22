@@ -39,8 +39,7 @@ public class WepAppInit implements WebApplicationInitializer {
   @Override
   public void onStartup(ServletContext servletContext) {
     AnnotationConfigWebApplicationContext rootContext = new AnnotationConfigWebApplicationContext();
-    rootContext.register(AppConfig.class);
-//    rootContext.setConfigLocation("AppConfig");
+    rootContext.scan("com.dental.config");
     servletContext.addListener(new ContextLoaderListener(rootContext));
 
     DispatcherServlet dispatcherServlet = new DispatcherServlet(rootContext);

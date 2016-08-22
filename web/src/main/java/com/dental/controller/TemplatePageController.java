@@ -17,7 +17,8 @@ public class TemplatePageController extends AbstractBasePageController {
   private static final String VIEW_FOLDER = "template";
 
   @RequestMapping("/template/{folder}/{name}")
-  public String template(HttpServletRequest servletRequest, @PathVariable("folder") String folder,
+  public String template(HttpServletRequest servletRequest,
+                         @PathVariable("folder") String folder,
                          @PathVariable("name") String templateName) throws NotFoundException {
     if (StringUtils.isEmpty(folder) || StringUtils.isEmpty(templateName)) {
       throw new NotFoundException("empty path or template");
