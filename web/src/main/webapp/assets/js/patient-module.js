@@ -26,10 +26,12 @@ var patientModule = angular.module('patient', ['ngRoute', 'dental'])
   .controller('NewPatientController', NewPatientController)
   .controller('EditPatientController', EditPatientController)
   .controller('ViewPatientController', ViewPatientController)
-  .service('PatientService', PatientService);
+  .controller('ToothController', ToothController)
+  .service('PatientService', PatientService)
+  .service('ToothService', ToothService);
 
 // Controllers
-function PatientController($scope, $http, PatientService) {
+function PatientController($scope, PatientService) {
   PatientService.getAll().then(function (response) {
     $scope.patients = response;
     console.log(response);
@@ -37,7 +39,7 @@ function PatientController($scope, $http, PatientService) {
     console.error(error)
   });
 }
-function NewPatientController($scope, $http, PatientService) {
+function NewPatientController($scope, PatientService) {
   $scope.patient = {};
   this.create = function (isValid) {
     if (isValid) {
@@ -69,7 +71,7 @@ function EditPatientController($scope, $routeParams, PatientService) {
     }
   };
 };
-function ViewPatientController($scope, $routeParams, PatientService) {
+function ViewPatientController($scope, $routeParams, PatientService, ToothService) {
   $scope.patient = {};
   $scope.patient.id = $routeParams.id;
   PatientService.get($scope.patient).then(function (response) {
@@ -78,6 +80,17 @@ function ViewPatientController($scope, $routeParams, PatientService) {
   }, function error(error) {
     console.error(error)
   });
+};
+function ToothController($scope, ToothService) {
+  this.addCure = function addCure(cure) {
+    ToothService.addCure(cure, $scope.patient.id, $scope.selectedTooth.id)
+      .then(function (response) {
+        $scope.selectedTooth.cures.push(response);
+        console.log(response);
+      }, function error(error) {
+        console.error(error)
+      });
+  };
 };
 
 function PatientService($http, $q, Rest, ResponseHandlers) {
@@ -127,4 +140,34 @@ function PatientService($http, $q, Rest, ResponseHandlers) {
     }).error(ResponseHandlers.onErrorResponse);
     return defer.promise;
   };
+}
+function ToothService($http, $q, Rest, ResponseHandlers) {
+  this.get = function (patientId, toothId) {
+    var defer = $q.defer();
+    var params = "?patientId=" + patientId + "&toothId=" + toothId;
+    $http({
+      url: Rest.toothCures + params,
+      method: 'GET',
+      data: {},
+      headers: {'Content-Type': 'application/json'}
+    }).success(function (data) {
+      defer.resolve(data);
+    }).error(ResponseHandlers.onErrorResponse);
+    return defer.promise;
+  };
+  this.addCure = function addCure (cure, patientId, toothId) {
+    var defer = $q.defer();
+    $http({
+      url: Rest.toothCures,
+      method: 'POST',
+      data: {
+        cure : cure,
+        patientId : patientId,
+        toothId : toothId
+      },
+    }).success(function (data) {
+      defer.resolve(data);
+    }).error(ResponseHandlers.onErrorResponse);
+    return defer.promise;
+  }
 }

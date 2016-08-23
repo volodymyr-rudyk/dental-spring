@@ -13,8 +13,9 @@ import java.util.List;
 
 @Repository
 public interface ToothRepository extends CrudRepository<Tooth, Long> {
+
   List<Tooth> findAllByPatient(Patient patient);
-//  Tooth findByIdAndPatient(Long toothId, Patient patient);
 
   Tooth findByIdAndPatientId(Long toothId, Long patientId);
+
 }

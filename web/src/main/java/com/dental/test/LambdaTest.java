@@ -1,4 +1,4 @@
-package com.dental;
+package com.dental.test;
 
 import java.util.Arrays;
 import java.util.List;

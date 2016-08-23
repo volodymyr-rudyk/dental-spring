@@ -129,4 +129,12 @@ public class DTOUtils {
   public static Set<PatientDTO> convert(Set<Patient> patients) {
     return patients.stream().map(patientToPatientDTO).collect(Collectors.toSet());
   }
+
+  public static ToothCureDTO convert(ToothCure toothCure) {
+    ToothCureDTO toothCureDTO = new ToothCureDTO();
+    toothCureDTO.setCure(toothCure.getCure());
+    toothCureDTO.setCreatedOn(toothCure.getCreatedOn());
+    toothCureDTO.setId(toothCure.getId());
+    return toothCureDTO;
+  }
 }

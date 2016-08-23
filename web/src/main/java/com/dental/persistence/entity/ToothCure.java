@@ -15,6 +15,14 @@ public class ToothCure extends BaseEntity implements Serializable {
   private Date createdOn;
   private Tooth tooth;
 
+  public ToothCure() {
+
+  }
+
+  public ToothCure(String cure) {
+    this.cure = cure;
+  }
+
   @Column(name = "cure")
   public String getCure() {
     return cure;

@@ -5,7 +5,7 @@ dentalApp
     signup : '/rest/signup',
     dashboard : '/rest/dashboard',
     patients : '/rest/patients',
-    tooth : '/rest/tooth',
+    toothCures : '/rest/tooth/cures',
     profile : '/rest/profile'
   })
   .constant('Navigation', {
