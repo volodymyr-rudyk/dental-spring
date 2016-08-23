@@ -17,8 +17,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Collection;
-import java.util.Collections;
 import java.util.Optional;
 import java.util.Set;
 
@@ -37,43 +35,42 @@ public class PatientServiceImpl implements PatientService {
   private DentistService dentistService;
 
   @Override
-  public Patient get(String firstName, String lastName) {
-    return patientRepository.findByFirstAndLastName(firstName, lastName);
+  public Patient findByFirstNameAndLastName(String firstName, String lastName) {
+    return patientRepository.findByFirstNameAndLastName(firstName, lastName);
   }
 
   @Override
-  public Patient getFull(Long patientId) {
-    return patientRepository.getFull(patientId);
+  @Transactional
+  public Patient load(Long patientId) {
+    Patient patient = patientRepository.findOne(patientId);
+    Hibernate.initialize(patient.getTeeth());
+    return patient;
   }
 
-  @Override
-  public Collection<Patient> getList(Dentist dentistBean) {
-    if (dentistBean == null) return Collections.emptyList();
-    Collection<Patient> patients = patientRepository.getPatientsByDentist(dentistBean.getId());
-    return patients;
-  }
+//  @Override
+//  public Collection<Patient> getList(Dentist dentistBean) {
+//    if (dentistBean == null) return Collections.emptyList();
+//    Collection<Patient> patients = patientRepository.findAllByDentists(Arrays.asList(dentistBean));
+//    return patients;
+//  }
 
   @Override
   public Patient get(Long id) {
-    return patientRepository.get(id);
+    return patientRepository.findOne(id);
   }
 
   @Override
   @Transactional
   public boolean update(PatientDTO patientDTO, Dentist loggedInDentist) {
-    Collection<Patient> patients = patientRepository.getPatientsByDentist(loggedInDentist.getId());
-    Optional<Patient> optional = patients.stream().filter((p) -> p.getId().equals(patientDTO.getId())).findFirst();
-    optional.ifPresent(p -> {
-      p.setFirstName(patientDTO.getFirstName());
-      p.setLastName(patientDTO.getLastName());
-      p.setMiddleName(patientDTO.getMiddleName());
-      p.setMiddleName(patientDTO.getMiddleName());
-      p.setAddress(patientDTO.getAddress());
-      p.setBirthday(patientDTO.getBirthday());
-      p.setGender(Gender.get(patientDTO.getGender()));
-      p.setPhone(patientDTO.getPhone());
-      patientRepository.update(p);
-    });
+    Patient patient = patientRepository.findOne(patientDTO.getId());
+    patient.setFirstName(patientDTO.getFirstName());
+    patient.setMiddleName(patientDTO.getMiddleName());
+    patient.setLastName(patientDTO.getLastName());
+    patient.setAddress(patientDTO.getAddress());
+    patient.setBirthday(patientDTO.getBirthday());
+    patient.setPhone(patientDTO.getPhone());
+    patient.setGender(Gender.get(patientDTO.getGender()));
+    patientRepository.save(patient);
     return true;
   }
 
@@ -93,7 +90,6 @@ public class PatientServiceImpl implements PatientService {
     dentist.getPatients().add(patient);
 
     Set<Tooth> teeth = patient.getTeeth();
-
 
     for(int i = 1; i <= TEETH_IN_BUCKET; i++) {
       fillTeeth(i, ToothBucket.UP_LEFT, teeth);

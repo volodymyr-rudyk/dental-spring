@@ -35,8 +35,8 @@ public class ToothRestController extends BaseRestController {
   public ResponseEntity<ToothDTO> getTooth(HttpServletRequest httpServletRequest, @LoggedDentist Dentist loggedDentist,
                                            ToothRequestBean toothRequestBean)  {
 
-    Tooth tooth = toothService.get(toothRequestBean.getToothId(), toothRequestBean.getPatientId());
-    ToothDTO toothDTO = DTOUtils.convert(tooth);
+    Tooth tooth = toothService.load(toothRequestBean.getToothId(), toothRequestBean.getPatientId());
+    ToothDTO toothDTO = DTOUtils.convertDeep(tooth);
     ResponseEntity<ToothDTO> responseEntity = new ResponseEntity<>(toothDTO, HttpStatus.OK);
     return responseEntity;
   }

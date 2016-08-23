@@ -29,7 +29,7 @@ public class DashboardPageController extends AbstractBasePageController {
   @RequestMapping(method = RequestMethod.GET)
   public String dashboard(HttpServletRequest request, HttpServletResponse response, @LoggedDentist Dentist loggedDentist,
                           ModelMap model) throws NotFoundException {
-    Dentist dentist = dentistService.getFull(loggedDentist.getId());
+    Dentist dentist = dentistService.load(loggedDentist.getId());
     model.put("dentist", dentist);
     return renderView(ViewConfig.PAGE_DASHBOARD);
   }

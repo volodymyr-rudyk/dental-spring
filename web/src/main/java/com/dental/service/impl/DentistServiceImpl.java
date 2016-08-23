@@ -4,8 +4,10 @@ import com.dental.bean.DentistBean;
 import com.dental.persistence.entity.Dentist;
 import com.dental.persistence.repository.DentistRepository;
 import com.dental.service.DentistService;
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Created by light on 27.05.2015.
@@ -18,12 +20,15 @@ public class DentistServiceImpl implements DentistService {
 
   @Override
   public Dentist get(Long id) {
-    return dentistRepository.get(id);
+    return dentistRepository.findOne(id);
   }
 
   @Override
-  public Dentist getFull(Long id) {
-    return dentistRepository.loadFull(id);
+  @Transactional
+  public Dentist load(Long id) {
+    Dentist dentist = dentistRepository.findOne(id);
+    Hibernate.initialize(dentist.getPatients());
+    return dentist;
   }
 
   @Override
@@ -38,13 +43,13 @@ public class DentistServiceImpl implements DentistService {
   }
 
   @Override
-  public void update(DentistBean dentistBean, Dentist profile) {
-    profile.setFirstName(dentistBean.getFirstName());
-    profile.setMiddleName(dentistBean.getMiddleName());
-    profile.setLastName(dentistBean.getLastName());
-    profile.setBirthday(dentistBean.getBirthday());
-    profile.setPhone(dentistBean.getPhone());
-    dentistRepository.update(profile);
+  public void update(DentistBean dentistBean, Dentist dentist) {
+    dentist.setFirstName(dentistBean.getFirstName());
+    dentist.setMiddleName(dentistBean.getMiddleName());
+    dentist.setLastName(dentistBean.getLastName());
+    dentist.setBirthday(dentistBean.getBirthday());
+    dentist.setPhone(dentistBean.getPhone());
+    dentistRepository.save(dentist);
   }
 
   private Dentist transform(DentistBean dentistBean) {

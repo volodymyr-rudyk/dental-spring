@@ -26,13 +26,13 @@ public class UserDetailsServiceImpl implements UserDetailsService {
   private UserRepository userRepository;
 
   @Override
-  public UserDetails loadUserByUsername(final String username) throws UsernameNotFoundException {
-    final User user = userRepository.loadUserByLogin(username);
+  public UserDetails loadUserByUsername(final String email) throws UsernameNotFoundException {
+    final User user = userRepository.findByEmail(email);
     if (user == null)
-      throw new UsernameNotFoundException("user name not found" + username);
+      throw new UsernameNotFoundException("user name not found" + email);
 
     List<SimpleGrantedAuthority> authorities = new ArrayList<>();
     authorities.add(roleUser);
-    return new DentalUserDetails(username, user.getPassword(), authorities, user);
+    return new DentalUserDetails(email, user.getPassword(), authorities, user);
   }
 }

@@ -30,8 +30,17 @@ public class DTOUtils {
     toothDTO.setToothState(t.getToothState());
     toothDTO.setToothBucket(t.getToothBucket());
     toothDTO.setToothNumber(t.getToothNumber());
-//    Set<ToothCureDTO> toothCureDTOSet = t.getCures().stream().map(convertToothCureToToothCureDto).collect(Collectors.toSet());
-//    toothDTO.setCures(toothCureDTOSet);
+    return toothDTO;
+  };
+
+  static Function<Tooth, ToothDTO> convertDeepToothToToothDto = (t) -> {
+    ToothDTO toothDTO = new ToothDTO();
+    toothDTO.setId(t.getId());
+    toothDTO.setToothState(t.getToothState());
+    toothDTO.setToothBucket(t.getToothBucket());
+    toothDTO.setToothNumber(t.getToothNumber());
+    Set<ToothCureDTO> toothCureDTOSet = t.getCures().stream().map(convertToothCureToToothCureDto).collect(Collectors.toSet());
+    toothDTO.setCures(toothCureDTOSet);
     return toothDTO;
   };
 
@@ -45,7 +54,29 @@ public class DTOUtils {
     dentistDTO.setPhone(dentist.getPhone());
     return dentistDTO;
   };
-
+  private static Function<Patient, PatientDTO> patientToPatientDTO = patient -> {
+    PatientDTO patientDTO = new PatientDTO();
+    patientDTO.setId(patient.getId());
+    patientDTO.setFirstName(patient.getFirstName());
+    patientDTO.setLastName(patient.getLastName());
+    patientDTO.setMiddleName(patient.getMiddleName());
+    patientDTO.setAddress(patient.getAddress());
+    patientDTO.setGender(patient.getGender().name());
+    patientDTO.setBirthday(patient.getBirthday());
+    patientDTO.setPhone(patient.getPhone());
+    return patientDTO;
+  };
+  private static Function<PatientDTO, Patient> patientDTOPToPatient = patientDTO -> {
+    Patient patient = new Patient();
+    patient.setFirstName(patientDTO.getFirstName());
+    patient.setLastName(patientDTO.getLastName());
+    patient.setAddress(patientDTO.getAddress());
+    patient.setMiddleName(patientDTO.getMiddleName());
+    patient.setBirthday(patientDTO.getBirthday());
+    patient.setGender(Gender.get(patientDTO.getGender()));
+    patient.setPhone(patientDTO.getPhone());
+    return patient;
+  };
 
   public static DentistDTO convert(Dentist dentist) {
     DentistDTO dentistDTO = new DentistDTO();
@@ -63,19 +94,6 @@ public class DTOUtils {
     }
     return dentistDTO;
   }
-
-  private static Function<Patient, PatientDTO> patientToPatientDTO = patient -> {
-    PatientDTO patientDTO = new PatientDTO();
-    patientDTO.setId(patient.getId());
-    patientDTO.setFirstName(patient.getFirstName());
-    patientDTO.setLastName(patient.getLastName());
-    patientDTO.setMiddleName(patient.getMiddleName());
-    patientDTO.setAddress(patient.getAddress());
-    patientDTO.setGender(patient.getGender().name());
-    patientDTO.setBirthday(patient.getBirthday());
-    patientDTO.setPhone(patient.getPhone());
-    return patientDTO;
-  };
 
   public static PatientDTO convertDeep(Patient patient) {
     PatientDTO patientDTO = convert(patient);
@@ -96,18 +114,9 @@ public class DTOUtils {
     return convertToothToToothDto.apply(tooth);
   }
 
-  private static Function<PatientDTO, Patient> patientDTOPToPatient = patientDTO -> {
-    Patient patient = new Patient();
-    patient.setFirstName(patientDTO.getFirstName());
-    patient.setLastName(patientDTO.getLastName());
-    patient.setAddress(patientDTO.getAddress());
-    patient.setMiddleName(patientDTO.getMiddleName());
-    patient.setBirthday(patientDTO.getBirthday());
-    patient.setGender(Gender.get(patientDTO.getGender()));
-    patient.setPhone(patientDTO.getPhone());
-    return patient;
-  };
-
+  public static ToothDTO convertDeep(Tooth tooth) {
+    return convertDeepToothToToothDto.apply(tooth);
+  }
 
   public static Patient convert(PatientDTO patientDTO) {
     return patientDTOPToPatient.apply(patientDTO);

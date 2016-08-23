@@ -7,6 +7,6 @@ import com.dental.persistence.entity.Tooth;
  */
 public interface ToothService extends BaseService<Tooth> {
 
-  Tooth get(Long toothId, Long patientId);
+  Tooth load(Long toothId, Long patientId);
 
 }

@@ -1,10 +1,12 @@
 package com.dental.persistence.repository;
 
 import com.dental.persistence.entity.Dentist;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
 /**
- * Created by admin on 27.05.2015.
+ * Created by vrudyk on 27.05.2015.
  */
-public interface DentistRepository extends GenericRepository<Dentist> {
-  Dentist loadFull(Long id);
+@Repository
+public interface DentistRepository extends CrudRepository<Dentist, Long> {
 }

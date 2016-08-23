@@ -1,14 +1,13 @@
 package com.dental.persistence.repository;
 
 import com.dental.persistence.entity.Patient;
-
-import java.util.Collection;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
 /**
  * Created by admin on 27.05.2015.
  */
-public interface PatientRepository extends GenericRepository<Patient> {
-  Patient findByFirstAndLastName(String firstName, String lastName);
-  Collection<Patient> getPatientsByDentist(Long dentistId);
-  Patient getFull(Long patientId);
+@Repository
+public interface PatientRepository extends CrudRepository<Patient, Long> {
+  Patient findByFirstNameAndLastName(String firstName, String lastName);
 }

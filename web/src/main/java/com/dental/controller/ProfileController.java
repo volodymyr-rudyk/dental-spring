@@ -24,7 +24,7 @@ public class ProfileController extends AbstractBasePageController {
 
   @RequestMapping(method = RequestMethod.GET)
   public String profile(@LoggedDentist Dentist loggedDentist, ModelMap model) throws NotFoundException {
-    Dentist dentist = dentistService.getFull(loggedDentist.getId());
+    Dentist dentist = dentistService.load(loggedDentist.getId());
     model.put("dentist", dentist);
     return renderView(ViewConfig.PAGE_PROFILE);
   }

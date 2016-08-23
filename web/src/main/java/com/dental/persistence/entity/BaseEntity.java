@@ -21,7 +21,4 @@ public class BaseEntity {
     this.id = id;
   }
 
-
-//  public abstract Long getId();
-
 }

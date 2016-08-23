@@ -9,20 +9,20 @@
             <span>{{patient.phone}}</span>
           </div>
           <div class="row text-center">
-            <div class="btn tooth blue" ng-repeat="t in patient.teethUL | orderBy : '-toothNumber'">
+            <tooth class="btn tooth blue" ng-repeat="tooth in patient.teethUL | orderBy : '-toothNumber'" ng-init="patientId=patient.id">
               <#--{{t.toothNumber}}-->
-            </div>
-            <div class="btn tooth red" ng-repeat="t in patient.teethUR | orderBy : '+toothNumber'">
+            </tooth>
+            <tooth class="btn tooth red" ng-repeat="tooth in patient.teethUR | orderBy : '+toothNumber'">
               <#--{{t.toothNumber}}-->
-            </div>
+            </tooth>
           </div>
           <div class="row text-center ">
-            <div class="btn tooth orange" ng-repeat="t in patient.teethDL | orderBy : '-toothNumber'">
+            <tooth class="btn tooth orange" ng-repeat="tooth in patient.teethDL | orderBy : '-toothNumber'">
               <#--{{t.toothNumber}}-->
-            </div>
-            <div class="btn tooth green" ng-repeat="t in patient.teethDR | orderBy : '+toothNumber'">
+            </tooth>
+            <tooth class="btn tooth green" ng-repeat="tooth in patient.teethDR | orderBy : '+toothNumber'">
               <#--{{t.toothNumber}}-->
-            </div>
+            </tooth>
           </div>
         </div>
       </div>

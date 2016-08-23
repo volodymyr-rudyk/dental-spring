@@ -28,7 +28,7 @@ public class PatientPageController extends AbstractBasePageController {
 
   @RequestMapping(method = RequestMethod.GET)
   public String patient(@LoggedDentist Dentist loggedDentist, ModelMap model) throws NotFoundException {
-    Dentist dentist = dentistService.getFull(loggedDentist.getId());
+    Dentist dentist = dentistService.load(loggedDentist.getId());
     model.put("dentist", dentist);
     LOG.info("patient page rendered");
     return renderView(ViewConfig.PAGE_PATIENT_LIST);

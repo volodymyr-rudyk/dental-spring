@@ -1,4 +1,4 @@
-angular.module('patient', ['ngRoute', 'dental'])
+var patientModule = angular.module('patient', ['ngRoute', 'dental'])
   .config(function ($routeProvider) {
     $routeProvider
     // route for the home page
