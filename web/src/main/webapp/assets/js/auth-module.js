@@ -51,31 +51,11 @@ function SignupController($scope, AuthService) {
   };
 }
 
-function AuthService($http, $q, Rest, ResponseHandlers) {
+function AuthService(RestTemplate) {
   this.login = function login(user) {
-    var defer = $q.defer();
-    $http({
-      url: Rest.login,
-      method: 'POST',
-      data: user
-    }).success(function (data) {
-      defer.resolve(data);
-    }).error(function (data) {
-      defer.reject(data);
-    });
-    return defer.promise;
+    return RestTemplate.POST({url : RestTemplate.url.login, data : user})
   };
   this.signup = function signup(user) {
-    var defer = $q.defer();
-    $http({
-      url: Rest.signup,
-      method: 'POST',
-      data: user
-    }).success(function (data) {
-      defer.resolve(data);
-    }).error(function (data) {
-      defer.reject(data);
-    });
-    return defer.promise;
+    return RestTemplate.POST({url : RestTemplate.url.signup, data : user})
   };
 };

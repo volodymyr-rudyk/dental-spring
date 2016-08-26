@@ -2,11 +2,12 @@
   <div ng-app="">
     <div ng-controller="NewPatientController as npCtrl">
       <div class="row">
-        <div class="col-xs-12 col-sm-8 col-md-9">
+        <div class="col-xs-12 col-sm-8 col-md-10">
           <form role="form" ng-submit="npCtrl.create(newPatientForm.$valid)" name="newPatientForm" novalidate>
             <h3>New Patient</h3>
-            <div ng-show="success">{{ success }}</div>
             <hr class="colorgraph">
+            <div ng-show="success" class="alert alert-success text-center">New Patient Added</div>
+            <div ng-show="error" class="alert alert-danger text-center">Ooop's</div>
             <div class="row">
               <div class="col-xs-12 col-sm-6 col-md-6">
                 <div class="form-group"

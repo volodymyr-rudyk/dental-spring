@@ -1,4 +1,4 @@
-var patientModule = angular.module('patient', ['ngRoute', 'dental'])
+var patientModule = angular.module('patient', ['ngRoute', 'dental', 'angular-loading-bar'])
   .config(function ($routeProvider) {
     $routeProvider
     // route for the home page
@@ -43,9 +43,12 @@ function NewPatientController($scope, PatientService) {
   $scope.patient = {};
   this.create = function (isValid) {
     if (isValid) {
+      $scope.success = null;
+      $scope.error = null;
       PatientService.create($scope.patient).then(function success(response) {
-        $scope.success = "Added new Patient";
+        $scope.success = {};
       }, function (error) {
+        $scope.error = {};
       });
     }
   };
@@ -71,7 +74,7 @@ function EditPatientController($scope, $routeParams, PatientService) {
     }
   };
 };
-function ViewPatientController($scope, $routeParams, PatientService, ToothService) {
+function ViewPatientController($scope, $routeParams, PatientService) {
   $scope.patient = {};
   $scope.patient.id = $routeParams.id;
   PatientService.get($scope.patient).then(function (response) {
@@ -93,81 +96,25 @@ function ToothController($scope, ToothService) {
   };
 };
 
-function PatientService($http, $q, Rest, ResponseHandlers) {
+function PatientService(RestTemplate) {
   this.getAll = function () {
-    var defer = $q.defer();
-    $http({
-      url: Rest.patients,
-      method: 'GET',
-      data: {},
-      headers: {'Content-Type': 'application/json'}
-    }).success(function (data) {
-      defer.resolve(data);
-    }).error(ResponseHandlers.onErrorResponse);
-    return defer.promise;
+    return RestTemplate.GET({url : RestTemplate.url.patients});
   };
   this.get = function (patient) {
-    var defer = $q.defer();
-    $http({
-      url: Rest.patients + "/" + patient.id,
-      method: 'GET',
-      data: {},
-      headers: {'Content-Type': 'application/json'}
-    }).success(function (data) {
-      defer.resolve(data);
-    }).error(ResponseHandlers.onErrorResponse);
-    return defer.promise;
+    return RestTemplate.GET({url : RestTemplate.url.patients+ "/" + patient.id});
   };
   this.update = function (patient) {
-    var defer = $q.defer();
-    $http({
-      url: Rest.patients + "/" + patient.id,
-      method: 'PUT',
-      data: patient
-    }).success(function (data) {
-      defer.resolve(data);
-    }).error(ResponseHandlers.onErrorResponse);
-    return defer.promise;
+    return RestTemplate.PUT({url : RestTemplate.url.patients+ "/" + patient.id, data : patient})
   };
   this.create = function (patient) {
-    var defer = $q.defer();
-    $http({
-      url: Rest.patients,
-      method: 'POST',
-      data: patient
-    }).success(function (data) {
-      defer.resolve(data);
-    }).error(ResponseHandlers.onErrorResponse);
-    return defer.promise;
+    return RestTemplate.POST({url : RestTemplate.url.patients+ "/" + patient.id, data : patient})
   };
 }
-function ToothService($http, $q, Rest, ResponseHandlers) {
+function ToothService(RestTemplate) {
   this.get = function (patientId, toothId) {
-    var defer = $q.defer();
-    var params = "?patientId=" + patientId + "&toothId=" + toothId;
-    $http({
-      url: Rest.toothCures + params,
-      method: 'GET',
-      data: {},
-      headers: {'Content-Type': 'application/json'}
-    }).success(function (data) {
-      defer.resolve(data);
-    }).error(ResponseHandlers.onErrorResponse);
-    return defer.promise;
+    return RestTemplate.GET({url : RestTemplate.url.toothCures + "?patientId=" + patientId + "&toothId=" + toothId});
   };
-  this.addCure = function addCure (cure, patientId, toothId) {
-    var defer = $q.defer();
-    $http({
-      url: Rest.toothCures,
-      method: 'POST',
-      data: {
-        cure : cure,
-        patientId : patientId,
-        toothId : toothId
-      },
-    }).success(function (data) {
-      defer.resolve(data);
-    }).error(ResponseHandlers.onErrorResponse);
-    return defer.promise;
+  this.addCure = function addCure(cure, patientId, toothId) {
+    return RestTemplate.POST({url : RestTemplate.url.toothCures, data : { cure: cure, patientId: patientId, toothId: toothId } });
   }
 }

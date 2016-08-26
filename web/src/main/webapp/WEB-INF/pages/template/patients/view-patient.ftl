@@ -10,30 +10,35 @@
           </div>
           <div class="row text-center">
             <tooth class="btn tooth blue" ng-repeat="tooth in patient.teethUL | orderBy : '-toothNumber'"
-                   ng-init="patientId=patient.id"></tooth>
-            <tooth class="btn tooth red" ng-repeat="tooth in patient.teethUR | orderBy : '+toothNumber'"></tooth>
+                    patient-id="{{patient.id}}" tooth-id="{{tooth.id}}"></tooth>
+            <tooth class="btn tooth blue" ng-repeat="tooth in patient.teethUR | orderBy : '+toothNumber'"></tooth>
           </div>
           <div class="row text-center">
-            <tooth class="btn tooth orange" ng-repeat="tooth in patient.teethDL | orderBy : '-toothNumber'"></tooth>
-            <tooth class="btn tooth green" ng-repeat="tooth in patient.teethDR | orderBy : '+toothNumber'"></tooth>
+            <tooth class="btn tooth blue" ng-repeat="tooth in patient.teethDL | orderBy : '-toothNumber'"></tooth>
+            <tooth class="btn tooth blue" ng-repeat="tooth in patient.teethDR | orderBy : '+toothNumber'"></tooth>
           </div>
         </div>
       </div>
+
+      <#--Cures-->
+
       <div class="text-center" ng-show="selectedTooth">
         <div ng-controller="ToothController as toothCtrl">
-          <h1>Cures</h1>
+          <h3>Cures</h3>
+          <hr class="colorgraph">
           <div class="form-inline">
             <div class="form-group">
-              <input type="text" ng-model="toothCure" class="form-control">
+              <#--<input type="text" ng-model="toothCure" class="form-control">-->
+              <textarea type="text" cols="90" rows="3" ng-model="toothCure" class="form-control"></textarea>
+                <button type="button" ng-click="toothCtrl.addCure(toothCure)" class="btn btn-small">Add Cure              </button>
+
             </div>
-            <button type="button" ng-click="toothCtrl.addCure(toothCure)" class="btn btn-small">Add Cure
-            </button>
           </div>
           <div ng-repeat="cure in selectedTooth.cures | orderBy : '-id' ">
-            <div class="alert alert-danger">
-              <div> id : {{cure.id}}</div>
-              <div> cure : {{cure.cure}}</div>
-              <div> created : {{cure.createdOn | date : 'yyyy-MM-dd HH:mm'}}</div>
+            <div class="row alert alert-warning">
+
+              <div class="col-md-9">{{cure.cure}}</div>
+              <div class="col-md-3 btn btn-info">{{cure.createdOn | date : 'yyyy-MM-dd HH:mm'}}</div>
             </div>
           </div>
         </div>

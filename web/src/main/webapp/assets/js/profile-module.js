@@ -1,15 +1,11 @@
 angular.module('profile', ['dental'])
-  .controller('ProfileController', function ($scope, $http, Rest) {
+  .controller('ProfileController', function ($scope, RestTemplate) {
     $scope.user = window.user;
-    debugger;
     $scope.response = {};
 
     this.updateProfile = function () {
-      $http({
-        url: Rest.profile,
-        method: 'POST',
-        data: $scope.user
-      }).success(success).error(fail);
+      RestTemplate.POST({url : RestTemplate.url.profile, data : $scope.user})
+        .then(success, fail);
     };
     var success = function (data, status, headers, config) {
       $scope.response = data;

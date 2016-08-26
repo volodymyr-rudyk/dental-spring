@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
  */
 @Controller
 @RequestMapping("/profile")
-public class ProfileController extends AbstractBasePageController {
+public class ProfilePageController extends AbstractBasePageController {
 
   @Autowired
   private DentistService dentistService;
@@ -27,6 +27,13 @@ public class ProfileController extends AbstractBasePageController {
     Dentist dentist = dentistService.load(loggedDentist.getId());
     model.put("dentist", dentist);
     return renderView(ViewConfig.PAGE_PROFILE);
+  }
+
+  @RequestMapping(value = "/edit", method = RequestMethod.GET)
+  public String profileEdit(@LoggedDentist Dentist loggedDentist, ModelMap model) throws NotFoundException {
+    Dentist dentist = dentistService.load(loggedDentist.getId());
+    model.put("dentist", dentist);
+    return renderView(ViewConfig.PAGE_PROFILE_EDIT);
   }
 
   @Override

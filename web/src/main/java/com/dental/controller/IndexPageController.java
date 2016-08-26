@@ -24,9 +24,9 @@ import java.util.Date;
  */
 
 @Controller
-public class IndexController extends AbstractBasePageController {
+public class IndexPageController extends AbstractBasePageController {
 
-  private static final Logger LOG = LoggerFactory.getLogger(IndexController.class);
+  private static final Logger LOG = LoggerFactory.getLogger(IndexPageController.class);
 
   @Autowired
   private SayText sayText;

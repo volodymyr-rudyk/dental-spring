@@ -1,4 +1,4 @@
-<#macro page dentist='' title="Dental" css=[] js=[] bowerdist=[] bower=[] bowercsspath=[] bowerfontpath=[] bowerjspath=[]>
+<#macro page dentist='' title="Dental" css=[] js=[] bowerpath=[] bowerdist=[] bower=[] bowercsspath=[] bowerfontpath=[] bowerjspath=[]>
 <#include "macro.ftl" />
 
 <#--<#import "spring.ftl" as spring />-->
@@ -10,7 +10,9 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/bower/bootstrap/dist/css/bootstrap.css">
-  <#--<link rel="stylesheet" href="/bower/bootstrap/dist/css/bootstrap-theme.css">-->
+  <link rel='stylesheet' href='/bower/angular-loading-bar/build/loading-bar.min.css' type='text/css' media='all' />
+
+<#--<link rel="stylesheet" href="/bower/bootstrap/dist/css/bootstrap-theme.css">-->
     <#list css as c>
       <link rel="stylesheet" href="/css/${c}.css">
     </#list>
@@ -30,6 +32,9 @@
     </#list>
     <#list bowerjspath as b>
         <script type="application/javascript" src="/bower/${b}.js"></script>
+    </#list>
+    <#list bowerpath as path>
+    <script type="application/javascript" src="/bower/${path}.js"></script>
     </#list>
     <script type="application/javascript" src="/bower/bootstrap/dist/js/bootstrap.js"></script>
 

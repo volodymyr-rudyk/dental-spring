@@ -1,4 +1,6 @@
 <div>
+  <h3>Patients</h3>
+  <hr class="colorgraph">
   <table class="table table-hover table-bordered">
     <thead>
     <tr>

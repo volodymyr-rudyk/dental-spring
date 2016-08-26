@@ -2,7 +2,7 @@
   "name": "dental",
   "homepage": "https://github.com/light88/dental-spring",
   "authors": [
-    "vrudyk <vrudyk@romexsoft.com>"
+    "vrudyk <vova.rudyk@gmail.com>"
   ],
   "description": "Dental",
   "main": "",
@@ -19,6 +19,7 @@
     "angular": "1.5.5",
     "angular-route": "1.5.5",
     "angular-messages": "1.5.5",
+    "angular-loading-bar" : "0.9.0",
     "underscore": "1.8.2",
     "jquery": "2.2.3",
     "bootstrap": "3.3.6"

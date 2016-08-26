@@ -63,12 +63,11 @@ public class PatientRestController extends BaseRestController {
 
   @RequestMapping(value = "/patients", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE,
       consumes = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<Object> patient(HttpServletRequest httpServletRequest, @RequestBody PatientDTO patientDTO) {
+  public ResponseEntity patient(HttpServletRequest httpServletRequest, @RequestBody PatientDTO patientDTO) {
 
     Patient patient = DTOUtils.convert(patientDTO);
     patientService.add(patient);
-    ResponseEntity responseEntity = new ResponseEntity(null, HttpStatus.OK);
-    return responseEntity;
+    return new ResponseEntity(null, HttpStatus.CREATED);
   }
 
 }
