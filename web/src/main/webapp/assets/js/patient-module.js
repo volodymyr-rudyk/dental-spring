@@ -107,7 +107,7 @@ function PatientService(RestTemplate) {
     return RestTemplate.PUT({url : RestTemplate.url.patients+ "/" + patient.id, data : patient})
   };
   this.create = function (patient) {
-    return RestTemplate.POST({url : RestTemplate.url.patients+ "/" + patient.id, data : patient})
+    return RestTemplate.POST({url : RestTemplate.url.patients, data : patient})
   };
 }
 function ToothService(RestTemplate) {
