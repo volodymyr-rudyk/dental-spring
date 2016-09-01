@@ -14,10 +14,11 @@ import com.dental.web.dto.DTOUtils;
 import com.dental.web.dto.PatientDTO;
 import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -123,8 +124,17 @@ public class PatientServiceImpl implements PatientService {
   }
 
   @Override
-  public Patient findIn(Long patientId, Set<Patient> patients) {
-    Optional<Patient> patient = patients.stream().filter(p -> p.getId().equals(patientId)).findFirst();
-    return patient.get();
+  public Patient findByDentist(Dentist dentist) {
+    return patientRepository.findByDentists(dentist);
+  }
+
+  @Override
+  public Set<Patient> findByDentist(Dentist dentist, Pageable page) {
+    return new HashSet<>(patientRepository.findByDentists(dentist, page));
+  }
+
+  @Override
+  public Set<Patient> findAllByDentist(Dentist dentist) {
+    return new HashSet<>(patientRepository.findAllByDentists(dentist));
   }
 }

@@ -19,7 +19,7 @@ import java.util.Map;
 
 @Configuration
 @ComponentScan(basePackages = "com.dental")
-@Import({SpringConfig.class, DaoConfig.class, SpringSecureConfig.class})
+@Import({SpringConfig.class, DaoConfig.class, SpringSecureConfig.class, SwaggerConfig.class})
 public class AppConfig {
 
 //  @Bean(name = "testBean")

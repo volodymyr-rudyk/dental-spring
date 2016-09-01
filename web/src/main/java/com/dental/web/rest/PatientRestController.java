@@ -9,6 +9,8 @@ import com.dental.service.PatientService;
 import com.dental.web.dto.DTOUtils;
 import com.dental.web.dto.PatientDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -34,9 +36,10 @@ public class PatientRestController extends BaseRestController {
 
   @RequestMapping(value = "/patients", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE,
       consumes = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<Set<PatientDTO>> getPatients(HttpServletRequest httpServletRequest, @LoggedDentist Dentist loggedDentist) {
-    Dentist dentist = dentistService.load(loggedDentist.getId());
-    Set<PatientDTO> patientsDTO = DTOUtils.convert(dentist.getPatients());
+  public ResponseEntity<Set<PatientDTO>> getPatients(HttpServletRequest httpServletRequest,
+                                                     @LoggedDentist Dentist loggedDentist, @PageableDefault(size = 7) Pageable page) {
+    Set<Patient> patients = patientService.findAllByDentist(loggedDentist);
+    Set<PatientDTO> patientsDTO = DTOUtils.convert(patients);
     ResponseEntity<Set<PatientDTO>> responseEntity = new ResponseEntity<>(patientsDTO, HttpStatus.OK);
     return responseEntity;
   }

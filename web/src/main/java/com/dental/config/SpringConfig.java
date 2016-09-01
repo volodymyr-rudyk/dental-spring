@@ -5,6 +5,7 @@ import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ResourceBundleMessageSource;
+import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -43,6 +44,7 @@ public class SpringConfig extends WebMvcConfigurerAdapter {
   public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
     super.addArgumentResolvers(argumentResolvers);
     argumentResolvers.add(new LoggedDentistMethodParameterResolver());
+    argumentResolvers.add(new PageableHandlerMethodArgumentResolver());
   }
 
   @Bean
@@ -78,6 +80,12 @@ public class SpringConfig extends WebMvcConfigurerAdapter {
     registry.addResourceHandler(FONT_RESOURCE);
     registry.addResourceHandler(IMAGE_RESOURCE).addResourceLocations(IMAGE_RESOURCE_LOCATION);
     registry.addResourceHandler(BOWER_RESOURCE).addResourceLocations(BOWER_RESOURCE_LOCATION);
+
+    registry.addResourceHandler("swagger-ui.html")
+        .addResourceLocations("classpath:/META-INF/resources/");
+
+    registry.addResourceHandler("/webjars/**")
+        .addResourceLocations("classpath:/META-INF/resources/webjars/");
   }
 
   @Bean
