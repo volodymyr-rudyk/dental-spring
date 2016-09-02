@@ -2,7 +2,6 @@ package com.dental.config;
 
 import com.dental.bean.InjectTextMessageBeanPostProcessor;
 import com.dental.bean.ProfilerHandlerBeanPostProcessor;
-import com.dental.test.Profi;
 import com.dental.test.PropertyEditorRun;
 import com.dental.test.PropertyEditorRunEditor;
 import org.springframework.beans.factory.config.BeanPostProcessor;
@@ -40,18 +39,6 @@ public class AppConfig {
   @Bean
   public BeanPostProcessor profilerHandlerBeanPostProcessor() throws Exception {
     return new ProfilerHandlerBeanPostProcessor();
-  }
-
-  @Bean
-  @Profile("one")
-  public Profi profi() {
-    return new Profi("One");
-  }
-
-  @Bean
-  @Profile("two")
-  public Profi profi2() {
-    return new Profi("Two");
   }
 
   public CustomEditorConfigurer customEditorConfigurer() {
