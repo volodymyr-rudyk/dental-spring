@@ -5,10 +5,7 @@ import com.dental.web.error.RestStatus;
 import com.dental.web.status.ResponseStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.web.bind.annotation.ControllerAdvice;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -18,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 @RestController
 @ControllerAdvice
 @RequestMapping(value = "/rest")
+@CrossOrigin
 public class BaseRestController {
 
   private Logger logger = LoggerFactory.getLogger(BaseRestController.class);
