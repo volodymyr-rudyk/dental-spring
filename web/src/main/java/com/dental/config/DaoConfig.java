@@ -25,16 +25,16 @@ import java.util.Properties;
 public class DaoConfig {
 
   @Autowired
-  private Environment env;
+  private Environment environment;
 
   @Bean
   public DataSource dataSource() {
     HikariDataSource dataSource = new HikariDataSource();
     try {
-      dataSource.setJdbcUrl(env.getRequiredProperty(DbConfig.DB_URL));
-      dataSource.setUsername(env.getRequiredProperty(DbConfig.DB_USERNAME));
-      dataSource.setPassword(env.getRequiredProperty(DbConfig.DB_PASSWORD));
-      dataSource.setDriverClassName(env.getRequiredProperty(DbConfig.DB_DRIVER_CLASSNAME));
+      dataSource.setJdbcUrl(environment.getRequiredProperty(DbConfig.DB_URL));
+      dataSource.setUsername(environment.getRequiredProperty(DbConfig.DB_USERNAME));
+      dataSource.setPassword(environment.getRequiredProperty(DbConfig.DB_PASSWORD));
+      dataSource.setDriverClassName(environment.getRequiredProperty(DbConfig.DB_DRIVER_CLASSNAME));
     } catch (Exception e) {
       throw new RuntimeException(e);
     }
@@ -45,7 +45,7 @@ public class DaoConfig {
   public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
     LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
     entityManagerFactoryBean.setDataSource(dataSource());
-    entityManagerFactoryBean.setPackagesToScan(env.getRequiredProperty(DbConfig.PACKAGES_SCAN));
+    entityManagerFactoryBean.setPackagesToScan(environment.getRequiredProperty(DbConfig.PACKAGES_SCAN));
     entityManagerFactoryBean.setJpaVendorAdapter(jpaVendorAdapter());
     entityManagerFactoryBean.setJpaProperties(hibernateProperties());
     return entityManagerFactoryBean;
@@ -54,17 +54,17 @@ public class DaoConfig {
   @Bean
   public JpaVendorAdapter jpaVendorAdapter() {
     HibernateJpaVendorAdapter adapter = new HibernateJpaVendorAdapter();
-    adapter.setDatabase(Database.valueOf(env.getRequiredProperty(DbConfig.DB_ENGINE)));
-    adapter.setShowSql(env.getRequiredProperty(DbConfig.HIBERNATE_SHOW_SQL, Boolean.class));
+    adapter.setDatabase(Database.valueOf(environment.getRequiredProperty(DbConfig.DB_ENGINE)));
+    adapter.setShowSql(environment.getRequiredProperty(DbConfig.HIBERNATE_SHOW_SQL, Boolean.class));
     return adapter;
   }
 
   private Properties hibernateProperties() {
     Properties properties = new Properties();
     properties.put("hibernate.id.new_generator_mappings", false);
-    properties.put(DbConfig.HIBERNATE_JDBC_BATCH_SIZE, env.getProperty(DbConfig.HIBERNATE_JDBC_BATCH_SIZE));
-    properties.put(DbConfig.HIBERNATE_DIALECT, env.getRequiredProperty(DbConfig.HIBERNATE_DIALECT));
-    properties.put(DbConfig.HIBERNATE_SHOW_SQL, env.getRequiredProperty(DbConfig.HIBERNATE_SHOW_SQL));
+    properties.put(DbConfig.HIBERNATE_JDBC_BATCH_SIZE, environment.getProperty(DbConfig.HIBERNATE_JDBC_BATCH_SIZE));
+    properties.put(DbConfig.HIBERNATE_DIALECT, environment.getRequiredProperty(DbConfig.HIBERNATE_DIALECT));
+    properties.put(DbConfig.HIBERNATE_SHOW_SQL, environment.getRequiredProperty(DbConfig.HIBERNATE_SHOW_SQL));
     return properties;
   }
 

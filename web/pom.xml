@@ -198,36 +198,14 @@
       <groupId>com.zaxxer</groupId>
       <artifactId>HikariCP</artifactId>
       <version>2.4.3</version>
-      <!--<exclusions>-->
-      <!--<exclusion>-->
-      <!--<groupId>org.slf4j</groupId>-->
-      <!--<artifactId>slf4j-api</artifactId>-->
-      <!--</exclusion>-->
-      <!--</exclusions>-->
     </dependency>
 
-
-    <!-- // Hibernate -->
-    <!-- Quartz framework dependencies -->
-    <!--<dependency>-->
-    <!--<groupId>org.quartz-scheduler</groupId>-->
-    <!--<artifactId>quartz</artifactId>-->
-    <!--<version>2.2.1</version>-->
-    <!--<exclusions>-->
-    <!--<exclusion>-->
-    <!--<groupId>com.mchange</groupId>-->
-    <!--<artifactId>c3p0</artifactId>-->
-    <!--</exclusion>-->
-    <!--</exclusions>-->
-    <!--</dependency>-->
-    <!--// Quartz framework dependencies-->
-    <!-- Java Mail API -->
-    <!--<dependency>-->
-    <!--<groupId>javax.mail</groupId>-->
-    <!--<artifactId>mail</artifactId>-->
-    <!--<version>1.4.7</version>-->
-    <!--</dependency>-->
-    <!-- // Java Mail API -->
+    <!-- EMail -->
+    <dependency>
+      <groupId>javax.mail</groupId>
+      <artifactId>mail</artifactId>
+      <version>1.4.7</version>
+    </dependency>
     <dependency>
       <groupId>org.apache.commons</groupId>
       <artifactId>commons-io</artifactId>
@@ -344,7 +322,7 @@
   <profiles>
 
     <profile>
-      <id>asus</id>
+      <id>localhost</id>
       <activation>
         <activeByDefault>true</activeByDefault>
       </activation>
@@ -357,6 +335,7 @@
         <db.hibernate.show_sql>true</db.hibernate.show_sql>
         <db.hibernate.format_sql>false</db.hibernate.format_sql>
         <db.engine>MYSQL</db.engine>
+        <email.smtp.server>localhost</email.smtp.server>
       </properties>
     </profile>
 
@@ -371,6 +350,7 @@
         <db.hibernate.show_sql>true</db.hibernate.show_sql>
         <db.hibernate.format_sql>true</db.hibernate.format_sql>
         <db.engine>MYSQL</db.engine>
+        <email.smtp.server>localhost</email.smtp.server>
       </properties>
     </profile>
 
@@ -385,6 +365,7 @@
         <db.hibernate.show_sql>true</db.hibernate.show_sql>
         <db.hibernate.format_sql>true</db.hibernate.format_sql>
         <db.engine>MYSQL</db.engine>
+        <email.smtp.server>localhost</email.smtp.server>
       </properties>
     </profile>
 

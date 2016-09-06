@@ -7,7 +7,7 @@ public enum RestStatus {
 
   SUCCESS(0, "OK"),
   GENERAL_ERROR(-1, "Server error"),
-  LOGIN_ERROR(-2, "Incorrect user data"),
+  INCORRECT_ERROR(-2, "Incorrect data"),
   SINGUP_ERROR(-3, "Registration failed");
 
   private int code;

@@ -69,7 +69,9 @@ public class SpringSecureConfig extends WebSecurityConfigurerAdapter {
             "/logout",
             "/user/register/**",
             "/rest/login",
-            "/rest/signup"
+            "/rest/signup",
+            "/rest/forgot-password",
+            "/swagger-ui.html"
         ).permitAll()
         //The rest of the our application is protected.
         .antMatchers("/**").hasRole("USER");
@@ -88,6 +90,7 @@ public class SpringSecureConfig extends WebSecurityConfigurerAdapter {
         .antMatchers("/js/**")
         .antMatchers("/font/**")
         .antMatchers("/img/**")
+        .antMatchers("/webjars/**")
         .antMatchers("/list")
         .antMatchers("/favicon.ico");
   }

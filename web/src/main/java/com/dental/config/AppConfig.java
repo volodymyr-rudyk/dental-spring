@@ -4,9 +4,13 @@ import com.dental.bean.InjectTextMessageBeanPostProcessor;
 import com.dental.bean.ProfilerHandlerBeanPostProcessor;
 import com.dental.test.PropertyEditorRun;
 import com.dental.test.PropertyEditorRunEditor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.beans.factory.config.CustomEditorConfigurer;
 import org.springframework.context.annotation.*;
+import org.springframework.core.env.Environment;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 
 import java.beans.PropertyEditor;
 import java.util.HashMap;
@@ -18,6 +22,7 @@ import java.util.Map;
 
 @Configuration
 @ComponentScan(basePackages = "com.dental")
+@PropertySource(value = {"classpath:app.properties"})
 @Import({SpringConfig.class, DaoConfig.class, SpringSecureConfig.class, SwaggerConfig.class})
 public class AppConfig {
 
@@ -25,6 +30,9 @@ public class AppConfig {
 //  public SayText getSayText() {
 //    return new TestBean();
 //  }
+
+  @Autowired
+  private Environment environment;
 
   @Bean
   public BeanPostProcessor sayTextProcessor() {
@@ -50,5 +58,13 @@ public class AppConfig {
 
     return customEditorConfigurer;
   }
+
+  @Bean
+  public JavaMailSender javaMailSender() {
+    JavaMailSenderImpl javaMailSender = new JavaMailSenderImpl();
+    javaMailSender.setHost(environment.getRequiredProperty("email.smtp.server"));
+    return javaMailSender;
+  }
+
 
 }
