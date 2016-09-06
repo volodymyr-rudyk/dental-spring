@@ -34,6 +34,8 @@ import javax.validation.Valid;
 @RestController
 public class AuthRestController extends BaseRestController {
 
+  public static final String INFO_DNTISTPRO_COM = "info@dntistpro.com";
+  public static final String SUBJECT = "Forgot Password";
   private Logger LOG = LoggerFactory.getLogger(AuthRestController.class);
 
   @Autowired
@@ -107,13 +109,13 @@ public class AuthRestController extends BaseRestController {
     }
 
     SimpleMailMessage mailMessage = new SimpleMailMessage();
-    mailMessage.setFrom("dental@test.com");
+    mailMessage.setFrom(INFO_DNTISTPRO_COM);
     mailMessage.setTo(forgotPasswordBean.getEmail());
 
-    mailMessage.setSubject("Test 1");
-    mailMessage.setText("Hello world");
+    mailMessage.setSubject(SUBJECT);
+    mailMessage.setText("Hello world, Your new password = start123 =)");
     mailService.send(mailMessage);
-
+    LOG.info("Mail is sent to = " + forgotPasswordBean.getEmail());
     return new ResponseEntity<>(HttpStatus.OK);
   }
 
