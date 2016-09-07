@@ -6,5 +6,7 @@ create table dentist (
   address VARCHAR(50) NULL ,
   birthday date,
   phone varchar(30) NULL,
-  primary key (id)
+  user_id int not null,
+  primary key (id),
+  constraint user_fk foreign key (user_id) references user(id)
 );

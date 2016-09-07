@@ -78,7 +78,8 @@ public class Dentist extends BaseEntity implements Serializable {
     this.phone = phone;
   }
 
-  @OneToOne(fetch = FetchType.LAZY, mappedBy = "dentist")
+  @OneToOne(cascade = CascadeType.ALL)
+  @JoinColumn(name = "user_id")
   public User getUser() {
     return user;
   }

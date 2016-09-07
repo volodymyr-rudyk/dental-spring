@@ -33,8 +33,7 @@ public class User extends BaseEntity implements Serializable {
     this.isEnabled = isEnabled;
   }
 
-  @OneToOne(cascade = CascadeType.ALL)
-  @JoinColumn(name = "dentist_id")
+  @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
   public Dentist getDentist() {
     return dentist;
   }

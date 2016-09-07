@@ -105,7 +105,7 @@ public class AuthServiceImpl implements AuthService {
     Dentist dentist = new Dentist();
     dentist.setFirstName(signupBean.getFirstName());
     dentist.setLastName(signupBean.getLastName());
-
+    dentist.setUser(user);
     user.setDentist(dentist);
     return user;
   }
