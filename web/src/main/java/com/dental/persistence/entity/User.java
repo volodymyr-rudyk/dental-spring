@@ -2,6 +2,7 @@ package com.dental.persistence.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * Created by light on 1/27/2015.
@@ -13,6 +14,7 @@ public class User extends BaseEntity implements Serializable {
   private String email;
   private String password;
   private boolean isEnabled;
+  private Date createdOn;
   private Dentist dentist;
 
   public User() {
@@ -58,6 +60,20 @@ public class User extends BaseEntity implements Serializable {
 
   public void setPassword(String password) {
     this.password = password;
+  }
+
+  @Column(name = "created_on", nullable = false)
+  public Date getCreatedOn() {
+    return createdOn;
+  }
+
+  public void setCreatedOn(Date createdOn) {
+    this.createdOn = createdOn;
+  }
+
+  @PrePersist
+  public void prePersist() {
+
   }
 
   @Override

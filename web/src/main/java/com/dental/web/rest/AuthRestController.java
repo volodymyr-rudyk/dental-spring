@@ -34,8 +34,6 @@ import javax.validation.Valid;
 @RestController
 public class AuthRestController extends BaseRestController {
 
-  public static final String INFO_DNTISTPRO_COM = "info@dntistpro.com";
-  public static final String SUBJECT = "Forgot Password";
   private Logger LOG = LoggerFactory.getLogger(AuthRestController.class);
 
   @Autowired
@@ -43,9 +41,6 @@ public class AuthRestController extends BaseRestController {
 
   @Autowired
   private AuthService authService;
-
-  @Autowired
-  private MailService mailService;
 
   @RequestMapping(value = "/login", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE,
       consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -97,25 +92,6 @@ public class AuthRestController extends BaseRestController {
       consumes = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<?> logout(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
     authService.logout(httpServletRequest, httpServletResponse);
-    return new ResponseEntity<>(HttpStatus.OK);
-  }
-
-  @RequestMapping(value = "/forgot-password", method = RequestMethod.POST,
-    produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<?> forgotPassword(@RequestBody @Valid ForgotPasswordBean forgotPasswordBean, BindingResult result) {
-    if (result.hasErrors()) {
-      BaseDTO baseDTO = new BaseDTO(ResponseStatus.Failure, RestStatus.INCORRECT_ERROR);
-      return new ResponseEntity<>(baseDTO, HttpStatus.BAD_REQUEST);
-    }
-
-    SimpleMailMessage mailMessage = new SimpleMailMessage();
-    mailMessage.setFrom(INFO_DNTISTPRO_COM);
-    mailMessage.setTo(forgotPasswordBean.getEmail());
-
-    mailMessage.setSubject(SUBJECT);
-    mailMessage.setText("Hello world, Your new password = start123 =)");
-    mailService.send(mailMessage);
-    LOG.info("Mail is sent to = " + forgotPasswordBean.getEmail());
     return new ResponseEntity<>(HttpStatus.OK);
   }
 

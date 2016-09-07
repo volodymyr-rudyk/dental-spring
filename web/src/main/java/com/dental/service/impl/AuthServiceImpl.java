@@ -23,6 +23,7 @@ import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Date;
 
 /**
  * Created by light on 5/3/2015.
@@ -101,6 +102,7 @@ public class AuthServiceImpl implements AuthService {
     user.setIsEnabled(true);
     user.setEmail(signupBean.getEmail());
     user.setPassword(signupBean.getPassword());
+    user.setCreatedOn(new Date());
 
     Dentist dentist = new Dentist();
     dentist.setFirstName(signupBean.getFirstName());
