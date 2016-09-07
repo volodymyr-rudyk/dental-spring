@@ -60,7 +60,7 @@ public class PasswordRestController extends BaseRestController {
 
         mailMessage.setSubject(SUBJECT);
 
-        String link = "<a href=" + "\"http://http://188.191.71.7:9999/rest/reset-password/" + forgotPasswordOptional.get().getForgotPasswordKey() + "\""+ ">Reset Password</a>";
+        String link = "<a href=" + "\"http://http://188.191.71.7:9999/forgot-password/" + forgotPasswordOptional.get().getForgotPasswordKey() + "\""+ ">Reset Password</a>";
 
         mailMessage.setText("Hello world, Your new password = start123 =) " + link);
         mailService.send(mailMessage);
