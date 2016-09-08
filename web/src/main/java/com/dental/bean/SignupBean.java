@@ -24,7 +24,7 @@ public class SignupBean extends SigninBean {
 //  }
 
   @NotNull
-  @Size(min = 5, max = 50)
+  @Size(min = 1, max = 255)
   public String getFirstName() {
     return firstName;
   }
@@ -34,7 +34,7 @@ public class SignupBean extends SigninBean {
   }
 
   @NotNull
-  @Size(min = 5, max = 50)
+  @Size(min = 1, max = 255)
   public String getLastName() {
     return lastName;
   }

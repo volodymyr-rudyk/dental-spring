@@ -1,5 +1,7 @@
 package com.dental.bean;
 
+import org.hibernate.validator.constraints.Email;
+
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -10,6 +12,7 @@ public class SigninBean {
 
   @NotNull
   @Size(min = 5, max = 50)
+  @Email
   private String email;
 
   @NotNull
