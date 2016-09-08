@@ -39,7 +39,7 @@ public class PasswordServiceImpl implements PasswordService {
       forgotPasswordRepository.save(forgotPassword);
       return Optional.of(forgotPassword);
     }
-    return Optional.empty();
+    return Optional.ofNullable(null);
   }
 
   @Override
