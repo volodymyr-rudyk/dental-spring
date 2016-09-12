@@ -8,7 +8,7 @@ import java.util.Set;
 /**
  * Created by vrudyk on 7/4/2016.
  */
-public class ToothDTO {
+public class ToothDTO extends BaseDTO {
   private Long id;
   private Set<ToothCureDTO> cures;
   private ToothState toothState;

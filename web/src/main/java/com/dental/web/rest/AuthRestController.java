@@ -10,11 +10,9 @@ import com.dental.web.dto.DTOUtils;
 import com.dental.web.dto.SigninDTO;
 import com.dental.web.dto.SignupDTO;
 import com.dental.web.error.RestStatus;
-import com.dental.web.status.ResponseStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -63,24 +61,19 @@ public class AuthRestController extends BaseRestController {
 
   @RequestMapping(value = "/signup", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE,
       consumes = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<? extends SignupDTO> signup(HttpServletRequest httpServletRequest,
-                                                    @RequestBody @Valid SignupBean signupBean, BindingResult result) {
+  public ResponseEntity<?> signup(HttpServletRequest httpServletRequest,
+                                                  @RequestBody @Valid SignupBean signupBean, BindingResult result) {
 
-    SignupDTO signupDTO;
-    if (result.hasErrors()) {
-      signupDTO = new SignupDTO(baseDTO(ResponseStatus.Failure, RestStatus.SINGUP_ERROR));
-      return new ResponseEntity<>(signupDTO, HttpStatus.BAD_REQUEST);
-    }
+    if (result.hasErrors()) return bad(RestStatus.SINGUP_ERROR);
 
     try {
       authService.signup(signupBean);
-      signupDTO = new SignupDTO(baseDTO(ResponseStatus.Success, RestStatus.SUCCESS));
+      SignupDTO signupDTO = new SignupDTO();
       signupDTO.setEmail(signupBean.getEmail());
-      return new ResponseEntity<>(signupDTO, HttpStatus.OK);
+      return success(signupDTO);
     } catch (Exception e) {
       LOG.error("Signup Error", e.getMessage());
-      signupDTO = new SignupDTO(baseDTO(ResponseStatus.Failure, RestStatus.SINGUP_ERROR));
-      return new ResponseEntity<>(signupDTO, HttpStatus.BAD_REQUEST);
+      return bad();
     }
   }
 

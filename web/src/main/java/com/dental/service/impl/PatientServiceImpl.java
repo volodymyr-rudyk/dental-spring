@@ -137,4 +137,9 @@ public class PatientServiceImpl implements PatientService {
   public Set<Patient> findAllByDentist(Dentist dentist) {
     return new HashSet<>(patientRepository.findAllByDentists(dentist));
   }
+
+  @Override
+  public Long patientsCount(Long dentistId) {
+    return patientRepository.countByDentistsId(dentistId);
+  }
 }

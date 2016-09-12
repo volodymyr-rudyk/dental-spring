@@ -40,8 +40,7 @@ public class ToothRestController extends BaseRestController {
                                            ToothRequestBean toothRequestBean)  {
     Tooth tooth = toothService.get(toothRequestBean.getToothId(), toothRequestBean.getPatientId());
     ToothDTO toothDTO = DTOUtils.convert(tooth);
-    ResponseEntity<ToothDTO> responseEntity = new ResponseEntity<>(toothDTO, HttpStatus.OK);
-    return responseEntity;
+    return success(toothDTO);
   }
 
   @RequestMapping(value = "/tooth/cures", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE,
@@ -50,8 +49,7 @@ public class ToothRestController extends BaseRestController {
                                              ToothRequestBean toothRequestBean)  {
     Tooth tooth = toothService.load(toothRequestBean.getToothId(), toothRequestBean.getPatientId());
     ToothDTO toothDTO = DTOUtils.convertDeep(tooth);
-    ResponseEntity<ToothDTO> responseEntity = new ResponseEntity<>(toothDTO, HttpStatus.OK);
-    return responseEntity;
+    return success(toothDTO);
   }
 
   @RequestMapping(value = "/tooth/cures", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE,

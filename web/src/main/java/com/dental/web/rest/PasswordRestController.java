@@ -45,9 +45,8 @@ public class PasswordRestController extends BaseRestController {
   @RequestMapping(value = "/forgot-password", method = RequestMethod.POST,
     produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<?> forgotPassword(@RequestBody @Valid ForgotPasswordBean forgotPasswordBean, BindingResult result) {
-    if (result.hasErrors()) {
-      return incorrect();
-    }
+
+    if (result.hasErrors()) return incorrect();
 
     Optional<ForgotPassword> forgotPasswordOptional = passwordService.createForgotPassword(forgotPasswordBean.getEmail());
 
@@ -76,9 +75,7 @@ public class PasswordRestController extends BaseRestController {
     produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<?> resetPassword(@PathVariable(value = "forgotPasswordKey") String forgotPasswordKey,
                                          @RequestBody @Valid ResetPasswordBean resetPasswordBean, BindingResult result) {
-    if (result.hasErrors()) {
-      return incorrect();
-    }
+    if (result.hasErrors()) return incorrect();
 
     passwordService.useForgotPassword(forgotPasswordKey, resetPasswordBean.getPassword());
     return success();

@@ -7,7 +7,7 @@ import java.util.Set;
 /**
  * Created by light on 5/6/2016.
  */
-public class PatientDTO {
+public class PatientDTO extends BaseDTO {
   private Long id;
   private String firstName;
   private String middleName;

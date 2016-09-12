@@ -22,7 +22,7 @@ public class ProfileRestController extends BaseRestController {
       consumes = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<?> profile(HttpServletRequest httpServletRequest,
                                                    @RequestBody @Valid SigninBean signinBean, BindingResult result) {
-    return null;
+    return success();
   }
 
 }

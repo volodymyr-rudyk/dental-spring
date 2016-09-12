@@ -4,8 +4,12 @@ import com.dental.exception.NotFoundException;
 import com.dental.init.LoggedDentist;
 import com.dental.persistence.entity.Dentist;
 import com.dental.service.DentistService;
+import com.dental.service.PatientService;
 import com.dental.view.ViewConfig;
 import com.dental.view.ViewFolderConfig;
+import com.dental.web.rest.PasswordRestController;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -22,13 +26,23 @@ import javax.servlet.http.HttpServletResponse;
 @RequestMapping("/dashboard")
 public class DashboardPageController extends AbstractBasePageController {
 
+  private Logger LOG = LoggerFactory.getLogger(PasswordRestController.class);
+
 
   @Autowired
   private DentistService dentistService;
 
+  @Autowired
+  private PatientService patientService;
+
   @RequestMapping(method = RequestMethod.GET)
   public String dashboard(HttpServletRequest request, HttpServletResponse response, @LoggedDentist Dentist loggedDentist,
                           ModelMap model) throws NotFoundException {
+
+    Long patientsCount = patientService.patientsCount(loggedDentist.getId());
+    LOG.info("patients for dentist " + patientsCount);
+
+
     Dentist dentist = dentistService.load(loggedDentist.getId());
     model.put("dentist", dentist);
     return renderView(ViewConfig.PAGE_DASHBOARD);

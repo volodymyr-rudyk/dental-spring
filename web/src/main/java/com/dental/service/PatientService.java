@@ -27,4 +27,6 @@ public interface PatientService extends BaseService<Patient> {
   Set<Patient> findByDentist(Dentist dentist, Pageable page);
 
   Set<Patient> findAllByDentist(Dentist dentist);
+
+  Long patientsCount(Long dentistId);
 }

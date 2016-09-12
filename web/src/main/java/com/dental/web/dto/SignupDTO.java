@@ -1,29 +1,13 @@
 package com.dental.web.dto;
 
-import com.dental.web.status.ResponseStatus;
-
 /**
  * Created by vrudyk on 12/3/2015.
  */
-public class SignupDTO {
+public class SignupDTO extends BaseDTO {
 
-  private BaseDTO baseDTO;
   private String email;
 
-  public SignupDTO(BaseDTO baseDTO) {
-    this.baseDTO = baseDTO;
-  }
-
-  public ResponseStatus getResponseStatus() {
-    return baseDTO.getResponseStatus();
-  }
-
-  public String getMessage() {
-    return baseDTO.getMessage();
-  }
-
-  public int getCode() {
-    return baseDTO.getCode();
+  public SignupDTO() {
   }
 
   public String getEmail() {

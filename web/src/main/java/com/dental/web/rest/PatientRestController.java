@@ -49,8 +49,7 @@ public class PatientRestController extends BaseRestController {
   public ResponseEntity<PatientDTO> getPatient(@PathVariable("id") Long patientId, @LoggedDentist Dentist loggedDentist) {
     Patient patient = patientService.load(patientId);
     PatientDTO patientDTO = DTOUtils.convertDeep(patient);
-    ResponseEntity<PatientDTO> responseEntity = new ResponseEntity<>(patientDTO, HttpStatus.OK);
-    return responseEntity;
+    return success(patientDTO);
   }
 
   @RequestMapping(value = "/patients/{id}", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE,

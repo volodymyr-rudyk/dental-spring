@@ -28,6 +28,16 @@ public class BaseDTO {
     this.code = code;
   }
 
+  public BaseDTO(BaseDTO base) {
+    setBaseDTO(base);
+  }
+
+  public void setBaseDTO(BaseDTO base) {
+    this.responseStatus = base.responseStatus;
+    this.message = base.message;
+    this.code = base.code;
+  }
+
   public ResponseStatus getResponseStatus() {
     return responseStatus;
   }
