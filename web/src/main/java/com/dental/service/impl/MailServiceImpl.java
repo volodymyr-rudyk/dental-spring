@@ -3,6 +3,9 @@ package com.dental.service.impl;
 import com.dental.service.MailService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.MailSender;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import javax.mail.Message;
@@ -24,15 +27,17 @@ public class MailServiceImpl implements MailService {
   public static final String FROM = "info@dntistpro.com";
   public static final String SUBJECT = "Forgot Password";
   public static final String HOST = "http://188.191.71.7:9999";
-  public static final String LOCALHOST = "localhost";
+
+  @Autowired
+  JavaMailSender javaMailSender;
 
   private void send(MimeMessage mailMessage) throws MessagingException {
-    Transport.send(mailMessage);
+    javaMailSender.send(mailMessage);
   }
 
   @Override
   public void sendForgotPasswordEmail(String email, String forgotPasswordKey) throws MessagingException {
-    MimeMessage message = new MimeMessage(getSession());
+    MimeMessage message = javaMailSender.createMimeMessage();
     message.setFrom(new InternetAddress(FROM));
     message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email));
     message.setSubject(SUBJECT);
@@ -40,12 +45,6 @@ public class MailServiceImpl implements MailService {
     String content = "<a href=" + "\"" + HOST + "/reset-password/" + forgotPasswordKey + "\"" + ">Reset Password</a>";
     message.setContent(content, "text/html");
     send(message);
-    LOG.info("Mail is sent to : " + email);
   }
 
-  private Session getSession() {
-    Properties props = new Properties();
-    props.put("mail.smtp.host", LOCALHOST);
-    return Session.getInstance(props);
-  }
 }
