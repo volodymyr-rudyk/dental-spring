@@ -1,13 +1,13 @@
 package com.dental.web.rest;
 
-import com.dental.bean.ForgotPasswordBean;
 import com.dental.bean.SigninBean;
 import com.dental.bean.SignupBean;
+import com.dental.provider.DentalUserDetails;
 import com.dental.service.AuthService;
-import com.dental.service.MailService;
 import com.dental.spring.EventService;
 import com.dental.spring.LoginEvent;
-import com.dental.web.dto.BaseDTO;
+import com.dental.web.dto.DTOUtils;
+import com.dental.web.dto.SigninDTO;
 import com.dental.web.dto.SignupDTO;
 import com.dental.web.error.RestStatus;
 import com.dental.web.status.ResponseStatus;
@@ -17,7 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.mail.SimpleMailMessage;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -46,15 +46,15 @@ public class AuthRestController extends BaseRestController {
       consumes = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<?> login(HttpServletRequest httpServletRequest,
                                                    @RequestBody @Valid SigninBean signinBean, BindingResult result) {
-    if (result.hasErrors()) {
-      return incorrect();
-    }
+    if (result.hasErrors()) return incorrect();
 
     try {
-      authService.authenticate(signinBean, httpServletRequest);
-      LoginEvent loginEvent = new LoginEvent(this, signinBean.getEmail());
-      eventService.publish(loginEvent);
-      return success();
+      UserDetails userDetails = authService.authenticate(signinBean, httpServletRequest);
+      DentalUserDetails dentalUserDetails = (DentalUserDetails) userDetails;
+      SigninDTO signinDTO = DTOUtils.convert(dentalUserDetails);
+
+      eventService.publish(new LoginEvent(this, signinBean.getEmail()));
+      return success(signinDTO);
     } catch (Exception e) {
       LOG.error("Authentication Error", e.getMessage());
       return bad();

@@ -1,11 +1,9 @@
 package com.dental.web.dto;
 
-import com.dental.persistence.entity.Dentist;
-import com.dental.persistence.entity.Patient;
-import com.dental.persistence.entity.Tooth;
-import com.dental.persistence.entity.ToothCure;
+import com.dental.persistence.entity.*;
 import com.dental.persistence.helperbean.Gender;
 import com.dental.persistence.helperbean.ToothBucket;
+import com.dental.provider.DentalUserDetails;
 
 import java.util.Set;
 import java.util.function.Function;
@@ -77,6 +75,23 @@ public class DTOUtils {
     patient.setPhone(patientDTO.getPhone());
     return patient;
   };
+  private static Function<DentalUserDetails, SigninDTO> userDetailsToSigninDTO = userDetails -> {
+    SigninDTO signinDTO = new SigninDTO();
+    User user = userDetails.getUser();
+
+    signinDTO.setUserEmail(user.getEmail());
+    signinDTO.setCreatedOn(user.getCreatedOn());
+
+    Dentist dentist = user.getDentist();
+    signinDTO.setFirstName(dentist.getFirstName());
+    signinDTO.setLastName(dentist.getLastName());
+    signinDTO.setAddress(dentist.getAddress());
+    signinDTO.setMiddleName(dentist.getMiddleName());
+    signinDTO.setBirthday(dentist.getBirthday());
+    signinDTO.setPhone(dentist.getPhone());
+
+    return signinDTO;
+  };
 
   public static DentistDTO convert(Dentist dentist) {
     DentistDTO dentistDTO = new DentistDTO();
@@ -136,5 +151,9 @@ public class DTOUtils {
     toothCureDTO.setCreatedOn(toothCure.getCreatedOn());
     toothCureDTO.setId(toothCure.getId());
     return toothCureDTO;
+  }
+
+  public static SigninDTO convert(DentalUserDetails dentalUserDetails) {
+    return userDetailsToSigninDTO.apply(dentalUserDetails);
   }
 }

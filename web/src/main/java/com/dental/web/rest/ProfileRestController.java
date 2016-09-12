@@ -1,7 +1,6 @@
 package com.dental.web.rest;
 
 import com.dental.bean.SigninBean;
-import com.dental.web.dto.SigninDTO;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -21,7 +20,7 @@ public class ProfileRestController extends BaseRestController {
 
   @RequestMapping(value = "/profile", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE,
       consumes = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<? extends SigninDTO> login(HttpServletRequest httpServletRequest,
+  public ResponseEntity<?> profile(HttpServletRequest httpServletRequest,
                                                    @RequestBody @Valid SigninBean signinBean, BindingResult result) {
     return null;
   }

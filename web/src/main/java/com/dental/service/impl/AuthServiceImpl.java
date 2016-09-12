@@ -17,6 +17,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.security.web.authentication.logout.LogoutHandler;
 import org.springframework.stereotype.Service;
@@ -44,7 +45,7 @@ public class AuthServiceImpl implements AuthService {
   private UserRepository userRepository;
 
   @Override
-  public void authenticate(SigninBean signinBean, HttpServletRequest request) throws AuthenticationException {
+  public UserDetails authenticate(SigninBean signinBean, HttpServletRequest request) throws AuthenticationException {
     LOG.info("Authentication started... " + signinBean);
     UsernamePasswordAuthenticationToken token =
         new UsernamePasswordAuthenticationToken(signinBean.getEmail(), signinBean.getPassword());
@@ -65,6 +66,7 @@ public class AuthServiceImpl implements AuthService {
 //    sc.setAuthentication(authentication);
 //    SecurityContextHolder.setContext(sc);
     LOG.info("Authentication completed.");
+    return (UserDetails) authentication.getPrincipal();
   }
 
   @Override

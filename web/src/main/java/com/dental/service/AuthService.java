@@ -5,6 +5,7 @@ import com.dental.bean.SignupBean;
 import com.dental.persistence.entity.Dentist;
 import com.dental.persistence.entity.User;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 public interface AuthService {
 
-  void authenticate(SigninBean signinBean, HttpServletRequest request) throws AuthenticationException;
+  UserDetails authenticate(SigninBean signinBean, HttpServletRequest request) throws AuthenticationException;
 
   void signup(SignupBean signupBean);
 
