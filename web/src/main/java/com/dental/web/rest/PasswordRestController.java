@@ -46,8 +46,7 @@ public class PasswordRestController extends BaseRestController {
     produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<?> forgotPassword(@RequestBody @Valid ForgotPasswordBean forgotPasswordBean, BindingResult result) {
     if (result.hasErrors()) {
-      BaseDTO baseDTO = new BaseDTO(ResponseStatus.Failure, RestStatus.INCORRECT_ERROR);
-      return new ResponseEntity<>(baseDTO, HttpStatus.BAD_REQUEST);
+      return incorrect();
     }
 
     Optional<ForgotPassword> forgotPasswordOptional = passwordService.createForgotPassword(forgotPasswordBean.getEmail());
@@ -65,26 +64,23 @@ public class PasswordRestController extends BaseRestController {
         mailMessage.setText("Hello world, Your new password = start123 =) " + link);
         mailService.send(mailMessage);
         LOG.info("Mail is sent to = " + forgotPasswordBean.getEmail());
-
-        return new ResponseEntity<>(HttpStatus.OK);
+        return success();
       } catch (Exception e) {
         LOG.info(e.getMessage());
       }
     }
-    return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    return bad();
   }
-
 
   @RequestMapping(value = "/reset-password/{forgotPasswordKey}", method = RequestMethod.POST,
     produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<?> resetPassword(@PathVariable(value = "forgotPasswordKey") String forgotPasswordKey,
                                          @RequestBody @Valid ResetPasswordBean resetPasswordBean, BindingResult result) {
     if (result.hasErrors()) {
-      BaseDTO baseDTO = new BaseDTO(ResponseStatus.Failure, RestStatus.INCORRECT_ERROR);
-      return new ResponseEntity<>(baseDTO, HttpStatus.BAD_REQUEST);
+      return incorrect();
     }
 
     passwordService.useForgotPassword(forgotPasswordKey, resetPasswordBean.getPassword());
-    return new ResponseEntity<>(HttpStatus.OK);
+    return success();
   }
 }

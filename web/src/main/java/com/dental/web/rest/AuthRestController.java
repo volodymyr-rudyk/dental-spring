@@ -44,24 +44,20 @@ public class AuthRestController extends BaseRestController {
 
   @RequestMapping(value = "/login", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE,
       consumes = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<? extends BaseDTO> login(HttpServletRequest httpServletRequest,
+  public ResponseEntity<?> login(HttpServletRequest httpServletRequest,
                                                    @RequestBody @Valid SigninBean signinBean, BindingResult result) {
-    BaseDTO loginDTO;
     if (result.hasErrors()) {
-       loginDTO = baseDTO(ResponseStatus.Failure, RestStatus.INCORRECT_ERROR);
-      return new ResponseEntity<>(loginDTO, HttpStatus.BAD_REQUEST);
+      return incorrect();
     }
 
     try {
       authService.authenticate(signinBean, httpServletRequest);
       LoginEvent loginEvent = new LoginEvent(this, signinBean.getEmail());
       eventService.publish(loginEvent);
-      loginDTO = baseDTO(ResponseStatus.Success, RestStatus.SUCCESS);
-      return new ResponseEntity<>(loginDTO, HttpStatus.OK);
+      return success();
     } catch (Exception e) {
       LOG.error("Authentication Error", e.getMessage());
-      loginDTO = baseDTO(ResponseStatus.Failure, RestStatus.GENERAL_ERROR);
-      return new ResponseEntity<>(loginDTO, HttpStatus.BAD_REQUEST);
+      return bad();
     }
   }
 
@@ -92,7 +88,7 @@ public class AuthRestController extends BaseRestController {
       consumes = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<?> logout(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
     authService.logout(httpServletRequest, httpServletResponse);
-    return new ResponseEntity<>(HttpStatus.OK);
+    return success();
   }
 
 }

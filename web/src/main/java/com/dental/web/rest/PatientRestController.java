@@ -55,18 +55,16 @@ public class PatientRestController extends BaseRestController {
 
   @RequestMapping(value = "/patients/{id}", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE,
       consumes = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<Object> putPatient(HttpServletRequest httpServletRequest, @RequestBody PatientDTO patientDTO) {
+  public ResponseEntity<?> putPatient(HttpServletRequest httpServletRequest, @RequestBody PatientDTO patientDTO) {
 
     Dentist loggedInDentist = authService.getLoggedInDentist();
     patientService.update(patientDTO, loggedInDentist);
-
-    ResponseEntity<Object> responseEntity = new ResponseEntity<>(null, HttpStatus.OK);
-    return responseEntity;
+    return success();
   }
 
   @RequestMapping(value = "/patients", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE,
       consumes = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity patient(HttpServletRequest httpServletRequest, @RequestBody PatientDTO patientDTO) {
+  public ResponseEntity<?> patient(HttpServletRequest httpServletRequest, @RequestBody PatientDTO patientDTO) {
 
     Patient patient = DTOUtils.convert(patientDTO);
     patientService.add(patient);
