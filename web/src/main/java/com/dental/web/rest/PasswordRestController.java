@@ -28,8 +28,7 @@ import java.util.Optional;
 @RestController
 public class PasswordRestController extends BaseRestController {
 
-  public static final String INFO_DNTISTPRO_COM = "info@dntistpro.com";
-  public static final String SUBJECT = "Forgot Password";
+
 
   private Logger LOG = LoggerFactory.getLogger(PasswordRestController.class);
 
@@ -49,23 +48,13 @@ public class PasswordRestController extends BaseRestController {
     if (result.hasErrors()) return incorrect();
 
     Optional<ForgotPassword> forgotPasswordOptional = passwordService.createForgotPassword(forgotPasswordBean.getEmail());
-
     if (forgotPasswordOptional.isPresent()) {
       try {
-        SimpleMailMessage mailMessage = new SimpleMailMessage();
-        mailMessage.setFrom(INFO_DNTISTPRO_COM);
-        mailMessage.setTo(forgotPasswordBean.getEmail());
-
-        mailMessage.setSubject(SUBJECT);
-
-        String link = "<a href=" + "\"http://188.191.71.7:9999/reset-password/" + forgotPasswordOptional.get().getForgotPasswordKey() + "\""+ ">Reset Password</a>";
-
-        mailMessage.setText("Hello world, Your new password = start123 =) " + link);
-        mailService.send(mailMessage);
+        mailService.sendForgotPasswordEmail(forgotPasswordBean.getEmail(), forgotPasswordOptional.get().getForgotPasswordKey());
         LOG.info("Mail is sent to = " + forgotPasswordBean.getEmail());
         return success();
       } catch (Exception e) {
-        LOG.info(e.getMessage());
+        LOG.error(e.getMessage());
       }
     }
     return bad();

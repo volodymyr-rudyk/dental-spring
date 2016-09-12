@@ -1,10 +1,10 @@
 package com.dental.service;
 
-import org.springframework.mail.SimpleMailMessage;
+import javax.mail.MessagingException;
 
 /**
  * Created by vrudyk on 9/5/2016.
  */
 public interface MailService {
-  void send(SimpleMailMessage mailMessage);
+  void sendForgotPasswordEmail(String email, String forgotPasswordKey) throws MessagingException;
 }
