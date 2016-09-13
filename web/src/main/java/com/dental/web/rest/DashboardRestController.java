@@ -30,8 +30,7 @@ public class DashboardRestController extends BaseRestController {
   @Autowired
   private PatientService patientService;
 
-  @RequestMapping(value = "/dashboard", method = { RequestMethod.POST, RequestMethod.GET },
-    produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+  @RequestMapping(value = "/dashboard", method = RequestMethod.GET , produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<?> dashboard(@LoggedDentist Dentist loggedDentist) {
     Dentist dentist = dentistService.get(loggedDentist.getId());
     Long patientsCount = patientService.patientsCount(loggedDentist.getId());
