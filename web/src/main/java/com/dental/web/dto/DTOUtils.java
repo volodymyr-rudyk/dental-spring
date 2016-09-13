@@ -14,15 +14,14 @@ import java.util.stream.Collectors;
  */
 public class DTOUtils {
 
-  static Function<ToothCure, ToothCureDTO> convertToothCureToToothCureDto = (tc) -> {
+  private static Function<ToothCure, ToothCureDTO> convertToothCureToToothCureDto = (tc) -> {
     ToothCureDTO toothCureDTO = new ToothCureDTO();
     toothCureDTO.setId(tc.getId());
     toothCureDTO.setCreatedOn(tc.getCreatedOn());
     toothCureDTO.setCure(tc.getCure());
     return toothCureDTO;
   };
-
-  static Function<Tooth, ToothDTO> convertToothToToothDto = (t) -> {
+  private static Function<Tooth, ToothDTO> convertToothToToothDto = (t) -> {
     ToothDTO toothDTO = new ToothDTO();
     toothDTO.setId(t.getId());
     toothDTO.setToothState(t.getToothState());
@@ -30,8 +29,7 @@ public class DTOUtils {
     toothDTO.setToothNumber(t.getToothNumber());
     return toothDTO;
   };
-
-  static Function<Tooth, ToothDTO> convertDeepToothToToothDto = (t) -> {
+  private static Function<Tooth, ToothDTO> convertDeepToothToToothDto = (t) -> {
     ToothDTO toothDTO = new ToothDTO();
     toothDTO.setId(t.getId());
     toothDTO.setToothState(t.getToothState());
@@ -41,7 +39,6 @@ public class DTOUtils {
     toothDTO.setCures(toothCureDTOSet);
     return toothDTO;
   };
-
   private static Function<Dentist, DentistDTO> dentistToDentistDTO = dentist -> {
     DentistDTO dentistDTO = new DentistDTO();
     dentistDTO.setFirstName(dentist.getFirstName());
@@ -51,6 +48,19 @@ public class DTOUtils {
     dentistDTO.setMiddleName(dentist.getMiddleName());
     dentistDTO.setPhone(dentist.getPhone());
     return dentistDTO;
+  };
+  private static Function<Dentist, ProfileDTO> dentistToProfileDTO = dentist -> {
+    ProfileDTO profileDTO = new ProfileDTO();
+    profileDTO.setFirstName(dentist.getFirstName());
+    profileDTO.setLastName(dentist.getLastName());
+    profileDTO.setAddress(dentist.getAddress());
+    profileDTO.setBirthday(dentist.getBirthday());
+    profileDTO.setMiddleName(dentist.getMiddleName());
+    profileDTO.setPhone(dentist.getPhone());
+    User user = dentist.getUser();
+    profileDTO.setCreatedOn(user.getCreatedOn());
+    profileDTO.setEmail(user.getEmail());
+    return profileDTO;
   };
   private static Function<Patient, PatientDTO> patientToPatientDTO = patient -> {
     PatientDTO patientDTO = new PatientDTO();
@@ -95,6 +105,10 @@ public class DTOUtils {
 
   public static DentistDTO convert(Dentist dentist) {
     return dentistToDentistDTO.apply(dentist);
+  }
+
+  public static ProfileDTO convertToProfile(Dentist dentist) {
+    return dentistToProfileDTO.apply(dentist);
   }
 
   public static DentistDTO convertDeep(Dentist dentist) {
