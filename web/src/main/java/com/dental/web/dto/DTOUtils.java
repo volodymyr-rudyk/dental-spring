@@ -94,13 +94,11 @@ public class DTOUtils {
   };
 
   public static DentistDTO convert(Dentist dentist) {
-    DentistDTO dentistDTO = new DentistDTO();
-    dentistDTO.setFirstName(dentist.getFirstName());
-    dentistDTO.setLastName(dentist.getLastName());
-    dentistDTO.setAddress(dentist.getAddress());
-    dentistDTO.setBirthday(dentist.getBirthday());
-    dentistDTO.setMiddleName(dentist.getMiddleName());
-    dentistDTO.setPhone(dentist.getPhone());
+    return dentistToDentistDTO.apply(dentist);
+  }
+
+  public static DentistDTO convertDeep(Dentist dentist) {
+    DentistDTO dentistDTO = dentistToDentistDTO.apply(dentist);
     if (dentist.getPatients().size() > 0) {
       for (Patient patient : dentist.getPatients()) {
         PatientDTO patientDTO = convert(patient);
