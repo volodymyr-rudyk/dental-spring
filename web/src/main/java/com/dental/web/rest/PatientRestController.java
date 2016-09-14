@@ -34,8 +34,8 @@ public class PatientRestController extends BaseRestController {
   @Autowired
   private PatientService patientService;
 
-  @RequestMapping(value = "/patients", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE,
-      consumes = MediaType.APPLICATION_JSON_VALUE)
+  @RequestMapping(value = "/patients", method = RequestMethod.GET, consumes = MediaType.ALL_VALUE,
+    produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<Set<PatientDTO>> getPatients(HttpServletRequest httpServletRequest,
                                                      @LoggedDentist Dentist loggedDentist, @PageableDefault(size = 7) Pageable page) {
     Set<Patient> patients = patientService.findAllByDentist(loggedDentist);
@@ -44,8 +44,8 @@ public class PatientRestController extends BaseRestController {
     return responseEntity;
   }
 
-  @RequestMapping(value = "/patients/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE,
-      consumes = MediaType.APPLICATION_JSON_VALUE)
+  @RequestMapping(value = "/patients/{id}", method = RequestMethod.GET, consumes = MediaType.ALL_VALUE,
+      produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<PatientDTO> getPatient(@PathVariable("id") Long patientId, @LoggedDentist Dentist loggedDentist) {
     Patient patient = patientService.load(patientId);
     PatientDTO patientDTO = DTOUtils.convertDeep(patient);
@@ -66,8 +66,9 @@ public class PatientRestController extends BaseRestController {
   public ResponseEntity<?> patient(HttpServletRequest httpServletRequest, @RequestBody PatientDTO patientDTO) {
 
     Patient patient = DTOUtils.convert(patientDTO);
-    patientService.add(patient);
-    return new ResponseEntity(null, HttpStatus.CREATED);
+    patient = patientService.add(patient);
+    PatientDTO convert = DTOUtils.convert(patient);
+    return success(convert);
   }
 
 }

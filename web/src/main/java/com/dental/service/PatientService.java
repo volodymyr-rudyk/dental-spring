@@ -20,7 +20,7 @@ public interface PatientService extends BaseService<Patient> {
 
   void add(PatientDTO patientDTO, Dentist dentist);
 
-  void add(Patient patient);
+  Patient add(Patient patient);
 
   Patient findByDentist(Dentist dentist);
 

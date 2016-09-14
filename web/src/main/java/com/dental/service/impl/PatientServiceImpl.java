@@ -1,11 +1,13 @@
 package com.dental.service.impl;
 
 import com.dental.persistence.entity.Dentist;
+import com.dental.persistence.entity.DentistPatient;
 import com.dental.persistence.entity.Patient;
 import com.dental.persistence.entity.Tooth;
 import com.dental.persistence.helperbean.Gender;
 import com.dental.persistence.helperbean.ToothBucket;
 import com.dental.persistence.helperbean.ToothState;
+import com.dental.persistence.repository.DentistPatientRepository;
 import com.dental.persistence.repository.PatientRepository;
 import com.dental.service.AuthService;
 import com.dental.service.DentistService;
@@ -33,6 +35,9 @@ public class PatientServiceImpl implements PatientService {
   @Autowired
   private PatientRepository patientRepository;
   @Autowired
+  private DentistPatientRepository dentistPatientRepository;
+
+  @Autowired
   private DentistService dentistService;
 
   @Override
@@ -47,13 +52,6 @@ public class PatientServiceImpl implements PatientService {
     Hibernate.initialize(patient.getTeeth());
     return patient;
   }
-
-//  @Override
-//  public Collection<Patient> getList(Dentist dentistBean) {
-//    if (dentistBean == null) return Collections.emptyList();
-//    Collection<Patient> patients = patientRepository.findAllByDentists(Arrays.asList(dentistBean));
-//    return patients;
-//  }
 
   @Override
   public Patient get(Long id) {
@@ -84,12 +82,9 @@ public class PatientServiceImpl implements PatientService {
 
   @Override
   @Transactional
-  public void add(Patient patient) {
+  public Patient add(Patient patient) {
     Dentist loggedInDentist = authService.getLoggedInDentist();
     Dentist dentist = dentistService.get(loggedInDentist.getId());
-    Hibernate.initialize(dentist.getPatients());
-    dentist.getPatients().add(patient);
-
     Set<Tooth> teeth = patient.getTeeth();
 
     for(int i = 1; i <= TEETH_IN_BUCKET; i++) {
@@ -113,7 +108,14 @@ public class PatientServiceImpl implements PatientService {
       t.setToothState(ToothState.UNDEFINED);
     });
 
-    dentistService.save(dentist);
+
+    Patient p = patientRepository.save(patient);
+    DentistPatient dentistPatient = new DentistPatient();
+    dentistPatient.setDentist(dentist);
+    dentistPatient.setPatient(p);
+    dentistPatientRepository.save(dentistPatient);
+
+    return patient;
   }
 
   private void fillTeeth(int index, ToothBucket toothBucket, Set<Tooth> teeth) {
