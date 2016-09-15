@@ -72,7 +72,8 @@ public class SpringSecureConfig extends WebSecurityConfigurerAdapter {
             "/rest/signup",
             "/rest/forgot-password",
             "/rest/reset-password/*",
-            "/swagger-ui.html"
+            "/swagger-ui.html",
+            "/rest/public/**"
         ).permitAll()
         //The rest of the our application is protected.
         .antMatchers("/**").hasRole("USER");

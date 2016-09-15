@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 /**
  * Created by light on 27.05.2015.
  */
@@ -50,6 +52,14 @@ public class DentistServiceImpl implements DentistService {
     dentist.setBirthday(dentistBean.getBirthday());
     dentist.setPhone(dentistBean.getPhone());
     dentistRepository.save(dentist);
+  }
+
+  public List<Dentist> findAll() {
+    return (List<Dentist>) dentistRepository.findAll();
+  }
+
+  public Dentist findOne(Long id) {
+    return dentistRepository.findOne(id);
   }
 
   private Dentist transform(DentistBean dentistBean) {

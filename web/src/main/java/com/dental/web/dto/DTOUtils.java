@@ -5,6 +5,7 @@ import com.dental.persistence.helperbean.Gender;
 import com.dental.persistence.helperbean.ToothBucket;
 import com.dental.provider.DentalUserDetails;
 
+import java.util.List;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -47,6 +48,13 @@ public class DTOUtils {
     dentistDTO.setBirthday(dentist.getBirthday());
     dentistDTO.setMiddleName(dentist.getMiddleName());
     dentistDTO.setPhone(dentist.getPhone());
+    return dentistDTO;
+  };
+  private static Function<Dentist, DentistDTO> dentistToDentistDTOShort = dentist -> {
+    DentistDTO dentistDTO = new DentistDTO();
+    dentistDTO.setFirstName(dentist.getFirstName());
+    dentistDTO.setLastName(dentist.getLastName());
+    dentistDTO.setAddress(dentist.getAddress());
     return dentistDTO;
   };
   private static Function<Dentist, ProfileDTO> dentistToProfileDTO = dentist -> {
@@ -105,6 +113,9 @@ public class DTOUtils {
 
   public static DentistDTO convert(Dentist dentist) {
     return dentistToDentistDTO.apply(dentist);
+  }
+  public static DentistDTO convertShort(Dentist dentist) {
+    return dentistToDentistDTOShort.apply(dentist);
   }
 
   public static ProfileDTO convertToProfile(Dentist dentist) {
@@ -167,5 +178,9 @@ public class DTOUtils {
 
   public static SigninDTO convert(DentalUserDetails dentalUserDetails) {
     return userDetailsToSigninDTO.apply(dentalUserDetails);
+  }
+
+  public static Set<DentistDTO> convert(List<Dentist> all) {
+    return all.stream().map(dentistToDentistDTOShort).collect(Collectors.toSet());
   }
 }

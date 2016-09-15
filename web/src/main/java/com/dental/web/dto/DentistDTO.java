@@ -7,7 +7,7 @@ import java.util.Set;
 /**
  * Created by light on 5/6/2016.
  */
-public class DentistDTO {
+public class DentistDTO extends BaseDTO {
   private String firstName;
   private String middleName;
   private String lastName;

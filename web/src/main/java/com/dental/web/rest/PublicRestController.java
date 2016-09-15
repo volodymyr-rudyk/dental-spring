@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
  * Created by vrudyk on 11/4/2015.
  */
 @RestController
-@RequestMapping(value = "/rest")
-public class BaseRestController extends AbstractBaseController {
+@RequestMapping(value = "/rest/public")
+public class PublicRestController implements Rest {
 
   private Logger logger = LoggerFactory.getLogger(BaseRestController.class);
 
