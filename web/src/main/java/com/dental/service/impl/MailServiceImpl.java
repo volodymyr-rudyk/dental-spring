@@ -26,7 +26,7 @@ public class MailServiceImpl implements MailService {
 
   public static final String FROM = "info@dntistpro.com";
   public static final String SUBJECT = "Forgot Password";
-  public static final String HOST = "http://188.191.71.7:9999";
+  public static final String HOST = "http://www.dntistpro.com";
 
   @Autowired
   JavaMailSender javaMailSender;

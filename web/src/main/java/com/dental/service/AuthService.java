@@ -23,6 +23,4 @@ public interface AuthService {
 
   Dentist getLoggedInDentist();
 
-  User getLoggedUser();
-
 }

@@ -51,20 +51,11 @@ public class AuthServiceImpl implements AuthService {
         new UsernamePasswordAuthenticationToken(signinBean.getEmail(), signinBean.getPassword());
     token.setDetails(new WebAuthenticationDetails(request));
     Authentication authentication = authenticationManager.authenticate(token);
-//        Authentication authentication = authenticationProvider.authenticate(token);
-
-//    SecurityContext securityContext = SecurityContextHolder.getContext();
-//    securityContext.setAuthentication(authentication);
-//    HttpSession session = request.getSession(true);
-//    session.setAttribute(SPRING_SECURITY_CONTEXT, securityContext);
 
     if (authentication.isAuthenticated()) {
       SecurityContextHolder.getContext().setAuthentication(authentication);
     }
 
-//    SecurityContext sc = new SecurityContextImpl();
-//    sc.setAuthentication(authentication);
-//    SecurityContextHolder.setContext(sc);
     LOG.info("Authentication completed.");
     return (UserDetails) authentication.getPrincipal();
   }
@@ -82,21 +73,15 @@ public class AuthServiceImpl implements AuthService {
   }
 
   @Override
-  public User getLoggedUser() {
+  public Dentist getLoggedInDentist() {
     DentalUserDetails dentalUserDetails = this.loadUserDetails();
-    return dentalUserDetails.getUser();
+    return dentalUserDetails.getUser().getDentist();
   }
 
   private DentalUserDetails loadUserDetails() {
     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
     if (authentication == null) throw new RequiredAuthenticationException("getLoggedInProfile");
     return (DentalUserDetails) authentication.getPrincipal();
-  }
-
-  @Override
-  public Dentist getLoggedInDentist() {
-    DentalUserDetails dentalUserDetails = this.loadUserDetails();
-    return dentalUserDetails.getUser().getDentist();
   }
 
   private User getUser(SignupBean signupBean) {

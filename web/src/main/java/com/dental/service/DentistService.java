@@ -10,10 +10,6 @@ import java.util.List;
  */
 public interface DentistService extends BaseService<Dentist>{
 
-  Dentist load(Long id);
-
-  void save(DentistBean dentistBean);
-
   void update(DentistBean dentistBean, Dentist dentist);
 
   void save(Dentist dentist);

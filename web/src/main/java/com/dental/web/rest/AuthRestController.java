@@ -15,6 +15,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -53,8 +54,11 @@ public class AuthRestController extends BaseRestController {
 
       eventService.publish(new LoginEvent(this, signinBean.getEmail()));
       return success(signinDTO);
-    } catch (Exception e) {
+    } catch (AuthenticationException e) {
       LOG.error("Authentication Error", e.getMessage());
+      return bad();
+    } catch (Exception e) {
+      LOG.error("Error", e.getMessage());
       return bad();
     }
   }

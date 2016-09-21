@@ -26,20 +26,6 @@ public class DentistServiceImpl implements DentistService {
   }
 
   @Override
-  @Transactional
-  public Dentist load(Long id) {
-    Dentist dentist = dentistRepository.findOne(id);
-    Hibernate.initialize(dentist.getPatients());
-    return dentist;
-  }
-
-  @Override
-  public void save(DentistBean dentistBean) {
-    Dentist dentist = transform(dentistBean);
-    dentistRepository.save(dentist);
-  }
-
-  @Override
   public void save(Dentist dentist) {
     dentistRepository.save(dentist);
   }
@@ -63,7 +49,4 @@ public class DentistServiceImpl implements DentistService {
     return dentistRepository.findOne(id);
   }
 
-  private Dentist transform(DentistBean dentistBean) {
-    return new Dentist();
-  }
 }

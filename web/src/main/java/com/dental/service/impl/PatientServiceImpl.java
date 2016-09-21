@@ -81,6 +81,26 @@ public class PatientServiceImpl implements PatientService {
   }
 
   @Override
+  public Patient findByDentist(Dentist dentist) {
+    return patientRepository.findByDentists(dentist);
+  }
+
+  @Override
+  public Set<Patient> findByDentist(Dentist dentist, Pageable page) {
+    return new HashSet<>(patientRepository.findByDentists(dentist, page));
+  }
+
+  @Override
+  public Set<Patient> findAllByDentist(Dentist dentist) {
+    return new HashSet<>(patientRepository.findAllByDentists(dentist));
+  }
+
+  @Override
+  public Long patientsCount(Long dentistId) {
+    return patientRepository.countByDentistsId(dentistId);
+  }
+
+  @Override
   @Transactional
   public Patient add(Patient patient) {
     Dentist loggedInDentist = authService.getLoggedInDentist();
@@ -125,23 +145,4 @@ public class PatientServiceImpl implements PatientService {
     teeth.add(tooth);
   }
 
-  @Override
-  public Patient findByDentist(Dentist dentist) {
-    return patientRepository.findByDentists(dentist);
-  }
-
-  @Override
-  public Set<Patient> findByDentist(Dentist dentist, Pageable page) {
-    return new HashSet<>(patientRepository.findByDentists(dentist, page));
-  }
-
-  @Override
-  public Set<Patient> findAllByDentist(Dentist dentist) {
-    return new HashSet<>(patientRepository.findAllByDentists(dentist));
-  }
-
-  @Override
-  public Long patientsCount(Long dentistId) {
-    return patientRepository.countByDentistsId(dentistId);
-  }
 }
