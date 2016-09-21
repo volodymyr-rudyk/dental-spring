@@ -51,6 +51,7 @@ public class DentistServiceImpl implements DentistService {
     dentist.setLastName(dentistBean.getLastName());
     dentist.setBirthday(dentistBean.getBirthday());
     dentist.setPhone(dentistBean.getPhone());
+    dentist.setAddress(dentistBean.getAddress());
     dentistRepository.save(dentist);
   }
 

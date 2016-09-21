@@ -14,6 +14,7 @@ public class DentistBean extends SigninBean {
   private String lastName;
   private Date birthday;
   private String phone;
+  private String address;
 
   public String getMiddleName() {
     return middleName;
@@ -58,5 +59,13 @@ public class DentistBean extends SigninBean {
 
   public void setPhone(String phone) {
     this.phone = phone;
+  }
+
+  public String getAddress() {
+    return address;
+  }
+
+  public void setAddress(String address) {
+    this.address = address;
   }
 }
