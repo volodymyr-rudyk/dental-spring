@@ -1,15 +1,18 @@
 package com.dental.web.rest;
 
+import com.dental.bean.ToothCureRequestBean;
 import com.dental.init.LoggedDentist;
 import com.dental.persistence.entity.Dentist;
 import com.dental.persistence.entity.Patient;
 import com.dental.persistence.entity.Tooth;
+import com.dental.persistence.entity.ToothCure;
 import com.dental.service.AuthService;
 import com.dental.service.DentistService;
 import com.dental.service.PatientService;
 import com.dental.service.ToothService;
 import com.dental.web.dto.DTOUtils;
 import com.dental.web.dto.PatientDTO;
+import com.dental.web.dto.ToothCureDTO;
 import com.dental.web.dto.ToothDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -79,10 +82,21 @@ public class PatientRestController extends BaseRestController {
 
   @RequestMapping(value = "/patients/{id}/teeth/{toothId}/cures", method = RequestMethod.GET, consumes = MediaType.ALL_VALUE,
     produces = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<?> getPatient(@PathVariable("id") Long patientId, @PathVariable("toothId") Long toothId ) {
+  public ResponseEntity<?> getToothCures(@PathVariable("id") Long patientId, @PathVariable("toothId") Long toothId ) {
     Tooth tooth = toothService.load(toothId, patientId);
     ToothDTO toothDTO = DTOUtils.convertDeep(tooth);
     return success(toothDTO);
+  }
+
+  @RequestMapping(value = "/patients/{id}/teeth/{toothId}/cures", method = RequestMethod.POST,
+    produces = MediaType.APPLICATION_JSON_VALUE,
+    consumes = MediaType.APPLICATION_JSON_VALUE)
+  public ResponseEntity<?> addToothCure(HttpServletRequest httpServletRequest, @LoggedDentist Dentist loggedDentist,
+                                                     @RequestBody ToothCureRequestBean toothCureRequestBean)  {
+    ToothCure toothCure = new ToothCure(toothCureRequestBean.getCure());
+    toothCure = toothService.addCure(toothCure, toothCureRequestBean.getToothId(), toothCureRequestBean.getPatientId());
+    ToothCureDTO toothCureDTO = DTOUtils.convert(toothCure);
+    return new ResponseEntity<>(toothCureDTO, HttpStatus.CREATED);
   }
 
 }
