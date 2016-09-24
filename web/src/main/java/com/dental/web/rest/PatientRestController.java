@@ -3,11 +3,14 @@ package com.dental.web.rest;
 import com.dental.init.LoggedDentist;
 import com.dental.persistence.entity.Dentist;
 import com.dental.persistence.entity.Patient;
+import com.dental.persistence.entity.Tooth;
 import com.dental.service.AuthService;
 import com.dental.service.DentistService;
 import com.dental.service.PatientService;
+import com.dental.service.ToothService;
 import com.dental.web.dto.DTOUtils;
 import com.dental.web.dto.PatientDTO;
+import com.dental.web.dto.ToothDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -33,6 +36,9 @@ public class PatientRestController extends BaseRestController {
 
   @Autowired
   private PatientService patientService;
+
+  @Autowired
+  private ToothService toothService;
 
   @RequestMapping(value = "/patients", method = RequestMethod.GET, consumes = MediaType.ALL_VALUE,
     produces = MediaType.APPLICATION_JSON_VALUE)
@@ -69,6 +75,14 @@ public class PatientRestController extends BaseRestController {
     patient = patientService.add(patient);
     PatientDTO convert = DTOUtils.convert(patient);
     return success(convert);
+  }
+
+  @RequestMapping(value = "/patients/{id}/teeth/{toothId}/cures", method = RequestMethod.GET, consumes = MediaType.ALL_VALUE,
+    produces = MediaType.APPLICATION_JSON_VALUE)
+  public ResponseEntity<?> getPatient(@PathVariable("id") Long patientId, @PathVariable("toothId") Long toothId ) {
+    Tooth tooth = toothService.load(toothId, patientId);
+    ToothDTO toothDTO = DTOUtils.convertDeep(tooth);
+    return success(toothDTO);
   }
 
 }
