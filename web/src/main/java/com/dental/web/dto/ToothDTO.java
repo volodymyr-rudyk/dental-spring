@@ -1,8 +1,5 @@
 package com.dental.web.dto;
 
-import com.dental.persistence.helperbean.ToothBucket;
-import com.dental.persistence.helperbean.ToothState;
-
 import java.util.Set;
 
 /**
@@ -12,7 +9,7 @@ public class ToothDTO extends BaseDTO {
   private Long id;
   private Set<ToothCureDTO> cures;
   private String toothState;
-  private ToothBucket toothBucket;
+  private String toothBucket;
   private Integer toothNumber;
 
   public Long getId() {
@@ -39,11 +36,11 @@ public class ToothDTO extends BaseDTO {
     this.toothState = toothState;
   }
 
-  public ToothBucket getToothBucket() {
+  public String getToothBucket() {
     return toothBucket;
   }
 
-  public void setToothBucket(ToothBucket toothBucket) {
+  public void setToothBucket(String toothBucket) {
     this.toothBucket = toothBucket;
   }
 
