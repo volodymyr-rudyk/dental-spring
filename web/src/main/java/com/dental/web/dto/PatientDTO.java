@@ -17,10 +17,7 @@ public class PatientDTO extends BaseDTO {
   private String gender;
   private String phone;
 
-  private Set<ToothDTO> teethUL = new HashSet<>();
-  private Set<ToothDTO> teethUR = new HashSet<>();
-  private Set<ToothDTO> teethDL = new HashSet<>();
-  private Set<ToothDTO> teethDR = new HashSet<>();
+  private TeethBucketDto teeth = new TeethBucketDto();
 
   public Long getId() {
     return id;
@@ -86,35 +83,12 @@ public class PatientDTO extends BaseDTO {
     this.phone = phone;
   }
 
-  public Set<ToothDTO> getTeethUL() {
-    return teethUL;
+  public TeethBucketDto getTeeth() {
+    return teeth;
   }
 
-  public void setTeethUL(Set<ToothDTO> teethUL) {
-    this.teethUL = teethUL;
+  public void setTeeth(TeethBucketDto teeth) {
+    this.teeth = teeth;
   }
 
-  public Set<ToothDTO> getTeethUR() {
-    return teethUR;
-  }
-
-  public void setTeethUR(Set<ToothDTO> teethUR) {
-    this.teethUR = teethUR;
-  }
-
-  public Set<ToothDTO> getTeethDL() {
-    return teethDL;
-  }
-
-  public void setTeethDL(Set<ToothDTO> teethDL) {
-    this.teethDL = teethDL;
-  }
-
-  public Set<ToothDTO> getTeethDR() {
-    return teethDR;
-  }
-
-  public void setTeethDR(Set<ToothDTO> teethDR) {
-    this.teethDR = teethDR;
-  }
 }

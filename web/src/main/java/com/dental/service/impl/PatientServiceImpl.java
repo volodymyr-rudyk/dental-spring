@@ -125,7 +125,7 @@ public class PatientServiceImpl implements PatientService {
 
     teeth.stream().forEach(t -> {
       t.setPatient(patient);
-      t.setToothState(ToothState.UNDEFINED);
+      t.setToothState(ToothState.ALIVE);
     });
 
 

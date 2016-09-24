@@ -25,7 +25,7 @@ public class DTOUtils {
   private static Function<Tooth, ToothDTO> convertToothToToothDto = (t) -> {
     ToothDTO toothDTO = new ToothDTO();
     toothDTO.setId(t.getId());
-    toothDTO.setToothState(t.getToothState());
+    toothDTO.setToothState(t.getToothState().getState());
     toothDTO.setToothBucket(t.getToothBucket());
     toothDTO.setToothNumber(t.getToothNumber());
     return toothDTO;
@@ -33,7 +33,7 @@ public class DTOUtils {
   private static Function<Tooth, ToothDTO> convertDeepToothToToothDto = (t) -> {
     ToothDTO toothDTO = new ToothDTO();
     toothDTO.setId(t.getId());
-    toothDTO.setToothState(t.getToothState());
+    toothDTO.setToothState(t.getToothState().getState());
     toothDTO.setToothBucket(t.getToothBucket());
     toothDTO.setToothNumber(t.getToothNumber());
     Set<ToothCureDTO> toothCureDTOSet = t.getCures().stream().map(convertToothCureToToothCureDto).collect(Collectors.toSet());
@@ -140,10 +140,10 @@ public class DTOUtils {
     Set<ToothDTO> downLeftToothDTOSet = patient.getTeeth().stream().filter(t -> t.getToothBucket() == ToothBucket.DOWN_LEFT).map(convertToothToToothDto).collect(Collectors.toSet());
     Set<ToothDTO> downRightToothDTOSet = patient.getTeeth().stream().filter(t -> t.getToothBucket() == ToothBucket.DOWN_RIGHT).map(convertToothToToothDto).collect(Collectors.toSet());
 
-    patientDTO.setTeethUL(upLeftToothDTOSet);
-    patientDTO.setTeethUR(upRightToothDTOSet);
-    patientDTO.setTeethDL(downLeftToothDTOSet);
-    patientDTO.setTeethDR(downRightToothDTOSet);
+    patientDTO.getTeeth().setTeethUL(upLeftToothDTOSet);
+    patientDTO.getTeeth().setTeethUR(upRightToothDTOSet);
+    patientDTO.getTeeth().setTeethDL(downLeftToothDTOSet);
+    patientDTO.getTeeth().setTeethDR(downRightToothDTOSet);
 
     return patientDTO;
   }

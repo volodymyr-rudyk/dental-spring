@@ -4,10 +4,12 @@ package com.dental.persistence.helperbean;
  * Created by vrudyk on 7/2/2016.
  */
 public enum ToothState {
-  LIVE("live"),
+  ALIVE("alive"),
   PULLED("pulled"),
   CURED("cured"),
-  UNDEFINED("undefined");
+  PENDING("pending"),
+  CRITICAL("critical"),
+  CORONA("corona");
 
   private String state;
 
@@ -21,6 +23,10 @@ public enum ToothState {
         return toothState;
       }
     }
-    return ToothState.UNDEFINED;
-  };
+    return ToothState.ALIVE;
+  }
+
+  public String getState() {
+    return state;
+  }
 }

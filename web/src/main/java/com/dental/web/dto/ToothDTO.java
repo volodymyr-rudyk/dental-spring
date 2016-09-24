@@ -11,7 +11,7 @@ import java.util.Set;
 public class ToothDTO extends BaseDTO {
   private Long id;
   private Set<ToothCureDTO> cures;
-  private ToothState toothState;
+  private String toothState;
   private ToothBucket toothBucket;
   private Integer toothNumber;
 
@@ -31,11 +31,11 @@ public class ToothDTO extends BaseDTO {
     this.cures = cures;
   }
 
-  public ToothState getToothState() {
+  public String getToothState() {
     return toothState;
   }
 
-  public void setToothState(ToothState toothState) {
+  public void setToothState(String toothState) {
     this.toothState = toothState;
   }
 
