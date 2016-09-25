@@ -33,7 +33,7 @@ public class ToothCure extends BaseEntity implements Serializable {
   }
 
   @Column(name = "created_on")
-  @Temporal(TemporalType.DATE)
+  @Temporal(TemporalType.TIMESTAMP)
   public Date getCreatedOn() {
     return createdOn;
   }
