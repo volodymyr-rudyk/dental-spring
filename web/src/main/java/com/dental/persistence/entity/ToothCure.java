@@ -32,7 +32,7 @@ public class ToothCure extends BaseEntity implements Serializable {
     this.cure = cure;
   }
 
-  @Column(name = "createdOn")
+  @Column(name = "created_on")
   @Temporal(TemporalType.DATE)
   public Date getCreatedOn() {
     return createdOn;
