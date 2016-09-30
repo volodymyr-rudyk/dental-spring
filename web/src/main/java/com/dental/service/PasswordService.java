@@ -1,6 +1,6 @@
 package com.dental.service;
 
-import com.dental.persistence.entity.ForgotPassword;
+import com.dental.persistence.entity.ForgotPasswordEntity;
 
 import java.util.Optional;
 
@@ -9,7 +9,7 @@ import java.util.Optional;
  */
 public interface PasswordService {
 
-  Optional<ForgotPassword> createForgotPassword(String email);
+  Optional<ForgotPasswordEntity> createForgotPassword(String email);
 
   void useForgotPassword(String forgotPasswordKey, String password);
 

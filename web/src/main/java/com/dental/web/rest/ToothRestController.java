@@ -3,9 +3,9 @@ package com.dental.web.rest;
 import com.dental.bean.ToothCureRequestBean;
 import com.dental.bean.ToothRequestBean;
 import com.dental.init.LoggedDentist;
-import com.dental.persistence.entity.Dentist;
-import com.dental.persistence.entity.Tooth;
-import com.dental.persistence.entity.ToothCure;
+import com.dental.persistence.entity.DentistEntity;
+import com.dental.persistence.entity.ToothEntity;
+import com.dental.persistence.entity.ToothCureEntity;
 import com.dental.service.AuthService;
 import com.dental.service.ToothService;
 import com.dental.web.dto.DTOUtils;
@@ -36,27 +36,27 @@ public class ToothRestController extends BaseRestController {
 
   @RequestMapping(value = "/tooth", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE,
       consumes = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<ToothDTO> tooth(HttpServletRequest httpServletRequest, @LoggedDentist Dentist loggedDentist,
+  public ResponseEntity<ToothDTO> tooth(HttpServletRequest httpServletRequest, @LoggedDentist DentistEntity loggedDentist,
                                            ToothRequestBean toothRequestBean)  {
-    Tooth tooth = toothService.get(toothRequestBean.getToothId(), toothRequestBean.getPatientId());
+    ToothEntity tooth = toothService.get(toothRequestBean.getToothId(), toothRequestBean.getPatientId());
     ToothDTO toothDTO = DTOUtils.convert(tooth);
     return success(toothDTO);
   }
 
   @RequestMapping(value = "/tooth/cures", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE,
       consumes = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<ToothDTO> toothCures(HttpServletRequest httpServletRequest, @LoggedDentist Dentist loggedDentist,
+  public ResponseEntity<ToothDTO> toothCures(HttpServletRequest httpServletRequest, @LoggedDentist DentistEntity loggedDentist,
                                              ToothRequestBean toothRequestBean)  {
-    Tooth tooth = toothService.load(toothRequestBean.getToothId(), toothRequestBean.getPatientId());
+    ToothEntity tooth = toothService.load(toothRequestBean.getToothId(), toothRequestBean.getPatientId());
     ToothDTO toothDTO = DTOUtils.convertDeep(tooth);
     return success(toothDTO);
   }
 
   @RequestMapping(value = "/tooth/cures", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE,
       consumes = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<ToothCureDTO> toothCuresPost(HttpServletRequest httpServletRequest, @LoggedDentist Dentist loggedDentist,
+  public ResponseEntity<ToothCureDTO> toothCuresPost(HttpServletRequest httpServletRequest, @LoggedDentist DentistEntity loggedDentist,
                                              @RequestBody ToothCureRequestBean toothCureRequestBean)  {
-    ToothCure toothCure = new ToothCure(toothCureRequestBean.getCure());
+    ToothCureEntity toothCure = new ToothCureEntity(toothCureRequestBean.getCure());
     toothCure = toothService.addCure(toothCure, toothCureRequestBean.getToothId(), toothCureRequestBean.getPatientId());
     ToothCureDTO toothCureDTO = DTOUtils.convert(toothCure);
     return new ResponseEntity<>(toothCureDTO, HttpStatus.CREATED);

@@ -1,6 +1,6 @@
 package com.dental.service.impl;
 
-import com.dental.persistence.entity.User;
+import com.dental.persistence.entity.UserEntity;
 import com.dental.persistence.repository.UserRepository;
 import com.dental.provider.DentalUserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +27,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
   @Override
   public UserDetails loadUserByUsername(final String email) throws UsernameNotFoundException {
-    final User user = userRepository.findByEmail(email);
+    final UserEntity user = userRepository.findByEmail(email);
     if (user == null)
       throw new UsernameNotFoundException("user name not found" + email);
 

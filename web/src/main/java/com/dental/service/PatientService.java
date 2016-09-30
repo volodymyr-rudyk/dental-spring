@@ -1,7 +1,7 @@
 package com.dental.service;
 
-import com.dental.persistence.entity.Dentist;
-import com.dental.persistence.entity.Patient;
+import com.dental.persistence.entity.DentistEntity;
+import com.dental.persistence.entity.PatientEntity;
 import com.dental.web.dto.PatientDTO;
 import org.springframework.data.domain.Pageable;
 
@@ -10,23 +10,23 @@ import java.util.Set;
 /**
  * Created by vrudyk on 3/21/2016.
  */
-public interface PatientService extends BaseService<Patient> {
+public interface PatientService extends BaseService<PatientEntity> {
 
-  Patient findByFirstNameAndLastName(String firstName, String lastName);
+  PatientEntity findByFirstNameAndLastName(String firstName, String lastName);
 
-  Patient load(Long patientId);
+  PatientEntity load(Long patientId);
 
-  boolean update(PatientDTO patientDTO, Dentist loggedInDentist);
+  boolean update(PatientDTO patientDTO, DentistEntity loggedInDentist);
 
-  void add(PatientDTO patientDTO, Dentist dentist);
+  void add(PatientDTO patientDTO, DentistEntity dentist);
 
-  Patient add(Patient patient);
+  PatientEntity add(PatientEntity patient);
 
-  Patient findByDentist(Dentist dentist);
+  PatientEntity findByDentist(DentistEntity dentist);
 
-  Set<Patient> findByDentist(Dentist dentist, Pageable page);
+  Set<PatientEntity> findByDentist(DentistEntity dentist, Pageable page);
 
-  Set<Patient> findAllByDentist(Dentist dentist);
+  Set<PatientEntity> findAllByDentist(DentistEntity dentist);
 
   Long patientsCount(Long dentistId);
 }

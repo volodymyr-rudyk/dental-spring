@@ -1,7 +1,7 @@
 package com.dental.service.impl;
 
-import com.dental.persistence.entity.Tooth;
-import com.dental.persistence.entity.ToothCure;
+import com.dental.persistence.entity.ToothEntity;
+import com.dental.persistence.entity.ToothCureEntity;
 import com.dental.persistence.repository.ToothCureRepository;
 import com.dental.persistence.repository.ToothRepository;
 import com.dental.service.ToothService;
@@ -26,20 +26,20 @@ public class ToothServiceImpl implements ToothService {
 
   @Override
   @Transactional
-  public Tooth load(Long toothId, Long patientId) {
-    Tooth tooth = toothRepository.findByIdAndPatientId(toothId, patientId);
+  public ToothEntity load(Long toothId, Long patientId) {
+    ToothEntity tooth = toothRepository.findByIdAndPatientId(toothId, patientId);
     Hibernate.initialize(tooth.getCures());
     return tooth;
   }
 
   @Override
-  public Tooth get(Long toothId, Long patientId) {
+  public ToothEntity get(Long toothId, Long patientId) {
     return toothRepository.findByIdAndPatientId(toothId, patientId);
   }
 
   @Override
-  public ToothCure addCure(ToothCure toothCure, Long toothId, Long patientId) {
-    Tooth tooth = toothRepository.findOne(toothId);
+  public ToothCureEntity addCure(ToothCureEntity toothCure, Long toothId, Long patientId) {
+    ToothEntity tooth = toothRepository.findOne(toothId);
     toothCure.setCreatedOn(new Date());
     toothCure.setCure(toothCure.getCure());
     toothCure.setTooth(tooth);
@@ -48,7 +48,12 @@ public class ToothServiceImpl implements ToothService {
   }
 
   @Override
-  public Tooth get(Long id) {
+  public Long countCuresByDentistId(Long dentistId) {
+    return toothCureRepository.countCures(dentistId);
+  }
+
+  @Override
+  public ToothEntity get(Long id) {
     return toothRepository.findOne(id);
   }
 }

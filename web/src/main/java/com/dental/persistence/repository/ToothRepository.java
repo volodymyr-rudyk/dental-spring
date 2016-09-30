@@ -1,7 +1,7 @@
 package com.dental.persistence.repository;
 
-import com.dental.persistence.entity.Patient;
-import com.dental.persistence.entity.Tooth;
+import com.dental.persistence.entity.PatientEntity;
+import com.dental.persistence.entity.ToothEntity;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -12,10 +12,10 @@ import java.util.List;
  */
 
 @Repository
-public interface ToothRepository extends CrudRepository<Tooth, Long> {
+public interface ToothRepository extends CrudRepository<ToothEntity, Long> {
 
-  List<Tooth> findAllByPatient(Patient patient);
+  List<ToothEntity> findAllByPatient(PatientEntity patient);
 
-  Tooth findByIdAndPatientId(Long toothId, Long patientId);
+  ToothEntity findByIdAndPatientId(Long toothId, Long patientId);
 
 }

@@ -2,20 +2,15 @@ package com.dental.web.rest;
 
 import com.dental.bean.ForgotPasswordBean;
 import com.dental.bean.ResetPasswordBean;
-import com.dental.persistence.entity.ForgotPassword;
+import com.dental.persistence.entity.ForgotPasswordEntity;
 import com.dental.service.MailService;
 import com.dental.service.PasswordService;
 import com.dental.service.UserService;
-import com.dental.web.dto.BaseDTO;
-import com.dental.web.error.RestStatus;
-import com.dental.web.status.ResponseStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
@@ -47,7 +42,7 @@ public class PasswordRestController extends BaseRestController {
 
     if (result.hasErrors()) return incorrect();
 
-    Optional<ForgotPassword> forgotPasswordOptional = passwordService.createForgotPassword(forgotPasswordBean.getEmail());
+    Optional<ForgotPasswordEntity> forgotPasswordOptional = passwordService.createForgotPassword(forgotPasswordBean.getEmail());
     if (forgotPasswordOptional.isPresent()) {
       try {
         mailService.sendForgotPasswordEmail(forgotPasswordBean.getEmail(), forgotPasswordOptional.get().getForgotPasswordKey());

@@ -1,17 +1,18 @@
 package com.dental.service;
 
-import com.dental.persistence.entity.Tooth;
-import com.dental.persistence.entity.ToothCure;
+import com.dental.persistence.entity.ToothEntity;
+import com.dental.persistence.entity.ToothCureEntity;
 
 /**
  * Created by vrudyk on 7/4/2016.
  */
-public interface ToothService extends BaseService<Tooth> {
+public interface ToothService extends BaseService<ToothEntity> {
 
-  Tooth load(Long toothId, Long patientId);
+  ToothEntity load(Long toothId, Long patientId);
 
-  Tooth get(Long toothId, Long patientId);
+  ToothEntity get(Long toothId, Long patientId);
 
-  ToothCure addCure(ToothCure toothCure, Long toothId, Long patientId);
+  ToothCureEntity addCure(ToothCureEntity toothCure, Long toothId, Long patientId);
 
+  Long countCuresByDentistId(Long dentistId);
 }

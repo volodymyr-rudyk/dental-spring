@@ -13,13 +13,13 @@ import java.util.Set;
  */
 @Entity
 @Table(name = "tooth")
-public class Tooth extends BaseEntity implements Serializable{
+public class ToothEntity extends BaseEntity implements Serializable{
 
   private ToothState toothState;
   private ToothBucket toothBucket;
   private Integer toothNumber;
-  private Set<ToothCure> cures = new HashSet<>();
-  private Patient patient;
+  private Set<ToothCureEntity> cures = new HashSet<>();
+  private PatientEntity patient;
 
 
   @Column(name = "tooth_state")
@@ -44,20 +44,20 @@ public class Tooth extends BaseEntity implements Serializable{
 
   @OneToMany(cascade = CascadeType.ALL)
   @JoinColumn(name = "tooth_id")
-  public Set<ToothCure> getCures() {
+  public Set<ToothCureEntity> getCures() {
     return cures;
   }
 
-  public void setCures(Set<ToothCure> cures) {
+  public void setCures(Set<ToothCureEntity> cures) {
     this.cures = cures;
   }
 
   @ManyToOne
-  public Patient getPatient() {
+  public PatientEntity getPatient() {
     return patient;
   }
 
-  public void setPatient(Patient patient) {
+  public void setPatient(PatientEntity patient) {
     this.patient = patient;
   }
 

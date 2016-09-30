@@ -9,17 +9,17 @@ import java.util.Date;
  */
 @Entity
 @Table(name = "tooth_cure")
-public class ToothCure extends BaseEntity implements Serializable {
+public class ToothCureEntity extends BaseEntity implements Serializable {
 
   private String cure;
   private Date createdOn;
-  private Tooth tooth;
+  private ToothEntity tooth;
 
-  public ToothCure() {
+  public ToothCureEntity() {
 
   }
 
-  public ToothCure(String cure) {
+  public ToothCureEntity(String cure) {
     this.cure = cure;
   }
 
@@ -43,11 +43,11 @@ public class ToothCure extends BaseEntity implements Serializable {
   }
 
   @ManyToOne
-  public Tooth getTooth() {
+  public ToothEntity getTooth() {
     return tooth;
   }
 
-  public void setTooth(Tooth tooth) {
+  public void setTooth(ToothEntity tooth) {
     this.tooth = tooth;
   }
 }

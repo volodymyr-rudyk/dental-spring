@@ -14,6 +14,7 @@ public class DentistDTO extends BaseDTO {
   private String address;
   private Date birthday;
   private String phone;
+  private Date createdOn;
 
   private Set<PatientDTO> patients = new HashSet<>(0);
 
@@ -71,5 +72,13 @@ public class DentistDTO extends BaseDTO {
 
   public void setPatients(Set<PatientDTO> patients) {
     this.patients = patients;
+  }
+
+  public Date getCreatedOn() {
+    return createdOn;
+  }
+
+  public void setCreatedOn(Date createdOn) {
+    this.createdOn = createdOn;
   }
 }

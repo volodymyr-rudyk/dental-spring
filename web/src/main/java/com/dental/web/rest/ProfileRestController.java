@@ -2,7 +2,7 @@ package com.dental.web.rest;
 
 import com.dental.bean.DentistBean;
 import com.dental.init.LoggedDentist;
-import com.dental.persistence.entity.Dentist;
+import com.dental.persistence.entity.DentistEntity;
 import com.dental.service.DentistService;
 import com.dental.web.dto.DTOUtils;
 import com.dental.web.dto.ProfileDTO;
@@ -31,8 +31,8 @@ public class ProfileRestController extends BaseRestController {
 
   @RequestMapping(value = "/profile", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE,
       consumes = MediaType.ALL_VALUE)
-  public ResponseEntity<?> profileGet(HttpServletRequest httpServletRequest, @LoggedDentist Dentist loggedDentist) {
-    Dentist dentist = dentistService.get(loggedDentist.getId());
+  public ResponseEntity<?> profileGet(HttpServletRequest httpServletRequest, @LoggedDentist DentistEntity loggedDentist) {
+    DentistEntity dentist = dentistService.get(loggedDentist.getId());
     ProfileDTO profileDTO = DTOUtils.convertToProfile(dentist);
 
     return success(profileDTO);
@@ -40,9 +40,9 @@ public class ProfileRestController extends BaseRestController {
 
   @RequestMapping(value = "/profile", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE,
     consumes = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<?> profilePut(HttpServletRequest httpServletRequest, @LoggedDentist Dentist loggedDentist,
+  public ResponseEntity<?> profilePut(HttpServletRequest httpServletRequest, @LoggedDentist DentistEntity loggedDentist,
                                       @RequestBody DentistBean dentistBean) {
-    Dentist dentist = dentistService.get(loggedDentist.getId());
+    DentistEntity dentist = dentistService.get(loggedDentist.getId());
     dentistService.update(dentistBean, dentist);
     LOG.info("Profile updated ...");
     return success();

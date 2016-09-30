@@ -8,12 +8,12 @@ import java.util.Date;
  */
 @Entity
 @Table(name = "forgot_password")
-public class ForgotPassword extends BaseEntity{
+public class ForgotPasswordEntity extends BaseEntity{
 
   private String forgotPasswordKey;
   private Date createdOn;
   private Date usedOn;
-  private User user;
+  private UserEntity user;
 
   @Column(name = "forgot_password_key", nullable = false, length = 50)
   public String getForgotPasswordKey() {
@@ -46,11 +46,11 @@ public class ForgotPassword extends BaseEntity{
 
   @OneToOne(cascade = CascadeType.ALL)
   @JoinColumn(name = "user_id")
-  public User getUser() {
+  public UserEntity getUser() {
     return user;
   }
 
-  public void setUser(User user) {
+  public void setUser(UserEntity user) {
     this.user = user;
   }
 }

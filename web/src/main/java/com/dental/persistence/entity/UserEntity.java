@@ -9,19 +9,19 @@ import java.util.Date;
  */
 @Entity
 @Table(name = "user")
-public class User extends BaseEntity implements Serializable {
+public class UserEntity extends BaseEntity implements Serializable {
 
   private String email;
   private String password;
   private boolean isEnabled;
   private Date createdOn;
-  private Dentist dentist;
+  private DentistEntity dentist;
 
-  public User() {
+  public UserEntity() {
 
   }
 
-  public User(String email, String password) {
+  public UserEntity(String email, String password) {
     this.email = email;
     this.password = password;
   }
@@ -36,11 +36,11 @@ public class User extends BaseEntity implements Serializable {
   }
 
   @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
-  public Dentist getDentist() {
+  public DentistEntity getDentist() {
     return dentist;
   }
 
-  public void setDentist(Dentist dentist) {
+  public void setDentist(DentistEntity dentist) {
     this.dentist = dentist;
   }
 
@@ -78,7 +78,7 @@ public class User extends BaseEntity implements Serializable {
 
   @Override
   public String toString() {
-    return "User{" +
+    return "UserEntity{" +
         "id=" + id +
         ", email='" + email + '\'' +
         ", password='" + password + '\'' +

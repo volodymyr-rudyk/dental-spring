@@ -1,7 +1,7 @@
 package com.dental.service.impl;
 
-import com.dental.persistence.entity.ForgotPassword;
-import com.dental.persistence.entity.User;
+import com.dental.persistence.entity.ForgotPasswordEntity;
+import com.dental.persistence.entity.UserEntity;
 import com.dental.persistence.repository.ForgotPasswordRepository;
 import com.dental.persistence.repository.UserRepository;
 import com.dental.service.PasswordService;
@@ -27,12 +27,12 @@ public class PasswordServiceImpl implements PasswordService {
 
   @Override
   @Transactional
-  public Optional<ForgotPassword> createForgotPassword(String email) {
+  public Optional<ForgotPasswordEntity> createForgotPassword(String email) {
 
-    Optional<User> userOptional = Optional.ofNullable(userRepository.findByEmail(email));
+    Optional<UserEntity> userOptional = Optional.ofNullable(userRepository.findByEmail(email));
 
     if (userOptional.isPresent()) {
-      ForgotPassword forgotPassword = new ForgotPassword();
+      ForgotPasswordEntity forgotPassword = new ForgotPasswordEntity();
       forgotPassword.setUser(userOptional.get());
       forgotPassword.setCreatedOn(new Date());
       forgotPassword.setForgotPasswordKey(UUID.randomUUID().toString());
@@ -44,13 +44,13 @@ public class PasswordServiceImpl implements PasswordService {
 
   @Override
   public void useForgotPassword(String forgotPasswordKey, String password) {
-    Optional<ForgotPassword> forgotPasswordOptional = Optional.ofNullable(
+    Optional<ForgotPasswordEntity> forgotPasswordOptional = Optional.ofNullable(
       forgotPasswordRepository.findByForgotPasswordKey(forgotPasswordKey));
 
     forgotPasswordOptional.ifPresent(forgot -> {
       Optional<Date> dateOptional = Optional.ofNullable(forgot.getUsedOn());
       if (!dateOptional.isPresent()) {
-        User user = forgot.getUser();
+        UserEntity user = forgot.getUser();
         user.setPassword(password);
         userRepository.save(user);
         forgot.setUsedOn(new Date());

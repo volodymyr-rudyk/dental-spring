@@ -1,6 +1,6 @@
 package com.dental.provider;
 
-import com.dental.persistence.entity.User;
+import com.dental.persistence.entity.UserEntity;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -16,10 +16,10 @@ public class DentalUserDetails implements UserDetails {
   private String username;
   //  private boolean isAccountNonLocked;
   //  private boolean isAccountNonExpired;
-  private User user;
+  private UserEntity user;
 
   public DentalUserDetails(String username, String password,
-                           Collection<? extends GrantedAuthority> grantedAuthorities, User user) {
+                           Collection<? extends GrantedAuthority> grantedAuthorities, UserEntity user) {
     this.username = username;
     this.password = password;
     //    this.isAccountNonExpired = isAccountNonExpired;
@@ -63,7 +63,7 @@ public class DentalUserDetails implements UserDetails {
     return true;
   }
 
-  public User getUser() {
+  public UserEntity getUser() {
     return this.user;
   }
 }

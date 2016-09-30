@@ -1,9 +1,9 @@
 package com.dental.service.impl;
 
-import com.dental.persistence.entity.Dentist;
+import com.dental.persistence.entity.DentistEntity;
 import com.dental.persistence.entity.DentistPatient;
-import com.dental.persistence.entity.Patient;
-import com.dental.persistence.entity.Tooth;
+import com.dental.persistence.entity.PatientEntity;
+import com.dental.persistence.entity.ToothEntity;
 import com.dental.persistence.helperbean.Gender;
 import com.dental.persistence.helperbean.ToothBucket;
 import com.dental.persistence.helperbean.ToothState;
@@ -41,27 +41,27 @@ public class PatientServiceImpl implements PatientService {
   private DentistService dentistService;
 
   @Override
-  public Patient findByFirstNameAndLastName(String firstName, String lastName) {
+  public PatientEntity findByFirstNameAndLastName(String firstName, String lastName) {
     return patientRepository.findByFirstNameAndLastName(firstName, lastName);
   }
 
   @Override
   @Transactional
-  public Patient load(Long patientId) {
-    Patient patient = patientRepository.findOne(patientId);
+  public PatientEntity load(Long patientId) {
+    PatientEntity patient = patientRepository.findOne(patientId);
     Hibernate.initialize(patient.getTeeth());
     return patient;
   }
 
   @Override
-  public Patient get(Long id) {
+  public PatientEntity get(Long id) {
     return patientRepository.findOne(id);
   }
 
   @Override
   @Transactional
-  public boolean update(PatientDTO patientDTO, Dentist loggedInDentist) {
-    Patient patient = patientRepository.findOne(patientDTO.getId());
+  public boolean update(PatientDTO patientDTO, DentistEntity loggedInDentist) {
+    PatientEntity patient = patientRepository.findOne(patientDTO.getId());
     patient.setFirstName(patientDTO.getFirstName());
     patient.setMiddleName(patientDTO.getMiddleName());
     patient.setLastName(patientDTO.getLastName());
@@ -74,24 +74,24 @@ public class PatientServiceImpl implements PatientService {
   }
 
   @Override
-  public void add(PatientDTO patientDTO, Dentist dentist) {
-    Patient patient = DTOUtils.convert(patientDTO);
+  public void add(PatientDTO patientDTO, DentistEntity dentist) {
+    PatientEntity patient = DTOUtils.convert(patientDTO);
     patient.getDentists().add(dentist);
     patientRepository.save(patient);
   }
 
   @Override
-  public Patient findByDentist(Dentist dentist) {
+  public PatientEntity findByDentist(DentistEntity dentist) {
     return patientRepository.findByDentists(dentist);
   }
 
   @Override
-  public Set<Patient> findByDentist(Dentist dentist, Pageable page) {
-    return new HashSet<>(patientRepository.findByDentists(dentist, page));
+  public Set<PatientEntity> findByDentist(DentistEntity dentist, Pageable page) {
+    return new HashSet<>(patientRepository.findByDentistsOrderByCreatedOnDesc(dentist, page));
   }
 
   @Override
-  public Set<Patient> findAllByDentist(Dentist dentist) {
+  public Set<PatientEntity> findAllByDentist(DentistEntity dentist) {
     return new HashSet<>(patientRepository.findAllByDentists(dentist));
   }
 
@@ -102,10 +102,10 @@ public class PatientServiceImpl implements PatientService {
 
   @Override
   @Transactional
-  public Patient add(Patient patient) {
-    Dentist loggedInDentist = authService.getLoggedInDentist();
-    Dentist dentist = dentistService.get(loggedInDentist.getId());
-    Set<Tooth> teeth = patient.getTeeth();
+  public PatientEntity add(PatientEntity patient) {
+    DentistEntity loggedInDentist = authService.getLoggedInDentist();
+    DentistEntity dentist = dentistService.get(loggedInDentist.getId());
+    Set<ToothEntity> teeth = patient.getTeeth();
 
     for(int i = 1; i <= TEETH_IN_BUCKET; i++) {
       fillTeeth(i, ToothBucket.UP_LEFT, teeth);
@@ -129,7 +129,7 @@ public class PatientServiceImpl implements PatientService {
     });
 
 
-    Patient p = patientRepository.save(patient);
+    PatientEntity p = patientRepository.save(patient);
     DentistPatient dentistPatient = new DentistPatient();
     dentistPatient.setDentist(dentist);
     dentistPatient.setPatient(p);
@@ -138,8 +138,8 @@ public class PatientServiceImpl implements PatientService {
     return patient;
   }
 
-  private void fillTeeth(int index, ToothBucket toothBucket, Set<Tooth> teeth) {
-    Tooth tooth = new Tooth();
+  private void fillTeeth(int index, ToothBucket toothBucket, Set<ToothEntity> teeth) {
+    ToothEntity tooth = new ToothEntity();
     tooth.setToothBucket(toothBucket);
     tooth.setToothNumber(index);
     teeth.add(tooth);

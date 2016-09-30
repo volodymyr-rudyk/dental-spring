@@ -16,6 +16,7 @@ public class PatientDTO extends BaseDTO {
   private Date birthday;
   private String gender;
   private String phone;
+  private Date createdOn;
 
   private TeethBucketDto teeth = new TeethBucketDto();
 
@@ -91,4 +92,11 @@ public class PatientDTO extends BaseDTO {
     this.teeth = teeth;
   }
 
+  public Date getCreatedOn() {
+    return createdOn;
+  }
+
+  public void setCreatedOn(Date createdOn) {
+    this.createdOn = createdOn;
+  }
 }

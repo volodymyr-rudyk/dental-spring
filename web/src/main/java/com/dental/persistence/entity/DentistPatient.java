@@ -11,26 +11,26 @@ import java.io.Serializable;
 @Table(name = "dentist_patient")
 public class DentistPatient extends BaseEntity implements Serializable {
 
-  private Dentist dentist;
-  private Patient patient;
+  private DentistEntity dentist;
+  private PatientEntity patient;
 
   @OneToOne(cascade = CascadeType.ALL)
   @JoinColumn(name = "dentist_id")
-  public Dentist getDentist() {
+  public DentistEntity getDentist() {
     return dentist;
   }
 
-  public void setDentist(Dentist dentist) {
+  public void setDentist(DentistEntity dentist) {
     this.dentist = dentist;
   }
 
   @OneToOne(cascade = CascadeType.ALL)
   @JoinColumn(name = "patient_id")
-  public Patient getPatient() {
+  public PatientEntity getPatient() {
     return patient;
   }
 
-  public void setPatient(Patient patient) {
+  public void setPatient(PatientEntity patient) {
     this.patient = patient;
   }
 }

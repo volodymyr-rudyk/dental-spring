@@ -1,6 +1,6 @@
 package com.dental.service.impl;
 
-import com.dental.persistence.entity.User;
+import com.dental.persistence.entity.UserEntity;
 import com.dental.persistence.repository.UserRepository;
 import com.dental.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +16,7 @@ public class UserServiceImpl implements UserService {
   private UserRepository userRepository;
 
   @Override
-  public void resetPassword(User user, String password) {
+  public void resetPassword(UserEntity user, String password) {
     user.setPassword(password);
     userRepository.save(user);
   }

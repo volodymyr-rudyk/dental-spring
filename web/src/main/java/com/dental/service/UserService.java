@@ -1,10 +1,10 @@
 package com.dental.service;
 
-import com.dental.persistence.entity.User;
+import com.dental.persistence.entity.UserEntity;
 
 /**
  * Created by vrudyk on 9/7/2016.
  */
 public interface UserService {
-  void resetPassword(User user, String password);
+  void resetPassword(UserEntity user, String password);
 }

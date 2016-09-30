@@ -1,6 +1,6 @@
 package com.dental.web.rest;
 
-import com.dental.persistence.entity.Dentist;
+import com.dental.persistence.entity.DentistEntity;
 import com.dental.service.DentistService;
 import com.dental.web.dto.DTOUtils;
 import com.dental.web.dto.DentistDTO;
@@ -31,7 +31,7 @@ public class DentistPublicRestController extends PublicRestController {
   @RequestMapping(value = "/dentists", method = RequestMethod.GET, consumes = MediaType.ALL_VALUE,
     produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<?> getPatients(HttpServletRequest httpServletRequest, @PageableDefault(size = 7) Pageable page) {
-    List<Dentist> all = dentistService.findAll();
+    List<DentistEntity> all = dentistService.findAll();
     Set<DentistDTO> dentistDTOs = DTOUtils.convert(all);
     return new ResponseEntity<>(dentistDTOs, HttpStatus.OK);
   }
@@ -39,7 +39,7 @@ public class DentistPublicRestController extends PublicRestController {
   @RequestMapping(value = "/dentists/{id}", method = RequestMethod.GET, consumes = MediaType.ALL_VALUE,
       produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<?> getPatient(@PathVariable("id") Long dentistId) {
-    Dentist dentist = dentistService.findOne(dentistId);
+    DentistEntity dentist = dentistService.findOne(dentistId);
     DentistDTO dentistDTO = DTOUtils.convertShort(dentist);
     return success(dentistDTO);
   }

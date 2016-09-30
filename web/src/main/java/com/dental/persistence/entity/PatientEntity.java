@@ -1,5 +1,7 @@
 package com.dental.persistence.entity;
 
+import com.dental.persistence.helperbean.Gender;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -11,17 +13,29 @@ import java.util.Set;
  */
 
 @Entity
-@Table(name = "dentist")
-public class Dentist extends BaseEntity implements Serializable {
+@Table(name = "patient")
+public class PatientEntity extends BaseEntity implements Serializable {
 
+  private String email;
   private String firstName;
   private String middleName;
   private String lastName;
   private String address;
   private Date birthday;
+  private Gender gender;
   private String phone;
-  private User user;
-  private Set<Patient> patients = new HashSet<>(0);
+  private Date createdOn;
+  private Set<DentistEntity> dentists = new HashSet<>(0);
+  private Set<ToothEntity> teeth = new HashSet<>(0);
+
+  @Column(name = "email")
+  public String getEmail() {
+    return email;
+  }
+
+  public void setEmail(String email) {
+    this.email = email;
+  }
 
   @Column(name = "first_name")
   public String getFirstName() {
@@ -69,6 +83,16 @@ public class Dentist extends BaseEntity implements Serializable {
     this.birthday = birthday;
   }
 
+  @Column(name = "gender")
+  @Enumerated(EnumType.STRING)
+  public Gender getGender() {
+    return gender;
+  }
+
+  public void setGender(Gender gender) {
+    this.gender = gender;
+  }
+
   @Column(name = "phone")
   public String getPhone() {
     return phone;
@@ -78,26 +102,37 @@ public class Dentist extends BaseEntity implements Serializable {
     this.phone = phone;
   }
 
-  @OneToOne(cascade = CascadeType.ALL)
-  @JoinColumn(name = "user_id")
-  public User getUser() {
-    return user;
+  @Column(name = "created_on")
+  @Temporal(TemporalType.TIMESTAMP)
+  public Date getCreatedOn() {
+    return createdOn;
   }
 
-  public void setUser(User user) {
-    this.user = user;
+  public void setCreatedOn(Date createdOn) {
+    this.createdOn = createdOn;
   }
 
-  @ManyToMany(cascade = CascadeType.ALL)
-  @JoinTable(name = "dentist_patient",
-      joinColumns = { @JoinColumn(name = "dentist_id") },
-      inverseJoinColumns = { @JoinColumn(name = "patient_id") }
-  )
-  public Set<Patient> getPatients() {
-    return patients;
+  @ManyToMany(fetch = FetchType.LAZY, mappedBy = "patients")
+  public Set<DentistEntity> getDentists() {
+    return dentists;
   }
 
-  public void setPatients(Set<Patient> patients) {
-    this.patients = patients;
+  public void setDentists(Set<DentistEntity> dentists) {
+    this.dentists = dentists;
+  }
+
+  @OneToMany(cascade = CascadeType.ALL)
+  @JoinColumn(name = "patient_id")
+  public Set<ToothEntity> getTeeth() {
+    return teeth;
+  }
+
+  public void setTeeth(Set<ToothEntity> teeth) {
+    this.teeth = teeth;
+  }
+
+  @PrePersist
+  public void prePersist(){
+    setCreatedOn(new Date());
   }
 }

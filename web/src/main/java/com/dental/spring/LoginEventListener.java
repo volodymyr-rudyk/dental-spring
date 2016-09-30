@@ -22,7 +22,7 @@ public class LoginEventListener implements ApplicationListener<LoginEvent> {
 
   @Override
   public void onApplicationEvent(LoginEvent loginEvent) {
-    LOG.info("User with email has logged in {0}", loginEvent.getEmail() );
-    System.out.println("User has logged in " + loginEvent.getEmail() );
+    LOG.info("UserEntity with email has logged in {0}", loginEvent.getEmail() );
+    System.out.println("UserEntity has logged in " + loginEvent.getEmail() );
   }
 }

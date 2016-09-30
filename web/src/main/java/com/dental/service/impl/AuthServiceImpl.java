@@ -3,8 +3,8 @@ package com.dental.service.impl;
 import com.dental.bean.SigninBean;
 import com.dental.bean.SignupBean;
 import com.dental.exception.RequiredAuthenticationException;
-import com.dental.persistence.entity.Dentist;
-import com.dental.persistence.entity.User;
+import com.dental.persistence.entity.DentistEntity;
+import com.dental.persistence.entity.UserEntity;
 import com.dental.persistence.repository.UserRepository;
 import com.dental.provider.DentalUserDetails;
 import com.dental.service.AuthService;
@@ -68,12 +68,12 @@ public class AuthServiceImpl implements AuthService {
 
   @Override
   public void signup(SignupBean signupBean) {
-    User user = getUser(signupBean);
+    UserEntity user = getUser(signupBean);
     userRepository.save(user);
   }
 
   @Override
-  public Dentist getLoggedInDentist() {
+  public DentistEntity getLoggedInDentist() {
     DentalUserDetails dentalUserDetails = this.loadUserDetails();
     return dentalUserDetails.getUser().getDentist();
   }
@@ -84,14 +84,14 @@ public class AuthServiceImpl implements AuthService {
     return (DentalUserDetails) authentication.getPrincipal();
   }
 
-  private User getUser(SignupBean signupBean) {
-    User user = new User();
+  private UserEntity getUser(SignupBean signupBean) {
+    UserEntity user = new UserEntity();
     user.setIsEnabled(true);
     user.setEmail(signupBean.getEmail());
     user.setPassword(signupBean.getPassword());
     user.setCreatedOn(new Date());
 
-    Dentist dentist = new Dentist();
+    DentistEntity dentist = new DentistEntity();
     dentist.setFirstName(signupBean.getFirstName());
     dentist.setLastName(signupBean.getLastName());
     dentist.setUser(user);
