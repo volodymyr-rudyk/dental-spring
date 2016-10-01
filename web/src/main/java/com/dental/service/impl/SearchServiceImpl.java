@@ -20,7 +20,7 @@ public class SearchServiceImpl implements SearchService {
 
   @Override
   public List<PatientEntity> findByOneName(DentistEntity dentist, String oneName) {
-    return searchRepository.findByDentistsAndFirstNameLikeOrLastNameLike(dentist.getId(), oneName, oneName);
+    return searchRepository.findByDentistAndOneName(dentist.getId(), oneName);
   }
 
   @Override

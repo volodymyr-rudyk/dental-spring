@@ -21,6 +21,6 @@ public class OneNameSearchStrategy implements SearchStrategy {
 
   @Override
   public List<PatientEntity> invoke(DentistEntity dentist) {
-    return searchService.findByFirstName(dentist, oneName);
+    return searchService.findByOneName(dentist, oneName);
   }
 }
