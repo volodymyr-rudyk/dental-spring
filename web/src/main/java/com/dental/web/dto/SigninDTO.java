@@ -15,6 +15,7 @@ public class SigninDTO extends BaseDTO {
   private String address;
   private Date birthday;
   private String phone;
+  private String language;
 
   public SigninDTO() {
 
@@ -86,5 +87,13 @@ public class SigninDTO extends BaseDTO {
 
   public void setPhone(String phone) {
     this.phone = phone;
+  }
+
+  public String getLanguage() {
+    return language;
+  }
+
+  public void setLanguage(String language) {
+    this.language = language;
   }
 }

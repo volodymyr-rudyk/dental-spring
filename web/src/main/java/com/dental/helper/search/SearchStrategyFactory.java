@@ -17,9 +17,7 @@ public class SearchStrategyFactory {
       case 0: return new EmptySearchStrategy();
       case 1: return new OneNameSearchStrategy(filters[0], searchService);
       case 2: return new FirstLastNameSearchStrategy(filters[0], filters[1], searchService);
-      default: return () -> null;
+      default: return (d) -> null;
     }
-
-
   }
 }

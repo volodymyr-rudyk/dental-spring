@@ -4,6 +4,7 @@ import com.dental.bean.DentistBean;
 import com.dental.persistence.entity.DentistEntity;
 import com.dental.persistence.repository.DentistRepository;
 import com.dental.service.DentistService;
+import com.dental.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +18,9 @@ public class DentistServiceImpl implements DentistService {
 
   @Autowired
   private DentistRepository dentistRepository;
+
+  @Autowired
+  private UserService userService;
 
   @Override
   public DentistEntity get(Long id) {
@@ -36,6 +40,7 @@ public class DentistServiceImpl implements DentistService {
     dentist.setBirthday(dentistBean.getBirthday());
     dentist.setPhone(dentistBean.getPhone());
     dentist.setAddress(dentistBean.getAddress());
+    userService.updateLanguage(dentist.getUser(), dentistBean.getLanguage());
     dentistRepository.save(dentist);
   }
 

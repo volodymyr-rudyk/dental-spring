@@ -7,4 +7,5 @@ import com.dental.persistence.entity.UserEntity;
  */
 public interface UserService {
   void resetPassword(UserEntity user, String password);
+  void updateLanguage(UserEntity user, String languageCode);
 }

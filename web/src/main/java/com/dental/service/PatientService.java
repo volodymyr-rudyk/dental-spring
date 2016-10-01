@@ -4,6 +4,7 @@ import com.dental.persistence.entity.DentistEntity;
 import com.dental.persistence.entity.PatientEntity;
 import com.dental.web.dto.PatientDTO;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.Query;
 
 import java.util.Set;
 
@@ -29,4 +30,9 @@ public interface PatientService extends BaseService<PatientEntity> {
   Set<PatientEntity> findAllByDentist(DentistEntity dentist);
 
   Long patientsCount(Long dentistId);
+
+//  @Query(nativeQuery = true, value = "SELECT * from dentist_patient dp RIGHT JOIN patient p on dp.patient_id = p.id where dp.dentist_id=?1")
+//  @Query(nativeQuery = true,
+//    value = "SELECT p.* from patient p LEFT JOIN dentist_patient dp on p.id = dp.patient_id where dp.dentist_id=?1")
+//  Set<PatientEntity> searchPatientsByDentist(Long dentistId);
 }
