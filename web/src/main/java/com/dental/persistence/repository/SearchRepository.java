@@ -22,6 +22,9 @@ public interface SearchRepository extends Repository<PatientEntity, Long> {
   @Query(value = "SELECT p.* from patient p LEFT JOIN dentist_patient dp on p.id = dp.patient_id where dp.dentist_id=:dentistId and p.last_name like :lastName", nativeQuery = true)
   List<PatientEntity> findByDentistsAndLastNameLike(@Param("dentistId") Long dentistId, @Param("lastName") String lastName);
 
+  @Query(value = "SELECT p.* from patient p LEFT JOIN dentist_patient dp on p.id = dp.patient_id where dp.dentist_id=:dentistId and p.first_name like :oneName or p.last_name like :oneName", nativeQuery = true)
+  List<PatientEntity> findByDentistAndOneName(@Param("dentistId") Long dentistId, @Param("oneName") String oneName);
+
   @Query(value = "SELECT p.* from patient p LEFT JOIN dentist_patient dp on p.id = dp.patient_id where dp.dentist_id=:dentistId and p.first_name like :firstName  or p.first_name like :lastName or p.last_name like :firstName  or p.last_name like :lastName ", nativeQuery = true)
   List<PatientEntity> findByDentistsAndFirstNameLikeOrLastNameLike(@Param("dentistId") Long dentistId, @Param("firstName") String firstName, @Param("lastName") String lastName);
 
