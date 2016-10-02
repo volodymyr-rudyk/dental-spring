@@ -1,8 +1,9 @@
 package com.dental.persistence.repository;
 
-import com.dental.persistence.entity.DentistEntity;
 import com.dental.persistence.entity.PatientEntity;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.Repository;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
@@ -11,13 +12,20 @@ import java.util.List;
  */
 @org.springframework.stereotype.Repository
 public interface SearchRepository extends Repository<PatientEntity, Long> {
-  List<PatientEntity> findByFirstNameLike(String firstName);
 
-  List<PatientEntity> findByMiddleNameLike(String middleName);
+  @Query(value = "SELECT p.* from patient p LEFT JOIN dentist_patient dp on p.id = dp.patient_id where dp.dentist_id=:dentistId and p.first_name like :firstName", nativeQuery = true)
+  List<PatientEntity> findByDentistAndFirstNameLike(@Param("dentistId") Long dentistId, @Param("firstName") String firstName);
 
-  List<PatientEntity> findByLastNameLike(String lastName);
+  @Query(value = "SELECT p.* from patient p LEFT JOIN dentist_patient dp on p.id = dp.patient_id where dp.dentist_id=:dentistId and p.middle_name like :middleName", nativeQuery = true)
+  List<PatientEntity> findByDentistsAndMiddleNameLike(@Param("dentistId") Long dentistId, @Param("middleName") String middleName);
 
-  List<PatientEntity> findByFirstNameLikeOrLastNameLike(String lastName, String firstName);
+  @Query(value = "SELECT p.* from patient p LEFT JOIN dentist_patient dp on p.id = dp.patient_id where dp.dentist_id=:dentistId and p.last_name like :lastName", nativeQuery = true)
+  List<PatientEntity> findByDentistsAndLastNameLike(@Param("dentistId") Long dentistId, @Param("lastName") String lastName);
 
-  List<PatientEntity> findByFirstNameLikeOrLastNameLikeOrLastNameLikeOrFirstNameLike(String firstName, String lastName, String lName, String fName);
+  @Query(value = "SELECT p.* from patient p LEFT JOIN dentist_patient dp on p.id = dp.patient_id where dp.dentist_id=:dentistId and p.first_name like :oneName or p.last_name like :oneName", nativeQuery = true)
+  List<PatientEntity> findByDentistAndOneName(@Param("dentistId") Long dentistId, @Param("oneName") String oneName);
+
+  @Query(value = "SELECT p.* from patient p LEFT JOIN dentist_patient dp on p.id = dp.patient_id where dp.dentist_id=:dentistId and p.first_name like :firstName  or p.first_name like :lastName or p.last_name like :firstName  or p.last_name like :lastName ", nativeQuery = true)
+  List<PatientEntity> findByDentistsAndFirstNameLikeOrLastNameLike(@Param("dentistId") Long dentistId, @Param("firstName") String firstName, @Param("lastName") String lastName);
+
 }

@@ -1,5 +1,6 @@
 package com.dental.helper.search;
 
+import com.dental.persistence.entity.DentistEntity;
 import com.dental.persistence.entity.PatientEntity;
 import com.dental.service.SearchService;
 
@@ -21,7 +22,7 @@ public class FirstLastNameSearchStrategy implements SearchStrategy {
   }
 
   @Override
-  public List<PatientEntity> invoke() {
-    return searchService.findByFirstNameAndLastName(firstName, lastName);
+  public List<PatientEntity> invoke(DentistEntity dentist) {
+    return searchService.findByFirstNameOrLastName(dentist, firstName, lastName);
   }
 }

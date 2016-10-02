@@ -6,8 +6,4 @@ import org.springframework.security.web.context.AbstractSecurityWebApplicationIn
  * Created by admin on 07.04.2015.
  */
 public class SecurityWebApplicationInitializer extends AbstractSecurityWebApplicationInitializer {
-  //loads springSecurityFilterChain
-//    public SecurityWebApplicationInitializer() {
-//        super(SpringSecureConfig.class);
-//    }
 }

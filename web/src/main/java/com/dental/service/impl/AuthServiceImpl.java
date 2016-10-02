@@ -1,10 +1,12 @@
 package com.dental.service.impl;
 
-import com.dental.bean.SigninBean;
-import com.dental.bean.SignupBean;
+import com.dental.bean.request.SigninBean;
+import com.dental.bean.request.SignupBean;
 import com.dental.exception.RequiredAuthenticationException;
 import com.dental.persistence.entity.DentistEntity;
+import com.dental.persistence.entity.LanguageEntity;
 import com.dental.persistence.entity.UserEntity;
+import com.dental.persistence.repository.LanguageRepository;
 import com.dental.persistence.repository.UserRepository;
 import com.dental.provider.DentalUserDetails;
 import com.dental.service.AuthService;
@@ -33,6 +35,7 @@ import java.util.Date;
 public class AuthServiceImpl implements AuthService {
 
   private static final Logger LOG = LoggerFactory.getLogger(AuthServiceImpl.class);
+  public static final String DEFAULT_LANGUAGE = "en";
 
   @Autowired
   private LogoutHandler logoutHandler;
@@ -43,6 +46,9 @@ public class AuthServiceImpl implements AuthService {
 
   @Autowired
   private UserRepository userRepository;
+
+  @Autowired
+  private LanguageRepository languageRepository;
 
   @Override
   public UserDetails authenticate(SigninBean signinBean, HttpServletRequest request) throws AuthenticationException {
@@ -69,6 +75,8 @@ public class AuthServiceImpl implements AuthService {
   @Override
   public void signup(SignupBean signupBean) {
     UserEntity user = getUser(signupBean);
+    LanguageEntity en = languageRepository.findOneByCode(DEFAULT_LANGUAGE);
+    user.setLanguage(en);
     userRepository.save(user);
   }
 
@@ -96,6 +104,9 @@ public class AuthServiceImpl implements AuthService {
     dentist.setLastName(signupBean.getLastName());
     dentist.setUser(user);
     user.setDentist(dentist);
+    LanguageEntity language = new LanguageEntity();
+    language.setCode(DEFAULT_LANGUAGE);
+    user.setLanguage(language);
     return user;
   }
 }

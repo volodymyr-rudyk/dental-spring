@@ -21,7 +21,6 @@ import java.util.Properties;
 @EnableTransactionManagement
 @EnableJpaRepositories("com.dental.persistence.repository")
 @PropertySource(value = {"classpath:datasource.properties"})
-//@Profile("one")
 public class DaoConfig {
 
   @Autowired

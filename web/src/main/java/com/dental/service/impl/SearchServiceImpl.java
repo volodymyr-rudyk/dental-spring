@@ -4,8 +4,6 @@ import com.dental.persistence.entity.DentistEntity;
 import com.dental.persistence.entity.PatientEntity;
 import com.dental.persistence.repository.SearchRepository;
 import com.dental.service.SearchService;
-import org.aspectj.apache.bcel.Repository;
-import org.aspectj.apache.bcel.generic.RET;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,32 +19,28 @@ public class SearchServiceImpl implements SearchService {
   private SearchRepository searchRepository;
 
   @Override
-  public List<PatientEntity> findByOneName(String oneName) {
-    return searchRepository.findByFirstNameLikeOrLastNameLike(oneName, oneName);
+  public List<PatientEntity> findByOneName(DentistEntity dentist, String oneName) {
+    return searchRepository.findByDentistAndOneName(dentist.getId(), oneName);
   }
 
   @Override
-  public List<PatientEntity> findByFirstName(String firstName) {
-    return searchRepository.findByFirstNameLike(firstName);
+  public List<PatientEntity> findByFirstName(DentistEntity dentist, String firstName) {
+    return searchRepository.findByDentistAndFirstNameLike(dentist.getId(), firstName);
   }
 
   @Override
-  public List<PatientEntity> findByMiddleName(String middleName) {
-    return searchRepository.findByMiddleNameLike(middleName);
+  public List<PatientEntity> findByMiddleName(DentistEntity dentist, String middleName) {
+    return searchRepository.findByDentistsAndMiddleNameLike(dentist.getId(), middleName);
   }
 
   @Override
-  public List<PatientEntity> findByLastName(String lastName) {
-    return searchRepository.findByLastNameLike(lastName);
+  public List<PatientEntity> findByLastName(DentistEntity dentist, String lastName) {
+    return searchRepository.findByDentistsAndLastNameLike(dentist.getId(), lastName);
   }
 
   @Override
-  public List<PatientEntity> findByFirstNameOrLastName(String firstName, String lastName) {
-    return searchRepository.findByFirstNameLikeOrLastNameLike(firstName, lastName);
+  public List<PatientEntity> findByFirstNameOrLastName(DentistEntity dentist, String firstName, String lastName) {
+    return searchRepository.findByDentistsAndFirstNameLikeOrLastNameLike(dentist.getId(), firstName, lastName);
   }
 
-  @Override
-  public List<PatientEntity> findByFirstNameAndLastName(String firstName, String lastName) {
-    return searchRepository.findByFirstNameLikeOrLastNameLikeOrLastNameLikeOrFirstNameLike(firstName, firstName, lastName, lastName);
-  }
 }

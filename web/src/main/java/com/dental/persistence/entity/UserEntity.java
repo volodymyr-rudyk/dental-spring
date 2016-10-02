@@ -15,6 +15,7 @@ public class UserEntity extends BaseEntity implements Serializable {
   private String password;
   private boolean isEnabled;
   private Date createdOn;
+  private LanguageEntity language;
   private DentistEntity dentist;
 
   public UserEntity() {
@@ -69,6 +70,16 @@ public class UserEntity extends BaseEntity implements Serializable {
 
   public void setCreatedOn(Date createdOn) {
     this.createdOn = createdOn;
+  }
+
+  @OneToOne
+  @JoinColumn(name = "language_id")
+  public LanguageEntity getLanguage() {
+    return language;
+  }
+
+  public void setLanguage(LanguageEntity language) {
+    this.language = language;
   }
 
   @PrePersist

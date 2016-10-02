@@ -1,5 +1,6 @@
 package com.dental.helper.search;
 
+import com.dental.persistence.entity.DentistEntity;
 import com.dental.persistence.entity.PatientEntity;
 
 import java.util.LinkedList;
@@ -10,7 +11,7 @@ import java.util.List;
  */
 public class EmptySearchStrategy implements SearchStrategy {
   @Override
-  public List<PatientEntity> invoke() {
+  public List<PatientEntity> invoke(DentistEntity dentist) {
     return new LinkedList<>();
   }
 }

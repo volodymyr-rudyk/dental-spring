@@ -3,6 +3,8 @@ package com.dental.web.rest;
 import com.dental.exception.NotFoundException;
 import com.dental.helper.search.SearchStrategy;
 import com.dental.helper.search.SearchStrategyFactory;
+import com.dental.init.LoggedDentist;
+import com.dental.persistence.entity.DentistEntity;
 import com.dental.persistence.entity.PatientEntity;
 import com.dental.service.DentistService;
 import com.dental.service.SearchService;
@@ -14,14 +16,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 import java.util.Set;
 
@@ -41,11 +40,11 @@ class SearchRestController extends BaseRestController {
 
   @RequestMapping(value = "/search", method = {RequestMethod.GET, RequestMethod.POST},
     produces = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<?> search(HttpServletRequest request, HttpServletResponse response,
-                                  @RequestParam("q") String query, ModelMap model) throws NotFoundException {
+  public ResponseEntity<?> search(@LoggedDentist DentistEntity dentist,
+                                  @RequestParam("q") String query) throws NotFoundException {
     LOG.info("query = " + query);
     SearchStrategy searchStrategy = SearchStrategyFactory.getSearchStrategy(query, searchService);
-    List<PatientEntity> patientEntities = searchStrategy.invoke();
+    List<PatientEntity> patientEntities = searchStrategy.invoke(dentist);
     Set<PatientDTO> patientDTOs = DTOUtils.convert(patientEntities);
     LOG.info(String.valueOf("search = " + patientEntities.size()));
     return new ResponseEntity<>(patientDTOs, HttpStatus.OK);

@@ -9,7 +9,7 @@ public enum ToothState {
   CURED("cured"),
   PENDING("pending"),
   CRITICAL("critical"),
-  CORONA("corona");
+  CROWN("crown");
 
   private String state;
 

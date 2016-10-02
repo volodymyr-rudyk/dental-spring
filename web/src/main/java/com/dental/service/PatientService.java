@@ -29,4 +29,7 @@ public interface PatientService extends BaseService<PatientEntity> {
   Set<PatientEntity> findAllByDentist(DentistEntity dentist);
 
   Long patientsCount(Long dentistId);
+
+  PatientEntity findByDentistIdAndPatientId(Long dentistId, Long patientId);
+
 }

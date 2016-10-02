@@ -36,7 +36,6 @@ public class PatientServiceImpl implements PatientService {
   private PatientRepository patientRepository;
   @Autowired
   private DentistPatientRepository dentistPatientRepository;
-
   @Autowired
   private DentistService dentistService;
 
@@ -98,6 +97,12 @@ public class PatientServiceImpl implements PatientService {
   @Override
   public Long patientsCount(Long dentistId) {
     return patientRepository.countByDentistsId(dentistId);
+  }
+
+  @Override
+  public PatientEntity findByDentistIdAndPatientId(Long dentistId, Long patientId) {
+    DentistEntity dentist = dentistService.get(dentistId);
+    return patientRepository.findOneByDentistsAndId(dentist, patientId);
   }
 
   @Override

@@ -1,53 +1,21 @@
-package com.dental.web.dto;
+package com.dental.bean.request;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Date;
 
 /**
- * Created by vrudyk on 11/5/2015.
+ * Created by light on 20.05.2015.
  */
-public class SigninDTO extends BaseDTO {
+public class DentistBean extends SigninBean {
 
-  private String userEmail;
-  private Date createdOn;
   private String firstName;
   private String middleName;
   private String lastName;
-  private String address;
   private Date birthday;
   private String phone;
+  private String address;
   private String language;
-
-  public SigninDTO() {
-
-  }
-
-  public SigninDTO(BaseDTO base) {
-    super(base);
-  }
-
-  public String getUserEmail() {
-    return userEmail;
-  }
-
-  public void setUserEmail(String userEmail) {
-    this.userEmail = userEmail;
-  }
-
-  public Date getCreatedOn() {
-    return createdOn;
-  }
-
-  public void setCreatedOn(Date createdOn) {
-    this.createdOn = createdOn;
-  }
-
-  public String getFirstName() {
-    return firstName;
-  }
-
-  public void setFirstName(String firstName) {
-    this.firstName = firstName;
-  }
 
   public String getMiddleName() {
     return middleName;
@@ -57,6 +25,18 @@ public class SigninDTO extends BaseDTO {
     this.middleName = middleName;
   }
 
+  @NotNull
+  @Size(min = 5, max = 50)
+  public String getFirstName() {
+    return firstName;
+  }
+
+  public void setFirstName(String firstName) {
+    this.firstName = firstName;
+  }
+
+  @NotNull
+  @Size(min = 5, max = 50)
   public String getLastName() {
     return lastName;
   }
@@ -65,14 +45,7 @@ public class SigninDTO extends BaseDTO {
     this.lastName = lastName;
   }
 
-  public String getAddress() {
-    return address;
-  }
-
-  public void setAddress(String address) {
-    this.address = address;
-  }
-
+  @NotNull
   public Date getBirthday() {
     return birthday;
   }
@@ -87,6 +60,14 @@ public class SigninDTO extends BaseDTO {
 
   public void setPhone(String phone) {
     this.phone = phone;
+  }
+
+  public String getAddress() {
+    return address;
+  }
+
+  public void setAddress(String address) {
+    this.address = address;
   }
 
   public String getLanguage() {

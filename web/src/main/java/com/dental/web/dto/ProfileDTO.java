@@ -13,6 +13,7 @@ public class ProfileDTO extends BaseDTO {
   private String address;
   private Date birthday;
   private String phone;
+  private String language;
 
   private String email;
   private Date createdOn;
@@ -79,5 +80,13 @@ public class ProfileDTO extends BaseDTO {
 
   public void setCreatedOn(Date createdOn) {
     this.createdOn = createdOn;
+  }
+
+  public String getLanguage() {
+    return language;
+  }
+
+  public void setLanguage(String language) {
+    this.language = language;
   }
 }

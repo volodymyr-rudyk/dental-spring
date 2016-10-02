@@ -7,7 +7,7 @@ import com.dental.service.SearchService;
  */
 public class SearchStrategyFactory {
 
-  public static final String DELIMITER = " ";
+  private static final String DELIMITER = ",";
 
   public static SearchStrategy getSearchStrategy(String input, SearchService searchService) {
 
@@ -17,9 +17,7 @@ public class SearchStrategyFactory {
       case 0: return new EmptySearchStrategy();
       case 1: return new OneNameSearchStrategy(filters[0], searchService);
       case 2: return new FirstLastNameSearchStrategy(filters[0], filters[1], searchService);
-      default: return () -> null;
+      default: return new EmptySearchStrategy();
     }
-
-
   }
 }

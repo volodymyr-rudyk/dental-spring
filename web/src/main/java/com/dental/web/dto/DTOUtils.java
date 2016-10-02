@@ -72,6 +72,7 @@ public class DTOUtils {
     UserEntity user = dentist.getUser();
     profileDTO.setCreatedOn(user.getCreatedOn());
     profileDTO.setEmail(user.getEmail());
+    profileDTO.setLanguage(user.getLanguage().getCode());
     return profileDTO;
   };
   private static Function<PatientEntity, PatientDTO> patientToPatientDTO = patient -> {
@@ -104,6 +105,7 @@ public class DTOUtils {
 
     signinDTO.setUserEmail(user.getEmail());
     signinDTO.setCreatedOn(user.getCreatedOn());
+    signinDTO.setLanguage(user.getLanguage().getCode());
 
     DentistEntity dentist = user.getDentist();
     signinDTO.setFirstName(dentist.getFirstName());
