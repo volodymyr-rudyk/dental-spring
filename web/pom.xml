@@ -309,7 +309,7 @@
           <encoding>UTF-8</encoding>
           <table>SchemaVersion</table>
           <driver>${db.driverClassName}</driver>
-          <url>jdbc:mysql://149.202.51.247:3306/dental?useSSL=false</url>
+          <url>${db.url}</url>
           <user>${db.username}</user>
           <password>${db.password}</password>
           <locations>
