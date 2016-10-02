@@ -361,7 +361,7 @@
         <db.driverClassName>com.mysql.jdbc.Driver</db.driverClassName>
         <db.url>jdbc:mysql://localhost:3306/dental?useSSL=false</db.url>
         <db.username>dental</db.username>
-        <db.password>dental</db.password>
+        <db.password>Start$753</db.password>
         <db.hibernate.dialect>org.hibernate.dialect.MySQLDialect</db.hibernate.dialect>
         <db.hibernate.show_sql>true</db.hibernate.show_sql>
         <db.hibernate.format_sql>true</db.hibernate.format_sql>
