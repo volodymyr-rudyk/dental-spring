@@ -1,8 +1,8 @@
 package com.dental.web.dto;
 
+import com.dental.persistence.helperbean.ToothState;
+
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * Created by light on 5/6/2016.
@@ -17,6 +17,7 @@ public class PatientDTO extends BaseDTO {
   private String gender;
   private String phone;
   private Date createdOn;
+  ToothState[] toothStates = ToothState.values();
 
   private TeethBucketDto teeth = new TeethBucketDto();
 
@@ -98,5 +99,13 @@ public class PatientDTO extends BaseDTO {
 
   public void setCreatedOn(Date createdOn) {
     this.createdOn = createdOn;
+  }
+
+  public ToothState[] getToothStates() {
+    return toothStates;
+  }
+
+  public void setToothStates(ToothState[] toothStates) {
+    this.toothStates = toothStates;
   }
 }

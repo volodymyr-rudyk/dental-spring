@@ -2,11 +2,16 @@ package com.dental.web.rest;
 
 import com.dental.bean.ToothCureRequestBean;
 import com.dental.bean.ToothRequestBean;
+import com.dental.bean.request.ToothStateBean;
+import com.dental.exception.EntityNotFountException;
 import com.dental.init.LoggedDentist;
 import com.dental.persistence.entity.DentistEntity;
-import com.dental.persistence.entity.ToothEntity;
+import com.dental.persistence.entity.PatientEntity;
 import com.dental.persistence.entity.ToothCureEntity;
+import com.dental.persistence.entity.ToothEntity;
 import com.dental.service.AuthService;
+import com.dental.service.DentistService;
+import com.dental.service.PatientService;
 import com.dental.service.ToothService;
 import com.dental.web.dto.DTOUtils;
 import com.dental.web.dto.ToothCureDTO;
@@ -34,6 +39,12 @@ public class ToothRestController extends BaseRestController {
   @Autowired
   private ToothService toothService;
 
+  @Autowired
+  private DentistService dentistService;
+
+  @Autowired
+  private PatientService patientService;
+
   @RequestMapping(value = "/tooth", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE,
       consumes = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<ToothDTO> tooth(HttpServletRequest httpServletRequest, @LoggedDentist DentistEntity loggedDentist,
@@ -60,5 +71,17 @@ public class ToothRestController extends BaseRestController {
     toothCure = toothService.addCure(toothCure, toothCureRequestBean.getToothId(), toothCureRequestBean.getPatientId());
     ToothCureDTO toothCureDTO = DTOUtils.convert(toothCure);
     return new ResponseEntity<>(toothCureDTO, HttpStatus.CREATED);
+  }
+
+  @RequestMapping(value = "/tooth/state", method = RequestMethod.PUT,
+    produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+  public ResponseEntity<?> toothStatePut(@LoggedDentist DentistEntity loggedDentist, ToothStateBean toothStateBean)  {
+
+    PatientEntity patient = patientService.findByDentistIdAndPatientId(loggedDentist.getId(), toothStateBean.getPatientId());
+    if (patient == null) {
+      throw new EntityNotFountException("Patient entity not found");
+    }
+    toothService.updateToothState(toothStateBean.getToothId(), toothStateBean.ToothState());
+    return success();
   }
 }

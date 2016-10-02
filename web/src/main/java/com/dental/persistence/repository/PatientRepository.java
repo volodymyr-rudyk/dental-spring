@@ -17,5 +17,6 @@ public interface PatientRepository extends CrudRepository<PatientEntity, Long> {
   PatientEntity findByDentists(DentistEntity dentist);
   List<PatientEntity> findByDentistsOrderByCreatedOnDesc(DentistEntity dentist, Pageable page);
   List<PatientEntity> findAllByDentists(DentistEntity dentist);
+  PatientEntity findOneByDentistsAndId(DentistEntity dentist, Long patientId);
   Long countByDentistsId(Long id);
 }
