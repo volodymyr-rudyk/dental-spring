@@ -1,6 +1,6 @@
 package com.dental.service.impl;
 
-import com.dental.bean.DentistBean;
+import com.dental.bean.request.DentistBean;
 import com.dental.persistence.entity.DentistEntity;
 import com.dental.persistence.repository.DentistRepository;
 import com.dental.service.DentistService;

@@ -12,28 +12,9 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletRegistration;
 
 /**
- * // * Created by light on 3/28/2015.
- * //
- *//*
-
-*/
-/*public class WepAppInit implements WebApplicationInitializer {
-
-    @Override
-    public void onStartup(ServletContext servletContext) throws ServletException {
-        System.out.println("Web App Init ...");
-
-        AnnotationConfigWebApplicationContext appContext = new AnnotationConfigWebApplicationContext();
-
-        appContext.addApplicationListener(new ContextLoaderListener());
-        appContext.register(SpringAppConfig.class);
-        appContext.setServletContext(servletContext);
-        appContext.refresh();
-
-
-    }
-}*/
-
+ * Created by vrudyk on 3/28/2015.
+ *
+ */
 public class WepAppInit implements WebApplicationInitializer {
 
   @Override

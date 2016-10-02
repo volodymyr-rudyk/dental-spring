@@ -1,7 +1,7 @@
 package com.dental.web.rest;
 
-import com.dental.bean.ForgotPasswordBean;
-import com.dental.bean.ResetPasswordBean;
+import com.dental.bean.request.ForgotPasswordBean;
+import com.dental.bean.request.ResetPasswordBean;
 import com.dental.persistence.entity.ForgotPasswordEntity;
 import com.dental.service.MailService;
 import com.dental.service.PasswordService;

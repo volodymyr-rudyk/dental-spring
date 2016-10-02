@@ -1,4 +1,4 @@
-package com.dental.bean;
+package com.dental.bean.request;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;

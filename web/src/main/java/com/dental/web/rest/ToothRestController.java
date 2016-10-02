@@ -1,7 +1,7 @@
 package com.dental.web.rest;
 
-import com.dental.bean.ToothCureRequestBean;
-import com.dental.bean.ToothRequestBean;
+import com.dental.bean.request.ToothCureRequestBean;
+import com.dental.bean.request.ToothRequestBean;
 import com.dental.bean.request.ToothStateBean;
 import com.dental.exception.EntityNotFountException;
 import com.dental.init.LoggedDentist;

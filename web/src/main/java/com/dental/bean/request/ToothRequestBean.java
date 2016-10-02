@@ -1,13 +1,14 @@
-package com.dental.bean;
+package com.dental.bean.request;
+
+import com.dental.bean.RequestBean;
 
 /**
  * Created by vrudyk on 7/4/2016.
  */
-public class ToothCureRequestBean implements RequestBean {
+public class ToothRequestBean implements RequestBean {
 
   private Long patientId;
   private Long toothId;
-  private String cure;
 
   public Long getPatientId() {
     return patientId;
@@ -23,13 +24,5 @@ public class ToothCureRequestBean implements RequestBean {
 
   public void setToothId(Long toothId) {
     this.toothId = toothId;
-  }
-
-  public String getCure() {
-    return cure;
-  }
-
-  public void setCure(String cure) {
-    this.cure = cure;
   }
 }

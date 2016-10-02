@@ -1,4 +1,4 @@
-package com.dental.bean;
+package com.dental.bean.request;
 
 import org.hibernate.validator.constraints.Email;
 

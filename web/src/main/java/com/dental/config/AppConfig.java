@@ -26,11 +26,6 @@ import java.util.Map;
 @Import({SpringConfig.class, DaoConfig.class, SpringSecureConfig.class, SwaggerConfig.class})
 public class AppConfig {
 
-//  @Bean(name = "testBean")
-//  public SayText getSayText() {
-//    return new TestBean();
-//  }
-
   @Autowired
   private Environment environment;
 
@@ -65,6 +60,5 @@ public class AppConfig {
     javaMailSender.setHost(environment.getRequiredProperty("email.smtp.server"));
     return javaMailSender;
   }
-
 
 }

@@ -1,6 +1,6 @@
 package com.dental.web.rest;
 
-import com.dental.bean.DentistBean;
+import com.dental.bean.request.DentistBean;
 import com.dental.bean.request.LanguageBean;
 import com.dental.init.LoggedDentist;
 import com.dental.persistence.entity.DentistEntity;

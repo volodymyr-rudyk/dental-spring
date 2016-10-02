@@ -1,7 +1,7 @@
 package com.dental.web.rest;
 
-import com.dental.bean.SigninBean;
-import com.dental.bean.SignupBean;
+import com.dental.bean.request.SigninBean;
+import com.dental.bean.request.SignupBean;
 import com.dental.provider.DentalUserDetails;
 import com.dental.service.AuthService;
 import com.dental.spring.EventService;

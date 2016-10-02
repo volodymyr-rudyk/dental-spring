@@ -1,7 +1,7 @@
 package com.dental.service.impl;
 
-import com.dental.bean.SigninBean;
-import com.dental.bean.SignupBean;
+import com.dental.bean.request.SigninBean;
+import com.dental.bean.request.SignupBean;
 import com.dental.exception.RequiredAuthenticationException;
 import com.dental.persistence.entity.DentistEntity;
 import com.dental.persistence.entity.LanguageEntity;

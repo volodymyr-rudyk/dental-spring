@@ -1,7 +1,7 @@
 package com.dental.service;
 
-import com.dental.bean.SigninBean;
-import com.dental.bean.SignupBean;
+import com.dental.bean.request.SigninBean;
+import com.dental.bean.request.SignupBean;
 import com.dental.persistence.entity.DentistEntity;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
