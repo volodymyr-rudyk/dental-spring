@@ -376,7 +376,7 @@
       <id>beta</id>
       <properties>
         <flyway.db.url>jdbc:mysql://localhost:3306/dental?useSSL=false</flyway.db.url>
-        <db.url>jdbc:mysql://localhost:3306/dental?useSSL=false</db.url>
+        <db.url>jdbc:mysql://localhost:3306/dental?useSSL=false&amp;autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=utf-8</db.url>
         <db.username>dental</db.username>
         <db.password>Start$753</db.password>
         <db.driverClassName>com.mysql.jdbc.Driver</db.driverClassName>
