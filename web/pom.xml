@@ -309,7 +309,7 @@
           <encoding>UTF-8</encoding>
           <table>SchemaVersion</table>
           <driver>${db.driverClassName}</driver>
-          <url>${db.url}</url>
+          <url>${flyway.db.url}</url>
           <user>${db.username}</user>
           <password>${db.password}</password>
           <locations>
@@ -328,10 +328,11 @@
         <activeByDefault>true</activeByDefault>
       </activation>
       <properties>
-        <db.driverClassName>com.mysql.jdbc.Driver</db.driverClassName>
+        <flyway.db.url>jdbc:mysql://localhost:3306/dental_dev?useSSL=false</flyway.db.url>
         <db.url>jdbc:mysql://localhost:3306/dental_dev?useSSL=false</db.url>
         <db.username>root</db.username>
         <db.password>start123</db.password>
+        <db.driverClassName>com.mysql.jdbc.Driver</db.driverClassName>
         <db.hibernate.dialect>org.hibernate.dialect.MySQLDialect</db.hibernate.dialect>
         <db.hibernate.show_sql>true</db.hibernate.show_sql>
         <db.hibernate.format_sql>false</db.hibernate.format_sql>
@@ -343,25 +344,11 @@
     <profile>
       <id>lenovo</id>
       <properties>
-        <db.driverClassName>com.mysql.jdbc.Driver</db.driverClassName>
+        <flyway.db.url>jdbc:mysql://localhost:3306/dental_dev</flyway.db.url>
         <db.url>jdbc:mysql://localhost:3306/dental_dev</db.url>
         <db.username>test</db.username>
         <db.password>test</db.password>
-        <db.hibernate.dialect>org.hibernate.dialect.MySQLDialect</db.hibernate.dialect>
-        <db.hibernate.show_sql>true</db.hibernate.show_sql>
-        <db.hibernate.format_sql>true</db.hibernate.format_sql>
-        <db.engine>MYSQL</db.engine>
-        <email.smtp.server>localhost</email.smtp.server>
-      </properties>
-    </profile>
-
-    <profile>
-      <id>dev</id>
-      <properties>
         <db.driverClassName>com.mysql.jdbc.Driver</db.driverClassName>
-        <db.url>jdbc:mysql://localhost:3306/dental?useSSL=false</db.url>
-        <db.username>dental</db.username>
-        <db.password>Start$753</db.password>
         <db.hibernate.dialect>org.hibernate.dialect.MySQLDialect</db.hibernate.dialect>
         <db.hibernate.show_sql>true</db.hibernate.show_sql>
         <db.hibernate.format_sql>true</db.hibernate.format_sql>
@@ -384,6 +371,40 @@
         <email.smtp.server>localhost</email.smtp.server>
       </properties>
     </profile>
+
+    <profile>
+      <id>beta</id>
+      <properties>
+        <flyway.db.url>jdbc:mysql://localhost:3306/dental?useSSL=false</flyway.db.url>
+        <db.url>jdbc:mysql://localhost:3306/dental?useSSL=false</db.url>
+        <db.username>dental</db.username>
+        <db.password>Start$753</db.password>
+        <db.driverClassName>com.mysql.jdbc.Driver</db.driverClassName>
+        <db.hibernate.dialect>org.hibernate.dialect.MySQLDialect</db.hibernate.dialect>
+        <db.hibernate.show_sql>true</db.hibernate.show_sql>
+        <db.hibernate.format_sql>true</db.hibernate.format_sql>
+        <db.engine>MYSQL</db.engine>
+        <email.smtp.server>localhost</email.smtp.server>
+      </properties>
+    </profile>
+
+    <profile>
+      <id>production</id>
+      <properties>
+        <flyway.db.url>jdbc:mysql://149.202.51.247:3306/dental</flyway.db.url>
+        <db.url>jdbc:mysql://localhost:3306/dental</db.url>
+        <db.username>dental</db.username>
+        <db.password>dental</db.password>
+        <db.driverClassName>com.mysql.jdbc.Driver</db.driverClassName>
+        <db.hibernate.dialect>org.hibernate.dialect.MySQLDialect</db.hibernate.dialect>
+        <db.hibernate.show_sql>true</db.hibernate.show_sql>
+        <db.hibernate.format_sql>true</db.hibernate.format_sql>
+        <db.engine>MYSQL</db.engine>
+        <email.smtp.server>localhost</email.smtp.server>
+      </properties>
+    </profile>
+
+
 
   </profiles>
 
