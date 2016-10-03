@@ -9,7 +9,6 @@
     <artifactId>parent</artifactId>
     <version>0.0.1</version>
   </parent>
-  <groupId>com.dental</groupId>
   <artifactId>web</artifactId>
   <version>0.1</version>
   <packaging>war</packaging>
@@ -281,6 +280,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-war-plugin</artifactId>
+        <version>3.0.0</version>
         <configuration>
           <failOnMissingWebXml>false</failOnMissingWebXml>
           <archiveClasses>true</archiveClasses>
@@ -360,6 +360,7 @@
     <profile>
       <id>ykryvun</id>
       <properties>
+        <flyway.db.url>jdbc:mysql://localhost:3306/dental?useSSL=false</flyway.db.url>
         <db.driverClassName>com.mysql.jdbc.Driver</db.driverClassName>
         <db.url>jdbc:mysql://localhost:3306/dental?useSSL=false</db.url>
         <db.username>dental</db.username>
@@ -407,5 +408,4 @@
 
 
   </profiles>
-
 </project>
