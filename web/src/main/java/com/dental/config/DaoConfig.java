@@ -64,6 +64,10 @@ public class DaoConfig {
     properties.put(DbConfig.HIBERNATE_JDBC_BATCH_SIZE, environment.getProperty(DbConfig.HIBERNATE_JDBC_BATCH_SIZE));
     properties.put(DbConfig.HIBERNATE_DIALECT, environment.getRequiredProperty(DbConfig.HIBERNATE_DIALECT));
     properties.put(DbConfig.HIBERNATE_SHOW_SQL, environment.getRequiredProperty(DbConfig.HIBERNATE_SHOW_SQL));
+    properties.put("hibernate.connection.CharSet", "utf8");
+    properties.put("hibernate.connection.characterEncoding", "utf8");
+    properties.put("hibernate.connection.useUnicode", true);
+
     return properties;
   }
 
