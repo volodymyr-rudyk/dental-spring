@@ -19,4 +19,5 @@ public interface SearchService {
 
   List<PatientEntity> findByFirstNameOrLastName(DentistEntity dentist, String firstName, String lastName);
 
+  List<PatientEntity> doSearch(String q);
 }

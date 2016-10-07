@@ -1,5 +1,6 @@
 package com.dental.service.impl;
 
+import com.dental.exception.EntityNotFountException;
 import com.dental.persistence.entity.DentistEntity;
 import com.dental.persistence.entity.DentistPatient;
 import com.dental.persistence.entity.PatientEntity;
@@ -85,6 +86,16 @@ public class PatientServiceImpl implements PatientService {
   }
 
   @Override
+  public PatientEntity loadByDentist(DentistEntity dentist) {
+    PatientEntity patientEntity = patientRepository.findByDentists(dentist);
+    if (patientEntity == null) {
+      throw new EntityNotFountException("Patient not found by dentist id : " + dentist.getId());
+    }
+    Hibernate.initialize(patientEntity.getTeeth());
+    return patientEntity;
+  }
+
+  @Override
   public Set<PatientEntity> findByDentist(DentistEntity dentist, Pageable page) {
     return new HashSet<>(patientRepository.findByDentistsOrderByCreatedOnDesc(dentist, page));
   }
@@ -112,19 +123,19 @@ public class PatientServiceImpl implements PatientService {
     DentistEntity dentist = dentistService.get(loggedInDentist.getId());
     Set<ToothEntity> teeth = patient.getTeeth();
 
-    for(int i = 1; i <= TEETH_IN_BUCKET; i++) {
+    for (int i = 1; i <= TEETH_IN_BUCKET; i++) {
       fillTeeth(i, ToothBucket.UP_LEFT, teeth);
     }
 
-    for(int i = 1; i <= TEETH_IN_BUCKET; i++) {
+    for (int i = 1; i <= TEETH_IN_BUCKET; i++) {
       fillTeeth(i, ToothBucket.UP_RIGHT, teeth);
     }
 
-    for(int i = 1; i <= TEETH_IN_BUCKET; i++) {
+    for (int i = 1; i <= TEETH_IN_BUCKET; i++) {
       fillTeeth(i, ToothBucket.DOWN_LEFT, teeth);
     }
 
-    for(int i = 1; i <= TEETH_IN_BUCKET; i++) {
+    for (int i = 1; i <= TEETH_IN_BUCKET; i++) {
       fillTeeth(i, ToothBucket.DOWN_RIGHT, teeth);
     }
 

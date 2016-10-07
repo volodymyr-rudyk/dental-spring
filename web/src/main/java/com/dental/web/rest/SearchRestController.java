@@ -10,6 +10,7 @@ import com.dental.service.DentistService;
 import com.dental.service.SearchService;
 import com.dental.web.dto.DTOUtils;
 import com.dental.web.dto.PatientDTO;
+import com.dental.web.dto.SearchPatientDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,21 +34,14 @@ class SearchRestController extends BaseRestController {
   private static final Logger LOG = LoggerFactory.getLogger(SearchRestController.class);
 
   @Autowired
-  private DentistService dentistService;
-
-  @Autowired
   private SearchService searchService;
 
-  @RequestMapping(value = "/search", method = {RequestMethod.GET, RequestMethod.POST},
-    produces = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<?> search(@LoggedDentist DentistEntity dentist,
-                                  @RequestParam("q") String query) throws NotFoundException {
-    LOG.info("query = " + query);
-    SearchStrategy searchStrategy = SearchStrategyFactory.getSearchStrategy(query, searchService);
-    List<PatientEntity> patientEntities = searchStrategy.invoke(dentist);
-    Set<PatientDTO> patientDTOs = DTOUtils.convert(patientEntities);
+  @RequestMapping(value = "/search-patients", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+  public ResponseEntity<?> search(@RequestParam("q") String query) throws NotFoundException {
+    List<PatientEntity> patientEntities = searchService.doSearch(query);
+    Set<SearchPatientDTO> searchPatientDTOs = DTOUtils.convertSearch(patientEntities);
     LOG.info(String.valueOf("search = " + patientEntities.size()));
-    return new ResponseEntity<>(patientDTOs, HttpStatus.OK);
+    return new ResponseEntity<>(searchPatientDTOs, HttpStatus.OK);
   }
 
 }

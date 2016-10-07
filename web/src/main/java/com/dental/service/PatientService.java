@@ -24,6 +24,8 @@ public interface PatientService extends BaseService<PatientEntity> {
 
   PatientEntity findByDentist(DentistEntity dentist);
 
+  PatientEntity loadByDentist(DentistEntity dentist);
+
   Set<PatientEntity> findByDentist(DentistEntity dentist, Pageable page);
 
   Set<PatientEntity> findAllByDentist(DentistEntity dentist);

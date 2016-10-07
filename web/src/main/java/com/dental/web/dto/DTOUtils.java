@@ -88,6 +88,19 @@ public class DTOUtils {
     patientDTO.setCreatedOn(patient.getCreatedOn());
     return patientDTO;
   };
+  private static Function<PatientEntity, SearchPatientDTO> patientToSearchPatientDTO = patient -> {
+    SearchPatientDTO searchPatientDTO = new SearchPatientDTO();
+    searchPatientDTO.setId(patient.getId());
+    searchPatientDTO.setFirstName(patient.getFirstName());
+    searchPatientDTO.setLastName(patient.getLastName());
+    searchPatientDTO.setMiddleName(patient.getMiddleName());
+    searchPatientDTO.setAddress(patient.getAddress());
+    searchPatientDTO.setGender(patient.getGender().name());
+    searchPatientDTO.setBirthday(patient.getBirthday());
+    searchPatientDTO.setPhone(patient.getPhone());
+    searchPatientDTO.setCreatedOn(patient.getCreatedOn());
+    return searchPatientDTO;
+  };
   private static Function<PatientDTO, PatientEntity> patientDTOToPatient = patientDTO -> {
     PatientEntity patient = new PatientEntity();
     patient.setFirstName(patientDTO.getFirstName());
@@ -173,6 +186,10 @@ public class DTOUtils {
 
   public static Set<PatientDTO> convert(Collection<PatientEntity> patients) {
     return patients.stream().map(patientToPatientDTO).collect(Collectors.toSet());
+  }
+
+  public static Set<SearchPatientDTO> convertSearch(Collection<PatientEntity> patients) {
+    return patients.stream().map(patientToSearchPatientDTO).collect(Collectors.toSet());
   }
 
   public static ToothCureDTO convert(ToothCureEntity toothCure) {
