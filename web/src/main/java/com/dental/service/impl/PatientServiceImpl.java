@@ -86,6 +86,7 @@ public class PatientServiceImpl implements PatientService {
   }
 
   @Override
+  @Transactional
   public PatientEntity loadByDentist(DentistEntity dentist) {
     PatientEntity patientEntity = patientRepository.findByDentists(dentist);
     if (patientEntity == null) {
