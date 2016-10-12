@@ -2,7 +2,7 @@ package com.dental.web.rest;
 
 import com.dental.web.dto.BaseDTO;
 import com.dental.web.error.RestStatus;
-import com.dental.web.status.ResponseStatus;
+import com.dental.web.helper.ResponseStatus;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 

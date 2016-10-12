@@ -18,14 +18,16 @@ import java.util.stream.Collectors;
  */
 public class DTOUtils {
 
-  private static Function<ToothCureEntity, ToothCureDTO> convertToothCureToToothCureDto = (tc) -> {
+  private DTOUtils() {}
+
+  private static Function<ToothCureEntity, ToothCureDTO> convertToothCureToToothCureDto = tc -> {
     ToothCureDTO toothCureDTO = new ToothCureDTO();
     toothCureDTO.setId(tc.getId());
     toothCureDTO.setCreatedOn(tc.getCreatedOn());
     toothCureDTO.setCure(tc.getCure());
     return toothCureDTO;
   };
-  private static Function<ToothEntity, ToothDTO> convertToothToToothDto = (t) -> {
+  private static Function<ToothEntity, ToothDTO> convertToothToToothDto = t -> {
     ToothDTO toothDTO = new ToothDTO();
     toothDTO.setId(t.getId());
     toothDTO.setToothState(t.getToothState().getState());
@@ -33,7 +35,7 @@ public class DTOUtils {
     toothDTO.setToothNumber(t.getToothNumber());
     return toothDTO;
   };
-  private static Function<ToothEntity, ToothDTO> convertDeepToothToToothDto = (t) -> {
+  private static Function<ToothEntity, ToothDTO> convertDeepToothToToothDto = t -> {
     ToothDTO toothDTO = new ToothDTO();
     toothDTO.setId(t.getId());
     toothDTO.setToothState(t.getToothState().getState());
