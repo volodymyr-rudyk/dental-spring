@@ -56,7 +56,7 @@ public class AuthRestController extends BaseRestController {
       return success(signinDTO);
     } catch (AuthenticationException e) {
       LOG.error("Authentication Error", e.getMessage());
-      return bad();
+      return incorrect();
     } catch (Exception e) {
       LOG.error("Error", e.getMessage());
       return bad();
