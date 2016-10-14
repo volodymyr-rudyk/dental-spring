@@ -1,7 +1,7 @@
 package com.dental.web.dto;
 
 import com.dental.web.error.RestStatus;
-import com.dental.web.status.ResponseStatus;
+import com.dental.web.helper.ResponseStatus;
 
 /**
  * Created by vrudyk on 11/5/2015.

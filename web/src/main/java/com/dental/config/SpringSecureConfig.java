@@ -39,63 +39,27 @@ public class SpringSecureConfig extends WebSecurityConfigurerAdapter {
 //
     http.csrf().disable()
         //Configures form login
-        .formLogin()
-        .loginPage("/login")
-        .loginProcessingUrl("/authenticate")
-        .failureUrl("/login?error=bad_credentials")
-
         //Configures the logout function
-        .and()
         .logout()
         .deleteCookies("JSESSIONID")
-        .logoutUrl("/logout")
-        .logoutSuccessUrl("/login")
-
         //Configures url based authorization
         .and()
         .authorizeRequests()
 
         //Anyone can access the urls
         .antMatchers(
-            "/auth/**",
-            "/",
-            "/test**",
-            "/test/**",
-            "/login",
-            "/about",
-            "/search",
-            "/authenticate",
-            "/signup/**",
-            "/logout",
-            "/user/register/**",
             "/rest/login",
             "/rest/signup",
             "/rest/forgot-password",
             "/rest/reset-password/*",
             "/swagger-ui.html",
-            "/rest/public/**",
-            "/rest/**"
+            "/rest/public/**"
         ).permitAll()
         //The rest of the our application is protected.
         .antMatchers("/**").hasRole("USER");
     //Adds the SocialAuthenticationFilter to Spring Security's filter chain.
 
 
-  }
-
-  public void configure(WebSecurity web) throws Exception {
-    web.ignoring()
-        .antMatchers("/authenticate")
-        .antMatchers("/logout")
-        .antMatchers("/signup")
-        .antMatchers("/css/**")
-        .antMatchers("/bower/**")
-        .antMatchers("/js/**")
-        .antMatchers("/font/**")
-        .antMatchers("/img/**")
-        .antMatchers("/webjars/**")
-        .antMatchers("/list")
-        .antMatchers("/favicon.ico");
   }
 
   @Bean(name = "dentalAuthenticationManager")

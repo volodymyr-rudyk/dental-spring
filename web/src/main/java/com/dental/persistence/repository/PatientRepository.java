@@ -14,7 +14,7 @@ import java.util.List;
 @Repository
 public interface PatientRepository extends CrudRepository<PatientEntity, Long> {
   PatientEntity findByFirstNameAndLastName(String firstName, String lastName);
-  PatientEntity findByDentists(DentistEntity dentist);
+  List<PatientEntity> findByDentists(DentistEntity dentist);
   List<PatientEntity> findByDentistsOrderByCreatedOnDesc(DentistEntity dentist, Pageable page);
   List<PatientEntity> findAllByDentists(DentistEntity dentist);
   PatientEntity findOneByDentistsAndId(DentistEntity dentist, Long patientId);

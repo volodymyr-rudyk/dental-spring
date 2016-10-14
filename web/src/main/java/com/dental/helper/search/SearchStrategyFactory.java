@@ -1,16 +1,21 @@
 package com.dental.helper.search;
 
 import com.dental.service.SearchService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /**
  * Created by vrudyk on 9/28/2016.
  */
+@Component
 public class SearchStrategyFactory {
 
   private static final String DELIMITER = ",";
 
-  public static SearchStrategy getSearchStrategy(String input, SearchService searchService) {
+  @Autowired
+  private SearchService searchService;
 
+  public SearchStrategy getSearchStrategy(String input) {
     String[] filters = input.split(DELIMITER);
     int length = filters.length;
     switch (length){

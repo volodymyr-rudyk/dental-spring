@@ -18,14 +18,16 @@ import java.util.stream.Collectors;
  */
 public class DTOUtils {
 
-  private static Function<ToothCureEntity, ToothCureDTO> convertToothCureToToothCureDto = (tc) -> {
+  private DTOUtils() {}
+
+  private static Function<ToothCureEntity, ToothCureDTO> convertToothCureToToothCureDto = tc -> {
     ToothCureDTO toothCureDTO = new ToothCureDTO();
     toothCureDTO.setId(tc.getId());
     toothCureDTO.setCreatedOn(tc.getCreatedOn());
     toothCureDTO.setCure(tc.getCure());
     return toothCureDTO;
   };
-  private static Function<ToothEntity, ToothDTO> convertToothToToothDto = (t) -> {
+  private static Function<ToothEntity, ToothDTO> convertToothToToothDto = t -> {
     ToothDTO toothDTO = new ToothDTO();
     toothDTO.setId(t.getId());
     toothDTO.setToothState(t.getToothState().getState());
@@ -33,7 +35,7 @@ public class DTOUtils {
     toothDTO.setToothNumber(t.getToothNumber());
     return toothDTO;
   };
-  private static Function<ToothEntity, ToothDTO> convertDeepToothToToothDto = (t) -> {
+  private static Function<ToothEntity, ToothDTO> convertDeepToothToToothDto = t -> {
     ToothDTO toothDTO = new ToothDTO();
     toothDTO.setId(t.getId());
     toothDTO.setToothState(t.getToothState().getState());
@@ -87,6 +89,19 @@ public class DTOUtils {
     patientDTO.setPhone(patient.getPhone());
     patientDTO.setCreatedOn(patient.getCreatedOn());
     return patientDTO;
+  };
+  private static Function<PatientEntity, SearchPatientDTO> patientToSearchPatientDTO = patient -> {
+    SearchPatientDTO searchPatientDTO = new SearchPatientDTO();
+    searchPatientDTO.setId(patient.getId());
+    searchPatientDTO.setFirstName(patient.getFirstName());
+    searchPatientDTO.setLastName(patient.getLastName());
+    searchPatientDTO.setMiddleName(patient.getMiddleName());
+    searchPatientDTO.setAddress(patient.getAddress());
+    searchPatientDTO.setGender(patient.getGender().name());
+    searchPatientDTO.setBirthday(patient.getBirthday());
+    searchPatientDTO.setPhone(patient.getPhone());
+    searchPatientDTO.setCreatedOn(patient.getCreatedOn());
+    return searchPatientDTO;
   };
   private static Function<PatientDTO, PatientEntity> patientDTOToPatient = patientDTO -> {
     PatientEntity patient = new PatientEntity();
@@ -173,6 +188,10 @@ public class DTOUtils {
 
   public static Set<PatientDTO> convert(Collection<PatientEntity> patients) {
     return patients.stream().map(patientToPatientDTO).collect(Collectors.toSet());
+  }
+
+  public static Set<SearchPatientDTO> convertSearch(Collection<PatientEntity> patients) {
+    return patients.stream().map(patientToSearchPatientDTO).collect(Collectors.toSet());
   }
 
   public static ToothCureDTO convert(ToothCureEntity toothCure) {

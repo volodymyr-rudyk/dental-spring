@@ -14,6 +14,7 @@ public class SignupBean extends SigninBean {
 //  private String address;
 //  private Date birthday;
 //  private String phone;
+  private String language;
 
 //  public String getMiddleName() {
 //    return middleName;
@@ -41,6 +42,14 @@ public class SignupBean extends SigninBean {
 
   public void setLastName(String lastName) {
     this.lastName = lastName;
+  }
+
+  public String getLanguage() {
+    return language;
+  }
+
+  public void setLanguage(String language) {
+    this.language = language;
   }
 
 //  @NotNull

@@ -40,13 +40,20 @@ public class ToothServiceImpl implements ToothService {
   }
 
   @Override
-  public ToothCureEntity addCure(ToothCureEntity toothCure, Long toothId, Long patientId) {
+  public ToothCureEntity addCure(Long patientId, Long toothId, ToothCureEntity toothCure) {
     ToothEntity tooth = toothRepository.findOne(toothId);
     toothCure.setCreatedOn(new Date());
     toothCure.setCure(toothCure.getCure());
     toothCure.setTooth(tooth);
     toothCureRepository.save(toothCure);
     return toothCure;
+  }
+
+  @Override
+  public void updateCure(Long toothId, Long cureId, String cure) {
+    ToothCureEntity toothCure = toothCureRepository.findByIdAndToothId(cureId, toothId);
+    toothCure.setCure(cure);
+    toothCureRepository.save(toothCure);
   }
 
   @Override

@@ -1,5 +1,6 @@
 package com.dental.service.impl;
 
+import com.dental.exception.EntityNotFountException;
 import com.dental.persistence.entity.DentistEntity;
 import com.dental.persistence.entity.DentistPatient;
 import com.dental.persistence.entity.PatientEntity;
@@ -21,6 +22,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -80,9 +82,20 @@ public class PatientServiceImpl implements PatientService {
   }
 
   @Override
-  public PatientEntity findByDentist(DentistEntity dentist) {
+  public List<PatientEntity> findByDentist(DentistEntity dentist) {
     return patientRepository.findByDentists(dentist);
   }
+
+//  @Override
+//  @Transactional
+//  public PatientEntity loadByDentist(DentistEntity dentist) {
+//    PatientEntity patientEntity = patientRepository.findByDentists(dentist);
+//    if (patientEntity == null) {
+//      throw new EntityNotFountException("Patient not found by dentist id : " + dentist.getId());
+//    }
+//    Hibernate.initialize(patientEntity.getTeeth());
+//    return patientEntity;
+//  }
 
   @Override
   public Set<PatientEntity> findByDentist(DentistEntity dentist, Pageable page) {
@@ -95,6 +108,7 @@ public class PatientServiceImpl implements PatientService {
   }
 
   @Override
+  @Transactional
   public Long patientsCount(Long dentistId) {
     return patientRepository.countByDentistsId(dentistId);
   }
@@ -102,7 +116,31 @@ public class PatientServiceImpl implements PatientService {
   @Override
   public PatientEntity findByDentistIdAndPatientId(Long dentistId, Long patientId) {
     DentistEntity dentist = dentistService.get(dentistId);
-    return patientRepository.findOneByDentistsAndId(dentist, patientId);
+    if (dentist == null) {
+      throw new EntityNotFountException("Dentist not found by id : " + dentistId);
+    }
+
+    PatientEntity patient = patientRepository.findOneByDentistsAndId(dentist, patientId);
+    if (patient == null) {
+      throw new EntityNotFountException("Patient not found by id : " + patientId);
+    }
+    return patient;
+  }
+
+  @Override
+  @Transactional
+  public PatientEntity loadByDentistIdAndPatientId(Long dentistId, Long patientId) {
+    DentistEntity dentist = dentistService.get(dentistId);
+    if (dentist == null) {
+      throw new EntityNotFountException("Dentist not found by id : " + dentistId);
+    }
+
+    PatientEntity patient = patientRepository.findOneByDentistsAndId(dentist, patientId);
+    if (patient == null) {
+      throw new EntityNotFountException("Patient not found by id : " + patientId);
+    }
+    Hibernate.initialize(patient.getTeeth());
+    return patient;
   }
 
   @Override
@@ -112,19 +150,19 @@ public class PatientServiceImpl implements PatientService {
     DentistEntity dentist = dentistService.get(loggedInDentist.getId());
     Set<ToothEntity> teeth = patient.getTeeth();
 
-    for(int i = 1; i <= TEETH_IN_BUCKET; i++) {
+    for (int i = 1; i <= TEETH_IN_BUCKET; i++) {
       fillTeeth(i, ToothBucket.UP_LEFT, teeth);
     }
 
-    for(int i = 1; i <= TEETH_IN_BUCKET; i++) {
+    for (int i = 1; i <= TEETH_IN_BUCKET; i++) {
       fillTeeth(i, ToothBucket.UP_RIGHT, teeth);
     }
 
-    for(int i = 1; i <= TEETH_IN_BUCKET; i++) {
+    for (int i = 1; i <= TEETH_IN_BUCKET; i++) {
       fillTeeth(i, ToothBucket.DOWN_LEFT, teeth);
     }
 
-    for(int i = 1; i <= TEETH_IN_BUCKET; i++) {
+    for (int i = 1; i <= TEETH_IN_BUCKET; i++) {
       fillTeeth(i, ToothBucket.DOWN_RIGHT, teeth);
     }
 

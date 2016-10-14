@@ -13,7 +13,9 @@ public interface ToothService extends BaseService<ToothEntity> {
 
   ToothEntity get(Long toothId, Long patientId);
 
-  ToothCureEntity addCure(ToothCureEntity toothCure, Long toothId, Long patientId);
+  ToothCureEntity addCure(Long patientId, Long toothId, ToothCureEntity toothCure);
+
+  void updateCure(Long toothId, Long cureId, String cure);
 
   Long countCuresByDentistId(Long dentistId);
 

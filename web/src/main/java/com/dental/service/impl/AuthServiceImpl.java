@@ -10,6 +10,7 @@ import com.dental.persistence.repository.LanguageRepository;
 import com.dental.persistence.repository.UserRepository;
 import com.dental.provider.DentalUserDetails;
 import com.dental.service.AuthService;
+import com.dental.web.helper.Language;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,8 +75,9 @@ public class AuthServiceImpl implements AuthService {
 
   @Override
   public void signup(SignupBean signupBean) {
+    Language language = Language.from(signupBean.getLanguage());
     UserEntity user = getUser(signupBean);
-    LanguageEntity en = languageRepository.findOneByCode(DEFAULT_LANGUAGE);
+    LanguageEntity en = languageRepository.findOneByCode(language.code());
     user.setLanguage(en);
     userRepository.save(user);
   }
@@ -88,7 +90,9 @@ public class AuthServiceImpl implements AuthService {
 
   private DentalUserDetails loadUserDetails() {
     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-    if (authentication == null) throw new RequiredAuthenticationException("getLoggedInProfile");
+    if (authentication == null) {
+      throw new RequiredAuthenticationException("getLoggedInProfile");
+    }
     return (DentalUserDetails) authentication.getPrincipal();
   }
 
@@ -104,9 +108,6 @@ public class AuthServiceImpl implements AuthService {
     dentist.setLastName(signupBean.getLastName());
     dentist.setUser(user);
     user.setDentist(dentist);
-    LanguageEntity language = new LanguageEntity();
-    language.setCode(DEFAULT_LANGUAGE);
-    user.setLanguage(language);
     return user;
   }
 }

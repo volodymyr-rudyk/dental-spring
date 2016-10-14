@@ -23,9 +23,7 @@ import java.util.Optional;
 @RestController
 public class PasswordRestController extends BaseRestController {
 
-
-
-  private Logger LOG = LoggerFactory.getLogger(PasswordRestController.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(PasswordRestController.class);
 
   @Autowired
   private MailService mailService;
@@ -38,18 +36,20 @@ public class PasswordRestController extends BaseRestController {
 
   @RequestMapping(value = "/forgot-password", method = RequestMethod.POST,
     produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<?> forgotPassword(@RequestBody @Valid ForgotPasswordBean forgotPasswordBean, BindingResult result) {
+  public ResponseEntity forgotPassword(@RequestBody @Valid ForgotPasswordBean forgotPasswordBean, BindingResult result) {
 
-    if (result.hasErrors()) return incorrect();
+    if (result.hasErrors()) {
+      return incorrect();
+    }
 
     Optional<ForgotPasswordEntity> forgotPasswordOptional = passwordService.createForgotPassword(forgotPasswordBean.getEmail());
     if (forgotPasswordOptional.isPresent()) {
       try {
         mailService.sendForgotPasswordEmail(forgotPasswordBean.getEmail(), forgotPasswordOptional.get().getForgotPasswordKey());
-        LOG.info("Mail is sent to = " + forgotPasswordBean.getEmail());
+        LOGGER.info("Mail is sent to = " + forgotPasswordBean.getEmail());
         return success();
       } catch (Exception e) {
-        LOG.error(e.getMessage());
+        LOGGER.error(e.getMessage(), e);
       }
     }
     return bad();
@@ -57,9 +57,11 @@ public class PasswordRestController extends BaseRestController {
 
   @RequestMapping(value = "/reset-password/{forgotPasswordKey}", method = RequestMethod.POST,
     produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<?> resetPassword(@PathVariable(value = "forgotPasswordKey") String forgotPasswordKey,
+  public ResponseEntity resetPassword(@PathVariable(value = "forgotPasswordKey") String forgotPasswordKey,
                                          @RequestBody @Valid ResetPasswordBean resetPasswordBean, BindingResult result) {
-    if (result.hasErrors()) return incorrect();
+    if (result.hasErrors()) {
+      return incorrect();
+    }
 
     passwordService.useForgotPassword(forgotPasswordKey, resetPasswordBean.getPassword());
     return success();
