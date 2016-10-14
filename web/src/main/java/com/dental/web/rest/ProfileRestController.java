@@ -53,8 +53,9 @@ public class ProfileRestController extends BaseRestController {
 
   @RequestMapping(value = "/profile/language", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE,
     consumes = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<?> profileLanguagePut(HttpServletRequest httpServletRequest, @LoggedDentist DentistEntity loggedDentist,
-                                              LanguageBean languageBean) {
+  public ResponseEntity<?> profileLanguagePut(HttpServletRequest httpServletRequest,
+                                              @LoggedDentist DentistEntity loggedDentist,
+                                              @RequestBody LanguageBean languageBean) {
     UserEntity user = dentistService.get(loggedDentist.getId()).getUser();
     userService.updateLanguage(user, languageBean.getLanguage());
     return success();
