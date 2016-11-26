@@ -62,6 +62,17 @@ public class SpringSecureConfig extends WebSecurityConfigurerAdapter {
 
   }
 
+  @Override
+  public void configure(WebSecurity web) throws Exception {
+    web.ignoring().antMatchers("/v2/api-docs",
+                                            "/configuration/ui",
+                                            "/swagger-resources",
+                                            "/swagger-resources/**",
+                                            "/configuration/security",
+                                            "/swagger-ui.html",
+                                            "/webjars/**");
+  }
+
   @Bean(name = "dentalAuthenticationManager")
   @Override
   public AuthenticationManager authenticationManager() throws Exception {
