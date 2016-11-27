@@ -14,6 +14,7 @@ public class ToothCureEntity extends BaseEntity implements Serializable {
   private String cure;
   private Date createdOn;
   private ToothEntity tooth;
+  private DentistEntity dentist;
 
   public ToothCureEntity() {
 
@@ -49,5 +50,14 @@ public class ToothCureEntity extends BaseEntity implements Serializable {
 
   public void setTooth(ToothEntity tooth) {
     this.tooth = tooth;
+  }
+
+  @ManyToOne
+  public DentistEntity getDentist() {
+    return dentist;
+  }
+
+  public void setDentist(DentistEntity dentist) {
+    this.dentist = dentist;
   }
 }

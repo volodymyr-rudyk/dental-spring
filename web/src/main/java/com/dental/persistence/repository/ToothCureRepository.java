@@ -16,8 +16,6 @@ public interface ToothCureRepository extends CrudRepository<ToothCureEntity, Lon
 
   ToothCureEntity findByIdAndToothId(Long id, Long toothId);
 
-  @Query(nativeQuery = true,
-    value = "SELECT count(*) from dentist_patient dp RIGHT JOIN patient p on dp.patient_id = p.id RIGHT JOIN tooth t on p.id = t.patient_id RIGHT JOIN tooth_cure tc on t.id = tc.tooth_id where dp.dentist_id=?1")
-  Long countCures(Long dentistId);
+  Long countByDentistId(Long dentistId);
 
 }

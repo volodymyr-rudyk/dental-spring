@@ -23,6 +23,7 @@ public class DentistEntity extends BaseEntity implements Serializable {
   private Date createdOn;
   private UserEntity user;
   private Set<PatientEntity> patients = new HashSet<>(0);
+  private Set<ToothCureEntity> cures = new HashSet<>();
 
   @Column(name = "first_name")
   public String getFirstName() {
@@ -110,6 +111,16 @@ public class DentistEntity extends BaseEntity implements Serializable {
 
   public void setPatients(Set<PatientEntity> patients) {
     this.patients = patients;
+  }
+
+  @OneToMany(cascade = CascadeType.ALL)
+  @JoinColumn(name = "dentist_id")
+  public Set<ToothCureEntity> getCures() {
+    return cures;
+  }
+
+  public void setCures(Set<ToothCureEntity> cures) {
+    this.cures = cures;
   }
 
   @PrePersist

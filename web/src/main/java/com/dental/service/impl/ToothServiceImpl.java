@@ -58,7 +58,7 @@ public class ToothServiceImpl implements ToothService {
 
   @Override
   public Long countCuresByDentistId(Long dentistId) {
-    return toothCureRepository.countCures(dentistId);
+    return toothCureRepository.countByDentistId(dentistId);
   }
 
   @Override
