@@ -1,6 +1,7 @@
 package com.dental.service.impl;
 
 import com.dental.exception.EntityNotFountException;
+import com.dental.persistence.entity.DentistEntity;
 import com.dental.persistence.entity.ToothEntity;
 import com.dental.persistence.entity.ToothCureEntity;
 import com.dental.persistence.helperbean.ToothState;
@@ -40,11 +41,12 @@ public class ToothServiceImpl implements ToothService {
   }
 
   @Override
-  public ToothCureEntity addCure(Long patientId, Long toothId, ToothCureEntity toothCure) {
+  public ToothCureEntity addCure(DentistEntity dentist, Long patientId, Long toothId, ToothCureEntity toothCure) {
     ToothEntity tooth = toothRepository.findOne(toothId);
     toothCure.setCreatedOn(new Date());
     toothCure.setCure(toothCure.getCure());
     toothCure.setTooth(tooth);
+    toothCure.setDentist(dentist);
     toothCureRepository.save(toothCure);
     return toothCure;
   }

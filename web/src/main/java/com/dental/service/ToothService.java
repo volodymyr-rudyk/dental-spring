@@ -1,5 +1,6 @@
 package com.dental.service;
 
+import com.dental.persistence.entity.DentistEntity;
 import com.dental.persistence.entity.ToothEntity;
 import com.dental.persistence.entity.ToothCureEntity;
 import com.dental.persistence.helperbean.ToothState;
@@ -13,7 +14,7 @@ public interface ToothService extends BaseService<ToothEntity> {
 
   ToothEntity get(Long toothId, Long patientId);
 
-  ToothCureEntity addCure(Long patientId, Long toothId, ToothCureEntity toothCure);
+  ToothCureEntity addCure(DentistEntity dentist, Long patientId, Long toothId, ToothCureEntity toothCure);
 
   void updateCure(Long toothId, Long cureId, String cure);
 

@@ -93,7 +93,7 @@ public class PatientRestController extends BaseRestController {
                                      @PathVariable("toothId") Long toothId, @LoggedDentist DentistEntity loggedDentist,
                                      @RequestBody ToothCureRequestBean toothCureRequestBean)  {
     ToothCureEntity toothCure = new ToothCureEntity(toothCureRequestBean.getCure());
-    toothCure = toothService.addCure(patientId, toothId, toothCure);
+    toothCure = toothService.addCure(loggedDentist, patientId, toothId, toothCure);
     ToothCureDTO toothCureDTO = DTOUtils.convert(toothCure);
     return new ResponseEntity<>(toothCureDTO, HttpStatus.CREATED);
   }
