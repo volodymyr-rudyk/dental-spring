@@ -1,24 +1,25 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>com.dental</groupId>
+  <groupId>com.dntistpro</groupId>
   <artifactId>tools</artifactId>
   <version>0.0.1</version>
   <packaging>jar</packaging>
-  <name>dental-tools</name>
+  <name>tools</name>
   <url>https://www.dental.com/</url>
-  <description>Dental search...</description>
+  <description>Dntistpro Tools</description>
+
   <parent>
-    <groupId>com.dental</groupId>
-    <artifactId>parent</artifactId>
+    <groupId>com.dntistpro</groupId>
+    <artifactId>app</artifactId>
     <version>0.0.1</version>
   </parent>
 
   <inceptionYear>2015</inceptionYear>
 
   <organization>
-    <name>Dental, Inc.</name>
-    <url>https://www.dental.com</url>
+    <name>Dntistpro Inc.</name>
+    <url>https://www.dntistpro.com</url>
   </organization>
 
   <properties>
@@ -34,19 +35,19 @@
     <!-- logging -->
     <dependency>
       <groupId>org.slf4j</groupId>
-      <artifactId>jcl-over-slf4j</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>jul-to-slf4j</artifactId>
+      <artifactId>slf4j-api</artifactId>
     </dependency>
     <dependency>
       <groupId>ch.qos.logback</groupId>
       <artifactId>logback-classic</artifactId>
     </dependency>
     <dependency>
-      <groupId>uk.org.lidalia</groupId>
-      <artifactId>sysout-over-slf4j</artifactId>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-core</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-access</artifactId>
     </dependency>
 
   </dependencies>
